@@ -1,39 +1,19 @@
 export const navLinks = [
   {
-    title: 'Missing Victims',
-    path: '/searchMissingPage',
+    title: 'About Us',
+    path: '/',
   },
   {
-    title: 'Unidentified Victims',
-    path: '/searchUnidentifiedPage',
+    title: 'Services',
+    path: '/',
   },
   {
-    title: 'Unclaimed Victims',
-    path: '/searchUnclaimedPage',
-  },
-  // {
-  //   title: 'About',
-  //   path: '/about',
-  // },
-  {
-    title: 'Contact',
-    path: '/contact-us',
+    title: 'Track ID',
+    path: '/',
   },
   {
-    title: 'Tip Form',
-    path: '/tip',
-  },
-  {
-    title: 'Statistics',
-    path: '/statistics',
-  },
-  {
-    title: 'Careers',
-    path: '',
-  },
-  {
-    title: 'FAQs',
-    path: '/faqs',
+    title: 'Contact Us',
+    path: '/',
   },
 ];
 export const userNavLinks = [

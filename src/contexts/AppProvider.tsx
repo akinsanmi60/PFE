@@ -16,7 +16,7 @@ const theme = extendTheme({
       // styles for the `body`
       body: {
         height: '100vh',
-        fontFamily: 'Manrope',
+        fontFamily: 'Inter',
         boxSizing: 'border-box',
       },
     },
