@@ -25,24 +25,24 @@ function LoginPage() {
     mode: 'all',
     resolver: yupResolver(LoginSchema),
   });
-  const [componentType, setComponentType] = useState('login');
+  // const [componentType, setComponentType] = useState('login');
   const [pshow, setPshow] = useState(false);
   const handleClickP = () => setPshow(!pshow);
 
   const navigate = useNavigate();
 
-  const handleClose = () => {
-    navigate('/');
-  };
+  // const handleClose = () => {
+  //   navigate('/');
+  // };
 
   const { mutate, isLoading } = useLoginMutation();
   const onSubmitForm = (values: ILoginFormData) => {
     mutate({ payload: values });
   };
 
-  const handleSwitchComp = (switchValue: string) => {
-    setComponentType(switchValue);
-  };
+  // const handleSwitchComp = (switchValue: string) => {
+  //   setComponentType(switchValue);
+  // };
 
   return (
     <div

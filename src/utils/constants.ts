@@ -1,5 +1,8 @@
 import { format } from 'date-fns';
-import { IformData } from 'types/search.type';
+
+type IformData = {
+  [key: string]: string;
+};
 
 export const Account = {
   user: 'user',
