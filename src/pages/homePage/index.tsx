@@ -1,5 +1,11 @@
 function HomePage() {
-  return <div></div>;
+  return (
+    <div className="max-content">
+      <div className="container">
+        <p>HomePage</p>
+      </div>
+    </div>
+  );
 }
 
 export default HomePage;

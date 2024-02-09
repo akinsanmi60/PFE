@@ -25,9 +25,9 @@ function App() {
   const logoutUser = () => {
     localStorage.removeItem('token');
     if (process.env.NODE_ENV === 'development') {
-      window.location.href = 'http://localhost:5173/login';
+      window.location.href = 'http://localhost:5173';
     } else {
-      window.location.href = 'https://missing-people-tau.vercel.app';
+      window.location.href = 'https://google.com';
     }
   };
 
