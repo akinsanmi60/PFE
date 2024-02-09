@@ -1,0 +1,53 @@
+{
+  "root": true,
+  "env": { "browser": true, "es2020": true },
+  "globals": {
+    "window": true,
+    "module": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "ignorePatterns": ["dist", ".eslintrc.js", "**/*.spec.ts", "**/*.cjs"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": ["./tsconfig.json", "./commitlint.config.js"]
+  },
+  "plugins": ["react-refresh", "import", "react-hooks"],
+  "rules": {
+    "no-nested-ternary": "off",
+    "spaced-comment": 0,
+    "no-explicit-any": 0,
+    "react/no-unescaped-entities": [0, {}],
+    "no-unused-vars": [2, { "args": "after-used", "argsIgnorePattern": "^_" }],
+    "react/prop-types": "off",
+    "newIsCap": 0,
+    "new-cap": "off",
+    "linebreak-style": 0,
+    "global-require": 0,
+    "react-refresh/only-export-components": [
+      "off",
+      { "allowConstantExport": true }
+    ],
+    "no-console": [
+      1,
+      {
+        "allow": ["clear", "info", "error", "dir", "trace"]
+      }
+    ],
+    "no-empty-function": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/no-unused-vars": 0,
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/ban-ts-comment": ["off"],
+    "ts-ignore": 0,
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }]
+  }
+}

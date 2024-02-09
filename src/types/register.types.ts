@@ -1,0 +1,26 @@
+export type IRegister = {
+  email?: string;
+  password?: string;
+  first_name?: string;
+  last_name?: string;
+  middle_name?: string;
+  account_type?: string;
+  phone_number?: string;
+  state?: string;
+  lga?: string;
+  area?: string;
+  address?: string;
+  security_question?: string;
+  security_answer?: string;
+  privacy_policy?: boolean;
+  professional_Role?: string;
+  agency_state?: string;
+  agency_lga?: string;
+  agency_name?: string;
+  sponsor_first_name?: string;
+  sponsor_last_name?: string;
+  sponsor_job_title?: string;
+  sponsor_phone_number?: string;
+  sponsor_email?: string;
+  sponsor_workplace?: string;
+};

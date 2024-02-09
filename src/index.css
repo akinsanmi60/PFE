@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --purple-primary: #554dde;
+    --purple-primary2: #9291a7;
+    --accent-pink: #f44e77;
+    --neutral-light: #f2f6ff;
+    --lavender-secondary: #6a6d9e; /*Primary Font Color*/
+    --dark-primary: #072723;
+    --border-colour: #cad6f1;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #f7f7f7;
+    line-height: 1;
+    transition-duration: 0.5s, 0.1s;
+    transition-property: background, color;
+    transition-timing-function: ease-out;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+    min-height: 6px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #072723;
+    border-radius: 8px;
+    min-height: 6px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #072723;
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+@layer components {
+  .btn-primary-min {
+    @apply tracking-normal py-[8px] duration-300 ease-in-out px-[32px] outline-none text-base cursor-pointer font-medium bg-[#072723] text-white focus:outline-none rounded-[40px] xlsm:text-[1rem];
+  }
+  .primary-link {
+    @apply tracking-normal no-underline text-base  text-[#2F37EF] font-medium py-2 px-4;
+    transition: 0.35s ease-in-out;
+    &:hover {
+      @apply bg-[#EEFFF5] rounded;
+      transition: 0.35s ease-in-out;
+    }
+  }
+  .container {
+    @apply lg:px-6 xl:px-12 w-full  px-14 mx-auto max-w-8xl h-full xlsm:px-3;
+  }
+  .max-content {
+    @apply max-w-[1350px] mx-auto h-full w-full;
+  }
+}
