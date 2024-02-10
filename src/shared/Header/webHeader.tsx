@@ -78,7 +78,7 @@ function Header() {
                 </p>
               ))}
             </div>
-            <div className="flex gap-[20px] mt-[20px] items-center xlsm:flex-col xlsm:items-start">
+            <div className="flex gap-[20px] mt-[50px] items-center xlsm:flex-col xlsm:items-start">
               <button
                 onClick={() => navigate('/login')}
                 className="rounded-[40px] xlsm:w-full py-[12px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#072723] border-[1px] border-[#072723]"
