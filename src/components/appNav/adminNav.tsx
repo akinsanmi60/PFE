@@ -27,7 +27,6 @@ function SideNav() {
   const location = useLocation();
   const pathName = location.pathname.split('/')[2];
   const { authUser, setAuthUser } = useAuthContext();
-  console.log(pathName);
   const navigate = useNavigate();
 
   const navList = useMemo(() => {
