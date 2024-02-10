@@ -5,6 +5,7 @@ module.exports = {
   darkMode: 'class',
   theme: {
     fontFamily: {
+      playfair: ['Playfair Display'],
       babablu: ['Montserrat'],
     },
     screens: {

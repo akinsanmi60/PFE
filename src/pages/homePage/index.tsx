@@ -1,9 +1,15 @@
+import FarmerNetwork from './components/farmerNetwork';
+import Hero from './components/hero';
+import HomeVideo from './components/homeVideo';
+import Insight from './components/insight';
+
 function HomePage() {
   return (
-    <div className="max-content">
-      <div className="container">
-        <p>HomePage</p>
-      </div>
+    <div className="">
+      <Hero />
+      <HomeVideo />
+      <FarmerNetwork />
+      <Insight />
     </div>
   );
 }
