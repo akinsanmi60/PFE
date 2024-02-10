@@ -1,46 +1,63 @@
-// // type SvgInHtml = typeof BuildingIcon;
-// import { ReactNode } from 'react';
-// import { FaUsers, FaPeopleGroup, FaUserGear } from 'react-icons/fa6';
-// import { HiMiniHome } from 'react-icons/hi2';
+// type SvgInHtml = typeof BuildingIcon;
+import { ReactNode } from 'react';
+import { ReactComponent as Home } from '@assets/svg/dashHome.svg';
+// import { ReactComponent as HomeWhite } from '@assets/svg/dashHomeWhite.svg';
+import { ReactComponent as Search } from '@assets/svg/dashSearch.svg';
+import { ReactComponent as Folder } from '@assets/svg/dashFolder.svg';
 
-// interface NavLInk {
-//   name: string;
-//   path: string;
-//   Icon: ReactNode;
-//   // IconBlue: SvgInHtml;
-// }
-// // const ADMIN_SIDENAV_NOTIFICATION: NavLInk = {
-// //   name: 'Notifications',
-// //   path: DashboardPath.NOTIFICATIONS,
-// //   Icon: Bell,
-// // IconBlue: BlueBell,
-// // };
+interface NavLInk {
+  name: string;
+  path: string;
+  Icon: ReactNode;
+  // IconBlue: SvgInHtml;
+}
+// const ADMIN_SIDENAV_NOTIFICATION: NavLInk = {
+//   name: 'Notifications',
+//   path: DashboardPath.NOTIFICATIONS,
+//   Icon: Bell,
+// IconBlue: BlueBell,
+// };
 
-// const ADMIN_SIDENAV: NavLInk[] = [
-//   {
-//     name: 'Dashboard',
-//     path: 'dashboard',
-//     Icon: <HiMiniHome />,
-//     // IconBlue: BlueDashboard,
-//   },
-//   {
-//     name: 'Users',
-//     path: 'users-list',
-//     Icon: <FaUsers />,
-//     // IconBlue: BlueCustomer,
-//   },
-//   {
-//     name: 'Victims',
-//     path: 'victims-list',
-//     Icon: <FaPeopleGroup />,
-//     // IconBlue: BlueGroup,
-//   },
-//   {
-//     name: 'Admins',
-//     path: 'admin-list',
-//     Icon: <FaUserGear />,
-//     // IconBlue: BlueGroup,
-//   },
-// ];
+const AGGREGATOR_SIDENAV: NavLInk[] = [
+  {
+    name: 'Dashboard',
+    path: 'dashboard',
+    Icon: <Home />,
+    // IconBlue: <HomeWhite />,
+  },
+  {
+    name: 'Pentrar Hub',
+    path: 'pentrar-hub',
+    Icon: <Search />,
+    // IconBlue: BlueCustomer,
+  },
+  {
+    name: 'My Produces',
+    path: 'myproduces-list',
+    Icon: <Folder />,
+    // IconBlue: BlueGroup,
+  },
+];
 
-// export { ADMIN_SIDENAV };
+const EXPORTER_SIDENAV: NavLInk[] = [
+  {
+    name: 'Dashboard',
+    path: 'dashboard',
+    Icon: <Home />,
+    // IconBlue: <HomeWhite />,
+  },
+  {
+    name: 'Pentrar Hub',
+    path: 'pentrar-hub',
+    Icon: <Search />,
+    // IconBlue: BlueCustomer,
+  },
+  {
+    name: 'My Produces',
+    path: 'myproduces-list',
+    Icon: <Folder />,
+    // IconBlue: BlueGroup,
+  },
+];
+
+export { AGGREGATOR_SIDENAV, EXPORTER_SIDENAV };

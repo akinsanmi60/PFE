@@ -5,9 +5,12 @@ type IformData = {
 };
 
 export const Account = {
-  user: 'user',
+  User: 'user',
   Admin: 'admin',
-  superAdmin: 'superAdmin',
+  SuperAdmin: 'subAdmin',
+  Aggregator: 'aggregator',
+  Exporter: 'exporter',
+  Offtakers: 'offtaker',
 };
 
 export const REGEX_CODE = /^[0-9]+$/;
@@ -158,25 +161,13 @@ export const removeByKey = (obj: any, keyToRemove: string) => {
   return obj;
 };
 
-export const calculateAge = (birthdate: string) => {
-  // Parse the input date string into a Date object
-  const birthDate = new Date(birthdate);
+export function getFirstSwordBeforeSpace(str: string) {
+  // Split the string by space
+  const words = str.split(' ');
 
-  // Get the current date
-  const currentDate = new Date();
+  // Get the first word
+  const firstWord = words[0];
 
-  // Calculate the difference in years
-  const age = currentDate.getFullYear() - birthDate.getFullYear();
-
-  // Check if the birthday has occurred for this year
-  if (
-    currentDate.getMonth() < birthDate.getMonth() ||
-    (currentDate.getMonth() === birthDate.getMonth() &&
-      currentDate.getDate() < birthDate.getDate())
-  ) {
-    // Subtract 1 from the age if the birthday hasn't occurred yet
-    return age - 1;
-  } else {
-    return age;
-  }
-};
+  // Return the first word
+  return firstWord;
+}
