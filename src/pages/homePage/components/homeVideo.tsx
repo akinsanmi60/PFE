@@ -4,7 +4,7 @@ function HomeVideo() {
   return (
     <div className="max-content py-[48px]">
       <div className="container">
-        <div className="bg-[#072723] border-[4px] border-[#6AD871] h-[660px] mdxl:h-[450px] w-full relative">
+        <div className="bg-background-main border-[4px] border-[#6AD871] h-[660px] mdxl:h-[450px] w-full relative">
           <img
             src={farmHarvest}
             alt="about-hero-img"

@@ -7,11 +7,14 @@ import {
   getFirstSwordBeforeSpace,
 } from '@utils/constants';
 import { logOut } from '@hooks/auth';
-import { AGGREGATOR_SIDENAV, EXPORTER_SIDENAV } from '@utils/sideNaDetailsv';
+import {
+  AGGREGATOR_SIDENAV,
+  EXPORTER_SIDENAV,
+  SETTINGS_SIDENAV,
+} from '@utils/sideNaDetailsv';
 import pentrarLogo from '@assets/svg/LogoPentrar.svg';
 import { getToken } from '@hooks/localStorageHook';
 import { BiDotsHorizontalRounded, BiLogOut } from 'react-icons/bi';
-import { CgProfile } from 'react-icons/cg';
 import { useMemo } from 'react';
 
 const active = ({ isActive }: { isActive: boolean }) => {
@@ -48,12 +51,6 @@ function SideNav() {
 
   const menuOptions = [
     {
-      menuTitle: 'View Profile',
-      action: () => navigate('/admin/profile'),
-      icon: <CgProfile />,
-      classname: `text-[#101828]`,
-    },
-    {
       menuTitle: 'Log out',
       action: handleLogout,
       icon: <BiLogOut />,
@@ -80,7 +77,11 @@ function SideNav() {
             const checkPath = pathName === sidenav.path;
             return (
               <div
-                className={checkPath ? 'px-4 border-r-[3px] mr-1' : 'px-4'}
+                className={
+                  checkPath
+                    ? 'px-4 border-r-[3px] mr-1 text-[14px]'
+                    : 'px-4 text-[14px]'
+                }
                 key={sidenav.name}
               >
                 <NavLink
@@ -100,10 +101,48 @@ function SideNav() {
             );
           })}
         </div>
+
+        {/* Settings */}
+        <div className="px-4 mt-[20px]">
+          <div className="w-full bg-background-borderlight border[1px] h-[1px]" />
+
+          <p className="p-4 text-primary-light text-[12px] font-primary">
+            Settings
+          </p>
+          <div className="flex flex-col gap-2">
+            {SETTINGS_SIDENAV?.map(sidenav => {
+              const checkPath = pathName === sidenav.path;
+              return (
+                <div
+                  className={
+                    checkPath
+                      ? 'px-4 border-r-[3px] mr-1 text-[14px]'
+                      : 'px-4 text-[14px]'
+                  }
+                  key={sidenav.name}
+                >
+                  <NavLink
+                    className="text-[18px] pl-3 font-[400] h-[40px] active:font-[400]  flex items-center gap-3"
+                    to={sidenav.path}
+                    key={sidenav.name}
+                    style={active}
+                    role={sidenav.name}
+                  >
+                    <span className={checkPath ? '-ml-[2px]' : 'ml-0'}>
+                      {sidenav.Icon}
+                    </span>
+
+                    <span>{sidenav.name}</span>
+                  </NavLink>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
       <div>
         <div className="w-full bg-[#E2E8F0] border[1px] h-[1px]" />
-        <div className="flex flex-col px-4 py-4 text-[#999999]">
+        <div className="flex flex-col px-4 py-4 text-primary-light">
           <div className="flex items-center justify-between">
             <p className="text-[12px] font-[600]">{capitalize(first_name)}</p>
             <Menu
@@ -120,7 +159,7 @@ function SideNav() {
               {menuOptions?.map((menuItem, i) => {
                 return (
                   <MenuItem
-                    className="w-[14rem] flex gap-2 items-center"
+                    className="w-[14rem] flex gap-2 items-center h-[14rem]"
                     key={i}
                     onClick={() => menuItem?.action()}
                     role={menuItem?.menuTitle}

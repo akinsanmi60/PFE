@@ -13,7 +13,7 @@ function Hero() {
     }
   };
   return (
-    <div className="bg-[#072723] h-screen lg:h-full lg:pb-[68px] w-full">
+    <div className="h-screen lg:h-full lg:pb-[68px] w-full bg-background-main">
       <div className="max-content">
         <div className="container">
           <div className="flex items-end justify-between mdxl:flex-col gap-[78px] lg:gap-[30px]">
@@ -39,7 +39,7 @@ function Hero() {
                 </div>
                 <button
                   onClick={handleSend}
-                  className="px-[40px] py-[20px] h-[67px] mdxl:h-[45px] xlsm:w-full mdxl:py-[10px] bg-[#6AD871] text-[#072723] font-[600] text-[18px] mdxl:text-[14px] leading-[25px] text-center rounded-tl-[0px] rounded-tr-[12px] rounded-br-[12px] xlsm:rounded-[12px] rounded-bl-[0px] border-none focus:outline-none "
+                  className="px-[40px] py-[20px] h-[67px] mdxl:h-[45px] xlsm:w-full mdxl:py-[10px] bg-background-light text-background-main font-[600] text-[18px] mdxl:text-[14px] leading-[25px] text-center rounded-tl-[0px] rounded-tr-[12px] rounded-br-[12px] xlsm:rounded-[12px] rounded-bl-[0px] border-none focus:outline-none"
                 >
                   Get Started
                 </button>

@@ -1,9 +1,10 @@
 // type SvgInHtml = typeof BuildingIcon;
 import { ReactNode } from 'react';
 import { ReactComponent as Home } from '@assets/svg/dashHome.svg';
-// import { ReactComponent as HomeWhite } from '@assets/svg/dashHomeWhite.svg';
 import { ReactComponent as Search } from '@assets/svg/dashSearch.svg';
 import { ReactComponent as Folder } from '@assets/svg/dashFolder.svg';
+import { ReactComponent as SettingIcon } from '@assets/svg/dashSettings.svg';
+import { ReactComponent as Caution } from '@assets/svg/dashCaution.svg';
 
 interface NavLInk {
   name: string;
@@ -60,4 +61,19 @@ const EXPORTER_SIDENAV: NavLInk[] = [
   },
 ];
 
-export { AGGREGATOR_SIDENAV, EXPORTER_SIDENAV };
+const SETTINGS_SIDENAV: NavLInk[] = [
+  {
+    name: 'Report a problem',
+    path: 'reportProblem',
+    Icon: <Caution />,
+    // IconBlue: <HomeWhite />,
+  },
+  {
+    name: 'Settings',
+    path: 'settings',
+    Icon: <SettingIcon />,
+    // IconBlue: BlueCustomer,
+  },
+];
+
+export { AGGREGATOR_SIDENAV, EXPORTER_SIDENAV, SETTINGS_SIDENAV };
