@@ -1,11 +1,11 @@
 export const navLinks = [
   {
     title: 'About Us',
-    path: '/',
+    path: '/about',
   },
   {
     title: 'Services',
-    path: '/',
+    path: '/services',
   },
   {
     title: 'Track ID',

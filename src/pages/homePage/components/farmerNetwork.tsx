@@ -1,4 +1,4 @@
-import farmerNetwork from '../../../assets/png/farmerNetworkImg.png';
+import farmerNetwork from '@assets/png/farmerNetworkImg.png';
 function FarmerNetwork() {
   return (
     <div className="max-content py-[32px]">
