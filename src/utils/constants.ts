@@ -122,18 +122,19 @@ export const extraKey = (inputString: string) => {
 };
 
 export const getClass = (text: string) => {
+  console.log(text);
   const classText = capitalize(text) as string;
   switch (classText) {
     case 'Active':
     case 'Verified':
     case 'Approve':
     case 'Success':
-      return 'bg-[#DAFBEC] py-[2px] px-[12px] text-[#052E16] font-[500] rounded-lg';
+      return 'bg-[#DAFBEC] py-[2px] px-[12px] text-statusText-success font-[500] rounded-lg';
     case 'Inactive':
     case 'Blocked':
       return 'bg-[#FCD9DC] py-[5px] px-[12px] text-[#720B18] font-[500] rounded-lg';
     case 'Pending':
-      return 'bg-[#FEF3C7] py-[5px] px-[12px] text-[#B45309] font-[500] rounded-lg';
+      return 'bg-[#FFE5E6] py-[5px] px-[12px] text-statusText-error font-[500] rounded-lg';
     default:
       return '';
   }

@@ -1,37 +1,73 @@
 /** @type {import('tailwindcss').Config} */
+
+const customColors = {
+  primary: {
+    main: '#1A1A1A',
+    light: '#999999',
+    white: '#FFFFFF',
+  },
+  secondary: {
+    'light-1': '#2AA232',
+  },
+  tertiary: {
+    main: '#FF8A00',
+    'light-1': '#FFF3E6',
+  },
+  statusText: {
+    success: '#0CAF60',
+    error: '#E03137',
+  },
+  background: {
+    main: '#072723',
+    light: '#6AD871',
+    borderlight: '#F2F2F2',
+  },
+  gray: {
+    50: '#9ca3af',
+    100: '#E2E8F0',
+    200: '#CBD5E1',
+    400: '#64748B',
+    500: '#475569',
+    600: '#334155',
+    700: '#1E293B',
+    800: '#0F172A',
+    900: '#101828',
+  },
+  'cancel-red': {
+    main: '#CF142B',
+    light: {
+      2: '#F0B6BD',
+    },
+  },
+  light: {
+    3: '#6C6C6C',
+    4: '#2D2D2D',
+  },
+  disabledState: '#CCCCFF',
+};
+
 module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   mode: 'jit',
   darkMode: 'class',
   theme: {
+    colors: {
+      ...customColors,
+    },
     fontFamily: {
       playfair: ['Playfair Display'],
-      babablu: ['Montserrat'],
+      primary: ['Inter', 'sans-serif'],
     },
     screens: {
       xxlA: { min: '1440px' },
-      // => @media (max-width: 1535px) { ... }
-
       xl: { max: '1279px' },
-      // => @media (max-width: 1279px) { ... }
-
       lg: { max: '1028px' },
-      // => @media (max-width: 1023px) { ... }
       minlg: { max: '1024px' },
-      // => @media (max-width: 1023px) { ... }
-
       mdxl: { max: '950px' },
-
       md: { max: '834px' },
-
-      // => @media (min-width: 7px) { ... }
       sixm: { max: '768px' },
-
       xlsm: { max: '550px' },
-      // => @media (max-width: 550px) { ... }
-
       sm: { max: '375px' },
-      // => @media (max-width: 639px) { ... }
     },
     container: {
       screens: {
