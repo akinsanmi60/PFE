@@ -7,6 +7,8 @@ const ErrorPage = React.lazy(() => import('@pages/error/error'));
 const UnauthourizedPage = React.lazy(() => import('@pages/error/unauthorized'));
 
 const HomePage = React.lazy(() => import('@pages/homePage'));
+const AboutPage = React.lazy(() => import('@pages/about'));
+const ServicePage = React.lazy(() => import('@pages/servicesPage'));
 
 const VerifyPasswordPage = React.lazy(
   () => import('@modules/authentication/verifyEmail'),
@@ -42,6 +44,14 @@ const routeWithLayout = {
   HomePage: {
     element: HomePage,
     path: '/',
+  },
+  AboutPage: {
+    element: AboutPage,
+    path: '/about',
+  },
+  ServicePage: {
+    element: ServicePage,
+    path: '/services',
   },
 };
 

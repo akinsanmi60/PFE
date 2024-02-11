@@ -65,7 +65,7 @@ function Header() {
         </div>
       </nav>
       {open && (
-        <div className="bg-white h-screen w-full pt-[20px]">
+        <div className="bg-white h-screen w-full pt-[20px] transition-transform transform">
           <div className="container">
             <div className="flex flex-col gap-[20px]">
               {navLinks.map((link, index) => (
