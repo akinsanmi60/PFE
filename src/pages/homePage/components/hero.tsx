@@ -8,11 +8,12 @@ function Hero() {
 
   const handleSend = () => {
     if (selectedOption) {
-      navigate(`/login/${selectedOption}`);
+      // navigate(`/login/${selectedOption}`);
+      navigate('/login');
     }
   };
   return (
-    <div className="h-screen lg:h-full w-full bg-background-main">
+    <div className="h-screen lg:h-full lg:pb-[68px] w-full bg-background-main">
       <div className="max-content">
         <div className="container">
           <div className="flex items-end justify-between mdxl:flex-col gap-[78px] lg:gap-[30px]">

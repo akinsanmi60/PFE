@@ -1,4 +1,4 @@
-import farmerNetwork from '../../../assets/png/farmerNetworkImg.png';
+import farmerNetwork from '@assets/png/farmerNetworkImg.png';
 function FarmerNetwork() {
   return (
     <div className="max-content py-[32px]">
@@ -41,7 +41,7 @@ function FarmerNetwork() {
                 >
                   Get Started
                 </button>
-                <button className="rounded-[40px] xlsm:w-full py-[12px] px-[24px] text-[16px] leading-[22px] font-[500] text-[#1A1A1A] border-[1px] border-[#1A1A1A] ">
+                <button className="rounded-[40px] xlsm:w-full py-[12px] px-[24px] text-[16px] leading-[22px] font-[500] text-primary-main border-[1px] border-[#1A1A1A] ">
                   Learn More{' '}
                 </button>
               </div>

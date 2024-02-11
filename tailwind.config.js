@@ -4,6 +4,7 @@ const customColors = {
   primary: {
     main: '#1A1A1A',
     light: '#999999',
+    lighter: '#666666',
     white: '#FFFFFF',
   },
   secondary: {

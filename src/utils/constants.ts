@@ -122,7 +122,6 @@ export const extraKey = (inputString: string) => {
 };
 
 export const getClass = (text: string) => {
-  console.log(text);
   const classText = capitalize(text) as string;
   switch (classText) {
     case 'Active':

@@ -16,10 +16,10 @@ function Insight() {
                 className="h-[186px] w-full rounded-[8px] object-cover"
               />
               <div className="mt-[20px]">
-                <p className="font-[500] text-[#1A1A1A] text-[24px] leading-[30px]">
+                <p className="font-[500] text-primary-main text-[24px] leading-[30px]">
                   {item?.title}
                 </p>
-                <p className="mt-[12px] font-[400] text-[15px] leading-[22px] text-[#666666]">
+                <p className="mt-[12px] font-[400] text-[15px] leading-[22px] text-primary-lighter">
                   {item?.subTitle}
                 </p>
               </div>

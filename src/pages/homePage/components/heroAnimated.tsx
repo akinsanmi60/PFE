@@ -1,4 +1,4 @@
-import heroImg1 from '../../../assets/png/heroImg1.png';
+import heroImg1 from '@assets/png/heroImg1.png';
 function HeroAnimated() {
   return (
     <div className="">
@@ -6,7 +6,7 @@ function HeroAnimated() {
         <img src={heroImg1} alt="" className="w-[604px] h-[562px]" />
       </div>
       <div className="mdxl:block hidden">
-        <img src={heroImg1} alt="" className="w-full h-[450px]" />
+        <img src={heroImg1} alt="" className="w-full h-[400px]" />
       </div>
     </div>
   );
