@@ -29,3 +29,4 @@ declare module '*.mp4' {
 }
 
 declare module '@paystack/inline-js';
+declare module 'react-step-progress-bar';

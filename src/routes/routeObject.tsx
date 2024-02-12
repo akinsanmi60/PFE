@@ -14,6 +14,10 @@ const VerifyPasswordPage = React.lazy(
   () => import('@modules/authentication/verifyEmail'),
 );
 
+const FarmerAggregatorRegisterPage = React.lazy(
+  () => import('@modules/authentication/register/farmerAggregatorForm'),
+);
+
 const noLayoutRoutes = {
   LoginPage: {
     element: LoginPage,
@@ -31,6 +35,11 @@ const noLayoutRoutes = {
   VerifyPasswordPage: {
     element: VerifyPasswordPage,
     path: '/verify-email',
+  },
+
+  FarmerAggregatorRegisterPage: {
+    element: FarmerAggregatorRegisterPage,
+    path: '/register/farmer-aggregator',
   },
 };
 
