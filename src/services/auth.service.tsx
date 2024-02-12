@@ -7,6 +7,8 @@ import {
   IForgetProp,
   ILoginFormData,
   ILoginResponse,
+  IPartialCreateUser,
+  IRegister,
   IVerifyProp,
 } from 'types/auth.type';
 import { useNavigate } from 'react-router-dom';
@@ -17,13 +19,13 @@ import { setToken } from '@hooks/localStorageHook';
 import { useAuthContext } from '@contexts/authContext';
 import { postRequest } from '@utils/apiCaller';
 import {
+  PARTIAL_USER_CREATION_URL,
   USER_CHANGE_PASSWORD_URL,
   USER_FORGET_URL,
   USER_LOGIN_URL,
-  USER_REGISTER_URL,
+  USER_SIGNUP_URL,
   USER_VERIFY_URL,
 } from '@utils/apiUrl';
-import { IRegister } from 'types/register.types';
 
 export const displayError = (error: any) => {
   const content = handleApiError(error);
@@ -70,18 +72,37 @@ export const useLoginMutation = () => {
   return { mutate, isLoading, ...rest };
 };
 
-export const useRegisterMutation = () => {
-  const navigate = useNavigate();
+export const usePartialUserCreationMutation = () => {
   const { mutate, isLoading, ...rest } = useMutation(
-    ({ payload }: { payload: IRegister }) =>
-      postRequest<IRegister, IBaseResponse>({
-        url: USER_REGISTER_URL,
+    ({ payload }: { payload: IPartialCreateUser }) =>
+      postRequest<IPartialCreateUser, IBaseResponse>({
+        url: PARTIAL_USER_CREATION_URL,
         payload,
       }),
     {
       onSuccess(res) {
         toast.success(res?.message, toastOptions);
-        navigate('/verify-email');
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+export const useRegisterMutation = () => {
+  const navigate = useNavigate();
+  const { mutate, isLoading, ...rest } = useMutation(
+    ({ payload }: { payload: IRegister }) =>
+      postRequest<IRegister, IBaseResponse>({
+        url: USER_SIGNUP_URL,
+        payload,
+      }),
+    {
+      onSuccess(res) {
+        toast.success(res?.message, toastOptions);
+        navigate('/dashboard');
       },
       onError(error) {
         displayError(error);
@@ -133,7 +154,6 @@ export const useChangePasswordMutation = () => {
 };
 
 export const useVerifyMutation = () => {
-  const navigate = useNavigate();
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: IVerifyProp }) =>
       postRequest<IVerifyProp, IBaseResponse>({
@@ -143,7 +163,6 @@ export const useVerifyMutation = () => {
     {
       onSuccess(res) {
         toast.success(res?.message, toastOptions);
-        navigate('/login');
       },
       onError(error) {
         displayError(error);

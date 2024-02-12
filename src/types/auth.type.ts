@@ -1,16 +1,7 @@
 export type IFormComponentType = {
-  formStep: number;
-  nextFormStep?: () => void;
-  revealForm?: {
-    formType: string;
-    showForm: boolean;
-  };
-  setRevealForm?: React.Dispatch<
-    React.SetStateAction<{
-      formType: string;
-      showForm: boolean;
-    }>
-  >;
+  currentStep?: number;
+  action?: () => void;
+  previous?: () => void;
 };
 
 export type IVerifyProp = {
@@ -43,13 +34,24 @@ export type IChangePassword = {
   new_password: string;
   confirm_password?: string;
 };
-export type IChangeSecurity = {
-  password: string;
-  security_answer: string;
-  security_question: string;
-};
 
 export type ILoginFormData = {
   email: string;
   password: string;
+};
+
+export type IRegister = {
+  email?: string;
+  password?: string;
+  full_name?: string;
+  user_type?: string;
+  phone_number?: string;
+  gender?: string;
+  code?: string;
+};
+
+export type IPartialCreateUser = {
+  email: 'string';
+  phone_number: 'string';
+  full_name: 'string';
 };
