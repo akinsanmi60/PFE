@@ -17,7 +17,7 @@ function FarmerNetwork() {
                 Find a great network to sell produce for export.
               </p>
               <p className="mt-[20px] font-[400] text-[20px] leading-[28px] xlsm:text-[16px] xlsm:leading-[24px]">
-                Lorem ipsum dolor sit amet consectetur. Velit vitae odio nec
+                Lorem ipsum dolors sit amet consectetur. Velit vitae odio nec
                 vulputate proin ut facilisi hendrerit leo. Amet vitae et lacus
                 bibendum.
               </p>
