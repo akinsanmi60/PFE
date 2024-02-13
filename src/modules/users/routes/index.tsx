@@ -1,50 +1,36 @@
-// import { Account } from '@utils/constants';
-// import React from 'react';
-// import AdminLayout from '..';
+import { Account } from '@utils/constants';
+import React from 'react';
+import UserLayout from '..';
 
-// const AdminDashBoard = React.lazy(
-//   () => import('@modules/admin/pages/dashboard'),
-// );
-// const AdminProfile = React.lazy(() => import('@modules/admin/pages/profile'));
-// const AllUsers = React.lazy(() => import('@modules/admin/pages/users'));
-// const AllVictims = React.lazy(() => import('@modules/admin/pages/victims'));
-// const AdminList = React.lazy(() => import('@modules/admin/pages/admins'));
-// const VictimPage = React.lazy(
-//   () => import('@modules/admin/pages'),
-// );
+const HomeDashBoard = React.lazy(
+  () => import('@modules/users/pages/dashboard'),
+);
+const UserPentrarHub = React.lazy(
+  () => import('@modules/users/pages/userPentrarHub'),
+);
 
-// const adminRoutes = {
-//   AdminDashBoard: {
-//     element: AdminDashBoard,
-//     path: 'dashboard',
-//   },
-//   AdminProfil: {
-//     element: AdminProfile,
-//     path: 'profile',
-//   },
-//   AllVictims: {
-//     element: AllVictims,
-//     path: 'victims-list',
-//   },
-//   VictimPage: {
-//     element: VictimPage,
-//     path: 'victims-list/victim/:id',
-//   },
-//   AllUsers: {
-//     id: '3',
-//     element: AllUsers,
-//     path: 'users-list',
-//   },
-//   AdminList: {
-//     element: AdminList,
-//     path: 'admin-list',
-//   },
-// };
+const UserProduce = React.lazy(
+  () => import('@modules/users/pages/userProduce'),
+);
+const userRoutes = {
+  HomeDashBoard: {
+    element: HomeDashBoard,
+    path: 'dashboard',
+  },
+  UserPentrarHub: {
+    element: UserPentrarHub,
+    path: 'pentrar-hub',
+  },
+  UserProduce: {
+    element: UserProduce,
+    path: 'my-produces',
+  },
+};
 
-// export const AdminAppRoute = {
-//   AppLayout: AdminLayout,
-//   IndexRoute: AdminDashBoard,
-//   AllowedRoles: [Account.superAdmin],
-//   BasePath: 'sadmin',
-//   ListedRoutes: adminRoutes,
-// };
+export const UserAppRoute = {
+  AppLayout: UserLayout,
+  IndexRoute: HomeDashBoard,
+  AllowedRoles: [Account.Aggregator, Account.Farmer],
+  BasePath: 'pentrar/user',
+  ListedRoutes: userRoutes,
+};

@@ -3,11 +3,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
 import { useForm } from 'react-hook-form';
+import { useRegisterMutation } from 'services/auth.service';
 import { IFormComponentType, IRegister } from 'types/auth.type';
 import { createPasswordSchema } from 'validation/registerValidation';
 
 function CreatePassword({ previous, currentStep }: IFormComponentType) {
   const { multiFormValues } = useFormData();
+  const { mutate, isLoading } = useRegisterMutation();
 
   const { handleSubmit, control } = useForm({
     mode: 'all',
@@ -23,7 +25,8 @@ function CreatePassword({ previous, currentStep }: IFormComponentType) {
       ...multiFormValues,
       password: values.password,
     };
-    return payload;
+
+    mutate({ payload });
   };
 
   return (
@@ -69,8 +72,8 @@ function CreatePassword({ previous, currentStep }: IFormComponentType) {
             </CustomButton>
             <CustomButton
               className=" w-[300px] bg-primary-main text-primary-white"
-              //   loading={isLoading}
-              loadingText="Verifying..."
+              loading={isLoading}
+              loadingText="Creating..."
               type="submit"
               onClick={handleSubmit(onSubmit)}
             >

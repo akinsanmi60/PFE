@@ -34,7 +34,7 @@ const AGGREGATOR_SIDENAV: NavLInk[] = [
   },
   {
     name: 'My Produces',
-    path: 'myproduces-list',
+    path: 'my-produces',
     Icon: <Folder />,
     // IconBlue: BlueGroup,
   },

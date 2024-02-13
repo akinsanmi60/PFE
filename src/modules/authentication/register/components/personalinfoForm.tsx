@@ -5,11 +5,13 @@ import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
 import ControlledSelect from '@shared/Select/ControlledSelect';
 import { useForm } from 'react-hook-form';
+import { usePartialUserCreationMutation } from 'services/auth.service';
 import { IFormComponentType, IRegister } from 'types/auth.type';
 import { personalInfoSchema } from 'validation/registerValidation';
 
 function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
   const { setFormValues } = useFormData();
+  const { mutate, isLoading } = usePartialUserCreationMutation({ action });
 
   const { handleSubmit, control } = useForm({
     defaultValues: {
@@ -34,9 +36,7 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
     }
 
     setFormValues(payload);
-    if (action) {
-      action();
-    }
+    mutate({ payload });
   };
 
   return (
@@ -95,6 +95,7 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
             type="button"
             className=" w-[50%] bg-primary-main text-primary-white"
             onClick={handleSubmit(onSubmit)}
+            loading={isLoading}
           >
             Proceed
           </CustomButton>

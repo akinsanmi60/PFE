@@ -33,12 +33,13 @@ function SideNav() {
   const navigate = useNavigate();
 
   const navList = useMemo(() => {
-    return authUser?.roles === Account.Aggregator
+    return authUser?.role === Account.Aggregator ||
+      authUser?.role === Account.Farmer
       ? AGGREGATOR_SIDENAV
-      : authUser?.roles === Account.Exporter
+      : authUser?.role === Account.Exporter
       ? EXPORTER_SIDENAV
-      : AGGREGATOR_SIDENAV;
-  }, [authUser?.roles]);
+      : null;
+  }, [authUser?.role]);
 
   const handleLogout = () => {
     logOut();
@@ -159,7 +160,7 @@ function SideNav() {
               {menuOptions?.map((menuItem, i) => {
                 return (
                   <MenuItem
-                    className="w-[14rem] flex gap-2 items-center h-[14rem]"
+                    className="w-[14rem] flex gap-2 items-center"
                     key={i}
                     onClick={() => menuItem?.action()}
                     role={menuItem?.menuTitle}

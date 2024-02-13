@@ -11,6 +11,7 @@ export const Account = {
   Aggregator: 'aggregator',
   Exporter: 'exporter',
   Offtakers: 'offtaker',
+  Farmer: 'farmer',
 };
 
 export const REGEX_CODE = /^[0-9]+$/;

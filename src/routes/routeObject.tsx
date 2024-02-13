@@ -10,10 +10,6 @@ const HomePage = React.lazy(() => import('@pages/homePage'));
 const AboutPage = React.lazy(() => import('@pages/about'));
 const ServicePage = React.lazy(() => import('@pages/servicesPage'));
 
-const VerifyPasswordPage = React.lazy(
-  () => import('@modules/authentication/verifyEmail'),
-);
-
 const FarmerAggregatorRegisterPage = React.lazy(
   () => import('@modules/authentication/register/farmerAggregatorForm'),
 );
@@ -28,13 +24,10 @@ const noLayoutRoutes = {
     element: ErrorPage,
     path: '*',
   },
+
   UnauthourizedPage: {
     element: UnauthourizedPage,
     path: '/unauthourized',
-  },
-  VerifyPasswordPage: {
-    element: VerifyPasswordPage,
-    path: '/verify-email',
   },
 
   FarmerAggregatorRegisterPage: {

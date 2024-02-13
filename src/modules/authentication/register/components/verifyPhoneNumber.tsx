@@ -10,7 +10,7 @@ import { useVerifyMutation } from 'services/auth.service';
 
 function GetVerifyCode({ currentStep, action, previous }: IFormComponentType) {
   const { setFormValues, multiFormValues } = useFormData();
-  const { mutate, isLoading, isSuccess } = useVerifyMutation();
+  const { mutate, isLoading } = useVerifyMutation({ action });
 
   const { control, handleSubmit } = useForm<IVerifyProp>({
     defaultValues: {
@@ -20,12 +20,6 @@ function GetVerifyCode({ currentStep, action, previous }: IFormComponentType) {
     resolver: yupResolver(verifyPasswordSchema),
   });
 
-  if (isSuccess) {
-    if (action) {
-      action();
-    }
-  }
-
   const onSubmit = (values: IVerifyProp) => {
     const payload = {
       ...values,
@@ -33,9 +27,6 @@ function GetVerifyCode({ currentStep, action, previous }: IFormComponentType) {
     };
     setFormValues(payload);
     mutate({ payload: values });
-    // if (action) {
-    //   action();
-    // }
   };
 
   return (

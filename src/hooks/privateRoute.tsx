@@ -34,7 +34,7 @@ function PrivateRoute({
     return <Navigate to="/" state={{ from: location }} replace />;
   }
 
-  const role = decodedUser?.roles ?? '';
+  const role = decodedUser?.role ?? '';
 
   const userHasRequiredAccount = role && accounts.includes(role);
 

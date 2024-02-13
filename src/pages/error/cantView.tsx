@@ -8,7 +8,7 @@ function CantView() {
   const goBack = () => navigate(-1);
 
   const routePath = () => {
-    switch (authUser?.roles) {
+    switch (authUser?.role) {
       case 'admin':
         return '/admin/dashboard';
       case 'superAdmin':

@@ -7,9 +7,8 @@ function Hero() {
   const [selectedOption, setSelectedOption] = useState<string>('');
 
   const handleSend = () => {
-    if (selectedOption) {
-      // navigate(`/login/${selectedOption}`);
-      navigate('/login');
+    if (selectedOption === 'Farmer' || selectedOption === 'Aggregator') {
+      navigate('/register/farmer-aggregator');
     }
   };
   return (
@@ -32,8 +31,8 @@ function Hero() {
                     className=" border-none cursor-pointer rounded-[10px] rounded-tr-[0px] rounded-br-[0px] pr-[12px] py-[20px] pl-[40px] w-[405px] lg:w-[340px] h-[67px] mdxl:h-[45px] xlsm:w-full xlsm:rounded-[12px] mdxl:py-[10px] mdxl:text-[14px] focus:outline-none focus:border-none"
                   >
                     <option value="">Select user type</option>
-                    <option value="/">Farmer</option>
-                    <option value="/">Aggregator</option>
+                    <option value="Farmer">Farmer</option>
+                    <option value="Aggregator">Aggregator</option>
                     <option value="/">Trader</option>
                   </select>
                 </div>

@@ -32,6 +32,9 @@ export const displayError = (error: any) => {
   return toast.error(content, toastOptions);
 };
 
+const userDashboard = ['user', 'farmer', 'aggregator'];
+const adminDashboard = ['admin', 'subAdmin'];
+
 export const useLoginMutation = () => {
   const { setAuthUser } = useAuthContext();
 
@@ -54,11 +57,11 @@ export const useLoginMutation = () => {
           if (
             decodedUser &&
             decodedUser.isEmail_verified &&
-            decodedUser.roles === 'user'
+            userDashboard.includes(decodedUser.role)
           ) {
             toast.success(res?.message || '', toastOptions);
-            navigate('/dashboard', { replace: true });
-          } else if (decodedUser && decodedUser.roles === 'superAdmin') {
+            navigate('/pentrar/user', { replace: true });
+          } else if (decodedUser && adminDashboard.includes(decodedUser.role)) {
             toast.success(res?.message || '', toastOptions);
             navigate('/sadmin/dashboard', { replace: true });
           }
@@ -72,7 +75,11 @@ export const useLoginMutation = () => {
   return { mutate, isLoading, ...rest };
 };
 
-export const usePartialUserCreationMutation = () => {
+export const usePartialUserCreationMutation = ({
+  action,
+}: {
+  action?: () => void;
+}) => {
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: IPartialCreateUser }) =>
       postRequest<IPartialCreateUser, IBaseResponse>({
@@ -82,6 +89,9 @@ export const usePartialUserCreationMutation = () => {
     {
       onSuccess(res) {
         toast.success(res?.message, toastOptions);
+        if (action) {
+          action();
+        }
       },
       onError(error) {
         displayError(error);
@@ -102,7 +112,7 @@ export const useRegisterMutation = () => {
     {
       onSuccess(res) {
         toast.success(res?.message, toastOptions);
-        navigate('/dashboard');
+        navigate('/login');
       },
       onError(error) {
         displayError(error);
@@ -153,7 +163,7 @@ export const useChangePasswordMutation = () => {
   return { mutate, isLoading, ...rest };
 };
 
-export const useVerifyMutation = () => {
+export const useVerifyMutation = ({ action }: { action?: () => void }) => {
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: IVerifyProp }) =>
       postRequest<IVerifyProp, IBaseResponse>({
@@ -163,6 +173,9 @@ export const useVerifyMutation = () => {
     {
       onSuccess(res) {
         toast.success(res?.message, toastOptions);
+        if (action) {
+          action();
+        }
       },
       onError(error) {
         displayError(error);

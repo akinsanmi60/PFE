@@ -8,9 +8,9 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
-import { RenderRoute } from 'routes/Routes';
+import { RenderProtectedRoute, RenderRoute } from 'routes/Routes';
 import { AppRouteWithLayout, AppRouteWithoutLayout } from 'routes/routeObject';
-import jwt_decode from 'jwt-decode';
+import { UserAppRoute } from '@modules/users/routes';
 
 function App() {
   const router = createBrowserRouter(
@@ -18,32 +18,10 @@ function App() {
       <>
         {RenderRoute(AppRouteWithLayout)}
         {RenderRoute(AppRouteWithoutLayout)}
-        {/* {RenderProtectedRoute(AdminAppRoute)} */}
+        {RenderProtectedRoute(UserAppRoute)}
       </>,
     ),
   );
-  const logoutUser = () => {
-    localStorage.removeItem('token');
-    if (process.env.NODE_ENV === 'development') {
-      window.location.href = 'http://localhost:5173';
-    } else {
-      window.location.href = 'https://google.com';
-    }
-  };
-
-  const token = localStorage.getItem('token');
-
-  if (token) {
-    // Check if a token is present in localStorage
-    const decoded = jwt_decode(token) as { exp: number };
-    // Token is present, check expiration time
-    const expirationTime = new Date(decoded.exp * 1000).toISOString();
-    const currentTime = new Date().toISOString();
-
-    if (expirationTime < currentTime) {
-      logoutUser();
-    }
-  }
 
   return (
     <ErrorBoundary>

@@ -41,5 +41,5 @@ export type IUserCTXType = {
   phone_number: string;
   last_login: string;
   created_at: string;
-  roles: string;
+  role: string;
 };
