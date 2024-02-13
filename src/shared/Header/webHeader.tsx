@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { navLinks } from '../../db/headerData';
+import { navLinks } from '@db/headerData';
 import { useState } from 'react';
-import logo from '../../assets/svg/logo.svg';
-import menuOpen from '../../assets/svg/menuOpen.svg';
-import menuClose from '../../assets/svg/menuClose.svg';
+import logo from '@assets/svg/logo.svg';
+import menuOpen from '@assets/svg/menuOpen.svg';
+import menuClose from '@assets/svg/menuClose.svg';
 
 function Header() {
   const navigate = useNavigate();

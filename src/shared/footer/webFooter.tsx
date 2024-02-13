@@ -1,8 +1,8 @@
 import { getYear } from '@utils/constants';
-import logo from '../../assets/svg/logoWhite.svg';
-import facebook from '../../assets/svg/facebook.svg';
-import instagram from '../../assets/svg/instagram.svg';
-import twitter from '../../assets/svg/twitter.svg';
+import logo from '@assets/svg/logoWhite.svg';
+import facebook from '@assets/svg/facebook.svg';
+import instagram from '@assets/svg/instagram.svg';
+import twitter from '@assets/svg/twitter.svg';
 
 const socialLinks = [
   {
