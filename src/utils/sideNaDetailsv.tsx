@@ -64,7 +64,7 @@ const EXPORTER_SIDENAV: NavLInk[] = [
 const SETTINGS_SIDENAV: NavLInk[] = [
   {
     name: 'Report a problem',
-    path: 'reportProblem',
+    path: 'report-problem',
     Icon: <Caution />,
     // IconBlue: <HomeWhite />,
   },

@@ -12,18 +12,39 @@ const UserPentrarHub = React.lazy(
 const UserProduce = React.lazy(
   () => import('@modules/users/pages/userProduce'),
 );
+
+const UserSettings = React.lazy(
+  () => import('@modules/users/pages/userSettings'),
+);
+
+const ReportProblem = React.lazy(
+  () => import('@modules/users/pages/reportProblem'),
+);
+
 const userRoutes = {
   HomeDashBoard: {
     element: HomeDashBoard,
     path: 'dashboard',
   },
+
   UserPentrarHub: {
     element: UserPentrarHub,
     path: 'pentrar-hub',
   },
+
   UserProduce: {
     element: UserProduce,
     path: 'my-produces',
+  },
+
+  UserSettings: {
+    element: UserSettings,
+    path: 'settings',
+  },
+
+  ReportProblem: {
+    element: ReportProblem,
+    path: 'report-problem',
   },
 };
 
