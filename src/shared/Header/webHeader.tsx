@@ -4,6 +4,7 @@ import { useState } from 'react';
 import logo from '@assets/svg/logo.svg';
 import menuOpen from '@assets/svg/menuOpen.svg';
 import menuClose from '@assets/svg/menuCLose.svg';
+import CustomButton from '@shared/Button';
 
 function Header() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function Header() {
 
   return (
     <div>
-      <nav className="sticky top-0 z-50 w-full transition-colors duration-500 py-[30px] bg-[#072723] shadow-md">
+      <nav className="w-full transition-colors duration-500 py-[20px] bg-[#072723] shadow-md">
         <div className="max-content">
           <div className="container">
             <div className="flex items-center justify-between cursor-pointer">
@@ -33,15 +34,15 @@ function Header() {
                 ))}
               </div>
               <div className="flex gap-[20px] items-center mdxl:hidden ">
-                <button
+                <CustomButton
                   onClick={() => navigate('/login')}
-                  className="rounded-[40px] py-[12px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#ffffff] border-[1px] border-[#ffffff]"
+                  className="py-[12px] w-[110px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#ffffff] border-[1px] border-[#ffffff]"
                 >
                   Login
-                </button>
-                <button className="rounded-[40px] py-[12px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#072723] border-[1px] border-[#6AD871] bg-[#6AD871]">
+                </CustomButton>
+                <CustomButton className="text-[16px] leading-[22px] w-[150px] font-[600] text-[#072723] border-[1px] border-[#6AD871] bg-[#6AD871]">
                   Get Started
-                </button>
+                </CustomButton>
               </div>
               <div className=" hidden mdxl:block">
                 {open ? (

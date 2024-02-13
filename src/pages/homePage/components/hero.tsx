@@ -12,15 +12,15 @@ function Hero() {
     }
   };
   return (
-    <div className="h-screen lg:h-full lg:pb-[68px] w-full bg-background-main">
+    <div className="h-screen w-full bg-background-main">
       <div className="max-content">
         <div className="container">
-          <div className="flex items-end justify-between mdxl:flex-col gap-[78px] lg:gap-[30px]">
-            <div className="max-w-[654px]">
-              <p className="text-[80px] lg:text-[65px] lg:leading-[85px] mdxl:text-[50px] xlsm:text-[45px] mdxl:leading-[63px] font-playfair leading-[100px] font-[700] text-[#ffffff]">
-                Unlock the Power of Traceability{' '}
+          <div className="flex items-center justify-between mdxl:flex-col-reverse gap-[78px] lg:gap-[30px]">
+            <div className="mdxl:w-full">
+              <p className="text-[80px] lg:text-[65px] lg:leading-[75px] mdxl:text-[50px] xlsm:text-[45px] mdxl:leading-[63px] font-playfair leading-[100px] font-[700] text-[#ffffff] w-[700px] tracking-normal">
+                Unlock the Power of Traceability
               </p>
-              <p className="text-[24px] leading-[30px] mdxl:text-[16px] mdxl:leading-[24px] font-[400] text-[#ffffff]">
+              <p className="text-[24px] leading-[30px] mdxl:text-[16px] mdxl:leading-[24px] font-[400] text-[#ffffff] ">
                 with our Innovative Software Solution.{' '}
               </p>
               <div className="flex items-center mt-[62px] mdxl:mt-[40px] xlsm:flex-col xlsm:gap-[10px]">
