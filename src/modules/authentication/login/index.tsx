@@ -105,7 +105,7 @@ function LoginPage() {
 
         <div className="mt-[20px]">
           <CustomButton
-            className="w-full"
+            className="w-full text-primary-white"
             loading={isLoading}
             loadingText="Loading..."
             type="submit"
