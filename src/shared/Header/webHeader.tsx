@@ -3,7 +3,7 @@ import { navLinks } from '@db/headerData';
 import { useState } from 'react';
 import logo from '@assets/svg/logo.svg';
 import menuOpen from '@assets/svg/menuOpen.svg';
-import menuClose from '@assets/svg/menuClose.svg';
+import menuClose from '@assets/svg/menuCLose.svg';
 
 function Header() {
   const navigate = useNavigate();
