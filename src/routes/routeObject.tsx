@@ -1,7 +1,7 @@
 import React from 'react';
 
 const LoginPage = React.lazy(
-  () => import('@modules/authentication/login/index'),
+  () => import('@modules/authentication/login/farmerAggregatorLogin'),
 );
 const ErrorPage = React.lazy(() => import('@pages/error/error'));
 const UnauthourizedPage = React.lazy(() => import('@pages/error/unauthorized'));
@@ -14,6 +14,14 @@ const FarmerAggregatorRegisterPage = React.lazy(
   () => import('@modules/authentication/register/farmerAggregatorForm'),
 );
 
+const AdminLogin = React.lazy(
+  () => import('@modules/authentication/login/adminLogin'),
+);
+
+const AgencyLogin = React.lazy(
+  () => import('@modules/authentication/login/agencyLogin'),
+);
+
 const noLayoutRoutes = {
   LoginPage: {
     element: LoginPage,
@@ -23,6 +31,16 @@ const noLayoutRoutes = {
   ErrorPage: {
     element: ErrorPage,
     path: '*',
+  },
+
+  AdminLogin: {
+    element: AdminLogin,
+    path: '/admin-login',
+  },
+
+  AgencyLogin: {
+    element: AgencyLogin,
+    path: '/agency-login',
   },
 
   UnauthourizedPage: {

@@ -22,7 +22,6 @@ import {
   PARTIAL_USER_CREATION_URL,
   USER_CHANGE_PASSWORD_URL,
   USER_FORGET_URL,
-  USER_LOGIN_URL,
   USER_SIGNUP_URL,
   USER_VERIFY_URL,
 } from '@utils/apiUrl';
@@ -35,14 +34,14 @@ export const displayError = (error: any) => {
 const userDashboard = ['user', 'farmer', 'aggregator'];
 const adminDashboard = ['admin', 'subAdmin'];
 
-export const useLoginMutation = () => {
+export const useLoginMutation = ({ url }: { url: string }) => {
   const { setAuthUser } = useAuthContext();
 
   const navigate = useNavigate();
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: ILoginFormData }) =>
       postRequest<ILoginFormData, ILoginResponse>({
-        url: USER_LOGIN_URL,
+        url: url,
         payload,
       }),
     {

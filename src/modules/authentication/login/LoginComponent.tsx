@@ -12,7 +12,13 @@ import { useNavigate } from 'react-router-dom';
 import { ILoginFormData } from 'types/auth.type';
 import pentrarLogo from '@assets/svg/LogoPentrar.svg';
 
-function LoginPage() {
+function GeneralLoginPage({
+  url,
+  pageTitle,
+}: {
+  url: string;
+  pageTitle: string;
+}) {
   const {
     handleSubmit,
     control,
@@ -25,24 +31,15 @@ function LoginPage() {
     mode: 'all',
     resolver: yupResolver(LoginSchema),
   });
-  // const [componentType, setComponentType] = useState('login');
   const [pshow, setPshow] = useState(false);
   const handleClickP = () => setPshow(!pshow);
 
   const navigate = useNavigate();
 
-  // const handleClose = () => {
-  //   navigate('/');
-  // };
-
-  const { mutate, isLoading } = useLoginMutation();
+  const { mutate, isLoading } = useLoginMutation({ url: url });
   const onSubmitForm = (values: ILoginFormData) => {
     mutate({ payload: values });
   };
-
-  // const handleSwitchComp = (switchValue: string) => {
-  //   setComponentType(switchValue);
-  // };
 
   return (
     <div
@@ -116,16 +113,18 @@ function LoginPage() {
           </CustomButton>
         </div>
 
-        <div className="flex justify-center items-center mt-[20px]">
-          <div>
-            <p className="text-[15px] leading-[23px] tracking-normal text-[#999999]">
-              You’re new in here?{' '}
-              <a href="/register" className="">
-                <b className="text-[#2AA232]">Request Acces</b>
-              </a>{' '}
-            </p>
+        {pageTitle === 'FarmerAggregator' && (
+          <div className="flex justify-center items-center mt-[20px]">
+            <div>
+              <p className="text-[15px] leading-[23px] tracking-normal text-[#999999]">
+                You’re new in here?{' '}
+                <a href="/register" className="">
+                  <b className="text-[#2AA232]">Request Acces</b>
+                </a>{' '}
+              </p>
+            </div>
           </div>
-        </div>
+        )}
       </form>
 
       <p className="text-[15px] leading-[23px] tracking-normal font-[500] text-[#999999]">
@@ -138,4 +137,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default GeneralLoginPage;

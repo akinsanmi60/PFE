@@ -2,6 +2,7 @@ export const GET_ALL_VICTIMS = 'https://dummyjson.com/users';
 export const SEARCH_ALL_VICTIMS = 'https://dummyjson.com/users/search';
 
 export const USER_LOGIN_URL = 'auth/login';
+export const ADMIN_LOGIN_URL = 'auth/admin-login';
 export const USER_SIGNUP_URL = 'auth/signup';
 export const PARTIAL_USER_CREATION_URL = 'auth/create-partialuser';
 export const USER_VERIFY_URL = 'auth/verify';

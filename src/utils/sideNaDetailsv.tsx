@@ -76,4 +76,52 @@ const SETTINGS_SIDENAV: NavLInk[] = [
   },
 ];
 
-export { AGGREGATOR_SIDENAV, EXPORTER_SIDENAV, SETTINGS_SIDENAV };
+const SUPER_ADMIN_SIDENAV: NavLInk[] = [
+  {
+    name: 'Dashboard',
+    path: 'admin-dashboard',
+    Icon: <Home />,
+  },
+  {
+    name: 'Produces',
+    path: 'all-produces',
+    Icon: <Home />,
+  },
+  {
+    name: 'Farmers',
+    path: 'all-farmers',
+    Icon: <Home />,
+  },
+  {
+    name: 'Transporters',
+    path: 'all-transporters',
+    Icon: <Home />,
+  },
+  {
+    name: 'Aggregators',
+    path: 'all-aggregators',
+    Icon: <Home />,
+  },
+  {
+    name: 'Exporters',
+    path: 'all-exporters',
+    Icon: <Home />,
+  },
+  {
+    name: 'Offtakers',
+    path: 'all-offtakers',
+    Icon: <Home />,
+  },
+  {
+    name: 'Agencies',
+    path: 'all-agencies',
+    Icon: <Home />,
+  },
+];
+
+export {
+  AGGREGATOR_SIDENAV,
+  EXPORTER_SIDENAV,
+  SETTINGS_SIDENAV,
+  SUPER_ADMIN_SIDENAV,
+};

@@ -11,6 +11,7 @@ import {
   AGGREGATOR_SIDENAV,
   EXPORTER_SIDENAV,
   SETTINGS_SIDENAV,
+  SUPER_ADMIN_SIDENAV,
 } from '@utils/sideNaDetailsv';
 import pentrarLogo from '@assets/svg/LogoPentrar.svg';
 import { getToken } from '@hooks/localStorageHook';
@@ -38,6 +39,8 @@ function SideNav() {
       ? AGGREGATOR_SIDENAV
       : authUser?.role === Account.Exporter
       ? EXPORTER_SIDENAV
+      : authUser?.role === Account.SuperAdmin
+      ? SUPER_ADMIN_SIDENAV
       : null;
   }, [authUser?.role]);
 
