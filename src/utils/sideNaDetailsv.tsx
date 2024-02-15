@@ -59,6 +59,12 @@ const EXPORTER_SIDENAV: NavLInk[] = [
     Icon: <Folder />,
     // IconBlue: BlueGroup,
   },
+  {
+    name: 'My Order',
+    path: 'myorder-list',
+    Icon: <Folder />,
+    // IconBlue: BlueGroup,
+  },
 ];
 
 const SETTINGS_SIDENAV: NavLInk[] = [

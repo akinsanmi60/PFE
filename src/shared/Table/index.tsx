@@ -15,8 +15,12 @@ import {
   Td,
   TableContainer,
 } from '@chakra-ui/react';
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useMemo, useState } from 'react';
 
+type ISortData = {
+  key: string | null;
+  direction: string;
+};
 const CustomTable = ({
   tableHeads,
   dataTableSource,
@@ -40,6 +44,11 @@ const CustomTable = ({
   removeHeads,
   useTableFilter = true,
 }: ITableProp) => {
+  const [sortConfig, setSortConfig] = useState<ISortData>({
+    key: '' || null,
+    direction: 'ascending',
+  });
+
   const navigate = useNavigate();
   const [openFilterModal, setOpenFilterModal] = useState(false);
 
@@ -77,7 +86,42 @@ const CustomTable = ({
     }
   };
 
-  const dataTableSourceLength = dataTableSource?.length as number;
+  const sortedData = useMemo(() => {
+    if (!dataTableSource) return [];
+    const sortableData = [...dataTableSource];
+    if (sortConfig.key !== null && sortConfig.key !== undefined) {
+      sortableData.sort((a, b) => {
+        if (
+          a[sortConfig.key as unknown as keyof ITableBody] <
+          b[sortConfig.key as unknown as keyof ITableBody]
+        ) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (
+          a[sortConfig.key as unknown as keyof ITableBody] >
+          b[sortConfig.key as unknown as keyof ITableBody]
+        ) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableData;
+  }, [dataTableSource, sortConfig]);
+
+  const requestSort = (key: string | null) => {
+    let direction = 'ascending';
+    if (
+      key !== null &&
+      sortConfig.key === key &&
+      sortConfig.direction === 'ascending'
+    ) {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const dataTableSourceLength = sortedData?.length as number;
   const borderValue = showDivider ? '1px' : '0px';
 
   return (
@@ -94,13 +138,23 @@ const CustomTable = ({
               <Table variant="striped" colorScheme="gray">
                 <Thead className="w-full">
                   <Tr>
-                    {tableHeads?.map((heads, i) => {
+                    {tableHeads?.map(heads => {
                       return (
                         <Th
-                          key={i}
+                          onClick={() => {
+                            requestSort(heads.accessor);
+                          }}
+                          key={heads.accessor}
                           className={`text-left px-[10px] py-[13px] font-[500] bg-white capitalize text-sm text-[#64748B] border-b-[${borderValue}]`}
                         >
                           {heads.label}
+                          {sortConfig.key === heads.accessor && (
+                            <span>
+                              {sortConfig.direction === 'ascending'
+                                ? ' ▲'
+                                : ' ▼'}
+                            </span>
+                          )}
                         </Th>
                       );
                     })}
@@ -108,7 +162,7 @@ const CustomTable = ({
                 </Thead>
 
                 <Tbody className={showDivider ? 'divide-y' : ''}>
-                  {dataTableSource?.map((rowData, indexKey) => {
+                  {sortedData?.map((rowData, indexKey) => {
                     return (
                       <Tr
                         className={`w-full bg-white cursor-pointer capitalize   `}
