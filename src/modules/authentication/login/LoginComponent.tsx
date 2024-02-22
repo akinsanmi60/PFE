@@ -41,16 +41,31 @@ function GeneralLoginPage({
     mutate({ payload: values });
   };
 
+  const registerScreenLink = () => {
+    switch (pageTitle) {
+      case 'FarmerAggregator':
+        return '/register-form';
+      case 'offtakerExporter':
+        return '/register/form';
+    }
+  };
+
   return (
     <div
       className={`flex flex-col items-center justify-between h-screen py-[10px]`}
       role="loginBox"
     >
-      <img src={pentrarLogo} alt="logo" />
+      <>
+        <img
+          src={pentrarLogo}
+          alt="logo"
+          onClick={() => navigate('/')}
+          className="cursor-pointer"
+        />
+      </>
 
       <form
         action=""
-        // onSubmit={}
         role="loginForm"
         className="w-[490px] p-[24px]  text-[#1A1A1A]"
       >
@@ -113,12 +128,13 @@ function GeneralLoginPage({
           </CustomButton>
         </div>
 
-        {pageTitle === 'FarmerAggregator' && (
+        {(pageTitle === 'FarmerAggregator' ||
+          pageTitle === 'offtakerExporter') && (
           <div className="flex justify-center items-center mt-[20px]">
             <div>
               <p className="text-[15px] leading-[23px] tracking-normal text-[#999999]">
                 You’re new in here?{' '}
-                <a href="/register" className="">
+                <a href={registerScreenLink()} className="">
                   <b className="text-[#2AA232]">Request Acces</b>
                 </a>{' '}
               </p>

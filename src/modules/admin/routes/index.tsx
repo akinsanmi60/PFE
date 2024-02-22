@@ -69,6 +69,6 @@ export const UserAppRoute = {
   AppLayout: DashboardLayout,
   IndexRoute: AdminDashboard,
   AllowedRoles: [Account.SuperAdmin],
-  BasePath: 'pentrar/user',
+  BasePath: 'pentrar/admin',
   ListedRoutes: AdminRoutes,
 };

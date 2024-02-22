@@ -11,8 +11,8 @@ function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div>
-      <nav className="w-full transition-colors duration-500 py-[20px] bg-[#072723] shadow-md">
+    <div className="bg-background-main">
+      <nav className="w-full transition-colors duration-500 py-[20px] bg-[#072723] border-0">
         <div className="max-content">
           <div className="container">
             <div className="flex items-center justify-between cursor-pointer">

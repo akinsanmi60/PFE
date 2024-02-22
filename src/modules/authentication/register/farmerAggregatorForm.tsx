@@ -4,6 +4,7 @@ import { useState } from 'react';
 import PersonalinfoForm from './components/personalinfoForm';
 import GetVerifyCode from './components/verifyPhoneNumber';
 import CreatePassword from './components/createPassword';
+import { useNavigate } from 'react-router-dom';
 
 function FarmerAggregatorRegister() {
   const steps = ['Personal Information', 'Verify Phone', 'Create Password'];
@@ -20,11 +21,20 @@ function FarmerAggregatorRegister() {
     setCurrentStep(prev => prev - 1);
   };
 
+  const navigate = useNavigate();
+
   return (
     <div
       className={`flex flex-col items-center justify-between h-screen py-[10px]`}
     >
-      <img src={pentrarLogo} alt="logo" />
+      <>
+        <img
+          src={pentrarLogo}
+          alt="logo"
+          onClick={() => navigate('/')}
+          className="cursor-pointer"
+        />
+      </>
 
       <div className="mt-[60px]">
         <FormWithStepperWrapper

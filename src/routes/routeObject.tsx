@@ -50,7 +50,7 @@ const noLayoutRoutes = {
 
   FarmerAggregatorRegisterPage: {
     element: FarmerAggregatorRegisterPage,
-    path: '/register/farmer-aggregator',
+    path: '/register-form',
   },
 };
 

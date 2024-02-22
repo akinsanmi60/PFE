@@ -6,3 +6,11 @@ export const heroImageData = [
     title: 'Farmer',
   },
 ];
+
+export const allUserType = [
+  'Farmer',
+  'Aggregator',
+  'Exporter',
+  'Transporter',
+  'Offtaker',
+];

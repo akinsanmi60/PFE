@@ -1,4 +1,3 @@
-// import Example from '@shared/Stepper';
 import FarmerNetwork from './components/farmerNetwork';
 import Hero from './components/hero';
 import HomeVideo from './components/homeVideo';
