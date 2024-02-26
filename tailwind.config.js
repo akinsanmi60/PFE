@@ -9,10 +9,13 @@ const customColors = {
   },
   secondary: {
     'light-1': '#2AA232',
+    'light-2': '#333333',
   },
   tertiary: {
     main: '#FF8A00',
     'light-1': '#FFF3E6',
+    'light-2': '#4D4D4D',
+    'light-3': '#666666',
   },
   statusText: {
     success: '#0CAF60',

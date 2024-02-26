@@ -114,7 +114,7 @@ function AppHeader() {
   const status = 'pending';
 
   return (
-    <div className="bg-white shadow-sm px-[20px] py-[10px] sticky top-0 z-30">
+    <div className="bg-primary-white shadow-sm px-[20px] py-[10px] sticky top-0 z-30">
       <div className="flex items-center justify-end">
         <div className="flex gap-[30px] items-center">
           <div

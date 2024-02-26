@@ -1,4 +1,4 @@
-import AppHeader from 'components/appHeader';
+import AppHeader from 'components/appHeader/appHeader';
 import SideNav from 'components/appNav/sideBar';
 import { Outlet } from 'react-router-dom';
 const DashboardLayout = () => {
@@ -9,7 +9,7 @@ const DashboardLayout = () => {
       </aside>
       <main className="mdxl:w-full">
         <AppHeader />
-        <div className="bg-gray-50">
+        <div className="bg-background-borderlight">
           <Outlet />
         </div>
       </main>
