@@ -5,10 +5,12 @@ import logo from '@assets/svg/logo.svg';
 import menuOpen from '@assets/svg/menuOpen.svg';
 import menuClose from '@assets/svg/menuCLose.svg';
 import CustomButton from '@shared/Button';
+import { useDetailContext } from '@contexts/saveDetailContext';
 
 function Header() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const { saveDetails } = useDetailContext();
 
   return (
     <div className="bg-background-main">
@@ -33,17 +35,26 @@ function Header() {
                   </p>
                 ))}
               </div>
-              <div className="flex gap-[20px] items-center mdxl:hidden ">
-                <CustomButton
-                  onClick={() => navigate('/login')}
-                  className="py-[12px] w-[110px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#ffffff] border-[1px] border-[#ffffff]"
+              {saveDetails.url !== null ? (
+                <p
+                  className=" text-primary-white"
+                  onClick={() => navigate(`${saveDetails.url}`)}
                 >
-                  Login
-                </CustomButton>
-                <CustomButton className="text-[16px] leading-[22px] w-[150px] font-[600] text-[#072723] border-[1px] border-[#6AD871] bg-[#6AD871]">
-                  Get Started
-                </CustomButton>
-              </div>
+                  Dashboard
+                </p>
+              ) : (
+                <div className="flex gap-[20px] items-center mdxl:hidden ">
+                  <CustomButton
+                    onClick={() => navigate('/login')}
+                    className="py-[12px] w-[110px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#ffffff] border-[1px] border-[#ffffff]"
+                  >
+                    Login
+                  </CustomButton>
+                  <CustomButton className="text-[16px] leading-[22px] w-[150px] font-[600] text-[#072723] border-[1px] border-[#6AD871] bg-[#6AD871]">
+                    Get Started
+                  </CustomButton>
+                </div>
+              )}
               <div className=" hidden mdxl:block">
                 {open ? (
                   <img

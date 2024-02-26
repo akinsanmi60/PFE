@@ -1,5 +1,11 @@
+import DashboardHeroFOrFarmerAggregator from 'components/farmerAggregatorHeroCpomponent';
+
 function DashboardHome() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <DashboardHeroFOrFarmerAggregator />
+    </div>
+  );
 }
 
 export default DashboardHome;

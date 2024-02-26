@@ -1,4 +1,5 @@
 import { useAuthContext } from '@contexts/authContext';
+import { userPathsLinks } from '@modules/users/routes';
 import { useNavigate } from 'react-router-dom';
 
 function CantView() {
@@ -9,10 +10,10 @@ function CantView() {
 
   const routePath = () => {
     switch (authUser?.role) {
-      case 'admin':
+      case 'admin' || 'subAdmin':
         return '/admin/dashboard';
-      case 'superAdmin':
-        return '/sadmin/dashboard';
+      case 'farmer' || 'aggregator':
+        return `/${userPathsLinks.basePath}`;
       default:
         return '/';
     }

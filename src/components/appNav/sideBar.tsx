@@ -49,6 +49,7 @@ function SideNav() {
     const token = getToken();
     if (!token) {
       setAuthUser(null);
+      localStorage.removeItem('presentUrl');
       navigate('/');
     }
   };

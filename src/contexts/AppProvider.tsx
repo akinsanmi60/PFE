@@ -5,6 +5,7 @@ import FormProvider from './FormProvider';
 import ModalProvider from './ModalProvider';
 import { AuthProvider } from './AuthProvider';
 import { ToastContainer } from 'react-toastify';
+import SaveDetailProvider from './saveDetailProvider';
 
 type ProviderProps = {
   children: React.ReactNode;
@@ -42,25 +43,27 @@ export default function AppProviders({ children }: ProviderProps) {
       <AuthProvider>
         <ModalProvider>
           <FormProvider>
-            <QueryClientProvider client={queryClient}>
-              {children}
-              <ReactQueryDevtools
-                initialIsOpen={false}
-                position="bottom-left"
-              />
-              <ToastContainer
-                position="bottom-center"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"
-              />
-            </QueryClientProvider>
+            <SaveDetailProvider>
+              <QueryClientProvider client={queryClient}>
+                {children}
+                <ReactQueryDevtools
+                  initialIsOpen={false}
+                  position="bottom-left"
+                />
+                <ToastContainer
+                  position="bottom-center"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="colored"
+                />
+              </QueryClientProvider>
+            </SaveDetailProvider>
           </FormProvider>
         </ModalProvider>
       </AuthProvider>

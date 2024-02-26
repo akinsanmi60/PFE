@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import handleApiError from '@utils/handleApiError';
 import jwt_decode from 'jwt-decode';
 import { IUserCTXType } from 'types/contextProvider.type';
-import { setToken } from '@hooks/localStorageHook';
+import { saveDetailToLocalStorage, setToken } from '@hooks/localStorageHook';
 import { useAuthContext } from '@contexts/authContext';
 import { postRequest } from '@utils/apiCaller';
 import {
@@ -25,13 +25,15 @@ import {
   USER_SIGNUP_URL,
   USER_VERIFY_URL,
 } from '@utils/apiUrl';
+import { userPathsLinks } from '@modules/users/routes';
+import { LOCAL_STORAGE_KEY } from '@utils/localStorageKey';
 
 export const displayError = (error: any) => {
   const content = handleApiError(error);
   return toast.error(content, toastOptions);
 };
 
-const userDashboard = ['user', 'farmer', 'aggregator'];
+const userDashboard = ['farmer', 'aggregator'];
 const adminDashboard = ['admin', 'subAdmin'];
 
 export const useLoginMutation = ({ url }: { url: string }) => {
@@ -59,7 +61,11 @@ export const useLoginMutation = ({ url }: { url: string }) => {
             userDashboard.includes(decodedUser.role)
           ) {
             toast.success(res?.message || '', toastOptions);
-            navigate('/pentrar/user', { replace: true });
+            saveDetailToLocalStorage(
+              LOCAL_STORAGE_KEY.URL,
+              `/${userPathsLinks.basePath}`,
+            );
+            navigate(`/${userPathsLinks.basePath}`, { replace: true });
           } else if (decodedUser && adminDashboard.includes(decodedUser.role)) {
             toast.success(res?.message || '', toastOptions);
             navigate('/sadmin/dashboard', { replace: true });

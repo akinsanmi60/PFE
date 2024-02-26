@@ -23,30 +23,28 @@ const socialLinks = [
 ];
 function Footer() {
   return (
-    <footer className="w-full bg-[var(--dark-primary)] text-white py-[50px] ">
+    <footer className="w-full bg-[var(--dark-primary)] text-primary-white  pt-[50px] pb-[20px] ">
       <div className="max-content">
         <div className="container">
-          <div className="">
-            <div className="flex justify-between items-center">
-              <div>
-                <img src={logo} alt="logo" className="w-[182px] h-[50px]" />
-              </div>
-              <div className="flex gap-[24px] items-center">
-                {socialLinks.map((link, index) => (
-                  <a key={index} href={link?.link} target="_blank">
-                    <div className="bg-[#ffffff] rounded-full h-[32px] w-[32px] flex justify-center items-center">
-                      <img
-                        src={link?.icon}
-                        alt="logo"
-                        className="w-[12px] h-[12px]"
-                      />
-                    </div>
-                  </a>
-                ))}
-              </div>
+          <div className="flex justify-between items-center">
+            <div>
+              <img src={logo} alt="logo" className="w-[182px] h-[50px]" />
+            </div>
+            <div className="flex gap-[24px] items-center">
+              {socialLinks.map((link, index) => (
+                <a key={index} href={link?.link} target="_blank">
+                  <div className="bg-[#ffffff] rounded-full h-[32px] w-[32px] flex justify-center items-center">
+                    <img
+                      src={link?.icon}
+                      alt="logo"
+                      className="w-[12px] h-[12px]"
+                    />
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
-          <p className="text-center font-[400] text-[16px] leading-[29px] mt-[26px]">
+          <p className="text-center font-[400] text-[14px] leading-[29px] mt-[26px]">
             {getYear()} @ Pentrar
           </p>
         </div>

@@ -18,6 +18,14 @@ export type IModalContextValue = {
   message: string;
 };
 
+export type ISaveDetailContextValue = {
+  url: string | null;
+};
+
+export type ISaveDetailContextType = {
+  saveDetails: ISaveDetailContextValue;
+  setSaveDetails: React.Dispatch<React.SetStateAction<ISaveDetailContextValue>>;
+};
 export type IModalContextType = {
   modalState: IModalContextValue;
   setModalState: React.Dispatch<React.SetStateAction<IModalContextValue>>;

@@ -21,30 +21,39 @@ const ReportProblem = React.lazy(
   () => import('@modules/users/pages/reportProblem'),
 );
 
+export const userPathsLinks = {
+  basePath: 'pentrar/user',
+  dashBoard: 'dashboard',
+  pentrarHub: 'pentrar-hub',
+  myProduces: 'my-produces',
+  settings: 'settings',
+  reportProblem: 'report-problem',
+};
+
 const userRoutes = {
   HomeDashBoard: {
     element: HomeDashBoard,
-    path: 'dashboard',
+    path: userPathsLinks.dashBoard,
   },
 
   UserPentrarHub: {
     element: UserPentrarHub,
-    path: 'pentrar-hub',
+    path: userPathsLinks.pentrarHub,
   },
 
   UserProduce: {
     element: UserProduce,
-    path: 'my-produces',
+    path: userPathsLinks.myProduces,
   },
 
   UserSettings: {
     element: UserSettings,
-    path: 'settings',
+    path: userPathsLinks.settings,
   },
 
   ReportProblem: {
     element: ReportProblem,
-    path: 'report-problem',
+    path: userPathsLinks.reportProblem,
   },
 };
 
@@ -52,6 +61,6 @@ export const UserAppRoute = {
   AppLayout: DashboardLayout,
   IndexRoute: HomeDashBoard,
   AllowedRoles: [Account.Aggregator, Account.Farmer],
-  BasePath: 'pentrar/user',
+  BasePath: userPathsLinks.basePath,
   ListedRoutes: userRoutes,
 };
