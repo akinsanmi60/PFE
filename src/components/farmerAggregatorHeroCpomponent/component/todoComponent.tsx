@@ -6,8 +6,8 @@ function TodoComponent() {
       <p className="text-[16px] font-[600] text-primary-main tracking-normal">
         Action Needed
       </p>
-      <p className="text-[14px] font-[600] text-tertiary-light-3 my-2">
-        {'nil'}
+      <p className="text-[14px] font-[600] text-tertiary-light-3 ">
+        Please complete your profile
       </p>
 
       <div className="flex justify-end">

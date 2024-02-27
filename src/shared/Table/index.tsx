@@ -5,7 +5,6 @@ import { ITableBody, ITableProp } from './table.interface';
 import { Menu, MenuItem, MenuButton } from '@szhsin/react-menu';
 import { capitalize, getClass } from '@utils/constants';
 import { IPagenationSetter } from '@hooks/tableHook';
-import { RxHamburgerMenu } from 'react-icons/rx';
 import {
   Table,
   Thead,
@@ -15,7 +14,7 @@ import {
   Td,
   TableContainer,
 } from '@chakra-ui/react';
-import { MouseEvent, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 type ISortData = {
   key: string | null;
@@ -29,7 +28,6 @@ const CustomTable = ({
   showPagination,
   clickRow,
   showDivider,
-  showRowModal,
   rowDetailCollector,
   setValuer,
   valuer,
@@ -40,9 +38,6 @@ const CustomTable = ({
   loading,
   tableEmptyState,
   tableLoader,
-  optAddItem,
-  removeHeads,
-  useTableFilter = true,
 }: ITableProp) => {
   const [sortConfig, setSortConfig] = useState<ISortData>({
     key: '' || null,
@@ -50,8 +45,6 @@ const CustomTable = ({
   });
 
   const navigate = useNavigate();
-  const [openFilterModal, setOpenFilterModal] = useState(false);
-
   const dataLength = total as number;
 
   const itemsPerPage = page_size as number; // Number of items to display per page
@@ -70,19 +63,10 @@ const CustomTable = ({
     const id = dataTableSource![indexValue]?.id;
     if (pathTo !== '') {
       navigate(`${pathTo}/${id}`);
-    } else if (showRowModal) {
-      // dispatch(setFilterModalOpen(true));
+    } else {
       if (rowDetailCollector) {
         rowDetailCollector(dataTableSource![indexValue] as ITableBody);
       }
-    }
-  };
-
-  const handleFilterOpen = () => {
-    if (openFilterModal === false) {
-      setOpenFilterModal(!openFilterModal);
-    } else {
-      setOpenFilterModal(false);
     }
   };
 
@@ -261,30 +245,6 @@ const CustomTable = ({
                 </Tbody>
               </Table>
             </TableContainer>
-            {useTableFilter && (
-              <div className="absolute top-0 left-0 cursor-pointer">
-                <RxHamburgerMenu onClick={handleFilterOpen} />
-                {openFilterModal === true && (
-                  <div className="mt-[0px] shadow-lg w-[200px]  bg-white ">
-                    {removeHeads?.map((heads, i) => {
-                      return (
-                        <div
-                          onClick={(e: MouseEvent<HTMLDivElement>) => {
-                            if (optAddItem) {
-                              optAddItem(e);
-                            }
-                          }}
-                          key={i}
-                          className={`text-left px-[10px] py-[13px] font-[500]capitalize text-sm text-[#64748B] border-b-[${borderValue}]`}
-                        >
-                          {heads.label}
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            )}
           </div>
         ) : (
           tableEmptyState

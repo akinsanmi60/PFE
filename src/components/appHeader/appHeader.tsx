@@ -57,7 +57,7 @@ const ProfileBox = ({ first_name }: { first_name: string }) => {
 
         {isHovered && (
           <div
-            className="absolute top-5 -right-14 mt-[33px] cursor-pointer shadow-lg w-[300px] h-[300px]"
+            className="absolute top-5 -right-14 mt-[23px] cursor-pointer shadow-lg w-[300px] h-[300px] bg-primary-white"
             //   ref={divRef}
           >
             <div className="text-[14px] border-b-[1px] py-[8px] px-[10px] sticky top-0 bg-primary-white z-30 h-[14%]">
@@ -89,7 +89,7 @@ const ProfileBox = ({ first_name }: { first_name: string }) => {
         </div>
         {isOpen && (
           <div
-            className="absolute top-10 right-2 mt-[33px] cursor-pointer shadow-lg w-[200px] h-[175px] scrollbar-none overflow-y-auto bg-white"
+            className="absolute top-10 right-2 mt-[18px] cursor-pointer shadow-lg w-[200px] h-[175px] scrollbar-none overflow-y-auto bg-white bg-primary-white"
             //   ref={divRef}
           >
             <div className="">hello</div>

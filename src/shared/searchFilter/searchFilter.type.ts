@@ -1,12 +1,35 @@
+/* eslint-disable no-unused-vars */
+import { IInputProps } from '@shared/Input/interface';
+
 export type IsearchFilterBox = {
-  handleFilterOpen?: () => void;
+  searchBarProps: {
+    placeholder: string;
+    onSetTermChange: ({
+      target: { value },
+    }: {
+      target: {
+        value: any;
+      };
+    }) => void;
+    term: string;
+    useEndAdornment?: React.ReactNode;
+    useStartAdornment?: React.ReactNode;
+    className?: string;
+  };
+};
+
+export type InputSearchboxProp = IInputProps & {
   placeholder?: string;
-  onChange?: () => void;
-  onSetTermChange: React.Dispatch<React.SetStateAction<string>>;
-  term?: string;
-  btnTitle?: string;
-  handleAction?: () => void;
-  viewAddBtn?: boolean;
-  svg?: React.ReactNode;
-  useArrow?: boolean;
+  onSetTermChange: ({
+    target: { value },
+  }: {
+    target: {
+      value: any;
+    };
+  }) => void;
+  term: string;
+  useEndAdornment?: React.ReactNode;
+  useStartAdornment?: React.ReactNode;
+  className?: string;
+  debounceChange?: boolean;
 };
