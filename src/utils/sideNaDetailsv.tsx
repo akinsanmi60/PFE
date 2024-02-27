@@ -5,12 +5,17 @@ import { ReactComponent as Search } from '@assets/svg/dashSearch.svg';
 import { ReactComponent as Folder } from '@assets/svg/dashFolder.svg';
 import { ReactComponent as SettingIcon } from '@assets/svg/dashSettings.svg';
 import { ReactComponent as Caution } from '@assets/svg/dashCaution.svg';
+import { ReactComponent as Personal } from '@assets/svg/PersonalSvg.svg';
+import { ReactComponent as Briefcase } from '@assets/svg/briefcaseVector.svg';
+import { ReactComponent as Password } from '@assets/svg/passwordLock.svg';
+import { ReactComponent as Notify } from '@assets/svg/notifySvg.svg';
+import { ReactComponent as PersonalActive } from '@assets/svg/personalActive.svg';
 
-interface NavLInk {
+export interface NavLInk {
   name: string;
   path: string;
   Icon: ReactNode;
-  // IconBlue: SvgInHtml;
+  IconBlue?: ReactNode;
 }
 // const ADMIN_SIDENAV_NOTIFICATION: NavLInk = {
 //   name: 'Notifications',
@@ -125,9 +130,34 @@ const SUPER_ADMIN_SIDENAV: NavLInk[] = [
   },
 ];
 
+const SETTINGS_PAGE_NAVLIST: NavLInk[] = [
+  {
+    name: 'Personal Information',
+    path: 'personal-information',
+    Icon: <Personal />,
+    IconBlue: <PersonalActive />,
+  },
+  {
+    name: 'Business Information',
+    path: 'business-information',
+    Icon: <Briefcase />,
+  },
+  {
+    name: 'Change Password',
+    path: 'change-password',
+    Icon: <Password />,
+  },
+  {
+    name: 'Notifications',
+    path: 'notifications',
+    Icon: <Notify />,
+  },
+];
+
 export {
   AGGREGATOR_SIDENAV,
   EXPORTER_SIDENAV,
   SETTINGS_SIDENAV,
   SUPER_ADMIN_SIDENAV,
+  SETTINGS_PAGE_NAVLIST,
 };

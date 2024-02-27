@@ -28,6 +28,8 @@ export const userPathsLinks = {
   myProduces: 'my-produces',
   settings: 'settings',
   reportProblem: 'report-problem',
+  personalInfo: '/pentrar/user/settings/personal-information',
+  businessInfo: '/pentrar/user/settings/business-information',
 };
 
 const userRoutes = {

@@ -41,6 +41,7 @@ export const RenderProtectedRoute = (routeObject: IProtectedRouteProp) => {
 
   const { AllowedRoles, AppLayout, BasePath, IndexRoute, ListedRoutes } =
     routeObject;
+
   return (
     <Route
       element={<PrivateRoute accounts={AllowedRoles} decodedUser={authUser} />}
