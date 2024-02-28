@@ -25,6 +25,7 @@ const customColors = {
     main: '#072723',
     light: '#6AD871',
     borderlight: '#F2F2F2',
+    'borderlight-1': '#F1F2F4',
   },
   gray: {
     50: '#9ca3af',

@@ -10,6 +10,9 @@ import { ReactComponent as Briefcase } from '@assets/svg/briefcaseVector.svg';
 import { ReactComponent as Password } from '@assets/svg/passwordLock.svg';
 import { ReactComponent as Notify } from '@assets/svg/notifySvg.svg';
 import { ReactComponent as PersonalActive } from '@assets/svg/personalActive.svg';
+import { ReactComponent as BriefcaseActive } from '@assets/svg/briefcaseActive.svg';
+import { ReactComponent as PasswordActive } from '@assets/svg/lockActive.svg';
+import { ReactComponent as NotifyActive } from '@assets/svg/notifyActive.svg';
 
 export interface NavLInk {
   name: string;
@@ -141,16 +144,19 @@ const SETTINGS_PAGE_NAVLIST: NavLInk[] = [
     name: 'Business Information',
     path: 'business-information',
     Icon: <Briefcase />,
+    IconBlue: <BriefcaseActive />,
   },
   {
     name: 'Change Password',
     path: 'change-password',
     Icon: <Password />,
+    IconBlue: <PasswordActive />,
   },
   {
     name: 'Notifications',
     path: 'notifications',
     Icon: <Notify />,
+    IconBlue: <NotifyActive />,
   },
 ];
 

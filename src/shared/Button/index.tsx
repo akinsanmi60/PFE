@@ -57,7 +57,11 @@ const CustomButton = ({
       variant={variant}
       disabled={disabled}
       role={role}
-      sx={{ borderRadius: '40px', paddingY: '22px' }}
+      sx={{
+        borderRadius: '40px',
+        paddingY: '22px',
+        borderColor: variant === 'outlined' ? 'border-primary-main' : 'none',
+      }}
       className={twMerge(className, _className)}
       {...rest}
     >

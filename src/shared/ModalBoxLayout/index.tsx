@@ -13,12 +13,7 @@ const ModalBoxLayout = ({
           onClick={onBackgroundClick}
         >
           {/* <div className="fixed inset-0 z-[99999] overflow-x-hidden overflow-y-auto"> */}
-          <div
-            className=" z-[999999] flex flex-col items-center justify-center min-h-full"
-            onClick={e => {
-              e.stopPropagation();
-            }}
-          >
+          <div className=" z-[999999] flex flex-col items-center justify-center min-h-full">
             {children}
           </div>
           {/* </div> */}

@@ -15,7 +15,7 @@ function DashboardHeroFOrFarmerAggregator() {
       <p className="text-primary-main leading-6 font-[500] text-[18px]">
         Welcome, {first_name}
       </p>
-      <div className="grid grid-cols-2 gap-4 xlsm:grid-cols-1">
+      <div className="grid grid-cols-2 gap-4 xlsm:grid-cols-1 font-primary">
         <div className="bg-primary-white px-[24px] py-[15px] flex flex-col gap-y-[15px] rounded-lg">
           <p className="text-tertiary-light-2 text-[14px] fonnt-[500]">
             My Produces

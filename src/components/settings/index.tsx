@@ -1,6 +1,7 @@
 import { ISettingProps } from './types.dto';
 import { useState } from 'react';
 import PersonalInformation from '@modules/common/personalInformation';
+import BusinessInformation from '@modules/common/businessInformation';
 
 function SettingView({ settingProps }: ISettingProps) {
   const [active, setActive] = useState('Personal Information');
@@ -37,6 +38,8 @@ function SettingView({ settingProps }: ISettingProps) {
           switch (active) {
             case 'Personal Information':
               return <PersonalInformation />;
+            case 'Business Information':
+              return <BusinessInformation />;
           }
         })()}
       </div>
