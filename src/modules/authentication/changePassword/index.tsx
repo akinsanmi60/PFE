@@ -1,72 +1,124 @@
-// import { useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { changePasswordSchema } from 'validation/changePasswordValidation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ControlledInput from '@shared/Input/ControlledInput';
 import CustomButton from '@shared/Button';
 import { useChangePasswordMutation } from 'services/auth.service';
+import { useState } from 'react';
+import { InputRightElement } from '@chakra-ui/react'; // Assuming you are using Chakra UI for icons
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'; // Assuming you are using Chakra UI for icons
+import PageTile from 'components/pageTile';
 import { IChangePassword } from 'types/auth.type';
 
+type IStateObject = {
+  oldPasswordView: boolean;
+  newPasswordView: boolean;
+  confirmPasswordView: boolean;
+};
+
+type InputNames = 'old_password' | 'new_password' | 'confirm_password';
+
 function ChangePassword() {
+  const [passwordViews, setPasswordViews] = useState<IStateObject>({
+    oldPasswordView: false,
+    newPasswordView: false,
+    confirmPasswordView: false,
+  });
+
   const { control, handleSubmit } = useForm({
     defaultValues: {
       old_password: '',
       new_password: '',
+      confirm_password: '', // Include confirm_password in defaultValues
     },
-    mode: 'all',
     resolver: yupResolver(changePasswordSchema),
   });
 
   const { isLoading, mutate } = useChangePasswordMutation();
 
-  const onSubmit = (values: IChangePassword) => {
-    mutate({ payload: values });
+  const handleClickPasswordVisibility = (passwordKey: keyof IStateObject) => {
+    setPasswordViews(prev => ({
+      ...prev,
+      [passwordKey]: !prev[passwordKey],
+    }));
   };
 
+  const onSubmit = (values: IChangePassword) => {
+    const payload = {
+      current_password: values.old_password,
+      new_password: values.new_password,
+    };
+    mutate({ payload: payload });
+  };
+
+  const inputObject = [
+    {
+      label: 'Old Password',
+      inputName: 'old_password',
+      viewName: 'oldPasswordView',
+      stateView: passwordViews.oldPasswordView,
+    },
+    {
+      label: 'New Password',
+      inputName: 'new_password',
+      viewName: 'newPasswordView',
+      stateView: passwordViews.newPasswordView,
+    },
+    {
+      label: 'Confirm Password',
+      inputName: 'confirm_password',
+      viewName: 'confirmPasswordView',
+      stateView: passwordViews.confirmPasswordView,
+    },
+  ];
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="bg-white shadow-lg w-[350px] p-[20px] rounded-[15px]"
-    >
-      <h1 className="font-[500] text-[20px] tracking-normal">
-        Change Password
-      </h1>
-      <div className="flex flex-col gap-[12px] mt-[8px] ">
-        <div className="">
-          <ControlledInput
-            control={control}
-            label="Old Password"
-            name="old_password"
-            type="text"
-          />
-        </div>
-        <div className="">
-          <ControlledInput
-            control={control}
-            label="New Password"
-            name="new_password"
-            type="password"
-          />
-        </div>
-        <div className="">
-          <ControlledInput
-            control={control}
-            name="confirm_password"
-            label="Confirm New Password"
-            type="password"
-          />
-        </div>
+    <form onSubmit={handleSubmit(onSubmit)} className="p-[24px]">
+      <PageTile title="Change Password" />
+
+      <div className="flex flex-col gap-[12px] mt-[30px]">
+        {inputObject.map(item => (
+          <div key={item.inputName}>
+            <ControlledInput
+              control={control}
+              label={item.label}
+              name={item.inputName as InputNames}
+              type={item.stateView ? 'text' : 'password'}
+              useEndAdornment={
+                <InputRightElement>
+                  <p
+                    className="btn-icon cursor-pointer"
+                    onClick={() =>
+                      handleClickPasswordVisibility(
+                        item.viewName as keyof IStateObject,
+                      )
+                    }
+                    role="openAndCloseEye"
+                  >
+                    {item?.stateView ? (
+                      <ViewIcon color="#072723" />
+                    ) : (
+                      <ViewOffIcon color="#072723" />
+                    )}
+                  </p>
+                </InputRightElement>
+              }
+            />
+          </div>
+        ))}
       </div>
 
-      <div className="mt-[30px]">
-        <CustomButton
-          className="w-full btn-primary-min"
-          loadingText="Loading..."
-          loading={isLoading}
-          type="submit"
-        >
-          Submit
-        </CustomButton>
+      <div className="mt-[30px] flex justify-end">
+        <div>
+          <CustomButton
+            className="w-full btn-primary-min"
+            loadingText="Loading..."
+            loading={isLoading}
+            type="submit"
+          >
+            Save Changes
+          </CustomButton>
+        </div>
       </div>
     </form>
   );

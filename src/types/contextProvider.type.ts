@@ -50,4 +50,9 @@ export type IUserCTXType = {
   last_login: string;
   created_at: string;
   role: string;
+  gender: string;
+  coy_name: string;
+  reg_number: string;
+  tin_id: string;
+  coy_address: string;
 };

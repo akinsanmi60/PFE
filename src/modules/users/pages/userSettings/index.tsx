@@ -5,7 +5,7 @@ import SettingView from 'components/settings';
 function UserSettings() {
   return (
     <PageContainer>
-      <h3 className="text-[18px] leading-[33px] font-[500] tracking-normal">
+      <h3 className="text-[18px] leading-[33px] font-[500] tracking-normal sticky top-0">
         Settings
       </h3>
       <SettingView

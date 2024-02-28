@@ -1,8 +1,22 @@
 import { useModalContext } from '@contexts/modalContext';
 import EditPhone from './editPhone/editPhone';
+import PageTile from 'components/pageTile';
+import { useAuthContext } from '@contexts/authContext';
+import ControlledInput from '@shared/Input/ControlledInput';
+import { useForm } from 'react-hook-form';
 
+type IPersonalInputNames = 'full_name' | 'email' | 'phone_number' | 'gender';
 function PersonalInformation() {
+  const { authUser } = useAuthContext();
   const { modalState, handleModalOpen } = useModalContext();
+  const { control } = useForm({
+    defaultValues: {
+      full_name: authUser?.full_name || 'Nil',
+      email: authUser?.email || 'Nil',
+      phone_number: authUser?.phone_number || 'Nil',
+      gender: authUser?.gender || 'Nil',
+    },
+  });
 
   const actionArray = [
     {
@@ -19,26 +33,41 @@ function PersonalInformation() {
     },
   ];
 
+  const personalInfoArray = [
+    {
+      label: 'Full Name',
+      inputName: 'full_name',
+    },
+    {
+      label: 'Email',
+      inputName: 'email',
+    },
+    {
+      label: 'Phone Number',
+      inputName: 'phone_number',
+    },
+    {
+      label: 'Gender',
+      inputName: 'gender',
+    },
+  ];
+
   return (
     <>
       <div className="p-[24px] font-primary">
-        <div className="flex justify-between items-center border-b-[1px] border-background-borderlight-1 pb-[18px]">
-          <div>
-            <p className="text-[20px] font-[600] leading-[28px]">
-              Personal Info
-            </p>
-          </div>
-          <div className="flex gap-[18px] items-center text-[13px]">
-            {actionArray.map(action => (
-              <p
-                key={action.name}
-                onClick={action.action}
-                className="hover:cursor-pointer hover:font-[600] hover:underline hover:text-statusText-success"
-              >
-                {action.name}
-              </p>
-            ))}
-          </div>
+        <PageTile actionArray={actionArray} title="Personal Information" />
+
+        <div className="flex flex-col gap-y-[20px] mt-[30px]">
+          {personalInfoArray.map(info => (
+            <div key={info.label}>
+              <ControlledInput
+                control={control}
+                name={info.inputName as IPersonalInputNames}
+                label={info.label}
+                readonly
+              />
+            </div>
+          ))}
         </div>
       </div>
 

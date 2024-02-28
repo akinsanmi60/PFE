@@ -3,13 +3,13 @@ import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import {
   IBaseResponse,
-  IChangePassword,
   IForgetProp,
   ILoginFormData,
   ILoginResponse,
   IPartialCreateUser,
   IRegister,
   IVerifyProp,
+  IchangePasswordPayload,
 } from 'types/auth.type';
 import { useNavigate } from 'react-router-dom';
 import handleApiError from '@utils/handleApiError';
@@ -150,8 +150,8 @@ export const useForgetPasswordMutation = () => {
 
 export const useChangePasswordMutation = () => {
   const { mutate, isLoading, ...rest } = useMutation(
-    ({ payload }: { payload: IChangePassword }) =>
-      postRequest<IChangePassword, IBaseResponse>({
+    ({ payload }: { payload: IchangePasswordPayload }) =>
+      postRequest<IchangePasswordPayload, IBaseResponse>({
         url: USER_CHANGE_PASSWORD_URL,
         payload,
       }),

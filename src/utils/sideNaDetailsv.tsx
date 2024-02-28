@@ -14,12 +14,15 @@ import { ReactComponent as BriefcaseActive } from '@assets/svg/briefcaseActive.s
 import { ReactComponent as PasswordActive } from '@assets/svg/lockActive.svg';
 import { ReactComponent as NotifyActive } from '@assets/svg/notifyActive.svg';
 
-export interface NavLInk {
+export type NavLInk = {
   name: string;
   path: string;
   Icon: ReactNode;
   IconBlue?: ReactNode;
-}
+};
+
+export type SettingNavLink = Omit<NavLInk, 'path'>;
+
 // const ADMIN_SIDENAV_NOTIFICATION: NavLInk = {
 //   name: 'Notifications',
 //   path: DashboardPath.NOTIFICATIONS,
@@ -133,28 +136,24 @@ const SUPER_ADMIN_SIDENAV: NavLInk[] = [
   },
 ];
 
-const SETTINGS_PAGE_NAVLIST: NavLInk[] = [
+const SETTINGS_PAGE_NAVLIST: SettingNavLink[] = [
   {
     name: 'Personal Information',
-    path: 'personal-information',
     Icon: <Personal />,
     IconBlue: <PersonalActive />,
   },
   {
     name: 'Business Information',
-    path: 'business-information',
     Icon: <Briefcase />,
     IconBlue: <BriefcaseActive />,
   },
   {
     name: 'Change Password',
-    path: 'change-password',
     Icon: <Password />,
     IconBlue: <PasswordActive />,
   },
   {
     name: 'Notifications',
-    path: 'notifications',
     Icon: <Notify />,
     IconBlue: <NotifyActive />,
   },

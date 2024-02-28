@@ -2,13 +2,13 @@ import { ISettingProps } from './types.dto';
 import { useState } from 'react';
 import PersonalInformation from '@modules/common/personalInformation';
 import BusinessInformation from '@modules/common/businessInformation';
+import ChangePassword from '@modules/authentication/changePassword';
 
 function SettingView({ settingProps }: ISettingProps) {
   const [active, setActive] = useState('Personal Information');
-
   return (
     <div className="flex gap-x-5">
-      <div className="w-[30%] bg-primary-white rounded-[16px]  py-[30px]">
+      <div className="w-[30%] bg-primary-white rounded-[16px] h-[372px]  py-[30px]">
         <div className="flex flex-col gap-y-[15px]">
           {settingProps.navList?.map(sidenav => {
             return (
@@ -40,6 +40,8 @@ function SettingView({ settingProps }: ISettingProps) {
               return <PersonalInformation />;
             case 'Business Information':
               return <BusinessInformation />;
+            case 'Change Password':
+              return <ChangePassword />;
           }
         })()}
       </div>

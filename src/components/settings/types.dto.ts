@@ -1,7 +1,7 @@
-import { NavLInk } from '@utils/sideNaDetailsv';
+import { SettingNavLink } from '@utils/sideNaDetailsv';
 
 export type ISettingProps = {
   settingProps: {
-    navList: NavLInk[];
+    navList: SettingNavLink[];
   };
 };

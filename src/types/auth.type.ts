@@ -35,6 +35,10 @@ export type IChangePassword = {
   confirm_password?: string;
 };
 
+export type IchangePasswordPayload = Pick<IChangePassword, 'new_password'> & {
+  current_password: string;
+};
+
 export type ILoginFormData = {
   email: string;
   password: string;
