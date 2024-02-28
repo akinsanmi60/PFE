@@ -18,39 +18,69 @@ const AdminLogin = React.lazy(
   () => import('@modules/authentication/login/adminLogin'),
 );
 
+const ForgotPasswordPage = React.lazy(
+  () => import('@modules/authentication/forgotPassword'),
+);
+
+const ResetPasswordPage = React.lazy(
+  () => import('@modules/authentication/resetPassword'),
+);
+
 const AgencyLogin = React.lazy(
   () => import('@modules/authentication/login/agencyLogin'),
 );
 
+export const RootLink = {
+  login: '/login',
+  registerFarmerAggregator: '/register-form',
+  forgotPassword: '/forgot-password',
+  resetPassword: '/reset-password',
+  adminLogin: '/admin-login',
+  agencyLogin: '/agency-login',
+  registerExporterOfftaker: '/register',
+  unauthourized: '/unauthourized',
+  error: '*',
+};
+
 const noLayoutRoutes = {
   LoginPage: {
     element: LoginPage,
-    path: '/login',
+    path: RootLink.login,
   },
 
   ErrorPage: {
     element: ErrorPage,
-    path: '*',
+    path: RootLink.error,
   },
 
   AdminLogin: {
     element: AdminLogin,
-    path: '/admin-login',
+    path: RootLink.adminLogin,
   },
 
   AgencyLogin: {
     element: AgencyLogin,
-    path: '/agency-login',
+    path: RootLink.agencyLogin,
   },
 
   UnauthourizedPage: {
     element: UnauthourizedPage,
-    path: '/unauthourized',
+    path: RootLink.unauthourized,
   },
 
   FarmerAggregatorRegisterPage: {
     element: FarmerAggregatorRegisterPage,
-    path: '/register-form',
+    path: RootLink.registerFarmerAggregator,
+  },
+
+  ForgotPasswordPage: {
+    element: ForgotPasswordPage,
+    path: RootLink.forgotPassword,
+  },
+
+  ResetPasswordPage: {
+    element: ResetPasswordPage,
+    path: RootLink.resetPassword,
   },
 };
 

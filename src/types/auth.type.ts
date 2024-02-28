@@ -16,6 +16,11 @@ export type IForgetProp = {
   email: string;
 };
 
+export type IResetProp = {
+  code: string;
+  new_password: string;
+};
+
 export type IBaseResponse = {
   message: string;
   success: true;
