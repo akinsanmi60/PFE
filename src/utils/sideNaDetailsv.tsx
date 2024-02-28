@@ -5,7 +5,7 @@ import { ReactComponent as Search } from '@assets/svg/dashSearch.svg';
 import { ReactComponent as Folder } from '@assets/svg/dashFolder.svg';
 import { ReactComponent as SettingIcon } from '@assets/svg/dashSettings.svg';
 import { ReactComponent as Caution } from '@assets/svg/dashCaution.svg';
-import { ReactComponent as Personal } from '@assets/svg/PersonalSvg.svg';
+import { ReactComponent as Personal } from '@assets/svg/personalSvg.svg';
 import { ReactComponent as Briefcase } from '@assets/svg/briefcaseVector.svg';
 import { ReactComponent as Password } from '@assets/svg/passwordLock.svg';
 import { ReactComponent as Notify } from '@assets/svg/notifySvg.svg';
