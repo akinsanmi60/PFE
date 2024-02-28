@@ -29,6 +29,16 @@ export const forgetPasswordSchema = yup.object({
     .required('Enter your email')
     .matches(EMAIL_REGEX, 'Please enter a valid email address'),
 });
+
+export const resetPasswordSchema = yup.object({
+  code: yup
+    .string()
+    .required('Enter the code sent to your email')
+    .max(6, 'Code must not be greater than 6 characters')
+    .min(6, 'Code must be atleast 6 characters'),
+  new_password: yup.string().required('Enter your password'),
+});
+
 export const securitySchema = yup.object({
   security_question: yup.string().required('Select security question'),
   security_answer: yup.string().required('Answer security question'),
