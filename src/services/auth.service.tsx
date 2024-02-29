@@ -8,6 +8,7 @@ import {
   ILoginResponse,
   IPartialCreateUser,
   IRegister,
+  IResetProp,
   IVerifyProp,
   IchangePasswordPayload,
 } from 'types/auth.type';
@@ -22,11 +23,13 @@ import {
   PARTIAL_USER_CREATION_URL,
   USER_CHANGE_PASSWORD_URL,
   USER_FORGET_URL,
+  USER_RESET_URL,
   USER_SIGNUP_URL,
   USER_VERIFY_URL,
 } from '@utils/apiUrl';
 import { userPathsLinks } from '@modules/users/routes';
 import { LOCAL_STORAGE_KEY } from '@utils/localStorageKey';
+import { RootLink } from 'routes/routeObject';
 
 export const displayError = (error: any) => {
   const content = handleApiError(error);
@@ -129,6 +132,7 @@ export const useRegisterMutation = () => {
 };
 
 export const useForgetPasswordMutation = () => {
+  const navigate = useNavigate();
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: IForgetProp }) =>
       postRequest<IForgetProp, IBaseResponse>({
@@ -138,7 +142,32 @@ export const useForgetPasswordMutation = () => {
     {
       onSuccess(res: IBaseResponse) {
         toast.success(res?.message, toastOptions);
+        navigate(RootLink.forgotPassword);
       },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+
+export const useResetPasswordMutation = () => {
+  const navigate = useNavigate();
+  const { mutate, isLoading, ...rest } = useMutation(
+    ({ payload }: { payload: IResetProp }) =>
+      postRequest<IResetProp, IBaseResponse>({
+        url: USER_RESET_URL,
+        payload,
+      }),
+
+    {
+      onSuccess(res: IBaseResponse) {
+        toast.success(res?.message, toastOptions);
+        navigate(RootLink.login);
+      },
+
       onError(error) {
         displayError(error);
       },

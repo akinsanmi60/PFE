@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { useForgetPasswordMutation } from 'services/auth.service';
 import { IForgetProp } from 'types/auth.type';
 import { forgetPasswordSchema } from 'validation/changePasswordValidation';
+import pentrarLogo from '@assets/svg/LogoPentrar.svg';
+import { useNavigate } from 'react-router-dom';
 
 function ForgotPassword() {
   const { handleSubmit, control } = useForm<IForgetProp>({
@@ -21,34 +23,46 @@ function ForgotPassword() {
     mutate({ payload: values });
   };
 
+  const navigate = useNavigate();
+
   return (
-    <div className="max-w-[420px] p-[10px]">
-      <p className="text-[16px] leading-[22px] tracking-normal">
-        Enter your email address below and we will email you a link to reset
-        your password.
-      </p>
-      <form action="" onSubmit={handleSubmit(onSubmitForm)}>
-        <div className=" mt-[20px] ">
-          <div className="">
-            <ControlledInput
-              control={control}
-              label="Email"
-              name="email"
-              type="email"
-            />
+    <div className="flex flex-col items-center justify-center h-screen">
+      <>
+        <img
+          src={pentrarLogo}
+          alt="logo"
+          onClick={() => navigate('/')}
+          className="cursor-pointer"
+        />
+      </>
+      <div className="max-w-[420px] p-[10px] mt-[40px]">
+        <p className="text-[16px] leading-[22px] tracking-normal">
+          Enter your email address below and we will email you a link to reset
+          your password.
+        </p>
+        <form action="" onSubmit={handleSubmit(onSubmitForm)}>
+          <div className=" mt-[20px] ">
+            <div className="">
+              <ControlledInput
+                control={control}
+                label="Email"
+                name="email"
+                type="email"
+              />
+            </div>
           </div>
-        </div>
-        <div className=" mt-[20px]">
-          <CustomButton
-            className="btn-primary-min w-full"
-            loading={isLoading}
-            loadingText="Sending..."
-            type="submit"
-          >
-            Send
-          </CustomButton>{' '}
-        </div>
-      </form>
+          <div className=" mt-[20px]">
+            <CustomButton
+              className="btn-primary-min w-full"
+              loading={isLoading}
+              loadingText="Sending..."
+              type="submit"
+            >
+              Send
+            </CustomButton>{' '}
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

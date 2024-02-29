@@ -7,4 +7,5 @@ export const USER_SIGNUP_URL = 'auth/signup';
 export const PARTIAL_USER_CREATION_URL = 'auth/create-partialuser';
 export const USER_VERIFY_URL = 'auth/verify';
 export const USER_FORGET_URL = 'auth/forgot-password';
+export const USER_RESET_URL = 'auth/reset-password';
 export const USER_CHANGE_PASSWORD_URL = 'auth/change-password';
