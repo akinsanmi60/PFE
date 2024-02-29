@@ -13,6 +13,10 @@ import { ReactComponent as PersonalActive } from '@assets/svg/personalActive.svg
 import { ReactComponent as BriefcaseActive } from '@assets/svg/briefcaseActive.svg';
 import { ReactComponent as PasswordActive } from '@assets/svg/lockActive.svg';
 import { ReactComponent as NotifyActive } from '@assets/svg/notifyActive.svg';
+import { ReactComponent as SettingsWhite } from '@assets/svg/dashSettingWhite.svg';
+import { ReactComponent as HomeWhite } from '@assets/svg/dashHomeWhite.svg';
+import { ReactComponent as FolderWhite } from '@assets/svg/dashFolderWhite.svg';
+import { ReactComponent as SearchWhite } from '@assets/svg/dashSearchWhite.svg';
 
 export type NavLInk = {
   name: string;
@@ -23,31 +27,24 @@ export type NavLInk = {
 
 export type SettingNavLink = Omit<NavLInk, 'path'>;
 
-// const ADMIN_SIDENAV_NOTIFICATION: NavLInk = {
-//   name: 'Notifications',
-//   path: DashboardPath.NOTIFICATIONS,
-//   Icon: Bell,
-// IconBlue: BlueBell,
-// };
-
 const AGGREGATOR_SIDENAV: NavLInk[] = [
   {
     name: 'Dashboard',
     path: 'dashboard',
     Icon: <Home />,
-    // IconBlue: <HomeWhite />,
+    IconBlue: <HomeWhite />,
   },
   {
     name: 'Pentrar Hub',
     path: 'pentrar-hub',
     Icon: <Search />,
-    // IconBlue: BlueCustomer,
+    IconBlue: <SearchWhite />,
   },
   {
     name: 'My Produces',
     path: 'my-produces',
     Icon: <Folder />,
-    // IconBlue: BlueGroup,
+    IconBlue: <FolderWhite />,
   },
 ];
 
@@ -56,7 +53,7 @@ const EXPORTER_SIDENAV: NavLInk[] = [
     name: 'Dashboard',
     path: 'dashboard',
     Icon: <Home />,
-    // IconBlue: <HomeWhite />,
+    IconBlue: <HomeWhite />,
   },
   {
     name: 'Pentrar Hub',
@@ -89,7 +86,7 @@ const SETTINGS_SIDENAV: NavLInk[] = [
     name: 'Settings',
     path: 'settings',
     Icon: <SettingIcon />,
-    // IconBlue: BlueCustomer,
+    IconBlue: <SettingsWhite />,
   },
 ];
 

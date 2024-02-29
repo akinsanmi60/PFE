@@ -9,11 +9,26 @@ import { ReactComponent as ProfileICon } from '@assets/svg/profileIcon.svg';
 import { ReactComponent as DashBell } from '@assets/svg/dashBell.svg';
 import { ReactComponent as DashBellRed } from '@assets/svg/dashBellRed.svg';
 import { ReactComponent as ChevronDown } from '@assets/svg/chevronDown.svg';
+import { logOut } from '@hooks/auth';
+import { getToken } from '@hooks/localStorageHook';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileBox = ({ first_name }: { first_name: string }) => {
+  const { setAuthUser } = useAuthContext();
   const divRef = useRef<HTMLDivElement | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logOut();
+    const token = getToken();
+    if (!token) {
+      setAuthUser(null);
+      localStorage.removeItem('presentUrl');
+      navigate('/');
+    }
+  };
 
   const toggleHoverState = () => {
     if (!isHovered) {
@@ -92,7 +107,9 @@ const ProfileBox = ({ first_name }: { first_name: string }) => {
             className="absolute top-10 right-2 mt-[18px] cursor-pointer shadow-lg w-[200px] h-[175px] scrollbar-none overflow-y-auto bg-white bg-primary-white"
             //   ref={divRef}
           >
-            <div className="">hello</div>
+            <div className="" onClick={handleLogout}>
+              Logout
+            </div>
           </div>
         )}
       </div>
