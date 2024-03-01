@@ -4,6 +4,7 @@ import PageTile from 'components/pageTile';
 import { useAuthContext } from '@contexts/authContext';
 import ControlledInput from '@shared/Input/ControlledInput';
 import { useForm } from 'react-hook-form';
+import EditEmail from './editEmail/editEmail';
 
 type IPersonalInputNames = 'full_name' | 'email' | 'phone_number' | 'gender';
 function PersonalInformation() {
@@ -72,7 +73,7 @@ function PersonalInformation() {
       </div>
 
       {modalState.modalType === 'phone' && <EditPhone />}
-      {modalState.modalType === 'email' && <> hi</>}
+      {modalState.modalType === 'email' && <EditEmail />}
     </>
   );
 }
