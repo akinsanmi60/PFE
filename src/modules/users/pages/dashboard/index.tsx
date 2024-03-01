@@ -1,9 +1,16 @@
 import CustomTable from '@shared/Table';
 import EmptyBar from '@shared/Table/tableEmpty';
 import PageContainer from 'components/Layout/PageContainer';
+import AppHeader from 'components/appHeader/appHeader';
+import { useAuthContext } from '@contexts/authContext';
+import { capitalize, getFirstSwordBeforeSpace } from '@utils/constants';
 import DashboardHeroFOrFarmerAggregator from 'components/farmerAggregatorHeroCpomponent';
 
 function DashboardHome() {
+  const { authUser } = useAuthContext();
+  const first_name = capitalize(
+    getFirstSwordBeforeSpace(authUser?.full_name as unknown as string),
+  );
   const tableHead = [
     {
       label: 'id',
@@ -39,6 +46,13 @@ function DashboardHome() {
 
   return (
     <div>
+      <AppHeader>
+        <p className="text-primary-main leading-6 font-[500] text-[18px] mt-[24px] px-[24px] pb-[14px]">
+          Welcome, {first_name}
+        </p>
+      </AppHeader>
+
+      <DashboardHeroFOrFarmerAggregator />
       <DashboardHeroFOrFarmerAggregator />
 
       <PageContainer>

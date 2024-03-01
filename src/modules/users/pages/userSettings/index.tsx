@@ -1,19 +1,24 @@
 import { SETTINGS_PAGE_NAVLIST } from '@utils/sideNaDetailsv';
 import PageContainer from 'components/Layout/PageContainer';
+import AppHeader from 'components/appHeader/appHeader';
 import SettingView from 'components/settings';
 
 function UserSettings() {
   return (
-    <PageContainer>
-      <h3 className="text-[18px] leading-[33px] font-[500] tracking-normal sticky top-0">
-        Settings
-      </h3>
-      <SettingView
-        settingProps={{
-          navList: SETTINGS_PAGE_NAVLIST,
-        }}
-      />
-    </PageContainer>
+    <>
+      <AppHeader>
+        <h3 className="text-[18px] leading-[33px] font-[500] tracking-normal mt-[24px] px-[24px] pb-[14px]">
+          Settings
+        </h3>
+      </AppHeader>
+      <PageContainer className="pt-0">
+        <SettingView
+          settingProps={{
+            navList: SETTINGS_PAGE_NAVLIST,
+          }}
+        />
+      </PageContainer>
+    </>
   );
 }
 
