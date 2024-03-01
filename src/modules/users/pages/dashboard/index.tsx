@@ -53,7 +53,6 @@ function DashboardHome() {
       </AppHeader>
 
       <DashboardHeroFOrFarmerAggregator />
-      <DashboardHeroFOrFarmerAggregator />
 
       <PageContainer>
         <div className="w-full bg-primary-white rounded-lg p-[24px]">
