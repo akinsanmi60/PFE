@@ -2,7 +2,7 @@ import { getToken } from '@hooks/localStorageHook';
 import axios from 'axios';
 
 const customAxiosMethod = axios.create({
-  baseURL: 'https://api-pentrar.vercel.app/',
+  baseURL: import.meta.env.VITE_FRONTEND_URL as string | undefined,
 });
 
 // Add request interceptor
