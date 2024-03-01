@@ -27,3 +27,13 @@ export type IDashboardHeroFOrFarmerAggregator = {
     role: string | undefined;
   };
 };
+
+export type IDashboardRecentProduce = IBaseResponse & {
+  data: {
+    id: string;
+    created_at: string;
+    updated_at: string;
+    farm_address: string;
+    farm_state: string;
+  }[];
+};

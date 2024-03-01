@@ -1,7 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { getRequest } from '@utils/apiCaller';
 import { queryKeys } from '@utils/queryKey';
-import { IFarmerAggregatorDashboardcount } from 'types/farmerAggregatorDash.type';
+import {
+  IDashboardRecentProduce,
+  IFarmerAggregatorDashboardcount,
+} from 'types/farmerAggregatorDash.type';
 
 function GetDasboardOfFarmerAggregator({
   queryParamsId,
@@ -27,4 +30,28 @@ function GetDasboardOfFarmerAggregator({
   };
 }
 
-export default GetDasboardOfFarmerAggregator;
+function useGetRecentProduce({
+  queryParamsId,
+  url,
+}: {
+  queryParamsId: string;
+  url: (_id: string) => string;
+}) {
+  const { isLoading, isRefetching, isError, data } =
+    useQuery<IDashboardRecentProduce>(
+      [queryKeys.getFarmerAggregatorRecentProduce, queryParamsId],
+      () => getRequest({ url: url(queryParamsId) }),
+      {
+        refetchOnWindowFocus: false,
+      },
+    );
+
+  return {
+    isLoading,
+    isRefetching,
+    isError,
+    data: data as IDashboardRecentProduce,
+  };
+}
+
+export { GetDasboardOfFarmerAggregator, useGetRecentProduce };

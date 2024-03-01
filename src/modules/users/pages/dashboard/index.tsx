@@ -5,9 +5,25 @@ import AppHeader from 'components/appHeader/appHeader';
 import { useAuthContext } from '@contexts/authContext';
 import { capitalize, getFirstSwordBeforeSpace } from '@utils/constants';
 import DashboardHeroFOrFarmerAggregator from 'components/farmerAggregatorHeroCpomponent';
+import {
+  GET_AGGREGATOR_RECENT_PRODUCE_URL,
+  GET_FARMER_RECENT_PRODUCE_URL,
+} from '@utils/apiUrl';
+import { useGetRecentProduce } from 'services/farmerAggregatorDashboard.service';
+import TableLoading from '@shared/Table/tableLoading';
 
 function DashboardHome() {
   const { authUser } = useAuthContext();
+
+  const recentUrl =
+    authUser?.role === 'farmer'
+      ? GET_FARMER_RECENT_PRODUCE_URL
+      : GET_AGGREGATOR_RECENT_PRODUCE_URL;
+
+  const { isLoading, data } = useGetRecentProduce({
+    queryParamsId: authUser?.id as string,
+    url: recentUrl,
+  });
 
   const first_name = capitalize(
     getFirstSwordBeforeSpace(authUser?.full_name as unknown as string),
@@ -72,10 +88,12 @@ function DashboardHome() {
           </div>
           <CustomTable
             tableHeads={tableHead}
-            dataTableSource={[]}
+            dataTableSource={data?.data || []}
+            loading={isLoading}
             tableEmptyState={
               <EmptyBar emptyStateSize="lg" componentType="produces" />
             }
+            tableLoader={<TableLoading title="Loading Recent Produces" />}
           />
         </div>
       </PageContainer>

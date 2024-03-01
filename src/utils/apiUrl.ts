@@ -12,7 +12,11 @@ export const USER_CHANGE_PASSWORD_URL = 'auth/change-password';
 // farmer urls
 export const GET_FARMER_DASHBOARD_COUNT_URL = (id: string) =>
   `farmer/${id}/dashboardcount`;
+export const GET_FARMER_RECENT_PRODUCE_URL = (id: string) =>
+  `farmer/${id}/recentproduce`;
 
 //Aggregator urls
 export const GET_AGGREGATOR_DASHBOARD_COUNT_URL = (id: string) =>
   `aggregator/${id}/dashboardcount`;
+export const GET_AGGREGATOR_RECENT_PRODUCE_URL = (id: string) =>
+  `aggregator/${id}/recentproduce`;

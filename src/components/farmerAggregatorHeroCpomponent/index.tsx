@@ -1,13 +1,13 @@
 import PageContainer from 'components/Layout/PageContainer';
 import PendingProduce from './component/pendingProduce';
 import TodoComponent from './component/todoComponent';
-import GetDasboardOfFarmerAggregator from 'services/farmerAggregatorDashboard.service';
 import {
   GET_AGGREGATOR_DASHBOARD_COUNT_URL,
   GET_FARMER_DASHBOARD_COUNT_URL,
 } from '@utils/apiUrl';
 import CircularProgress from '@shared/CircularProgress';
 import { IDashboardHeroFOrFarmerAggregator } from 'types/farmerAggregatorDash.type';
+import { GetDasboardOfFarmerAggregator } from 'services/farmerAggregatorDashboard.service';
 
 function DashboardHeroFOrFarmerAggregator({
   dashboardProp,
