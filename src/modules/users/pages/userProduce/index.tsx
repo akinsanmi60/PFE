@@ -53,7 +53,7 @@ function UserProduce() {
             <SearchFilterBox
               searchBarProps={{
                 placeholder: 'Search produce by name or ID',
-                useEndAdornment: <SearchVector />,
+                useStartAdornment: <SearchVector />,
                 onSetTermChange: ({ target: { value } }) =>
                   setSearchTerm(value),
                 term: searchTerm,
