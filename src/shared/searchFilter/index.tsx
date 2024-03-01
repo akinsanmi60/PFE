@@ -11,6 +11,10 @@ export const InputSearchBox = (props: InputSearchboxProp) => {
     useEndAdornment,
     useStartAdornment,
     className,
+    borderRadius = '40px',
+    paddingLeft = '10px',
+    paddingRight = '20px',
+    borderColor = 'none',
     ...rest
   } = props;
   const debounceDelay = 200;
@@ -26,13 +30,14 @@ export const InputSearchBox = (props: InputSearchboxProp) => {
     <div>
       <InputGroup
         sx={{
-          borderRadius: '40px',
+          borderRadius: borderRadius,
+          border: `${borderColor} solid 1px`,
           paddingY: '2px',
           backgroundColor: 'white',
           display: 'flex',
           alignItems: 'center',
-          paddingLeft: '8px',
-          paddingRight: '20px',
+          paddingLeft: paddingLeft,
+          paddingRight: paddingRight,
         }}
       >
         {useStartAdornment && useStartAdornment}

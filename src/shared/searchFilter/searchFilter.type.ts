@@ -15,6 +15,10 @@ export type IsearchFilterBox = {
     useEndAdornment?: React.ReactNode;
     useStartAdornment?: React.ReactNode;
     className?: string;
+    borderRadius?: string;
+    paddingLeft?: string;
+    paddingRight?: string;
+    borderColor?: string;
   };
 };
 
@@ -32,4 +36,9 @@ export type InputSearchboxProp = IInputProps & {
   useStartAdornment?: React.ReactNode;
   className?: string;
   debounceChange?: boolean;
+  borderRadius?: string;
+  paddingLeft?: string;
+
+  paddingRight?: string;
+  borderColor?: string;
 };
