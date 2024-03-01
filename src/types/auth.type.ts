@@ -22,8 +22,9 @@ export type IResetProp = {
 };
 
 export type IBaseResponse = {
+  status: true;
+  statusCode: number;
   message: string;
-  success: true;
 };
 
 export type ILoginData = {

@@ -1,32 +1,65 @@
 import PageContainer from 'components/Layout/PageContainer';
 import PendingProduce from './component/pendingProduce';
 import TodoComponent from './component/todoComponent';
+import GetDasboardOfFarmerAggregator from 'services/farmerAggregatorDashboard.service';
+import {
+  GET_AGGREGATOR_DASHBOARD_COUNT_URL,
+  GET_FARMER_DASHBOARD_COUNT_URL,
+} from '@utils/apiUrl';
+import CircularProgress from '@shared/CircularProgress';
+import { IDashboardHeroFOrFarmerAggregator } from 'types/farmerAggregatorDash.type';
 
-function DashboardHeroFOrFarmerAggregator() {
+function DashboardHeroFOrFarmerAggregator({
+  dashboardProp,
+}: IDashboardHeroFOrFarmerAggregator) {
+  const { id, role } = dashboardProp;
+  const urlForCount =
+    role === 'farmer'
+      ? GET_FARMER_DASHBOARD_COUNT_URL
+      : GET_AGGREGATOR_DASHBOARD_COUNT_URL;
+
+  const { data, isLoading } = GetDasboardOfFarmerAggregator({
+    queryParamsId: id as string,
+    url: urlForCount,
+  });
+
   return (
     <PageContainer>
       <div className="grid grid-cols-2 gap-4 xlsm:grid-cols-1 font-primary">
-        <div className="bg-primary-white px-[24px] py-[15px] flex flex-col gap-y-[15px] rounded-lg">
+        <div className="bg-primary-white px-[24px] py-[15px] flex flex-col gap-y-[15px] rounded-lg h-[112px]">
           <p className="text-tertiary-light-2 text-[14px] fonnt-[500]">
             My Produces
           </p>
           <p className="text-primary-main text-[30px] font-[600] leading-[42px]">
-            0
+            {isLoading ? (
+              <CircularProgress color="#072723" size={30} />
+            ) : (
+              data?.data?.countedProduce || 0
+            )}
           </p>
         </div>
-        <div className="bg-primary-white px-[24px] py-[15px] flex flex-col gap-y-[15px] rounded-lg">
+        <div className="bg-primary-white px-[24px] py-[15px] flex flex-col gap-y-[15px] rounded-lg h-[112px]">
           <p className="text-tertiary-light-2 text-[14px] fonnt-[500]">
             Pending
           </p>
           <p className="text-primary-main text-[30px] font-[600] leading-[42px]">
-            0
+            {isLoading ? (
+              <CircularProgress color="#072723" size={30} />
+            ) : (
+              data?.data?.pendingProduce || 0
+            )}
           </p>
         </div>
         <div>
           <h3 className="text-primary-main mb-[4px] text-[14px] font-[600]">
             Pending Produces
           </h3>
-          <PendingProduce produceValue={{}} />{' '}
+          <PendingProduce
+            produceValue={{
+              produceDetail: data?.data?.detailPendingProduce,
+              loading: isLoading,
+            }}
+          />{' '}
         </div>
         <div>
           <h3 className="text-primary-main mb-[4px] text-[14px] font-[600]">

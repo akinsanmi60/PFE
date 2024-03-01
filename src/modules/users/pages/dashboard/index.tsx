@@ -8,6 +8,7 @@ import DashboardHeroFOrFarmerAggregator from 'components/farmerAggregatorHeroCpo
 
 function DashboardHome() {
   const { authUser } = useAuthContext();
+
   const first_name = capitalize(
     getFirstSwordBeforeSpace(authUser?.full_name as unknown as string),
   );
@@ -52,7 +53,12 @@ function DashboardHome() {
         </p>
       </AppHeader>
 
-      <DashboardHeroFOrFarmerAggregator />
+      <DashboardHeroFOrFarmerAggregator
+        dashboardProp={{
+          id: authUser?.id,
+          role: authUser?.role,
+        }}
+      />
 
       <PageContainer>
         <div className="w-full bg-primary-white rounded-lg p-[24px]">
