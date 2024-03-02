@@ -15,12 +15,13 @@ function GetVerifyCode({ currentStep, action, previous }: IFormComponentType) {
   const { control, handleSubmit } = useForm<IVerifyProp>({
     defaultValues: {
       code: '',
+      phone_number: multiFormValues?.phone_number as string,
     },
     mode: 'all',
     resolver: yupResolver(verifyPasswordSchema),
   });
 
-  const onSubmit = (values: IVerifyProp) => {
+  const onSubmit = (values: Partial<IVerifyProp>) => {
     const payload = {
       ...values,
       ...multiFormValues,

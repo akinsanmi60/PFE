@@ -6,6 +6,7 @@ export type IFormComponentType = {
 
 export type IVerifyProp = {
   code: string;
+  phone_number: string;
 };
 type Code = string;
 

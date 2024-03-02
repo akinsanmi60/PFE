@@ -199,8 +199,8 @@ export const useChangePasswordMutation = () => {
 
 export const useVerifyMutation = ({ action }: { action?: () => void }) => {
   const { mutate, isLoading, ...rest } = useMutation(
-    ({ payload }: { payload: IVerifyProp }) =>
-      postRequest<IVerifyProp, IBaseResponse>({
+    ({ payload }: { payload: Partial<IVerifyProp> }) =>
+      postRequest<Partial<IVerifyProp>, IBaseResponse>({
         url: USER_VERIFY_URL,
         payload,
       }),
