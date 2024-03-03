@@ -6,7 +6,6 @@ import { useFormData } from '@contexts/formContext';
 import CustomButton from '@shared/Button';
 import { IFormComponentType, IVerifyProp } from 'types/auth.type';
 import { useVerifyMutation } from 'services/auth.service';
-// import { RxDividerHorizontal } from 'react-icons/rx';
 
 function GetVerifyCode({ currentStep, action, previous }: IFormComponentType) {
   const { setFormValues, multiFormValues } = useFormData();

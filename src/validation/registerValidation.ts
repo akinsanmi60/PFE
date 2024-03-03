@@ -5,7 +5,6 @@ const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 export const personalInfoSchema = yup
   .object({
     full_name: yup.string().required('Enter first name'),
-    // .matches(ALPHAREGEX_CODE, 'Special characters not accepted'),
     phone_number: yup.string().required('Enter phone number'),
     email: yup
       .string()
