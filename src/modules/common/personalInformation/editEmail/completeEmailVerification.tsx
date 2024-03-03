@@ -1,36 +1,60 @@
 import { useAuthContext } from '@contexts/authContext';
+import { useFormData } from '@contexts/formContext';
 import { useModalContext } from '@contexts/modalContext';
+import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
+import CircularProgress from '@shared/CircularProgress';
 import ControlledInput from '@shared/Input/ControlledInput';
-import { useForm } from 'react-hook-form';
-import { useCompleteEmailVerification } from 'services/persionalInformationService';
 import {
-  ICompleteChangeEmailFormData,
-  ICompleteEmailFormData,
-} from 'types/personalSetting.type';
+  COMPLETE_AGGREGATOR_EMAIL_VERIFICATION_URL,
+  COMPLETE_FARMER_EMAIL_VERIFICATION_URL,
+} from '@utils/apiUrl';
+import { useForm } from 'react-hook-form';
+import { useCompleteEmailVerification } from 'services/persionalInformation.service';
+import { ICompleteChangeEmailFormData } from 'types/personalSetting.type';
+import { completeEmailVerificationSchema } from 'validation/changeEmailValidation';
 
 function CompleteEmailVerification() {
   const { authUser } = useAuthContext();
+  const { multiFormValues } = useFormData();
+
   const { handleModalClose } = useModalContext();
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      new_email: authUser?.email || '',
+      new_email: (multiFormValues?.new_email as string) || '',
       code: '',
     },
     mode: 'all',
-    //    resolver: yupResolver(changePasswordSchema),
+    resolver: yupResolver(completeEmailVerificationSchema),
   });
 
-  const { mutate } = useCompleteEmailVerification({
-    id: authUser?.id || '',
+  const urlLink = () => {
+    switch (authUser?.role) {
+      case 'farmer':
+        return COMPLETE_FARMER_EMAIL_VERIFICATION_URL(authUser?.id as string);
+
+      case 'aggregator':
+        return COMPLETE_AGGREGATOR_EMAIL_VERIFICATION_URL(
+          authUser?.id as string,
+        );
+
+      default:
+        return COMPLETE_FARMER_EMAIL_VERIFICATION_URL(authUser?.id as string);
+    }
+  };
+
+  const { mutate, isLoading } = useCompleteEmailVerification({
+    url: urlLink(),
+    closeModal: handleModalClose,
   });
 
   const onSubmit = (values: ICompleteChangeEmailFormData) => {
     const payload = {
+      new_email: multiFormValues?.new_email,
       code: values.code,
     };
-    mutate({ payload: payload as ICompleteEmailFormData });
+    mutate({ payload: payload as ICompleteChangeEmailFormData });
   };
 
   return (
@@ -70,7 +94,11 @@ function CompleteEmailVerification() {
               className="bg-primary-main text-primary-white w-[180px]"
               onClick={handleSubmit(onSubmit)}
             >
-              Confirm{' '}
+              {isLoading ? (
+                <CircularProgress color="#FFFFFF" size={30} />
+              ) : (
+                'Confirm'
+              )}{' '}
             </CustomButton>
           </div>
         </div>

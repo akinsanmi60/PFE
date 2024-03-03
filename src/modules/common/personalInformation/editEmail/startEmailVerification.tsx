@@ -1,35 +1,59 @@
 import { useAuthContext } from '@contexts/authContext';
+import { useFormData } from '@contexts/formContext';
 import { useModalContext } from '@contexts/modalContext';
+import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
+import CircularProgress from '@shared/CircularProgress';
 import ControlledInput from '@shared/Input/ControlledInput';
+import {
+  START_AGGREGATOR_EMAIL_VERIFICATION_URL,
+  START_FARMER_EMAIL_VERIFICATION_URL,
+} from '@utils/apiUrl';
 import { useForm } from 'react-hook-form';
-import { useStartEmailVerification } from 'services/persionalInformationService';
+import { useStartEmailVerification } from 'services/persionalInformation.service';
 import {
   IStartChangeEmailFormData,
   IStartEmailFormData,
 } from 'types/personalSetting.type';
+import { StartEmailVerificationSchema } from 'validation/changeEmailValidation';
 
 function StartEmailVerification({
   switchView,
+  email,
 }: {
   switchView: React.Dispatch<React.SetStateAction<number>>;
+  email: string;
 }) {
   const { authUser } = useAuthContext();
+  const { setFormValues } = useFormData();
   const { handleModalClose } = useModalContext();
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      old_email: authUser?.email || '',
+      old_email: email || '',
       new_email: '',
       password: '',
     },
     mode: 'all',
-    //    resolver: yupResolver(changePasswordSchema),
+    resolver: yupResolver(StartEmailVerificationSchema),
   });
 
-  const { mutate } = useStartEmailVerification({
+  const urlLink = () => {
+    switch (authUser?.role) {
+      case 'farmer':
+        return START_FARMER_EMAIL_VERIFICATION_URL(authUser?.id as string);
+
+      case 'aggregator':
+        return START_AGGREGATOR_EMAIL_VERIFICATION_URL(authUser?.id as string);
+
+      default:
+        return START_FARMER_EMAIL_VERIFICATION_URL(authUser?.id as string);
+    }
+  };
+
+  const { mutate, isLoading } = useStartEmailVerification({
     switchView,
-    id: authUser?.id || '',
+    url: urlLink(),
   });
 
   const onSubmit = (values: IStartChangeEmailFormData) => {
@@ -37,6 +61,7 @@ function StartEmailVerification({
       new_email: values.new_email,
       password: values.password,
     };
+    setFormValues({ new_email: payload?.new_email as string });
     mutate({ payload: payload as IStartEmailFormData });
   };
 
@@ -80,7 +105,11 @@ function StartEmailVerification({
               className="bg-primary-main text-primary-white w-[180px]"
               onClick={handleSubmit(onSubmit)}
             >
-              Confirm{' '}
+              {isLoading ? (
+                <CircularProgress color="#FFFFFF" size={30} />
+              ) : (
+                'Confirm'
+              )}
             </CustomButton>
           </div>
         </div>

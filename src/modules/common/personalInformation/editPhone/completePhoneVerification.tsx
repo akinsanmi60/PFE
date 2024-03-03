@@ -1,34 +1,61 @@
 import { useAuthContext } from '@contexts/authContext';
+import { useFormData } from '@contexts/formContext';
 import { useModalContext } from '@contexts/modalContext';
+import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
+import CircularProgress from '@shared/CircularProgress';
 import ControlledInput from '@shared/Input/ControlledInput';
+import {
+  COMPLETE_AGGREGATOR_PHONE_VERIFICATION_URL,
+  COMPLETE_FARMER_PHONE_VERIFICATION_URL,
+} from '@utils/apiUrl';
 import { useForm } from 'react-hook-form';
-import { useCompletePhoneVerification } from 'services/persionalInformationService';
+import { useCompletePhoneVerification } from 'services/persionalInformation.service';
 import {
   ICompleteChangeFormData,
   ICompleteFormData,
 } from 'types/personalSetting.type';
+import { completePhoneVerificationSchema } from 'validation/changePhoneValidation';
 
 function CompletePhoneVerification() {
   const { authUser } = useAuthContext();
+  const { multiFormValues } = useFormData();
+
   const { handleModalClose } = useModalContext();
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      new_phone: authUser?.phone_number || '',
+      new_phone: (multiFormValues?.new_phone as string) || '',
       code: '',
     },
     mode: 'all',
-    //    resolver: yupResolver(changePasswordSchema),
+    resolver: yupResolver(completePhoneVerificationSchema),
   });
 
-  const { mutate } = useCompletePhoneVerification({
-    id: authUser?.id || '',
+  const urlLink = () => {
+    switch (authUser?.role) {
+      case 'farmer':
+        return COMPLETE_FARMER_PHONE_VERIFICATION_URL(authUser?.id as string);
+
+      case 'aggregator':
+        return COMPLETE_AGGREGATOR_PHONE_VERIFICATION_URL(
+          authUser?.id as string,
+        );
+
+      default:
+        return COMPLETE_FARMER_PHONE_VERIFICATION_URL(authUser?.id as string);
+    }
+  };
+
+  const { mutate, isLoading } = useCompletePhoneVerification({
+    url: urlLink(),
+    closeModal: handleModalClose,
   });
 
   const onSubmit = (values: ICompleteChangeFormData) => {
     const payload = {
       code: values.code,
+      new_phone: values.new_phone,
     };
     mutate({ payload: payload as ICompleteFormData });
   };
@@ -70,7 +97,11 @@ function CompletePhoneVerification() {
               className="bg-primary-main text-primary-white w-[180px]"
               onClick={handleSubmit(onSubmit)}
             >
-              Confirm{' '}
+              {isLoading ? (
+                <CircularProgress color="#FFFFFF" size={30} />
+              ) : (
+                'Confirm'
+              )}
             </CustomButton>
           </div>
         </div>

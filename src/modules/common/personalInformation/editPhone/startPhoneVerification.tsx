@@ -1,35 +1,58 @@
 import { useAuthContext } from '@contexts/authContext';
+import { useFormData } from '@contexts/formContext';
 import { useModalContext } from '@contexts/modalContext';
+import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
+import CircularProgress from '@shared/CircularProgress';
 import ControlledInput from '@shared/Input/ControlledInput';
+import {
+  START_AGGREGATOR_PHONE_VERIFICATION_URL,
+  START_FARMER_PHONE_VERIFICATION_URL,
+} from '@utils/apiUrl';
 import { useForm } from 'react-hook-form';
-import { useStartPhoneVerification } from 'services/persionalInformationService';
+import { useStartPhoneVerification } from 'services/persionalInformation.service';
 import {
   IStartChangeFormData,
   IStartFormData,
 } from 'types/personalSetting.type';
+import { StartPhoneVerificationSchema } from 'validation/changePhoneValidation';
 
 function StartPhoneVerification({
   switchView,
+  phone,
 }: {
   switchView: React.Dispatch<React.SetStateAction<number>>;
+  phone: string;
 }) {
   const { authUser } = useAuthContext();
+  const { setFormValues } = useFormData();
   const { handleModalClose } = useModalContext();
-
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      old_phone: authUser?.phone_number || '',
+      old_phone: phone || '',
       new_phone: '',
       password: '',
     },
     mode: 'all',
-    //    resolver: yupResolver(changePasswordSchema),
+    resolver: yupResolver(StartPhoneVerificationSchema),
   });
 
-  const { mutate } = useStartPhoneVerification({
+  const urlLink = () => {
+    switch (authUser?.role) {
+      case 'farmer':
+        return START_FARMER_PHONE_VERIFICATION_URL(authUser?.id as string);
+
+      case 'aggregator':
+        return START_AGGREGATOR_PHONE_VERIFICATION_URL(authUser?.id as string);
+
+      default:
+        return START_FARMER_PHONE_VERIFICATION_URL(authUser?.id as string);
+    }
+  };
+
+  const { mutate, isLoading } = useStartPhoneVerification({
     switchView,
-    id: authUser?.id || '',
+    url: urlLink(),
   });
 
   const onSubmit = (values: IStartChangeFormData) => {
@@ -37,6 +60,7 @@ function StartPhoneVerification({
       new_phone: values.new_phone,
       password: values.password,
     };
+    setFormValues({ new_phone: payload?.new_phone as string });
     mutate({ payload: payload as IStartFormData });
   };
 
@@ -80,7 +104,11 @@ function StartPhoneVerification({
               className="bg-primary-main text-primary-white w-[180px]"
               onClick={handleSubmit(onSubmit)}
             >
-              Confirm{' '}
+              {isLoading ? (
+                <CircularProgress color="#FFFFFF" size={30} />
+              ) : (
+                'Confirm'
+              )}
             </CustomButton>
           </div>
         </div>

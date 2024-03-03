@@ -3,9 +3,19 @@ import { MouseEvent, useEffect, useRef, useState } from 'react';
 function Dropdown({
   dropDownArray,
   setSelectedOption,
+  height = '67px',
+  backgroundColor = 'bg-primary-white',
+  dropdownTitle = 'Select a user type',
+  paddingY = '20px',
+  top = '60px',
 }: {
   dropDownArray: string[];
   setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
+  height?: string;
+  backgroundColor?: string;
+  dropdownTitle?: string;
+  paddingY?: string;
+  top?: string;
 }) {
   const [showMenu, setShowMenu] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -41,14 +51,16 @@ function Dropdown({
   };
 
   return (
-    <div className="relative h-[67px] w-full cursor-pointer rounded-tl-[12px] rounded-bl-[12px] border-none xlsm:rounded-[12px] bg-primary-white py-[20px]">
+    <div
+      className={`h-[${height}] ${backgroundColor} py-[${paddingY}] relative w-full cursor-pointer rounded-tl-[12px] rounded-bl-[12px] border-none xlsm:rounded-[12px]`}
+    >
       <div
         ref={inputRef}
         className="flex justify-between px-[16px]"
         onClick={handleInputClick}
       >
         <p className="text-[16px] leading-[24px] text-white">
-          {searchValue ? searchValue : 'Select user type'}
+          {searchValue ? searchValue : dropdownTitle}
         </p>
 
         <svg
@@ -68,7 +80,9 @@ function Dropdown({
       </div>
 
       {showMenu && (
-        <div className=" absolute top-[60px] shadow-primary-lighter rounded-[8px] z-50 max-h-[100px] w-full translate-y-1 overflow-auto border  border-solid border-[#DFE2E2] bg-primary-white text-[#131515] scrollbar-thin scrollbar-none">
+        <div
+          className={`top-[${top}] absolute shadow-primary-lighter rounded-[8px] z-50 max-h-[100px] w-full translate-y-1 overflow-auto border  border-solid border-[#DFE2E2] bg-primary-white text-[#131515] scrollbar-thin scrollbar-none`}
+        >
           {dropDownArray.map((value, index) => (
             <div
               key={index}

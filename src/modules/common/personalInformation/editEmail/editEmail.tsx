@@ -3,17 +3,21 @@ import { useState } from 'react';
 import StartEmailVerification from './startEmailVerification';
 import CompleteEmailVerification from './completeEmailVerification';
 
-function EditEmail() {
+function EditEmail({ email }: { email: string }) {
   const [viewComponent, setViewComponent] = useState(1);
 
   const renderComponent = () => {
     switch (viewComponent) {
       case 1:
-        return <StartEmailVerification switchView={setViewComponent} />;
+        return (
+          <StartEmailVerification email={email} switchView={setViewComponent} />
+        );
       case 2:
         return <CompleteEmailVerification />;
       default:
-        return <StartEmailVerification switchView={setViewComponent} />;
+        return (
+          <StartEmailVerification email={email} switchView={setViewComponent} />
+        );
     }
   };
 

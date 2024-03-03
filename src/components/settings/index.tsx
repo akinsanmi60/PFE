@@ -3,9 +3,35 @@ import { useState } from 'react';
 import PersonalInformation from '@modules/common/personalInformation';
 import BusinessInformation from '@modules/common/businessInformation';
 import ChangePassword from '@modules/authentication/changePassword';
+import { useAuthContext } from '@contexts/authContext';
+import { useGetIndividualFarmer } from 'services/individualFarmerAggregator.service';
+import {
+  GET_INDIVIDUAL_AGGREGATOR_URL,
+  GET_INDIVIDUAL_FARMER_URL,
+} from '@utils/apiUrl';
 
 function SettingView({ settingProps }: ISettingProps) {
   const [active, setActive] = useState('Personal Information');
+  const { authUser } = useAuthContext();
+
+  const individualUserUrlLink = () => {
+    switch (authUser?.role) {
+      case 'farmer':
+        return GET_INDIVIDUAL_FARMER_URL;
+
+      case 'aggregator':
+        return GET_INDIVIDUAL_AGGREGATOR_URL;
+
+      default:
+        return GET_INDIVIDUAL_FARMER_URL;
+    }
+  };
+
+  const { data } = useGetIndividualFarmer({
+    queryParamsId: authUser?.id as string,
+    url: individualUserUrlLink(),
+  });
+
   return (
     <div className="flex gap-x-5">
       <div className="w-[30%] bg-primary-white rounded-[16px] h-[372px]  py-[30px]">
@@ -37,7 +63,7 @@ function SettingView({ settingProps }: ISettingProps) {
         {(() => {
           switch (active) {
             case 'Personal Information':
-              return <PersonalInformation />;
+              return <PersonalInformation data={data} />;
             case 'Business Information':
               return <BusinessInformation />;
             case 'Change Password':

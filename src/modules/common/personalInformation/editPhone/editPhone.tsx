@@ -3,17 +3,21 @@ import { useState } from 'react';
 import StartPhoneVerification from './startPhoneVerification';
 import CompletePhoneVerification from './completePhoneVerification';
 
-function EditPhone() {
+function EditPhone({ phone }: { phone: string }) {
   const [viewComponent, setViewComponent] = useState(1);
 
   const renderComponent = () => {
     switch (viewComponent) {
       case 1:
-        return <StartPhoneVerification switchView={setViewComponent} />;
+        return (
+          <StartPhoneVerification phone={phone} switchView={setViewComponent} />
+        );
       case 2:
         return <CompletePhoneVerification />;
       default:
-        return <StartPhoneVerification switchView={setViewComponent} />;
+        return (
+          <StartPhoneVerification phone={phone} switchView={setViewComponent} />
+        );
     }
   };
 
