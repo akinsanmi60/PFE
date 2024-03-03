@@ -1,25 +1,28 @@
 /* eslint-disable no-unused-vars */
-import { useMutation } from '@tanstack/react-query';
+import { displayError, displaySuccess } from '@shared/Toast/Toast';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postRequest } from '@utils/apiCaller';
-import { displayError } from './auth.service';
 import {
-  ICompleteEmailFormData,
+  ICompleteChangeEmailFormData,
   ICompleteFormData,
   IStartEmailFormData,
   IStartFormData,
   IStartResponse,
+  IUseCompleteEmailVerification,
+  IUseCompletePhoneVerification,
 } from 'types/personalSetting.type';
 
 export const useStartPhoneVerification = (props: any) => {
-  const { switchView, id } = props;
+  const { switchView, url } = props;
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: IStartFormData }) =>
       postRequest<IStartFormData, IStartResponse>({
-        url: `/auth/startPhoneVerification/${id}`,
+        url: url,
         payload,
       }),
     {
-      onSuccess(_res) {
+      onSuccess(res) {
+        displaySuccess(res?.message);
         if (switchView) {
           switchView(2);
         }
@@ -32,16 +35,25 @@ export const useStartPhoneVerification = (props: any) => {
 
   return { mutate, isLoading, ...rest };
 };
-export const useCompletePhoneVerification = (props: any) => {
-  const { id } = props;
+export const useCompletePhoneVerification = ({
+  url,
+  closeModal,
+}: IUseCompletePhoneVerification) => {
+  const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: ICompleteFormData }) =>
       postRequest<ICompleteFormData, IStartResponse>({
-        url: `/auth/startPhoneVerification/${id}`,
+        url: url,
         payload,
       }),
     {
-      onSuccess(_res) {},
+      onSuccess(res) {
+        displaySuccess(res?.message);
+        if (closeModal) {
+          closeModal('phone');
+        }
+        queryClient.invalidateQueries(['getIndividualFarmer']);
+      },
       onError(error) {
         displayError(error);
       },
@@ -52,15 +64,16 @@ export const useCompletePhoneVerification = (props: any) => {
 };
 
 export const useStartEmailVerification = (props: any) => {
-  const { switchView, id } = props;
+  const { switchView, url } = props;
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: IStartEmailFormData }) =>
       postRequest<IStartEmailFormData, IStartResponse>({
-        url: `/auth/startEmailVerification/${id}`,
+        url: url,
         payload,
       }),
     {
-      onSuccess(_res) {
+      onSuccess(res) {
+        displaySuccess(res?.message);
         if (switchView) {
           switchView(2);
         }
@@ -74,16 +87,25 @@ export const useStartEmailVerification = (props: any) => {
   return { mutate, isLoading, ...rest };
 };
 
-export const useCompleteEmailVerification = (props: any) => {
-  const { id } = props;
+export const useCompleteEmailVerification = ({
+  url,
+  closeModal,
+}: IUseCompleteEmailVerification) => {
+  const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
-    ({ payload }: { payload: ICompleteEmailFormData }) =>
-      postRequest<ICompleteEmailFormData, IStartResponse>({
-        url: `/auth/startPhoneVerification/${id}`,
+    ({ payload }: { payload: ICompleteChangeEmailFormData }) =>
+      postRequest<ICompleteChangeEmailFormData, IStartResponse>({
+        url: url,
         payload,
       }),
     {
-      onSuccess(_res) {},
+      onSuccess(res) {
+        displaySuccess(res?.message);
+        if (closeModal) {
+          closeModal('email');
+        }
+        queryClient.invalidateQueries(['getIndividualFarmer']);
+      },
       onError(error) {
         displayError(error);
       },

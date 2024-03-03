@@ -1,4 +1,5 @@
-import { Theme, ToastPosition } from 'react-toastify';
+import handleApiError from '@utils/handleApiError';
+import { Theme, ToastPosition, toast } from 'react-toastify';
 
 type ToastProp = {
   position: ToastPosition | undefined;
@@ -15,4 +16,13 @@ const toastOptions: ToastProp = {
   draggable: true,
   theme: 'light',
 };
-export default toastOptions;
+
+const displayError = (error: any) => {
+  const content = handleApiError(error);
+  return toast.error(content, toastOptions);
+};
+
+const displaySuccess = (message: string) => {
+  return toast.success(message, toastOptions);
+};
+export { toastOptions, displayError, displaySuccess };

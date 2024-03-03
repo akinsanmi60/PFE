@@ -1,4 +1,7 @@
 import AppHeader from 'components/appHeader/appHeader';
+import HubAnimation from './hubAnimation';
+import HubProduce from './hubProduce';
+import PageContainer from 'components/Layout/PageContainer';
 
 function UserPentrarHub() {
   return (
@@ -8,6 +11,10 @@ function UserPentrarHub() {
           Pentrar Hub
         </p>
       </AppHeader>
+      <PageContainer className="pt-0">
+        <HubAnimation />
+        <HubProduce />
+      </PageContainer>
     </div>
   );
 }

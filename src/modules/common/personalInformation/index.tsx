@@ -1,23 +1,31 @@
 import { useModalContext } from '@contexts/modalContext';
 import EditPhone from './editPhone/editPhone';
 import PageTile from 'components/pageTile';
-import { useAuthContext } from '@contexts/authContext';
 import ControlledInput from '@shared/Input/ControlledInput';
 import { useForm } from 'react-hook-form';
 import EditEmail from './editEmail/editEmail';
+import { capitalize } from '@utils/constants';
+import { IIndividualFarmer } from 'types/individualFarmerAggregator.type';
+import { useEffect } from 'react';
 
 type IPersonalInputNames = 'full_name' | 'email' | 'phone_number' | 'gender';
-function PersonalInformation() {
-  const { authUser } = useAuthContext();
+function PersonalInformation({ data }: { data: IIndividualFarmer }) {
   const { modalState, handleModalOpen } = useModalContext();
-  const { control } = useForm({
+  const { control, setValue } = useForm({
     defaultValues: {
-      full_name: authUser?.full_name || 'Nil',
-      email: authUser?.email || 'Nil',
-      phone_number: authUser?.phone_number || 'Nil',
-      gender: authUser?.gender || 'Nil',
+      full_name: '',
+      email: '',
+      phone_number: '',
+      gender: '',
     },
   });
+
+  useEffect(() => {
+    setValue('email', data?.email);
+    setValue('full_name', capitalize(data?.full_name) as string);
+    setValue('phone_number', data?.phone_number);
+    setValue('gender', data?.gender);
+  }, [data, setValue]);
 
   const actionArray = [
     {
@@ -59,21 +67,25 @@ function PersonalInformation() {
         <PageTile actionArray={actionArray} title="Personal Information" />
 
         <div className="flex flex-col gap-y-[20px] mt-[30px]">
-          {personalInfoArray.map(info => (
-            <div key={info.label}>
-              <ControlledInput
-                control={control}
-                name={info.inputName as IPersonalInputNames}
-                label={info.label}
-                readonly
-              />
-            </div>
-          ))}
+          {personalInfoArray.map(info => {
+            return (
+              <div key={info.label}>
+                <ControlledInput
+                  control={control}
+                  name={info.inputName as IPersonalInputNames}
+                  label={info.label}
+                  readonly
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {modalState.modalType === 'phone' && <EditPhone />}
-      {modalState.modalType === 'email' && <EditEmail />}
+      {modalState.modalType === 'phone' && (
+        <EditPhone phone={data?.phone_number} />
+      )}
+      {modalState.modalType === 'email' && <EditEmail email={data?.email} />}
     </>
   );
 }

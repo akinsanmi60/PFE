@@ -14,9 +14,30 @@ export const GET_FARMER_DASHBOARD_COUNT_URL = (id: string) =>
   `farmer/${id}/dashboardcount`;
 export const GET_FARMER_RECENT_PRODUCE_URL = (id: string) =>
   `farmer/${id}/recentproduce`;
+export const START_FARMER_PHONE_VERIFICATION_URL = (id: string) =>
+  `farmer/${id}/update-phonenumber`;
+export const COMPLETE_FARMER_PHONE_VERIFICATION_URL = (id: string) =>
+  `farmer/${id}/complete-phonenumber-reset`;
+export const GET_INDIVIDUAL_FARMER_URL = (id: string) =>
+  `farmer/${id}/individual-farmer`;
+export const START_FARMER_EMAIL_VERIFICATION_URL = (id: string) =>
+  `farmer/${id}/update-email`;
+export const COMPLETE_FARMER_EMAIL_VERIFICATION_URL = (id: string) =>
+  `farmer/${id}/complete-email-reset`;
 
 //Aggregator urls
 export const GET_AGGREGATOR_DASHBOARD_COUNT_URL = (id: string) =>
   `aggregator/${id}/dashboardcount`;
 export const GET_AGGREGATOR_RECENT_PRODUCE_URL = (id: string) =>
   `aggregator/${id}/recentproduce`;
+
+export const START_AGGREGATOR_PHONE_VERIFICATION_URL = (id: string) =>
+  `aggregator/${id}/update-phonenumber`;
+export const COMPLETE_AGGREGATOR_PHONE_VERIFICATION_URL = (id: string) =>
+  `aggregator/${id}/complete-phonenumber-reset`;
+export const GET_INDIVIDUAL_AGGREGATOR_URL = (id: string) =>
+  `farmer/${id}/individual-aggregator`;
+export const START_AGGREGATOR_EMAIL_VERIFICATION_URL = (id: string) =>
+  `aggregator/${id}/update-email`;
+export const COMPLETE_AGGREGATOR_EMAIL_VERIFICATION_URL = (id: string) =>
+  `aggregator/${id}/complete-email-reset`;

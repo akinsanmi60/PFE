@@ -1,6 +1,4 @@
-import toastOptions from '@shared/Toast/Toast';
 import { useMutation } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
 import {
   IBaseResponse,
   IForgetProp,
@@ -13,7 +11,6 @@ import {
   IchangePasswordPayload,
 } from 'types/auth.type';
 import { useNavigate } from 'react-router-dom';
-import handleApiError from '@utils/handleApiError';
 import jwt_decode from 'jwt-decode';
 import { IUserCTXType } from 'types/contextProvider.type';
 import { saveDetailToLocalStorage, setToken } from '@hooks/localStorageHook';
@@ -30,11 +27,7 @@ import {
 import { userPathsLinks } from '@modules/users/routes';
 import { LOCAL_STORAGE_KEY } from '@utils/localStorageKey';
 import { RootLink } from 'routes/routeObject';
-
-export const displayError = (error: any) => {
-  const content = handleApiError(error);
-  return toast.error(content, toastOptions);
-};
+import { displayError, displaySuccess } from '@shared/Toast/Toast';
 
 const userDashboard = ['farmer', 'aggregator'];
 const adminDashboard = ['admin', 'subAdmin'];
@@ -63,14 +56,14 @@ export const useLoginMutation = ({ url }: { url: string }) => {
             decodedUser.isEmail_verified &&
             userDashboard.includes(decodedUser.role)
           ) {
-            toast.success(res?.message || '', toastOptions);
+            displaySuccess(res?.message || '');
             saveDetailToLocalStorage(
               LOCAL_STORAGE_KEY.URL,
               `/${userPathsLinks.basePath}`,
             );
             navigate(`/${userPathsLinks.basePath}`, { replace: true });
           } else if (decodedUser && adminDashboard.includes(decodedUser.role)) {
-            toast.success(res?.message || '', toastOptions);
+            displaySuccess(res?.message || '');
             navigate('/sadmin/dashboard', { replace: true });
           }
         }
@@ -96,7 +89,7 @@ export const usePartialUserCreationMutation = ({
       }),
     {
       onSuccess(res) {
-        toast.success(res?.message, toastOptions);
+        displaySuccess(res?.message);
         if (action) {
           action();
         }
@@ -119,7 +112,7 @@ export const useRegisterMutation = () => {
       }),
     {
       onSuccess(res) {
-        toast.success(res?.message, toastOptions);
+        displaySuccess(res?.message);
         navigate('/login');
       },
       onError(error) {
@@ -141,7 +134,7 @@ export const useForgetPasswordMutation = () => {
       }),
     {
       onSuccess(res: IBaseResponse) {
-        toast.success(res?.message, toastOptions);
+        displaySuccess(res?.message);
         navigate(RootLink.forgotPassword);
       },
       onError(error) {
@@ -164,7 +157,7 @@ export const useResetPasswordMutation = () => {
 
     {
       onSuccess(res: IBaseResponse) {
-        toast.success(res?.message, toastOptions);
+        displaySuccess(res?.message);
         navigate(RootLink.login);
       },
 
@@ -186,7 +179,7 @@ export const useChangePasswordMutation = () => {
       }),
     {
       onSuccess(res) {
-        toast.success(res?.message, toastOptions);
+        displaySuccess(res?.message);
       },
       onError(error) {
         displayError(error);
@@ -206,7 +199,7 @@ export const useVerifyMutation = ({ action }: { action?: () => void }) => {
       }),
     {
       onSuccess(res) {
-        toast.success(res?.message, toastOptions);
+        displaySuccess(res?.message);
         if (action) {
           action();
         }
