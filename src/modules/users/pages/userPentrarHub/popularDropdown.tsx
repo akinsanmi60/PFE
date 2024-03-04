@@ -14,7 +14,7 @@ function PopularDropdown({ popularArray, setSortObject }: IPentrarHubDropdown) {
   }, [popular]);
 
   return (
-    <div className="w-[160px]">
+    <div className="w-[180px]">
       <Dropdown
         dropDownArray={popularArray as string[]}
         setSelectedOption={setPopular}
