@@ -10,12 +10,14 @@ const customColors = {
   secondary: {
     'light-1': '#2AA232',
     'light-2': '#333333',
+    'dark-1': '#111827',
   },
   tertiary: {
     main: '#FF8A00',
     'light-1': '#FFF3E6',
     'light-2': '#4D4D4D',
     'light-3': '#666666',
+    'light-4': '#F8F8F8',
   },
   statusText: {
     success: '#0CAF60',
@@ -36,6 +38,9 @@ const customColors = {
     700: '#1E293B',
     800: '#0F172A',
     900: '#101828',
+  },
+  dark: {
+    500: '#070707',
   },
   'cancel-red': {
     main: '#CF142B',
