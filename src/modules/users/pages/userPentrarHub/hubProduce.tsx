@@ -1,30 +1,58 @@
 import SearchFilterBox from '@shared/searchFilter';
 import { ReactComponent as SearchVector } from '@assets/svg/searchVector.svg';
 import { useEffect, useMemo, useState } from 'react';
-import { popularArray, stateArray } from '@db/hubData';
 import ProduceSort from './produceSort';
-import ProduceList from './produceList';
-import { ReactComponent as PrevIcon } from '@assets/svg/prev.svg';
-import { ReactComponent as NextIcon } from '@assets/svg/next.svg';
-import { ReactComponent as ChevronUp } from '@assets/svg/chevron-up.svg';
 import { produceListData } from '@db/hubData';
-import { IProduceItemList } from 'types/pentrarHub.type';
+import { IProduceItemList, IQueryHubProp } from 'types/pentrarHub.type';
+import CustomHubTable from '@shared/HubTable';
+import EmptyBar from '@shared/Table/tableEmpty';
+import { useGetPentrarHubProduce } from 'services/pentrar.service';
 
 function HubProduce() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredData, setFilteredData] = useState<IProduceItemList>([]);
+  const [queryParams, setQueryParams] = useState({
+    search: '',
+    page: 1,
+    limit: 10,
+    state: '',
+    popular_produce: '',
+  });
+
+  const updateQueryParams = (params: IQueryHubProp) => {
+    setQueryParams(prev => ({ ...prev, ...params }));
+  };
+
+  const { data } = useGetPentrarHubProduce(queryParams);
 
   const sortProduce = useMemo(() => {
-    return <ProduceSort popularArray={popularArray} stateArray={stateArray} />;
+    return (
+      <ProduceSort
+        setPopluar={produce => updateQueryParams({ popular_produce: produce })}
+        setState={stateVal => updateQueryParams({ state: stateVal })}
+      />
+    );
   }, []);
+
+  const dataToUse = data?.data?.produces_list as IProduceItemList;
 
   // Filter data based on search term
   useEffect(() => {
-    const filtered = produceListData.filter(item =>
-      item.name.toLowerCase().startsWith(searchTerm.toLowerCase()),
-    );
-    setFilteredData(filtered);
-  }, [searchTerm]);
+    const filtered =
+      dataToUse?.length > 0
+        ? dataToUse
+        : produceListData.filter(item =>
+            item.name
+              .toLowerCase()
+              .startsWith(
+                searchTerm.toLowerCase() ||
+                  queryParams.search.toLowerCase() ||
+                  queryParams.popular_produce.toLowerCase() ||
+                  queryParams.state.toLowerCase(),
+              ),
+          );
+    setFilteredData(filtered as IProduceItemList);
+  }, [dataToUse, searchTerm, queryParams]);
 
   const displayedData = filteredData;
 
@@ -35,7 +63,12 @@ function HubProduce() {
           searchBarProps={{
             placeholder: 'Search for produce',
             useStartAdornment: <SearchVector />,
-            onSetTermChange: ({ target: { value } }) => setSearchTerm(value),
+            onSetTermChange: ({ target: { value } }) => {
+              setSearchTerm(value);
+              updateQueryParams({
+                search: value,
+              });
+            },
             term: searchTerm,
             borderColor: '#F2F2F2',
             className: 'w-full border-[1px]',
@@ -44,33 +77,15 @@ function HubProduce() {
       </div>
       <div className="w-full mt-[24px]">{sortProduce}</div>
       <div className="w-full mt-[24px]">
-        <ProduceList produceListData={displayedData} />
-      </div>
-      <div className="w-full mt-[24px] flex items-center justify-between">
-        <div className="flex items-center gap-[24px]">
-          <div className="w-[32px] h-[32px] flex justify-center items-center rounded-[8px]  border-[1px] border-gray-100 cursor-pointer">
-            <PrevIcon />
-          </div>
-          <div>
-            <p className="w-[32px] h-[32px] font-[600] text-[12px] leading-[19px] text-secondary-dark-1 flex justify-center items-center rounded-[10px] bg-tertiary-light-4   cursor-pointer">
-              1
-            </p>
-          </div>
-          <div className="w-[32px] h-[32px] flex justify-center items-center rounded-[8px]  border-[1px] border-gray-100 cursor-pointer">
-            <NextIcon />
-          </div>
-        </div>
-        <div className="flex items-center gap-[16px]">
-          <p className=" font-[500] text-[12px] leading-[19px] text-primary-light">
-            Showing 1 to 5 of 100 entries{' '}
-          </p>
-          <div className="rounded-[8px] cursor-pointer p-[10px] border-[1px] border-gray-100 flex items-center gap-[10px]">
-            <p className=" font-[500] text-[12px] leading-[19px] text-dark-500 ">
-              Show 8{' '}
-            </p>
-            <ChevronUp />
-          </div>
-        </div>
+        <CustomHubTable
+          dataBody={displayedData}
+          total={displayedData.length}
+          setCurrentPage={(val: number) => updateQueryParams({ page: val })}
+          setLimit={(val: number) => updateQueryParams({ limit: val })}
+          tableEmptyState={
+            <EmptyBar emptyStateSize="lg" componentType="Hub Produce" />
+          }
+        />
       </div>
     </div>
   );

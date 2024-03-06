@@ -1,10 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import CustomPagination from 'shared/Pagination';
 import { ITableBody, ITableProp } from './table.interface';
-
 import { Menu, MenuItem, MenuButton } from '@szhsin/react-menu';
 import { capitalize, getClass } from '@utils/constants';
-import { IPagenationSetter } from '@hooks/tableHook';
 import {
   Table,
   Thead,
@@ -15,6 +12,7 @@ import {
   TableContainer,
 } from '@chakra-ui/react';
 import { useMemo, useState } from 'react';
+import CustomPagination from '@shared/customPagination';
 
 type ISortData = {
   key: string | null;
@@ -29,8 +27,8 @@ const CustomTable = ({
   clickRow,
   showDivider,
   rowDetailCollector,
-  setValuer,
-  valuer,
+  current_page,
+  setCurrentPage,
   page_size,
   total,
   menuOptions,
@@ -38,6 +36,7 @@ const CustomTable = ({
   loading,
   tableEmptyState,
   tableLoader,
+  setLimit,
 }: ITableProp) => {
   const [sortConfig, setSortConfig] = useState<ISortData>({
     key: '' || null,
@@ -50,13 +49,17 @@ const CustomTable = ({
   const itemsPerPage = page_size as number; // Number of items to display per page
 
   // Calculate the indexes for the current page
-  const startIndex = ((valuer?.current_page as number) - 1) * itemsPerPage;
+  const startIndex = ((current_page as number) - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
   const handlePageChange = (page: number) => {
-    if (setValuer) {
-      setValuer({ ...(valuer as IPagenationSetter), current_page: page });
+    if (setCurrentPage) {
+      setCurrentPage(page);
     }
+  };
+
+  const handleSetLimit = () => {
+    setLimit && setLimit(page_size as number);
   };
 
   const handleNavigationToDetailpage = (indexValue: number) => {
@@ -264,9 +267,10 @@ const CustomTable = ({
               <CustomPagination
                 endIndex={endIndex}
                 startIndex={startIndex}
-                currentPage={valuer?.current_page as number}
+                currentPage={current_page as number}
                 onChangeOfPage={handlePageChange}
                 lengthOfData={dataLength}
+                onChangeofPageSize={handleSetLimit}
               />
             </div>
           )}

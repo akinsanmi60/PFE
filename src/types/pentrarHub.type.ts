@@ -1,12 +1,8 @@
+import { IBaseResponse } from './auth.type';
+
 export type IPentrarHubDropdown = {
-  popularArray?: string[];
-  stateArray?: string[];
-  setSortObject: React.Dispatch<
-    React.SetStateAction<{
-      popular: string;
-      state: string;
-    }>
-  >;
+  setPopluar?: (_value: string) => void;
+  setState?: (_value: string) => void;
 };
 
 export type IProduceItemList = {
@@ -23,3 +19,21 @@ export type IProduceItemList = {
   description: string;
   harvest_date: string;
 }[];
+
+export type IQueryHubProp = {
+  search?: string;
+  page?: number;
+  limit?: number;
+  state?: string;
+  popular_produce?: string;
+};
+
+export type IPentrarHubResponse = IBaseResponse & {
+  data: {
+    total: number;
+    total_pages: number;
+    current_page: number;
+    page_size: number;
+    produces_list: IProduceItemList;
+  };
+};

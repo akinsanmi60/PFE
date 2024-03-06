@@ -56,10 +56,10 @@ function Dropdown({
     >
       <div
         ref={inputRef}
-        className="flex justify-between px-[16px]"
+        className="flex justify-between px-[16px] items-center"
         onClick={handleInputClick}
       >
-        <p className="text-[16px] leading-[24px] text-white">
+        <p className="text-[16px] leading-[24px] text-white mr-[-30px]">
           {searchValue ? searchValue : dropdownTitle}
         </p>
 

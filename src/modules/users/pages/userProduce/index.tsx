@@ -5,6 +5,7 @@ import { useState } from 'react';
 import AppHeader from 'components/appHeader/appHeader';
 import CustomTable from '@shared/Table';
 import EmptyBar from '@shared/Table/tableEmpty';
+import CustomButton from '@shared/Button';
 
 function UserProduce() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -49,7 +50,7 @@ function UserProduce() {
               User Produce
             </h2>
           </div>
-          <div className="w-full">
+          <div className="w-full flex justify-between items-center gap-x-[15px] ">
             <SearchFilterBox
               searchBarProps={{
                 placeholder: 'Search produce by name or ID',
@@ -59,6 +60,9 @@ function UserProduce() {
                 term: searchTerm,
               }}
             />
+            <CustomButton className="text-primary-white w-[180px]">
+              Add Produce
+            </CustomButton>
           </div>
         </div>
       </AppHeader>

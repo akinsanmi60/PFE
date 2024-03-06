@@ -1,23 +1,21 @@
 import Dropdown from '@shared/Select/uncontrolledSelect';
 import { useEffect, useState } from 'react';
 import { IPentrarHubDropdown } from 'types/pentrarHub.type';
+import { popularArray } from '@db/hubData';
 
-function PopularDropdown({ popularArray, setSortObject }: IPentrarHubDropdown) {
-  const [popular, setPopular] = useState('');
+function PopularDropdown({ setPopluar }: IPentrarHubDropdown) {
+  const [popularProduce, setPopularProduce] = useState('');
 
   useEffect(() => {
-    setSortObject(prev => ({
-      ...prev,
-      popular: popular,
-    }));
+    setPopluar && setPopluar(popularProduce);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [popular]);
+  }, [popularProduce]);
 
   return (
-    <div className="w-[180px]">
+    <div className="w-[160px]">
       <Dropdown
         dropDownArray={popularArray as string[]}
-        setSelectedOption={setPopular}
+        setSelectedOption={setPopularProduce}
         dropdownTitle="Most popular"
         backgroundColor="bg-none"
         height="20px"

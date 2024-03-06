@@ -1,4 +1,3 @@
-import { IPagenationSetter } from '@hooks/tableHook';
 import { SetStateAction } from 'react';
 
 export type ITableBody = {
@@ -26,13 +25,6 @@ export type ITableProp = {
   onMenuClick?: (_textType: ITableBody) => void;
   onRowClick?: (data: any) => typeof data;
   rowDetailCollector?: React.Dispatch<SetStateAction<ITableBody>>;
-  setValuer?: React.Dispatch<React.SetStateAction<IPagenationSetter>>;
-  valuer?: {
-    total: number;
-    page_size: number;
-    current_page: number;
-    total_pages: number;
-  };
   page_size?: number;
   handlePageChange?: number;
   total_pages?: number;
@@ -47,4 +39,7 @@ export type ITableProp = {
   tableLoader?: React.ReactNode;
   tableEmptyState?: React.ReactNode;
   emptyStateSize?: string;
+  setCurrentPage?: (_page: number) => void;
+  current_page?: number;
+  setLimit?: (_limit: number) => void;
 };
