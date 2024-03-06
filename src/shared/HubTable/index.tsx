@@ -1,5 +1,6 @@
 import CustomPagination from '@shared/customPagination';
 import { IHubProp, IRowBody } from './type';
+import { formatDate } from '@utils/constants';
 
 function CustomHubTable<TData extends IRowBody>({
   dataBody,
@@ -43,18 +44,18 @@ function CustomHubTable<TData extends IRowBody>({
                   onRowClick && onRowClick(item);
                 }}
                 key={i}
-                className="py-[12px] cursor-pointer  border-b-[1px] border-background-borderlight flex items-center gap-[24px] font-primary"
+                className="sixm:flex-col py-[12px] cursor-pointer  border-b-[1px] border-background-borderlight flex items-center gap-[24px] font-primary"
               >
-                <div className="min-w-[240px]">
+                <div className="sixm:w-full  min-w-[240px]">
                   <img
                     src={item?.images[0]}
                     alt="produce"
-                    className="w-[240px] h-[160px] rounded-[4px]"
+                    className="w-[240px] h-[160px] rounded-[4px] sixm:w-full sixm:h-[320px]"
                   />
                 </div>
                 <div className="w-full">
                   <p className="text-[12px] leading-[16px] font-[400] text-tertiary-light-3">
-                    {item?.created_at}
+                    {formatDate({ date: item?.created_at })}
                   </p>
                   <div className="mt-[12px]">
                     <p className="text-[24px] leading-[33px] font-[500] text-primary-main">
@@ -64,7 +65,7 @@ function CustomHubTable<TData extends IRowBody>({
                       {item?.description}
                     </p>
                   </div>
-                  <div className="mt-[12px] flex items-center gap-[48px]">
+                  <div className="mt-[12px] flex items-center gap-x-[48px] xlsm:gap-x-[15px] xlsm:flex-wrap">
                     <div className="flex items-center gap-[10px]">
                       <p className="mt-[4px] text-[14px] leading-[20px] font-[400] text-primary-lighter">
                         Quantity:

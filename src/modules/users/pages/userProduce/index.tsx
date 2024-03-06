@@ -42,9 +42,9 @@ function UserProduce() {
     },
   ];
   return (
-    <>
+    <div className="h-screen">
       <AppHeader>
-        <div className="flex justify-between items-center mt-[20px] px-[24px] pb-[14px]">
+        <div className="flex justify-between items-center mt-[20px] px-[24px] pb-[14px] sixm:flex-col sixm:gap-y-[20px]">
           <div className="w-full">
             <h2 className="text-primary-main leading-6 font-[500] text-[18px]">
               User Produce
@@ -66,7 +66,7 @@ function UserProduce() {
           </div>
         </div>
       </AppHeader>
-      <PageContainer>
+      <PageContainer className="pt-0">
         <div className="w-full bg-primary-white rounded-lg mt-[30px]">
           <CustomTable
             tableHeads={tableHead}
@@ -77,7 +77,7 @@ function UserProduce() {
           />
         </div>
       </PageContainer>
-    </>
+    </div>
   );
 }
 
