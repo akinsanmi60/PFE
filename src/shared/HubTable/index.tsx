@@ -1,7 +1,7 @@
 import CustomPagination from '@shared/customPagination';
-import { IHubProp } from './type';
+import { IHubProp, IRowBody } from './type';
 
-function CustomHubTable({
+function CustomHubTable<TData extends IRowBody>({
   dataBody,
   currentPage,
   setCurrentPage,
@@ -12,7 +12,8 @@ function CustomHubTable({
   tableLoader,
   tableEmptyState,
   setLimit,
-}: IHubProp) {
+  onRowClick,
+}: IHubProp<TData>) {
   const dataLength = total as number;
 
   const itemsPerPage = page_size as number; // Number of items to display per page
@@ -35,11 +36,14 @@ function CustomHubTable({
       <div className="bg-primary-white">
         {loading
           ? tableLoader
-          : !loading && dataBody.length > 0
-          ? dataBody?.map((item: any, i: any) => (
+          : !loading && dataBody?.length > 0
+          ? dataBody?.map((item, i: any) => (
               <div
+                onClick={() => {
+                  onRowClick && onRowClick(item);
+                }}
                 key={i}
-                className="py-[12px]  border-b-[1px] border-background-borderlight flex items-center gap-[24px] font-primary"
+                className="py-[12px] cursor-pointer  border-b-[1px] border-background-borderlight flex items-center gap-[24px] font-primary"
               >
                 <div className="min-w-[240px]">
                   <img
@@ -94,7 +98,7 @@ function CustomHubTable({
       {/* pagination */}
       {loading && showPagination
         ? null
-        : dataBody.length === 0
+        : dataBody?.length === 0
         ? null
         : showPagination &&
           dataLength > 0 && (

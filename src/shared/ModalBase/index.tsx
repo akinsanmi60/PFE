@@ -20,7 +20,7 @@ function ModalBaseWrapper({ children, modalBaseProp }: IModalBaseProps) {
   const width = closeBtnwidth || '400px';
 
   const closeAction = () => {
-    handleModalClose(closingText);
+    handleModalClose(closingText as string);
   };
 
   return (
@@ -42,7 +42,7 @@ function ModalBaseWrapper({ children, modalBaseProp }: IModalBaseProps) {
           >
             <div
               className="bg-primary-white h-[30px] w-[30px] rounded-full flex justify-center items-center cursor-pointer"
-              onClick={() => handleModalClose(closingText)}
+              onClick={() => handleModalClose(closingText as string)}
             >
               <IoCloseOutline />
             </div>

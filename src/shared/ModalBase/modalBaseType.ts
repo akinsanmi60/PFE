@@ -1,7 +1,7 @@
 export type IModalBaseProps = {
   children: React.ReactNode;
   modalBaseProp: {
-    closingText: string;
+    closingText?: string;
     closeBtnwidth?: string;
     showCloseBtn?: boolean;
     useBackground?: boolean;

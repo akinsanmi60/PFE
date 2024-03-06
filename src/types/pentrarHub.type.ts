@@ -18,7 +18,7 @@ export type IProduceItemList = {
   images: string[];
   description: string;
   harvest_date: string;
-}[];
+};
 
 export type IQueryHubProp = {
   search?: string;
@@ -34,6 +34,6 @@ export type IPentrarHubResponse = IBaseResponse & {
     total_pages: number;
     current_page: number;
     page_size: number;
-    produces_list: IProduceItemList;
+    produces_list: IProduceItemList[];
   };
 };

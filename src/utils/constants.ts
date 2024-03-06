@@ -33,19 +33,10 @@ export const capitalize = (text: string | undefined) => {
   return output.join(' ');
 };
 
-export const formatDate = ({
-  date,
-  time,
-}: {
-  date: string | Date;
-  time?: boolean;
-}) => {
+export const formatDate = ({ date }: { date: string | Date }) => {
   if (date === null) return;
-  if (time) {
-    return format(new Date(date), 'dd MMM, yyyy • hh:mma');
-  } else {
-    return format(new Date(date), 'dd MMM, yyyy');
-  }
+
+  return format(new Date(date), 'dd MMM, yyyy');
 };
 
 export const fullNameConcat = (

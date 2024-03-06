@@ -7,10 +7,13 @@ import { IProduceItemList, IQueryHubProp } from 'types/pentrarHub.type';
 import CustomHubTable from '@shared/HubTable';
 import EmptyBar from '@shared/Table/tableEmpty';
 import { useGetPentrarHubProduce } from 'services/pentrar.service';
+import { useModalContext } from '@contexts/modalContext';
+import OnHubProduceDetail from 'components/produceDetail';
 
 function HubProduce() {
+  const { modalState, handleModalOpen } = useModalContext();
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredData, setFilteredData] = useState<IProduceItemList>([]);
+  const [filteredData, setFilteredData] = useState<IProduceItemList[]>([]);
   const [queryParams, setQueryParams] = useState({
     search: '',
     page: 1,
@@ -18,7 +21,8 @@ function HubProduce() {
     state: '',
     popular_produce: '',
   });
-
+  const [modalProduceDetail, setModalProduceDetail] =
+    useState<IProduceItemList | null>(null);
   const updateQueryParams = (params: IQueryHubProp) => {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
@@ -34,7 +38,12 @@ function HubProduce() {
     );
   }, []);
 
-  const dataToUse = data?.data?.produces_list as IProduceItemList;
+  const dataToUse = data?.data?.produces_list as IProduceItemList[];
+
+  const viewProduce = (produceData: IProduceItemList) => {
+    handleModalOpen('hubProduceDetail');
+    setModalProduceDetail(produceData);
+  };
 
   // Filter data based on search term
   useEffect(() => {
@@ -51,7 +60,7 @@ function HubProduce() {
                   queryParams.state.toLowerCase(),
               ),
           );
-    setFilteredData(filtered as IProduceItemList);
+    setFilteredData(filtered as IProduceItemList[]);
   }, [dataToUse, searchTerm, queryParams]);
 
   const displayedData = filteredData;
@@ -77,7 +86,7 @@ function HubProduce() {
       </div>
       <div className="w-full mt-[24px]">{sortProduce}</div>
       <div className="w-full mt-[24px]">
-        <CustomHubTable
+        <CustomHubTable<IProduceItemList>
           dataBody={displayedData}
           total={displayedData.length}
           setCurrentPage={(val: number) => updateQueryParams({ page: val })}
@@ -85,8 +94,12 @@ function HubProduce() {
           tableEmptyState={
             <EmptyBar emptyStateSize="lg" componentType="Hub Produce" />
           }
+          onRowClick={rowData => viewProduce(rowData)}
         />
       </div>
+      {modalState.modalType === 'hubProduceDetail' && (
+        <OnHubProduceDetail modalProduceDetail={modalProduceDetail} />
+      )}
     </div>
   );
 }

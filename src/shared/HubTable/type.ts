@@ -2,8 +2,8 @@ export type IRowBody = {
   [x: string]: string | number | string[] | number[] | boolean | any;
 };
 
-export type IHubProp = {
-  dataBody: IRowBody[];
+export type IHubProp<TData> = {
+  dataBody: TData[];
   currentPage?: number;
   setCurrentPage?: (_page: number) => void;
   total?: number;
@@ -12,6 +12,6 @@ export type IHubProp = {
   loading?: boolean;
   tableLoader?: React.ReactNode;
   tableEmptyState?: React.ReactNode;
-  onRowClick?: (_rowData: IRowBody) => void;
+  onRowClick?: (_rowData: TData) => void;
   setLimit?: (_limit: number) => void;
 };
