@@ -1,4 +1,5 @@
-import aboutHero from '@assets/png/aboutHeroImg.jpg';
+import aboutHero from '@assets/png/aboutHeroA.png';
+
 function AboutHero() {
   return (
     <div className="pt-[132px] mdxl:pt-[75px] pb-[81px] mdxl:pb-[50px] max-content">
@@ -16,11 +17,11 @@ function AboutHero() {
             every step of your product's journey, from raw materials to the end
             consumer, ensuring transparency, compliance, and peace of mind.
           </p>
-          <div className="mt-[50px] bg-[#6AD871] w-full h-[600px] mdxl:h-[450px] xlsm:h-[400px]">
+          <div className="mt-[50px] bg-[#072723] rounded-[12px] w-full h-[600px] mdxl:h-[450px] xlsm:h-[400px]">
             <img
               src={aboutHero}
               alt="about-hero-img"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover rounded-[12px] mix-blend-luminosity"
             />
           </div>
         </div>
