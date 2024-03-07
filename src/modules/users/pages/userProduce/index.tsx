@@ -6,9 +6,13 @@ import AppHeader from 'components/appHeader/appHeader';
 import CustomTable from '@shared/Table';
 import EmptyBar from '@shared/Table/tableEmpty';
 import CustomButton from '@shared/Button';
+import { useModalContext } from '@contexts/modalContext';
+import AddProduceComponent from 'components/addProduce';
 
 function UserProduce() {
   const [searchTerm, setSearchTerm] = useState('');
+  const { modalState, handleModalOpen } = useModalContext();
+
   const tableHead = [
     {
       label: 'id',
@@ -60,7 +64,10 @@ function UserProduce() {
                 term: searchTerm,
               }}
             />
-            <CustomButton className="text-primary-white w-[180px]">
+            <CustomButton
+              className="text-primary-white w-[180px]"
+              onClick={() => handleModalOpen('addProduce')}
+            >
               Add Produce
             </CustomButton>
           </div>
@@ -77,6 +84,8 @@ function UserProduce() {
           />
         </div>
       </PageContainer>
+
+      {modalState?.modalType === 'addProduce' && <AddProduceComponent />}
     </div>
   );
 }

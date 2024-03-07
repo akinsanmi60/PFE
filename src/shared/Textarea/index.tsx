@@ -13,13 +13,13 @@ const CustomTextArea = forwardRef(
             {...rest}
             placeholder={placeholder}
             size="md"
-            maxLength={1500}
-            // height={height}
-            height={200}
+            maxLength={1000}
+            height={100}
             sx={{
-              borderColor: '#0e2038',
+              borderColor: '#E6E6E6',
+              borderRadius: '10px',
+              paddingY: '4px',
             }}
-            className="placeholder:text-[10px] cursor-pointer"
           />
         </Box>
       </FormField>

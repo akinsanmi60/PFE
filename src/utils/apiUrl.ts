@@ -44,3 +44,7 @@ export const COMPLETE_AGGREGATOR_EMAIL_VERIFICATION_URL = (id: string) =>
 
 //Pentra Hub
 export const GET_PENTRAHUB_PRODUCE_URL = () => 'pentrar-hub/getAllHubProduce';
+
+//Produce urls
+export const GET_ALL_PRODUCE_URL = () => 'produce/allProduce';
+export const ADD_PRODUCE_URL = (id: string) => `produce/${id}/create-produce`;
