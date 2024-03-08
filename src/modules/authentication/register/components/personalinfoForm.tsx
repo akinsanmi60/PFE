@@ -17,7 +17,7 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
     defaultValues: {
       email: '',
       full_name: '',
-      user_type: '',
+      user_type: 'farmer',
       gender: '',
       phone_number: '',
     },

@@ -30,6 +30,7 @@ const CustomSelect = forwardRef(
               borderColor: '#E6E6E6',
               borderRadius: '10px',
               paddingY: '24px',
+              fontcolor: 'red',
             }}
           >
             {options?.map(option => (
