@@ -5,9 +5,13 @@ import { ReactComponent as SearchVector } from '@assets/svg/searchVector.svg';
 import { useState } from 'react';
 import CustomTable from '@shared/Table';
 import EmptyBar from '@shared/Table/tableEmpty';
+import CustomButton from '@shared/Button';
+import { useModalContext } from '@contexts/modalContext';
+import AddAdminComponent from 'components/addAdmin';
 
 function SubAdmin() {
   const [searchTerm, setSearchTerm] = useState('');
+  const { modalState, handleModalOpen } = useModalContext();
 
   return (
     <div className="h-screen">
@@ -28,6 +32,12 @@ function SubAdmin() {
                 term: searchTerm,
               }}
             />
+            <CustomButton
+              className="text-primary-white w-[180px]"
+              onClick={() => handleModalOpen('addSubAdmin')}
+            >
+              Add Admin
+            </CustomButton>
           </div>
         </div>
       </AppHeader>
@@ -42,6 +52,7 @@ function SubAdmin() {
           />
         </div>
       </PageContainer>
+      {modalState?.modalType === 'addSubAdmin' && <AddAdminComponent />}
     </div>
   );
 }
