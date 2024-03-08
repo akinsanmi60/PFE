@@ -38,9 +38,12 @@ function Wrapper() {
 
 export const RenderProtectedRoute = (routeObject: IProtectedRouteProp) => {
   const { authUser } = useAuthContext();
+  console.log(authUser);
 
   const { AllowedRoles, AppLayout, BasePath, IndexRoute, ListedRoutes } =
     routeObject;
+  console.log(AllowedRoles);
+  console.log(BasePath);
 
   return (
     <Route

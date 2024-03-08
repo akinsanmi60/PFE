@@ -23,52 +23,72 @@ const OfftakerList = React.lazy(() => import('@modules/admin/pages/offtaker'));
 
 const FarmerList = React.lazy(() => import('@modules/admin/pages/farmer'));
 
+const SubAdminList = React.lazy(() => import('@modules/admin/pages/subadmin'));
+
+export const adminPathsLinks = {
+  basePath: 'pentrar/admin',
+  dashBoard: 'dashboard',
+  allAgencies: 'all-agencies',
+  allProduce: 'all-produces',
+  allTransporters: 'all-transporters',
+  allAggregators: 'all-aggregators',
+  allExporters: 'all-exporters',
+  allOfftakers: 'all-offtakers',
+  allFarmers: 'all-farmers',
+  allSubAdmins: 'all-subAdmins',
+};
+
 const AdminRoutes = {
   AdminDashBoard: {
     element: AdminDashboard,
-    path: 'admin-dashboard',
-  },
-
-  AgencyList: {
-    element: AgencyList,
-    path: 'all-agencies',
+    path: adminPathsLinks.dashBoard,
   },
 
   ProduceList: {
     element: ProduceList,
-    path: 'all-produces',
+    path: adminPathsLinks.allProduce,
   },
 
-  TransporterList: {
-    element: TransporterList,
-    path: 'all-transporters',
-  },
-
-  AggregatorList: {
-    element: AggregatorList,
-    path: 'all-aggregators',
-  },
-
-  ExporterList: {
-    element: ExporterList,
-    path: 'all-exporters',
-  },
-
-  OfftakerList: {
-    element: OfftakerList,
-    path: 'all-offtakers',
+  SubAdminList: {
+    element: SubAdminList,
+    path: adminPathsLinks.allSubAdmins,
   },
 
   FarmerList: {
     element: FarmerList,
-    path: 'all-farmers',
+    path: adminPathsLinks.allFarmers,
+  },
+
+  AggregatorList: {
+    element: AggregatorList,
+    path: adminPathsLinks.allAggregators,
+  },
+
+  AgencyList: {
+    element: AgencyList,
+    path: adminPathsLinks.allAgencies,
+  },
+
+  TransporterList: {
+    element: TransporterList,
+    path: adminPathsLinks.allTransporters,
+  },
+
+  ExporterList: {
+    element: ExporterList,
+    path: adminPathsLinks.allExporters,
+  },
+
+  OfftakerList: {
+    element: OfftakerList,
+    path: adminPathsLinks.allOfftakers,
   },
 };
 
-export const UserAppRoute = {
+export const AdminAppRoute = {
   AppLayout: DashboardLayout,
   IndexRoute: AdminDashboard,
-  AllowedRoles: [Account.SuperAdmin],
-  BasePath: 'pentrar/admin',
+  AllowedRoles: [Account.Admin],
+  BasePath: adminPathsLinks.basePath,
   ListedRoutes: AdminRoutes,
 };

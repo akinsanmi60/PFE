@@ -93,7 +93,7 @@ const SETTINGS_SIDENAV: NavLInk[] = [
 const SUPER_ADMIN_SIDENAV: NavLInk[] = [
   {
     name: 'Dashboard',
-    path: 'admin-dashboard',
+    path: 'dashboard',
     Icon: <Home />,
   },
   {
@@ -109,6 +109,11 @@ const SUPER_ADMIN_SIDENAV: NavLInk[] = [
   {
     name: 'Transporters',
     path: 'all-transporters',
+    Icon: <Home />,
+  },
+  {
+    name: 'Admins',
+    path: 'all-subAdmins',
     Icon: <Home />,
   },
   {

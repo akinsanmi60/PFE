@@ -28,14 +28,15 @@ import { userPathsLinks } from '@modules/users/routes';
 import { LOCAL_STORAGE_KEY } from '@utils/localStorageKey';
 import { RootLink } from 'routes/routeObject';
 import { displayError, displaySuccess } from '@shared/Toast/Toast';
+import { adminPathsLinks } from '@modules/admin/routes';
 
 const userDashboard = ['farmer', 'aggregator'];
 const adminDashboard = ['admin', 'subAdmin'];
 
 export const useLoginMutation = ({ url }: { url: string }) => {
   const { setAuthUser } = useAuthContext();
-
   const navigate = useNavigate();
+
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: ILoginFormData }) =>
       postRequest<ILoginFormData, ILoginResponse>({
@@ -61,10 +62,20 @@ export const useLoginMutation = ({ url }: { url: string }) => {
               LOCAL_STORAGE_KEY.URL,
               `/${userPathsLinks.basePath}`,
             );
-            navigate(`/${userPathsLinks.basePath}`, { replace: true });
+            navigate(
+              `/${userPathsLinks.basePath}/${userPathsLinks.dashBoard}`,
+              { replace: true },
+            );
           } else if (decodedUser && adminDashboard.includes(decodedUser.role)) {
             displaySuccess(res?.message || '');
-            navigate('/sadmin/dashboard', { replace: true });
+            saveDetailToLocalStorage(
+              LOCAL_STORAGE_KEY.URL,
+              `/${adminPathsLinks.basePath}/${adminPathsLinks.dashBoard}`,
+            );
+            navigate(
+              `/${adminPathsLinks.basePath}/${adminPathsLinks.dashBoard}`,
+              { replace: true },
+            );
           }
         }
       },
