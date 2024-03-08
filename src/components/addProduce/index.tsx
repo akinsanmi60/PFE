@@ -12,8 +12,8 @@ import { IAddProducePayload } from 'types/produce.type';
 
 function AddProduceComponent() {
   const { authUser } = useAuthContext();
-  const [imageString, setImageString] = useState<File[]>([]);
-  const { control, handleSubmit } = useForm({
+  const [imageString, setImageString] = useState<File[] | null>(null);
+  const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       name: '',
       quantity: 0,
@@ -30,14 +30,16 @@ function AddProduceComponent() {
     // resolver: yupResolver(addProduceValidationSchema),
   });
 
-  const { mutate, isLoading } = useProduceCreationMutation({
+  const { mutate, isLoading, isSuccess } = useProduceCreationMutation({
     id: authUser?.id as string,
+    reset,
+    setImageString,
   });
 
   const onAddProduce = (val: Omit<IAddProducePayload, 'images'>) => {
     const imgData = new FormData();
 
-    Array.from(imageString).forEach(file => {
+    Array.from(imageString as File[]).forEach(file => {
       imgData.append('files', file);
     });
     const payload = {
@@ -73,6 +75,7 @@ function AddProduceComponent() {
             <ArrayImageUpload
               setChosenImages={val => setImageString(val)}
               acceptType="image/*"
+              successWatcher={isSuccess}
             />
           </div>
 

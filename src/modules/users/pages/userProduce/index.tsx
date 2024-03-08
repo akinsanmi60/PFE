@@ -46,7 +46,8 @@ function UserProduce() {
     {
       label: 'Quantity',
       accessor: 'quantity',
-      render: ({ quantity, unit }) => `${quantity}/${unit}`,
+      render: ({ quantity, unit }) =>
+        `${quantity}/${unit === null || unit === '' ? 'KG' : unit}`,
     },
     {
       label: 'Last Updated',

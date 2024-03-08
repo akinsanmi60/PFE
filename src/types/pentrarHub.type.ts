@@ -13,7 +13,7 @@ export type IProduceItemList = {
   pentrar_produce_id: string;
   quantity: number;
   unit: string;
-  state: string;
+  farm_state: string;
   updated_at: string;
   images: string[];
   description: string;

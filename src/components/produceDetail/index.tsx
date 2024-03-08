@@ -4,6 +4,7 @@ import { formatDate } from '@utils/constants';
 import { IProduceItemList } from 'types/pentrarHub.type';
 import { ReactComponent as CallingPhone } from '@assets/svg/callingPhoneWhite.svg';
 import ModalHeader from 'components/appNav/modalHeader';
+import { useAuthContext } from '@contexts/authContext';
 
 const detailKeys = ['Quantity', 'Unit', 'Harvest Date', 'Farm Location'];
 
@@ -12,13 +13,19 @@ function OnHubProduceDetail({
 }: {
   modalProduceDetail: IProduceItemList | null;
 }) {
+  const { authUser } = useAuthContext();
+  const returnString = (): string =>
+    modalProduceDetail?.unit === null || modalProduceDetail?.unit === ''
+      ? 'KG'
+      : (modalProduceDetail?.unit as string);
+
   const detailValue = [
     modalProduceDetail?.quantity,
-    modalProduceDetail?.unit,
+    returnString(),
     formatDate({
       date: modalProduceDetail?.harvest_date as string,
     }),
-    modalProduceDetail?.state,
+    modalProduceDetail?.farm_state,
   ];
   return (
     <ModalBaseWrapper
@@ -70,10 +77,6 @@ function OnHubProduceDetail({
                     title={modalProduceDetail?.description}
                   >
                     {modalProduceDetail?.description}
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Odit voluptatibus at tenetur quas nemo amet nesciunt! Vel
-                    culpa explicabo voluptas numquam dolor debitis accusamus
-                    suscipit, consectetur ex mollitia est illum?
                   </p>
                 </div>
               </div>
@@ -104,13 +107,15 @@ function OnHubProduceDetail({
             <div className="w-full">
               <div className="rounded-[16px] bg-primary-white p-[20px] shadow-lg h-[180px] flex flex-col justify-between">
                 <p className="bg-[#DAFBEC] py-[2px] px-[12px] text-statusText-success font-[500] text-center rounded-lg w-[50%]">
-                  Aggregator
+                  {authUser?.role}
                 </p>
                 <h1 className="font-[500] text-[20px] leading-[28px] tracking-normal">
-                  Full Name
+                  {authUser?.full_name}
                 </h1>
                 <CustomButton className="w-full flex items-center gap-[4px] text-primary-white">
-                  <span className="text-[15px] font-[500]">Call Me</span>
+                  <a href={`tel:${authUser?.phone_number}`}>
+                    <span className="text-[15px] font-[500]">Call Me</span>
+                  </a>
                   <span className="h-[20px] w-[20px]">
                     <CallingPhone />
                   </span>

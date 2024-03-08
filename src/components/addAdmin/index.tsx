@@ -9,7 +9,7 @@ import { IAddSubAdminPayload } from 'types/subAdmin.type';
 import { addAdminValidationSchema } from 'validation/addAdminValidation';
 
 function AddAdminComponent() {
-  const { control, handleSubmit, getValues } = useForm({
+  const { control, handleSubmit } = useForm({
     defaultValues: {
       email: '',
       phone_number: '',
@@ -20,8 +20,6 @@ function AddAdminComponent() {
   });
 
   const { mutate, isLoading } = useAdminCreationMutation();
-
-  console.log(getValues());
 
   const onAddSubAdmin = (value: IAddSubAdminPayload) => {
     const payload = {
