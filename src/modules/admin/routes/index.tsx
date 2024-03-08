@@ -23,7 +23,7 @@ const OfftakerList = React.lazy(() => import('@modules/admin/pages/offtaker'));
 
 const FarmerList = React.lazy(() => import('@modules/admin/pages/farmer'));
 
-const SubAdminList = React.lazy(() => import('@modules/admin/pages/subadmin'));
+const TeamList = React.lazy(() => import('@modules/admin/pages/subadmin'));
 
 export const adminPathsLinks = {
   basePath: 'pentrar/admin',
@@ -35,7 +35,7 @@ export const adminPathsLinks = {
   allExporters: 'all-exporters',
   allOfftakers: 'all-offtakers',
   allFarmers: 'all-farmers',
-  allSubAdmins: 'all-subAdmins',
+  allTeams: 'all-teams',
 };
 
 const AdminRoutes = {
@@ -49,9 +49,9 @@ const AdminRoutes = {
     path: adminPathsLinks.allProduce,
   },
 
-  SubAdminList: {
-    element: SubAdminList,
-    path: adminPathsLinks.allSubAdmins,
+  TeamList: {
+    element: TeamList,
+    path: adminPathsLinks.allTeams,
   },
 
   FarmerList: {

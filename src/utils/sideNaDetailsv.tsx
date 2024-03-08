@@ -17,6 +17,13 @@ import { ReactComponent as SettingsWhite } from '@assets/svg/dashSettingWhite.sv
 import { ReactComponent as HomeWhite } from '@assets/svg/dashHomeWhite.svg';
 import { ReactComponent as FolderWhite } from '@assets/svg/dashFolderWhite.svg';
 import { ReactComponent as SearchWhite } from '@assets/svg/dashSearchWhite.svg';
+import { ReactComponent as ProduceIcon } from '@assets/svg/produceIcon.svg';
+import { ReactComponent as FarmerIcon } from '@assets/svg/farmerIcon.svg';
+import { ReactComponent as AggregatorIcon } from '@assets/svg/aggregatorIcon.svg';
+import { ReactComponent as ExporterIcon } from '@assets/svg/exporterIcon.svg';
+import { ReactComponent as OfftakerIcon } from '@assets/svg/offtakerIcon.svg';
+import { ReactComponent as AgencyIcon } from '@assets/svg/agencyIcon.svg';
+import { ReactComponent as TeamIcon } from '@assets/svg/teamIcon.svg';
 
 export type NavLInk = {
   name: string;
@@ -90,6 +97,20 @@ const SETTINGS_SIDENAV: NavLInk[] = [
   },
 ];
 
+const ADMIN_SETTINGS_SIDENAV: NavLInk[] = [
+  {
+    name: 'Team',
+    path: 'all-teams',
+    Icon: <TeamIcon />,
+  },
+  {
+    name: 'Settings',
+    path: 'settings',
+    Icon: <SettingIcon />,
+    IconBlue: <SettingsWhite />,
+  },
+];
+
 const SUPER_ADMIN_SIDENAV: NavLInk[] = [
   {
     name: 'Dashboard',
@@ -99,42 +120,38 @@ const SUPER_ADMIN_SIDENAV: NavLInk[] = [
   {
     name: 'Produces',
     path: 'all-produces',
-    Icon: <Home />,
+    Icon: <ProduceIcon />,
   },
   {
     name: 'Farmers',
     path: 'all-farmers',
-    Icon: <Home />,
+    Icon: <FarmerIcon />,
   },
   {
     name: 'Transporters',
     path: 'all-transporters',
-    Icon: <Home />,
+    Icon: <ExporterIcon />,
   },
-  {
-    name: 'Admins',
-    path: 'all-subAdmins',
-    Icon: <Home />,
-  },
+
   {
     name: 'Aggregators',
     path: 'all-aggregators',
-    Icon: <Home />,
+    Icon: <AggregatorIcon />,
   },
   {
     name: 'Exporters',
     path: 'all-exporters',
-    Icon: <Home />,
+    Icon: <ExporterIcon />,
   },
   {
     name: 'Offtakers',
     path: 'all-offtakers',
-    Icon: <Home />,
+    Icon: <OfftakerIcon />,
   },
   {
     name: 'Agencies',
     path: 'all-agencies',
-    Icon: <Home />,
+    Icon: <AgencyIcon />,
   },
 ];
 
@@ -167,4 +184,5 @@ export {
   SETTINGS_SIDENAV,
   SUPER_ADMIN_SIDENAV,
   SETTINGS_PAGE_NAVLIST,
+  ADMIN_SETTINGS_SIDENAV,
 };
