@@ -48,3 +48,5 @@ export const GET_PENTRAHUB_PRODUCE_URL = () => 'pentrar-hub/getAllHubProduce';
 //Produce urls
 export const GET_ALL_PRODUCE_URL = () => 'produce/allProduce';
 export const ADD_PRODUCE_URL = (id: string) => `produce/${id}/create-produce`;
+export const GET_USER_PRODUCE_URL = (id: string, type: string) =>
+  `produce/${id}/get-produce-by/${type}`;
