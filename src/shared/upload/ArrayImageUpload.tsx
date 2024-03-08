@@ -22,7 +22,7 @@ function ArrayImageUpload({
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [imageString, setImageString] = useState<File[]>([]);
   const sideClasses =
-    'h-[120px] w-full cursor-pointer primary-self-text border-[1px] border-gray-100 flex justify-start items-center  overflow-hidden mx-auto ';
+    'h-[120px] w-full cursor-pointer primary-self-text flex justify-start items-center  overflow-hidden mx-auto ';
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 

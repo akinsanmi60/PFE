@@ -2,7 +2,6 @@ import { useAuthContext } from '@contexts/authContext';
 import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
 import ModalBaseWrapper from '@shared/ModalBase';
-import ControlledSelect from '@shared/Select/ControlledSelect';
 import ControlledTextArea from '@shared/Textarea/ControlledInput';
 import ArrayImageUpload from '@shared/upload/ArrayImageUpload';
 import ModalHeader from 'components/appNav/modalHeader';
@@ -28,9 +27,12 @@ function AddProduceComponent() {
       season: '',
       weather: '',
     },
+    // resolver: yupResolver(addProduceValidationSchema),
   });
 
-  const { mutate } = useProduceCreationMutation({ id: authUser?.id as string });
+  const { mutate, isLoading } = useProduceCreationMutation({
+    id: authUser?.id as string,
+  });
 
   const onAddProduce = (val: Omit<IAddProducePayload, 'images'>) => {
     const imgData = new FormData();
@@ -62,8 +64,12 @@ function AddProduceComponent() {
 
         <div className="flex gap-y-[25px] mt-[20px] flex-col  w-[540px]">
           <div className="mb-[5px]">
-            <p>Add Images</p>
-            <p>You are allowed to upload 4 images.</p>
+            <p className="text-[14px] tracking-normal leading-[20px] font-[500] ">
+              Add Images
+            </p>
+            <p className="text-[12px] leading-[17px] tracking-normal font-[400]">
+              You are allowed to upload 4 images.
+            </p>
             <ArrayImageUpload
               setChosenImages={val => setImageString(val)}
               acceptType="image/*"
@@ -91,13 +97,14 @@ function AddProduceComponent() {
               control={control}
               type="date"
             />
-            <ControlledSelect
+            {/* <ControlledSelect
               name="season"
               label="Season"
               placeholder="Select Season"
               control={control}
               optionArray={[]}
-            />
+            /> */}
+            <ControlledInput name="season" label="Season" control={control} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <ControlledInput
@@ -106,12 +113,17 @@ function AddProduceComponent() {
               control={control}
               type="date"
             />
-            <ControlledSelect
+            {/* <ControlledSelect
               name="weather"
               label="Weather Condition"
               placeholder="Select Season"
               control={control}
               optionArray={[]}
+            /> */}
+            <ControlledInput
+              name="weather"
+              label="Weather Condition"
+              control={control}
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -121,12 +133,17 @@ function AddProduceComponent() {
               placeholder="Enter Farm Address"
               control={control}
             />
-            <ControlledSelect
+            {/* <ControlledSelect
               name="farm_state"
               label="Farm State"
               placeholder="Select Farm State"
               control={control}
               optionArray={[]}
+            /> */}
+            <ControlledInput
+              name="farm_state"
+              label="Farm State"
+              control={control}
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -136,19 +153,21 @@ function AddProduceComponent() {
               placeholder="Enter produce quantity"
               control={control}
             />
-            <ControlledSelect
+            {/* <ControlledSelect
               name="storage"
               label="Storage"
               placeholder="Select produce name"
               control={control}
               optionArray={[]}
-            />
+            /> */}
+            <ControlledInput name="storage" label="Storage" control={control} />
           </div>
 
           <div className="flex justify-end mt-[8px] mb-[-50px]">
             <CustomButton
               onClick={handleSubmit(onAddProduce)}
               className="bg-primary-main text-primary-white w-[180px]"
+              loading={isLoading}
             >
               Save Produce
             </CustomButton>
