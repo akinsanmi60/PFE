@@ -6,7 +6,7 @@ const DashboardLayout = () => {
       <aside className="sticky top-0 h-screen mdxl:hidden">
         <SideNav />
       </aside>
-      <main className="mdxl:w-full">
+      <main className="mdxl:w-full w-full">
         <div className="bg-background-borderlight h-full">
           <Outlet />
         </div>
