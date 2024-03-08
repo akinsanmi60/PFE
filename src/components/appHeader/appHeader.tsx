@@ -1,5 +1,6 @@
 import { useAuthContext } from '@contexts/authContext';
 import {
+  Account,
   capitalize,
   getClass,
   getFirstSwordBeforeSpace,
@@ -135,17 +136,19 @@ function AppHeader({ children }: { children: React.ReactNode }) {
       <div className="bg-primary-white shadow-sm px-[20px] py-[10px]">
         <div className="flex items-center justify-end">
           <div className="flex gap-[30px] items-center">
-            <div
-              className={`border-[1px] px-[16px] py-[5px] font-[600] rounded-tr-[16px] rounded-br-[16px] rounded-tl-[16px] rounded-bl-[16px] ${getClass(
-                status as string,
-              )}`}
-            >
-              <p>
-                {status === 'pending'
-                  ? 'Pending Verification'
-                  : 'Active Account'}
-              </p>
-            </div>
+            {authUser?.role === Account.Admin ? null : (
+              <div
+                className={`border-[1px] px-[16px] py-[5px] font-[600] rounded-tr-[16px] rounded-br-[16px] rounded-tl-[16px] rounded-bl-[16px] ${getClass(
+                  status as string,
+                )}`}
+              >
+                <p>
+                  {status === 'pending'
+                    ? 'Pending Verification'
+                    : 'Active Account'}
+                </p>
+              </div>
+            )}
 
             <ProfileBox first_name={first_name as string} />
           </div>

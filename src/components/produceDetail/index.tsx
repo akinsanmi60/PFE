@@ -3,8 +3,7 @@ import ModalBaseWrapper from '@shared/ModalBase';
 import { formatDate } from '@utils/constants';
 import { IProduceItemList } from 'types/pentrarHub.type';
 import { ReactComponent as CallingPhone } from '@assets/svg/callingPhoneWhite.svg';
-import { ReactComponent as LeftChevron } from '@assets/svg/leftChevron.svg';
-import { useModalContext } from '@contexts/modalContext';
+import ModalHeader from 'components/appNav/modalHeader';
 
 const detailKeys = ['Quantity', 'Unit', 'Harvest Date', 'Farm Location'];
 
@@ -13,7 +12,6 @@ function OnHubProduceDetail({
 }: {
   modalProduceDetail: IProduceItemList | null;
 }) {
-  const { handleModalClose } = useModalContext();
   const detailValue = [
     modalProduceDetail?.quantity,
     modalProduceDetail?.unit,
@@ -30,13 +28,12 @@ function OnHubProduceDetail({
       }}
     >
       <div className="p-[6px]">
-        <div className="flex items-center gap-x-1 mb-[14px]">
-          <LeftChevron
-            className="inline-block mr-2 cursor-pointer"
-            onClick={() => handleModalClose('hubProduceDetail')}
-          />
-          <h2>Produce Detail</h2>
-        </div>
+        <ModalHeader
+          modalHeaderProp={{
+            title: 'Produce Detail',
+            actionText: 'hubProduceDetail',
+          }}
+        />
         <div className="border border-background-borderlight-1 rounded-[16px] px-[20px] mb-[-40px]">
           <p className="font-[400] text-[12px] leading-[17px] text-primary-main mt-[15px] mb-[8px]">
             ID: <span className="font-[500] ">{modalProduceDetail?.id}</span>

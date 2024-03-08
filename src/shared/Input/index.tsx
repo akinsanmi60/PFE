@@ -15,6 +15,7 @@ const CustomInput = forwardRef(
       className,
       ...rest
     } = props;
+    const today = new Date().toISOString().split('T')[0];
     return (
       <FormField label={label} error={helperText}>
         <InputGroup>
@@ -29,6 +30,7 @@ const CustomInput = forwardRef(
               borderRadius: '10px',
               paddingY: '24px',
             }}
+            max={rest.type === 'date' ? today : undefined}
           />
           {useEndAdornment && useEndAdornment}
         </InputGroup>

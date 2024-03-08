@@ -27,8 +27,9 @@ const CustomSelect = forwardRef(
             icon={<TriangleDownIcon fontSize="x-small" />}
             placeholder={placeholder}
             sx={{
-              borderColor: '#0e2038',
-              cursor: 'pointer',
+              borderColor: '#E6E6E6',
+              borderRadius: '10px',
+              paddingY: '24px',
             }}
           >
             {options?.map(option => (

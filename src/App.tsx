@@ -11,6 +11,7 @@ import {
 import { RenderProtectedRoute, RenderRoute } from 'routes/Routes';
 import { AppRouteWithLayout, AppRouteWithoutLayout } from 'routes/routeObject';
 import { UserAppRoute } from '@modules/users/routes';
+import { AdminAppRoute } from '@modules/admin/routes';
 
 function App() {
   const router = createBrowserRouter(
@@ -19,6 +20,7 @@ function App() {
         {RenderRoute(AppRouteWithLayout)}
         {RenderRoute(AppRouteWithoutLayout)}
         {RenderProtectedRoute(UserAppRoute)}
+        {RenderProtectedRoute(AdminAppRoute)}
       </>,
     ),
   );

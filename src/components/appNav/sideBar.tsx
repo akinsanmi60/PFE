@@ -34,7 +34,7 @@ function SideNav() {
       ? AGGREGATOR_SIDENAV
       : authUser?.role === Account.Exporter
       ? EXPORTER_SIDENAV
-      : authUser?.role === Account.SuperAdmin
+      : authUser?.role === Account.Admin
       ? SUPER_ADMIN_SIDENAV
       : null;
   }, [authUser?.role]);
@@ -86,43 +86,48 @@ function SideNav() {
         </div>
 
         {/* Settings */}
-        <div className="mt-[20px]">
-          <div className="w-full bg-background-borderlight border[1px] h-[1px]" />
-          <p className="p-4 text-primary-light text-[12px] font-primary">
-            Settings
-          </p>
-          <div className="flex flex-col gap-2">
-            {SETTINGS_SIDENAV?.map(sidenav => {
-              const checkPath = pathName === sidenav.path;
-              return (
-                <div
-                  className={
-                    checkPath ? 'text-[14px] text-primary-white' : 'text-[14px]'
-                  }
-                  key={sidenav.name}
-                >
-                  <NavLink
+        {(authUser?.role === Account.Aggregator ||
+          authUser?.role === Account.Farmer) && (
+          <div className="mt-[20px]">
+            <div className="w-full bg-background-borderlight border[1px] h-[1px]" />
+            <p className="p-4 text-primary-light text-[12px] font-primary">
+              Settings
+            </p>
+            <div className="flex flex-col gap-2">
+              {SETTINGS_SIDENAV?.map(sidenav => {
+                const checkPath = pathName === sidenav.path;
+                return (
+                  <div
                     className={
                       checkPath
-                        ? 'text-[18px] font-[400] h-[40px] active:font-[400]  flex items-center gap-3 px-3 py-[25px]'
-                        : 'text-[18px] font-[400] h-[40px] active:font-[400]  flex items-center gap-3 px-3'
+                        ? 'text-[14px] text-primary-white'
+                        : 'text-[14px]'
                     }
-                    to={sidenav.path}
                     key={sidenav.name}
-                    style={active}
-                    role={sidenav.name}
                   >
-                    <span className={checkPath ? '-ml-[2px]' : 'ml-0'}>
-                      {checkPath ? sidenav.IconBlue : sidenav.Icon}
-                    </span>
+                    <NavLink
+                      className={
+                        checkPath
+                          ? 'text-[18px] font-[400] h-[40px] active:font-[400]  flex items-center gap-3 px-3 py-[25px]'
+                          : 'text-[18px] font-[400] h-[40px] active:font-[400]  flex items-center gap-3 px-3'
+                      }
+                      to={sidenav.path}
+                      key={sidenav.name}
+                      style={active}
+                      role={sidenav.name}
+                    >
+                      <span className={checkPath ? '-ml-[2px]' : 'ml-0'}>
+                        {checkPath ? sidenav.IconBlue : sidenav.Icon}
+                      </span>
 
-                    <span>{sidenav.name}</span>
-                  </NavLink>
-                </div>
-              );
-            })}
+                      <span>{sidenav.name}</span>
+                    </NavLink>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <div>
         <div className="w-full bg-[#E2E8F0] border[1px] h-[1px]" />

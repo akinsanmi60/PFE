@@ -38,7 +38,7 @@ function Header() {
               {saveDetails.url !== null ? (
                 <p
                   className=" text-primary-white"
-                  onClick={() => navigate(`${saveDetails.url}`)}
+                  onClick={() => navigate(`${saveDetails.url}/dashboard`)}
                 >
                   Dashboard
                 </p>

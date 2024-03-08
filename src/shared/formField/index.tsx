@@ -16,7 +16,7 @@ function FormField({ error, label, children, name }: FormFieldProp) {
         htmlFor={name}
         mb={1}
         sx={{
-          fontWeight: '700',
+          fontWeight: '600',
         }}
         className="text-[#1A1A1A]"
       >

@@ -1,7 +1,7 @@
 export const SEARCH_ALL_VICTIMS = 'https://dummyjson.com/users/search';
 
 export const USER_LOGIN_URL = 'auth/login';
-export const ADMIN_LOGIN_URL = 'auth/admin-login';
+export const ADMIN_LOGIN_URL = 'admin/login';
 export const USER_SIGNUP_URL = 'auth/signup';
 export const PARTIAL_USER_CREATION_URL = 'auth/create-partialuser';
 export const USER_VERIFY_URL = 'auth/verify';
@@ -44,3 +44,7 @@ export const COMPLETE_AGGREGATOR_EMAIL_VERIFICATION_URL = (id: string) =>
 
 //Pentra Hub
 export const GET_PENTRAHUB_PRODUCE_URL = () => 'pentrar-hub/getAllHubProduce';
+
+//Produce urls
+export const GET_ALL_PRODUCE_URL = () => 'produce/allProduce';
+export const ADD_PRODUCE_URL = (id: string) => `produce/${id}/create-produce`;

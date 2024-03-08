@@ -27,4 +27,5 @@ function useGetPentrarHubProduce(queryParams: IQueryHubProp) {
     data,
   };
 }
+
 export { useGetPentrarHubProduce };
