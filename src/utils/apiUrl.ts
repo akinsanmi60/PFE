@@ -51,3 +51,5 @@ export const ADD_PRODUCE_URL = (id: string) => `produce/${id}/create-produce`;
 
 // Admin urls
 export const ADD_ADMIN_URL = 'admin/create-admin';
+export const GET_USER_PRODUCE_URL = (id: string, type: string) =>
+  `produce/${id}/get-produce-by/${type}`;

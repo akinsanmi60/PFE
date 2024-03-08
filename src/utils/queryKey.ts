@@ -3,4 +3,5 @@ export const queryKeys = {
   getFarmerAggregatorRecentProduce: 'getFarmerAggregatorRecentProduce',
   getIndividualFarmer: 'getIndividualFarmer',
   getPentrarHubProduce: 'getPentrarHubProduce',
+  getIMyProduce: 'getIMyProduce',
 };

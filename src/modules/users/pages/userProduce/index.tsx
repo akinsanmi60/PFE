@@ -8,36 +8,52 @@ import EmptyBar from '@shared/Table/tableEmpty';
 import CustomButton from '@shared/Button';
 import { useModalContext } from '@contexts/modalContext';
 import AddProduceComponent from 'components/addProduce';
+import { useAuthContext } from '@contexts/authContext';
+import { useGetMyProduce } from 'services/produce.service';
+import { GET_USER_PRODUCE_URL } from '@utils/apiUrl';
+import { ITableHead } from '@shared/Table/table.interface';
+import { IMyProduceData } from 'types/produce.type';
+import { formatDate } from '@utils/constants';
+import TableLoading from '@shared/Table/tableLoading';
 
 function UserProduce() {
   const [searchTerm, setSearchTerm] = useState('');
   const { modalState, handleModalOpen } = useModalContext();
+  const { authUser } = useAuthContext();
 
-  const tableHead = [
+  const { data, isLoading } = useGetMyProduce({
+    queryParamsId: authUser?.id as string,
+    userType: authUser?.role as string,
+    url: GET_USER_PRODUCE_URL,
+  });
+
+  const tableHead: ITableHead<IMyProduceData>[] = [
     {
       label: 'id',
       accessor: '',
-      render: () => null,
+      render: ({ pentrar_produce_id }) => pentrar_produce_id,
     },
     {
       label: 'Produce Name',
-      accessor: '',
-      render: () => null,
+      accessor: 'name',
+      render: ({ name }) => name,
     },
     {
       label: 'Location',
-      accessor: '',
-      render: () => null,
+      accessor: 'farm_state',
+      render: ({ farm_state }) => farm_state,
     },
     {
       label: 'Quantity',
-      accessor: '',
-      render: () => null,
+      accessor: 'quantity',
+      render: ({ quantity, unit }) => `${quantity}/${unit}`,
     },
     {
       label: 'Last Updated',
       accessor: '',
-      render: () => null,
+      render: ({ updated_at }) => {
+        return formatDate({ date: updated_at });
+      },
     },
     {
       label: 'Action',
@@ -51,7 +67,7 @@ function UserProduce() {
         <div className="flex justify-between items-center mt-[20px] px-[24px] pb-[14px] sixm:flex-col sixm:gap-y-[20px]">
           <div className="w-full">
             <h2 className="text-primary-main leading-6 font-[500] text-[18px]">
-              User Produce
+              Manage your produces{' '}
             </h2>
           </div>
           <div className="w-full flex justify-between items-center gap-x-[15px] ">
@@ -74,13 +90,19 @@ function UserProduce() {
         </div>
       </AppHeader>
       <PageContainer className="pt-0">
-        <div className="w-full bg-primary-white rounded-lg mt-[30px]">
-          <CustomTable
+        <div className="w-full bg-primary-white rounded-lg mt-[30px] p-[24px]">
+          <h2 className="text-primary-main leading-6 font-[500] text-[18px] mb-[15px]">
+            User Produce
+          </h2>
+          <CustomTable<IMyProduceData>
             tableHeads={tableHead}
-            dataTableSource={[]}
+            loading={isLoading}
+            dataTableSource={data?.data?.produces_list || []}
             tableEmptyState={
               <EmptyBar emptyStateSize="lg" componentType="produces" />
             }
+            tableLoader={<TableLoading title="Loading Produces" />}
+            showPagination={true}
           />
         </div>
       </PageContainer>

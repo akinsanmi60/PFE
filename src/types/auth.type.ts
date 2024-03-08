@@ -28,6 +28,13 @@ export type IBaseResponse = {
   message: string;
 };
 
+export type IDataCount = {
+  total: number;
+  total_pages: number;
+  current_page: number;
+  page_size: number;
+};
+
 export type ILoginData = {
   accessToken: string;
   success: boolean;
