@@ -6,25 +6,22 @@ export type ITableBody = {
 
 export type ITableHead<TData> = {
   label: string;
-  accessor: keyof TData | '' | null;
+  accessor: keyof TData | '' | null | number;
   align?: string;
   render?: (_data: TData) => React.ReactNode;
 };
 
-export type ITableProp = {
-  tableHeads?: {
-    label: string;
-    accessor: string;
-  }[];
+export type ITableProp<TData> = {
+  tableHeads?: ITableHead<TData>[];
   showMenu?: boolean;
-  dataTableSource?: ITableBody[];
+  dataTableSource?: TData[];
   showPagination?: boolean;
   clickRow?: boolean;
   pathTo?: string;
   showDivider?: boolean;
-  onMenuClick?: (_textType: ITableBody) => void;
+  onMenuClick?: (_textType: TData) => void;
   onRowClick?: (data: any) => typeof data;
-  rowDetailCollector?: React.Dispatch<SetStateAction<ITableBody>>;
+  rowDetailCollector?: React.Dispatch<SetStateAction<TData>>;
   page_size?: number;
   handlePageChange?: number;
   total_pages?: number;
@@ -32,7 +29,7 @@ export type ITableProp = {
   loading?: boolean | string;
   menuOptions?: {
     menuTitle: string;
-    action: (_agentId: ITableBody) => void;
+    action: (_agentId: TData) => void;
   }[];
   statusOptionMenu?: boolean;
   changeTextStyle?: boolean;

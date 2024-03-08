@@ -1,19 +1,18 @@
 import SearchFilterBox from '@shared/searchFilter';
 import { ReactComponent as SearchVector } from '@assets/svg/searchVector.svg';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import ProduceSort from './produceSort';
-import { produceListData } from '@db/hubData';
 import { IProduceItemList, IQueryHubProp } from 'types/pentrarHub.type';
 import CustomHubTable from '@shared/HubTable';
 import EmptyBar from '@shared/Table/tableEmpty';
 import { useGetPentrarHubProduce } from 'services/pentrar.service';
 import { useModalContext } from '@contexts/modalContext';
 import OnHubProduceDetail from 'components/produceDetail';
+import TableLoading from '@shared/Table/tableLoading';
 
 function HubProduce() {
   const { modalState, handleModalOpen } = useModalContext();
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredData, setFilteredData] = useState<IProduceItemList[]>([]);
   const [queryParams, setQueryParams] = useState({
     search: '',
     page: 1,
@@ -27,7 +26,7 @@ function HubProduce() {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
 
-  const { data } = useGetPentrarHubProduce(queryParams);
+  const { data, isLoading } = useGetPentrarHubProduce(queryParams);
 
   const sortProduce = useMemo(() => {
     return (
@@ -38,32 +37,10 @@ function HubProduce() {
     );
   }, []);
 
-  const dataToUse = data?.data?.produces_list as IProduceItemList[];
-
   const viewProduce = (produceData: IProduceItemList) => {
     handleModalOpen('hubProduceDetail');
     setModalProduceDetail(produceData);
   };
-
-  // Filter data based on search term
-  useEffect(() => {
-    const filtered =
-      dataToUse?.length > 0
-        ? dataToUse
-        : produceListData.filter(item =>
-            item.name
-              .toLowerCase()
-              .startsWith(
-                searchTerm.toLowerCase() ||
-                  queryParams.search.toLowerCase() ||
-                  queryParams.popular_produce.toLowerCase() ||
-                  queryParams.state.toLowerCase(),
-              ),
-          );
-    setFilteredData(filtered as IProduceItemList[]);
-  }, [dataToUse, searchTerm, queryParams]);
-
-  const displayedData = filteredData;
 
   return (
     <div className=" mt-[24px] p-[24px] bg-primary-white rounded-[8px] border-[1px] border-background-borderlight">
@@ -87,14 +64,17 @@ function HubProduce() {
       <div className="w-full mt-[24px]">{sortProduce}</div>
       <div className="w-full mt-[24px]">
         <CustomHubTable<IProduceItemList>
-          dataBody={displayedData}
-          total={displayedData.length}
+          dataBody={data?.produces_list}
+          loading={isLoading}
+          total={data?.total}
+          currentPage={data?.current_page}
           setCurrentPage={(val: number) => updateQueryParams({ page: val })}
           setLimit={(val: number) => updateQueryParams({ limit: val })}
           tableEmptyState={
             <EmptyBar emptyStateSize="lg" componentType="Hub Produce" />
           }
           onRowClick={rowData => viewProduce(rowData)}
+          tableLoader={<TableLoading title="Loading Hub Produces" />}
         />
       </div>
       {modalState.modalType === 'hubProduceDetail' && (

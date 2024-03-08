@@ -18,7 +18,7 @@ type ISortData = {
   key: string | null;
   direction: string;
 };
-const CustomTable = ({
+const CustomTable = <TData extends ITableBody>({
   tableHeads,
   dataTableSource,
   pathTo,
@@ -37,7 +37,7 @@ const CustomTable = ({
   tableEmptyState,
   tableLoader,
   setLimit,
-}: ITableProp) => {
+}: ITableProp<TData>) => {
   const [sortConfig, setSortConfig] = useState<ISortData>({
     key: '' || null,
     direction: 'ascending',
@@ -68,7 +68,7 @@ const CustomTable = ({
       navigate(`${pathTo}/${id}`);
     } else {
       if (rowDetailCollector) {
-        rowDetailCollector(dataTableSource![indexValue] as ITableBody);
+        rowDetailCollector(dataTableSource![indexValue] as TData);
       }
     }
   };
@@ -122,16 +122,16 @@ const CustomTable = ({
         ) : !loading && dataTableSourceLength > 0 ? (
           <div className="relative">
             <TableContainer className="scrollbar-thin ">
-              <Table variant="striped" colorScheme="gray">
-                <Thead className="w-full">
+              <Table>
+                <Thead className="w-full bg-gray-60">
                   <Tr>
                     {tableHeads?.map(heads => {
                       return (
                         <Th
                           onClick={() => {
-                            requestSort(heads.accessor);
+                            requestSort(heads.accessor as string | null);
                           }}
-                          key={heads.accessor}
+                          key={heads.accessor as string | null}
                           className={`text-left px-[10px] py-[13px] font-[500] bg-white capitalize text-sm text-[#64748B] border-b-[${borderValue}]`}
                         >
                           {heads.label}
@@ -155,11 +155,14 @@ const CustomTable = ({
                         className={`w-full bg-white cursor-pointer capitalize   `}
                         key={indexKey}
                       >
-                        {tableHeads?.map(({ accessor }, i) => {
-                          const dataToShow = rowData[accessor] || '--';
+                        {tableHeads?.map(({ accessor, render }, i) => {
+                          const dataToShow =
+                            (render
+                              ? render(rowData)
+                              : rowData[accessor as string]) || '--';
                           return (
                             <Td
-                              py="1.5"
+                              py="4"
                               fontSize="sm"
                               key={i}
                               className={`first:capitalize ${

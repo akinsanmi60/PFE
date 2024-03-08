@@ -3,7 +3,11 @@ import { getRequest } from '@utils/apiCaller';
 import { GET_PENTRAHUB_PRODUCE_URL } from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
-import { IPentrarHubResponse, IQueryHubProp } from 'types/pentrarHub.type';
+import {
+  IGetPentrarHubData,
+  IPentrarHubResponse,
+  IQueryHubProp,
+} from 'types/pentrarHub.type';
 
 function useGetPentrarHubProduce(queryParams: IQueryHubProp) {
   const { isLoading, isRefetching, isError, data } =
@@ -24,7 +28,7 @@ function useGetPentrarHubProduce(queryParams: IQueryHubProp) {
     isLoading,
     isRefetching,
     isError,
-    data,
+    data: data?.data as IGetPentrarHubData,
   };
 }
 

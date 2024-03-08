@@ -3,7 +3,11 @@ import EmptyBar from '@shared/Table/tableEmpty';
 import PageContainer from 'components/Layout/PageContainer';
 import AppHeader from 'components/appHeader/appHeader';
 import { useAuthContext } from '@contexts/authContext';
-import { capitalize, getFirstSwordBeforeSpace } from '@utils/constants';
+import {
+  capitalize,
+  formatDate,
+  getFirstSwordBeforeSpace,
+} from '@utils/constants';
 import DashboardHeroFOrFarmerAggregator from 'components/farmerAggregatorHeroCpomponent';
 import {
   GET_AGGREGATOR_RECENT_PRODUCE_URL,
@@ -11,6 +15,8 @@ import {
 } from '@utils/apiUrl';
 import { useGetRecentProduce } from 'services/farmerAggregatorDashboard.service';
 import TableLoading from '@shared/Table/tableLoading';
+import { ITableHead } from '@shared/Table/table.interface';
+import { IRecentProduceDetail } from 'types/farmerAggregatorDash.type';
 
 function DashboardHome() {
   const { authUser } = useAuthContext();
@@ -28,31 +34,33 @@ function DashboardHome() {
   const first_name = capitalize(
     getFirstSwordBeforeSpace(authUser?.full_name as unknown as string),
   );
-  const tableHead = [
+  const tableHead: ITableHead<IRecentProduceDetail>[] = [
     {
       label: 'id',
       accessor: '',
-      render: () => null,
+      render: ({ pentrar_produce_id }) => pentrar_produce_id,
     },
     {
       label: 'Produce Name',
-      accessor: '',
-      render: () => null,
+      accessor: 'name',
+      render: ({ name }) => name,
     },
     {
       label: 'Location',
-      accessor: '',
-      render: () => null,
+      accessor: 'farm_state',
+      render: ({ farm_state }) => farm_state,
     },
     {
       label: 'Quantity',
-      accessor: '',
-      render: () => null,
+      accessor: 'quantity',
+      render: ({ quantity }) => quantity,
     },
     {
       label: 'Last Updated',
       accessor: '',
-      render: () => null,
+      render: ({ updated_at }) => {
+        return formatDate({ date: updated_at });
+      },
     },
     {
       label: 'Action',
@@ -78,7 +86,7 @@ function DashboardHome() {
 
       <PageContainer>
         <div className="w-full bg-primary-white rounded-lg p-[24px]">
-          <div className="flex justify-between">
+          <div className="flex justify-between mb-5">
             <p className="text-[14px] font-[600] leading-[20px] text-secondary-light-2">
               Recent Produces
             </p>
@@ -86,7 +94,7 @@ function DashboardHome() {
               see all
             </p>
           </div>
-          <CustomTable
+          <CustomTable<IRecentProduceDetail>
             tableHeads={tableHead}
             dataTableSource={data?.data || []}
             loading={isLoading}

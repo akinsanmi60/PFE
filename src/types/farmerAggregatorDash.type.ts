@@ -28,12 +28,19 @@ export type IDashboardHeroFOrFarmerAggregator = {
   };
 };
 
+export type IRecentProduceDetail = {
+  id: string;
+  created_at: Date;
+  updated_at: Date;
+  name: string;
+  quantity: number;
+  unit: string;
+  certification: string;
+  farm_address: string;
+  pentrar_produce_id: string;
+  farm_state: string;
+};
+
 export type IDashboardRecentProduce = IBaseResponse & {
-  data: {
-    id: string;
-    created_at: string;
-    updated_at: string;
-    farm_address: string;
-    farm_state: string;
-  }[];
+  data: IRecentProduceDetail[];
 };

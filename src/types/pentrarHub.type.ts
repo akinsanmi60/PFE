@@ -28,12 +28,14 @@ export type IQueryHubProp = {
   popular_produce?: string;
 };
 
+export type IGetPentrarHubData = {
+  total: number;
+  total_pages: number;
+  current_page: number;
+  page_size: number;
+  produces_list: IProduceItemList[];
+};
+
 export type IPentrarHubResponse = IBaseResponse & {
-  data: {
-    total: number;
-    total_pages: number;
-    current_page: number;
-    page_size: number;
-    produces_list: IProduceItemList[];
-  };
+  data: IGetPentrarHubData;
 };
