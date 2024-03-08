@@ -1,12 +1,12 @@
+import AboutCarousels from './components/aboutCarousels';
 import AboutHero from './components/aboutHero';
 import AccessCard from './components/accessCard';
-import UserReview from './components/userReview';
 
 function AboutPage() {
   return (
     <div>
       <AboutHero />
-      <UserReview />
+      <AboutCarousels />
       <AccessCard />
     </div>
   );

@@ -9,7 +9,7 @@ function UserReview() {
           What People Are Saying
         </p>
         <div className="mt-[48px] flex gap-[20px] xlsm:flex-wrap">
-          {UserReviewData?.map((item, index) => (
+          {UserReviewData?.map((item, index: number) => (
             <div
               key={index}
               className="w-[660px] bg-[#E9FBF9] rounded-[8px] px-[24px] py-[44px]"
