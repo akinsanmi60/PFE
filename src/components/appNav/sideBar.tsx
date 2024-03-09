@@ -62,7 +62,7 @@ function SideNav() {
   return (
     <div className="bg-[#F4FAF5] text-[#999999] flex flex-col justify-between border-r-2 border-[#F7F7F8] h-screen">
       <div className="mt-[13px]  px-4">
-        <div className="h-[5rem] py-[8px]">
+        <div className="h-[4rem] py-[8px]">
           <img src={pentrarLogo} alt="peoplelogo" className="h-[40px]" />
         </div>
         <div className="flex flex-col gap-2">

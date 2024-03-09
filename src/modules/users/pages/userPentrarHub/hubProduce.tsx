@@ -28,8 +28,6 @@ function HubProduce() {
 
   const { data, isLoading } = useGetPentrarHubProduce(queryParams);
 
-  console.log(data);
-
   const sortProduce = useMemo(() => {
     return (
       <ProduceSort

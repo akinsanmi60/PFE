@@ -20,6 +20,12 @@ export type IProduceItemList = {
   harvest_date: string;
 };
 
+export type IHubQueryProps = {
+  search?: string;
+  page?: number;
+  limit?: number;
+};
+
 export type IQueryHubProp = {
   search?: string;
   page?: number;

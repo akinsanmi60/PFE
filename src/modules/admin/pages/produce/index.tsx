@@ -42,7 +42,7 @@ function ProduceList() {
     },
   ];
   return (
-    <div className="h-screen">
+    <div className="">
       <AppHeader>
         <div className="flex justify-between items-center mt-[20px] px-[24px] pb-[14px] sixm:flex-col sixm:gap-y-[20px]">
           <div className="w-full">

@@ -58,8 +58,8 @@ const CustomTable = <TData extends ITableBody>({
     }
   };
 
-  const handleSetLimit = () => {
-    setLimit && setLimit(page_size as number);
+  const handleSetLimit = (value: number) => {
+    setLimit && setLimit(value);
   };
 
   const handleNavigationToDetailpage = (indexValue: number) => {
@@ -125,13 +125,13 @@ const CustomTable = <TData extends ITableBody>({
               <Table>
                 <Thead className="w-full bg-primary-light-2">
                   <Tr>
-                    {tableHeads?.map(heads => {
+                    {tableHeads?.map((heads, index) => {
                       return (
                         <Th
                           onClick={() => {
                             requestSort(heads.accessor as string | null);
                           }}
-                          key={heads.accessor as string | null}
+                          key={index}
                           className={`text-left px-[10px] py-[13px] font-[500] bg-white capitalize text-sm text-[#64748B] border-b-[${borderValue}]`}
                         >
                           {heads.label}

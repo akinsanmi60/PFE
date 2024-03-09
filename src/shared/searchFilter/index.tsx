@@ -14,7 +14,7 @@ export const InputSearchBox = (props: InputSearchboxProp) => {
     borderColor = 'none',
     ...rest
   } = props;
-  const debounceDelay = 200;
+  const debounceDelay = 150;
   const debouncedTerm = useDebouncedValue(term, debounceDelay);
 
   const handleChange = (e: { target: { value: SetStateAction<string> } }) => {

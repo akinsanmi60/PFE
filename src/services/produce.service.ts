@@ -1,11 +1,14 @@
+import { useAuthContext } from './../contexts/authContext';
 import { useModalContext } from '@contexts/modalContext';
 import { displaySuccess, displayError } from '@shared/Toast/Toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getRequest, postRequest } from '@utils/apiCaller';
-import { ADD_PRODUCE_URL } from '@utils/apiUrl';
+import { ADD_PRODUCE_URL, GET_USER_PRODUCE_URL } from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
+import { queryParamsHelper } from 'config/query-params';
 import { UseFormReset } from 'react-hook-form';
 import { IBaseResponse } from 'types/auth.type';
+import { IHubQueryProps } from 'types/pentrarHub.type';
 import { IAddProducePayload, IMyProduceResponse } from 'types/produce.type';
 
 const useProduceCreationMutation = ({
@@ -51,19 +54,19 @@ const useProduceCreationMutation = ({
   return { mutate, isLoading, ...rest };
 };
 
-function useGetMyProduce({
-  queryParamsId,
-  userType,
-  url,
-}: {
-  queryParamsId: string;
-  userType: string;
-  url: (_id: string, _type: string) => string;
-}) {
+function useGetMyProduce(queryParams: IHubQueryProps) {
+  const { authUser } = useAuthContext();
+
   const { isLoading, isRefetching, isError, data } =
     useQuery<IMyProduceResponse>(
-      [queryKeys.getIMyProduce, [queryParamsId, userType]],
-      () => getRequest({ url: url(queryParamsId, userType) }),
+      [queryKeys.getIMyProduce, [queryParams]],
+      () =>
+        getRequest({
+          url: `${GET_USER_PRODUCE_URL(
+            authUser?.id as string,
+            authUser?.role as string,
+          )}${queryParamsHelper(queryParams)}`,
+        }),
       {
         refetchOnWindowFocus: false,
       },

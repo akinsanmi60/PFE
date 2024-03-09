@@ -8,24 +8,27 @@ import EmptyBar from '@shared/Table/tableEmpty';
 import CustomButton from '@shared/Button';
 import { useModalContext } from '@contexts/modalContext';
 import AddProduceComponent from 'components/addProduce';
-import { useAuthContext } from '@contexts/authContext';
 import { useGetMyProduce } from 'services/produce.service';
-import { GET_USER_PRODUCE_URL } from '@utils/apiUrl';
 import { ITableHead } from '@shared/Table/table.interface';
 import { IMyProduceData } from 'types/produce.type';
 import { formatDate } from '@utils/constants';
 import TableLoading from '@shared/Table/tableLoading';
+import { IHubQueryProps } from 'types/pentrarHub.type';
 
 function UserProduce() {
   const [searchTerm, setSearchTerm] = useState('');
   const { modalState, handleModalOpen } = useModalContext();
-  const { authUser } = useAuthContext();
-
-  const { data, isLoading } = useGetMyProduce({
-    queryParamsId: authUser?.id as string,
-    userType: authUser?.role as string,
-    url: GET_USER_PRODUCE_URL,
+  const [queryParams, setQueryParams] = useState({
+    search: '',
+    page: 1,
+    limit: 10,
   });
+
+  const updateQueryParams = (params: IHubQueryProps) => {
+    setQueryParams(prev => ({ ...prev, ...params }));
+  };
+
+  const { data, isLoading } = useGetMyProduce(queryParams);
 
   const tableHead: ITableHead<IMyProduceData>[] = [
     {
@@ -76,8 +79,10 @@ function UserProduce() {
               searchBarProps={{
                 placeholder: 'Search produce by name or ID',
                 useStartAdornment: <SearchVector />,
-                onSetTermChange: ({ target: { value } }) =>
-                  setSearchTerm(value),
+                onSetTermChange: ({ target: { value } }) => {
+                  setSearchTerm(value);
+                  updateQueryParams({ search: value });
+                },
                 term: searchTerm,
               }}
             />
@@ -102,6 +107,8 @@ function UserProduce() {
             page_size={data?.data?.page_size}
             total={data?.data?.total}
             current_page={data?.data?.current_page}
+            setCurrentPage={(val: number) => updateQueryParams({ page: val })}
+            setLimit={(val: number) => updateQueryParams({ limit: val })}
             tableEmptyState={
               <EmptyBar emptyStateSize="lg" componentType="produces" />
             }
