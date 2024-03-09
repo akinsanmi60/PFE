@@ -31,7 +31,6 @@ const customColors = {
   },
   gray: {
     50: '#9ca3af',
-    60: ' #FAFAFA',
     100: '#F1F2F4',
     400: '#64748B',
     500: '#475569',
