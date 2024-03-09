@@ -21,7 +21,6 @@ function CreatePassword({ previous, currentStep }: IFormComponentType) {
   });
 
   const onSubmit = (values: Partial<IRegister>) => {
-    console.log(multiFormValues);
     const payload = {
       ...multiFormValues,
       password: values.password,

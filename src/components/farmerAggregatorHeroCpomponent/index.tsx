@@ -13,7 +13,7 @@ function DashboardHeroFOrFarmerAggregator({
   dashboardProp,
 }: IDashboardHeroFOrFarmerAggregator) {
   const { id, role, userStatus } = dashboardProp;
-  console.log(id, role, userStatus);
+
   const urlForCount =
     role === 'farmer'
       ? GET_FARMER_DASHBOARD_COUNT_URL
