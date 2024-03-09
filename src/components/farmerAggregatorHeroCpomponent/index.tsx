@@ -12,7 +12,8 @@ import { GetDasboardOfFarmerAggregator } from 'services/farmerAggregatorDashboar
 function DashboardHeroFOrFarmerAggregator({
   dashboardProp,
 }: IDashboardHeroFOrFarmerAggregator) {
-  const { id, role } = dashboardProp;
+  const { id, role, userStatus } = dashboardProp;
+  console.log(id, role, userStatus);
   const urlForCount =
     role === 'farmer'
       ? GET_FARMER_DASHBOARD_COUNT_URL
@@ -61,12 +62,14 @@ function DashboardHeroFOrFarmerAggregator({
             }}
           />{' '}
         </div>
-        <div>
-          <h3 className="text-primary-main mb-[4px] text-[14px] font-[600]">
-            To Do{' '}
-          </h3>
-          <TodoComponent />{' '}
-        </div>
+        {userStatus === 'pending' && (
+          <div>
+            <h3 className="text-primary-main mb-[4px] text-[14px] font-[600]">
+              To Do{' '}
+            </h3>
+            <TodoComponent />{' '}
+          </div>
+        )}
       </div>
     </PageContainer>
   );

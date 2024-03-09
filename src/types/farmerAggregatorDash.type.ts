@@ -25,6 +25,7 @@ export type IDashboardHeroFOrFarmerAggregator = {
   dashboardProp: {
     id: string | undefined;
     role: string | undefined;
+    userStatus: string | undefined;
   };
 };
 

@@ -29,14 +29,14 @@ function PendingProduce({ produceValue }: IPendingProducePprop) {
               <p className="text-[14px] text-tertiary-light-3">
                 Unit:{' '}
                 <span className="text-primary-main font-[600]">
-                  {capitalize(produceDetail?.unit) || '----'}
+                  {capitalize(produceDetail?.unit) || 'KG'}
                 </span>
               </p>
             </div>
             {produceDetail?.certification && (
               <div className="flex justify-end">
                 <div className="bg-[#FFE5E6] py-[5px] px-[12px] text-[10px] text-statusText-error font-[500] rounded-lg">
-                  <p>PENDING</p>
+                  <p>{produceDetail?.certification.toLocaleUpperCase()}</p>
                 </div>
               </div>
             )}

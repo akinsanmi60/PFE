@@ -6,6 +6,8 @@ const customColors = {
     light: '#999999',
     lighter: '#666666',
     white: '#FFFFFF',
+    'light-1': '#F1F2F4',
+    'light-2': '#FAFAFA',
   },
   secondary: {
     'light-1': '#2AA232',

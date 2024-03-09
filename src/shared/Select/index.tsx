@@ -26,7 +26,7 @@ const CustomSelect = forwardRef(
             {...rest}
             icon={<TriangleDownIcon fontSize="x-small" />}
             placeholder={placeholder}
-            className="text-[13px] text-primary-lighter placeholder:text-[13px] cursor-pointer"
+            className="cursor-pointer text-primary-main"
             sx={{
               borderColor: '#E6E6E6',
               borderRadius: '10px',

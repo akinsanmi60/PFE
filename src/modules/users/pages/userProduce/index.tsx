@@ -63,7 +63,7 @@ function UserProduce() {
     },
   ];
   return (
-    <div className="h-screen">
+    <div className="">
       <AppHeader>
         <div className="flex justify-between items-center mt-[20px] px-[24px] pb-[14px] sixm:flex-col sixm:gap-y-[20px]">
           <div className="w-full">
@@ -99,6 +99,9 @@ function UserProduce() {
             tableHeads={tableHead}
             loading={isLoading}
             dataTableSource={data?.data?.produces_list || []}
+            page_size={data?.data?.page_size}
+            total={data?.data?.total}
+            current_page={data?.data?.current_page}
             tableEmptyState={
               <EmptyBar emptyStateSize="lg" componentType="produces" />
             }

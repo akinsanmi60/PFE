@@ -22,9 +22,11 @@ function GetVerifyCode({ currentStep, action, previous }: IFormComponentType) {
 
   const onSubmit = (values: Partial<IVerifyProp>) => {
     const payload = {
-      ...values,
+      code: values?.code as string,
+      phone_number: values?.phone_number as string,
       ...multiFormValues,
     };
+
     setFormValues(payload);
     mutate({ payload: values });
   };

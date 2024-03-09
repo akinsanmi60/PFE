@@ -123,7 +123,7 @@ const CustomTable = <TData extends ITableBody>({
           <div className="relative">
             <TableContainer className="scrollbar-thin ">
               <Table>
-                <Thead className="w-full bg-gray-60">
+                <Thead className="w-full bg-primary-light-2">
                   <Tr>
                     {tableHeads?.map(heads => {
                       return (

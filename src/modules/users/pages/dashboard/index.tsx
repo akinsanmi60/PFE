@@ -81,6 +81,7 @@ function DashboardHome() {
         dashboardProp={{
           id: authUser?.id,
           role: authUser?.role,
+          userStatus: authUser?.status,
         }}
       />
 

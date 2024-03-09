@@ -129,8 +129,6 @@ function AppHeader({ children }: { children: React.ReactNode }) {
     );
   }
 
-  const status = 'pending';
-
   return (
     <div className="sticky top-0 z-30 bg-background-borderlight">
       <div className="bg-primary-white shadow-sm px-[20px] py-[10px]">
@@ -139,11 +137,11 @@ function AppHeader({ children }: { children: React.ReactNode }) {
             {authUser?.role === Account.Admin ? null : (
               <div
                 className={`border-[1px] px-[16px] py-[5px] font-[600] rounded-tr-[16px] rounded-br-[16px] rounded-tl-[16px] rounded-bl-[16px] ${getClass(
-                  status as string,
+                  authUser?.status as string,
                 )}`}
               >
                 <p>
-                  {status === 'pending'
+                  {authUser?.status === 'pending'
                     ? 'Pending Verification'
                     : 'Active Account'}
                 </p>
