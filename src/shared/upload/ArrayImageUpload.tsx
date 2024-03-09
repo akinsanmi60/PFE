@@ -9,6 +9,7 @@ type IArrayUploadProp = {
   url?: string[];
   acceptType: string;
   setChosenImages: (_val: File[]) => void;
+  successWatcher: boolean;
 };
 
 const MAX_IMAGE_SIZE = 600 * 600; // 1MB
@@ -18,6 +19,7 @@ function ArrayImageUpload({
   className,
   acceptType,
   setChosenImages,
+  successWatcher,
 }: IArrayUploadProp) {
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [imageString, setImageString] = useState<File[]>([]);
@@ -33,10 +35,17 @@ function ArrayImageUpload({
   }, []);
 
   useEffect(() => {
-    setChosenImages(imageString);
+    setChosenImages(imageString as File[]);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageString]);
+
+  useEffect(() => {
+    if (successWatcher) {
+      setPreviewImages([]);
+      setImageString([]);
+    }
+  }, [successWatcher]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files ?? []) as File[];

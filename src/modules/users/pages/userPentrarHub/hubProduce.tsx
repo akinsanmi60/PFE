@@ -28,6 +28,8 @@ function HubProduce() {
 
   const { data, isLoading } = useGetPentrarHubProduce(queryParams);
 
+  console.log(data);
+
   const sortProduce = useMemo(() => {
     return (
       <ProduceSort
@@ -75,6 +77,7 @@ function HubProduce() {
           }
           onRowClick={rowData => viewProduce(rowData)}
           tableLoader={<TableLoading title="Loading Hub Produces" />}
+          page_size={data?.page_size}
         />
       </div>
       {modalState.modalType === 'hubProduceDetail' && (

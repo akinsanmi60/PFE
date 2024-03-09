@@ -1,6 +1,7 @@
 import CustomPagination from '@shared/customPagination';
 import { IHubProp, IRowBody } from './type';
 import { formatDate } from '@utils/constants';
+import defaultImage from '@assets/png/hubImgC.png';
 
 function CustomHubTable<TData extends IRowBody>({
   dataBody,
@@ -48,7 +49,11 @@ function CustomHubTable<TData extends IRowBody>({
               >
                 <div className="sixm:w-full  min-w-[240px]">
                   <img
-                    src={item?.images[0]}
+                    src={
+                      item?.images?.length === 0
+                        ? defaultImage
+                        : item?.images[0]
+                    }
                     alt="produce"
                     className="w-[240px] h-[160px] rounded-[4px] sixm:w-full sixm:h-[320px]"
                   />
@@ -79,7 +84,9 @@ function CustomHubTable<TData extends IRowBody>({
                         Unit:
                       </p>
                       <p className="mt-[4px] text-[14px] leading-[20px] font-[500] text-primary-main">
-                        {item?.unit}
+                        {item?.unit === '' || item?.unit === null
+                          ? 'KG'
+                          : item?.unit}
                       </p>
                     </div>
                     <div className="flex items-center gap-[10px]">
@@ -87,7 +94,7 @@ function CustomHubTable<TData extends IRowBody>({
                         State:
                       </p>
                       <p className="mt-[4px] text-[14px] leading-[20px] font-[500] text-primary-main">
-                        {item?.state}
+                        {item?.farm_state}
                       </p>
                     </div>
                   </div>
