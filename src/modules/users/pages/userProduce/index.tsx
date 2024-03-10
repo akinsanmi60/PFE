@@ -59,11 +59,19 @@ function UserProduce() {
       },
     },
     {
-      label: 'Action',
-      accessor: '',
-      render: () => null,
+      label: 'Certification',
+      accessor: 'certification',
+      // render: () => null,
     },
   ];
+
+  const renderText = () => {
+    return (
+      <h2 className="text-primary-main leading-6 font-[500] text-[18px]">
+        User Produce
+      </h2>
+    );
+  };
 
   return (
     <div className="">
@@ -96,26 +104,22 @@ function UserProduce() {
         </div>
       </AppHeader>
       <PageContainer className="pt-0">
-        <div className="w-full bg-primary-white rounded-lg mt-[30px] p-[24px]">
-          <h2 className="text-primary-main leading-6 font-[500] text-[18px] mb-[15px]">
-            User Produce
-          </h2>
-          <CustomTable<IMyProduceData>
-            tableHeads={tableHead}
-            loading={isLoading}
-            dataTableSource={data?.data?.produces_list || []}
-            page_size={data?.data?.page_size}
-            total={data?.data?.total}
-            current_page={data?.data?.current_page}
-            setCurrentPage={(val: number) => updateQueryParams({ page: val })}
-            setLimit={(val: number) => updateQueryParams({ limit: val })}
-            tableEmptyState={
-              <EmptyBar emptyStateSize="lg" componentType="produces" />
-            }
-            tableLoader={<TableLoading title="Loading Produces" />}
-            showPagination
-          />
-        </div>
+        <CustomTable<IMyProduceData>
+          children={renderText()}
+          tableHeads={tableHead}
+          loading={isLoading}
+          dataTableSource={data?.data?.produces_list || []}
+          page_size={data?.data?.page_size}
+          total={data?.data?.total}
+          current_page={data?.data?.current_page}
+          setCurrentPage={(val: number) => updateQueryParams({ page: val })}
+          setLimit={(val: number) => updateQueryParams({ limit: val })}
+          tableEmptyState={
+            <EmptyBar emptyStateSize="lg" componentType="produces" />
+          }
+          tableLoader={<TableLoading title="Loading Produces" />}
+          showPagination
+        />
       </PageContainer>
 
       {modalState?.modalType === 'addProduce' && <AddProduceComponent />}

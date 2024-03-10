@@ -37,6 +37,7 @@ const CustomTable = <TData extends ITableBody>({
   tableEmptyState,
   tableLoader,
   setLimit,
+  children,
 }: ITableProp<TData>) => {
   const [sortConfig, setSortConfig] = useState<ISortData>({
     key: '' || null,
@@ -79,14 +80,14 @@ const CustomTable = <TData extends ITableBody>({
     if (sortConfig.key !== null && sortConfig.key !== undefined) {
       sortableData.sort((a, b) => {
         if (
-          a[sortConfig.key as unknown as keyof ITableBody] <
-          b[sortConfig.key as unknown as keyof ITableBody]
+          a[sortConfig.key as unknown as keyof TData] <
+          b[sortConfig.key as unknown as keyof TData]
         ) {
           return sortConfig.direction === 'ascending' ? -1 : 1;
         }
         if (
-          a[sortConfig.key as unknown as keyof ITableBody] >
-          b[sortConfig.key as unknown as keyof ITableBody]
+          a[sortConfig.key as unknown as keyof TData] >
+          b[sortConfig.key as unknown as keyof TData]
         ) {
           return sortConfig.direction === 'ascending' ? 1 : -1;
         }
@@ -112,18 +113,20 @@ const CustomTable = <TData extends ITableBody>({
   const borderValue = showDivider ? '1px' : '0px';
 
   return (
-    <>
+    <div className="w-full bg-primary-white rounded-lg mt-[30px] p-[24px]">
+      {children}
       <div
         id="tableContainer"
-        className={`w-full overflow-y-auto scrollbar-none`}
+        // className={`w-full overflow-y-auto`}
+        className={`w-full h-auto overflow-y-auto flex flex-col mt-[15px]`}
       >
         {loading ? (
           tableLoader
         ) : !loading && dataTableSourceLength > 0 ? (
           <div className="relative">
-            <TableContainer className="scrollbar-thin ">
+            <TableContainer className="scrollbar-thin sticky top-0 overflow-y-auto">
               <Table>
-                <Thead className="w-full bg-primary-light-2">
+                <Thead className="w-full bg-primary-light-2 sticky top-0 z-10">
                   <Tr>
                     {tableHeads?.map((heads, index) => {
                       return (
@@ -278,7 +281,7 @@ const CustomTable = <TData extends ITableBody>({
               />
             </div>
           )}
-    </>
+    </div>
   );
 };
 export default CustomTable;

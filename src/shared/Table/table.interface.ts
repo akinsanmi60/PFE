@@ -9,6 +9,8 @@ export type ITableHead<TData> = {
   accessor: keyof TData | '' | null | number;
   align?: string;
   render?: (_data: TData) => React.ReactNode;
+  sticky?: boolean;
+  stickyTo?: 'left' | 'right';
 };
 
 export type ITableProp<TData> = {
@@ -39,4 +41,5 @@ export type ITableProp<TData> = {
   setCurrentPage?: (_page: number) => void;
   current_page?: number;
   setLimit?: (_limit: number) => void;
+  children?: React.ReactNode;
 };

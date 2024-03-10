@@ -55,3 +55,5 @@ export const GET_USER_PRODUCE_URL = (id: string, type: string) =>
 
 // Admin urls
 export const ADD_ADMIN_URL = 'admin/create-admin';
+export const GET_ADMIN_DASHBOARD_COUNT_URL = (id: string) =>
+  `admin/${id}/dashboard-count`;

@@ -80,23 +80,21 @@ function AggregatorList() {
         </div>
       </AppHeader>
       <PageContainer className="pt-0">
-        <div className="w-full bg-primary-white rounded-lg mt-[30px] p-[24px]">
-          <CustomTable
-            tableHeads={tableHead}
-            loading={isLoading || isRefetching}
-            total={data?.data?.total}
-            page_size={data?.data?.page_size}
-            dataTableSource={data?.data?.aggregators_list || []}
-            current_page={data?.data?.current_page}
-            tableLoader={<TableLoading title="Loading Aggregators" />}
-            showPagination
-            setCurrentPage={(val: number) => updateQueryParams({ page: val })}
-            setLimit={(val: number) => updateQueryParams({ limit: val })}
-            tableEmptyState={
-              <EmptyBar emptyStateSize="lg" componentType="Aggregator" />
-            }
-          />
-        </div>
+        <CustomTable
+          tableHeads={tableHead}
+          loading={isLoading || isRefetching}
+          total={data?.data?.total}
+          page_size={data?.data?.page_size}
+          dataTableSource={data?.data?.aggregators_list || []}
+          current_page={data?.data?.current_page}
+          tableLoader={<TableLoading title="Loading Aggregators" />}
+          showPagination
+          setCurrentPage={(val: number) => updateQueryParams({ page: val })}
+          setLimit={(val: number) => updateQueryParams({ limit: val })}
+          tableEmptyState={
+            <EmptyBar emptyStateSize="lg" componentType="Aggregator" />
+          }
+        />
       </PageContainer>
     </div>
   );

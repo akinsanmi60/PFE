@@ -3,6 +3,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { getRequest, postRequest } from '@utils/apiCaller';
 import {
   ADD_ADMIN_URL,
+  GET_ADMIN_DASHBOARD_COUNT_URL,
   GET_ALL_AGGREGATOR_URL,
   GET_ALL_FARMER_URL,
   GET_ALL_PRODUCE_URL,
@@ -93,10 +94,30 @@ const useGetAllProduce = (queryParams: IFarmerQueryProp) => {
     data: data as any,
   };
 };
+const useGetAdminDashboard = (id: string) => {
+  const { isLoading, isRefetching, isError, data } = useQuery<any>(
+    [queryKeys.getAdminDashboardCount],
+    () =>
+      getRequest({
+        url: GET_ADMIN_DASHBOARD_COUNT_URL(id),
+      }),
+    {
+      refetchOnWindowFocus: false,
+    },
+  );
+
+  return {
+    isLoading,
+    isRefetching,
+    isError,
+    data: data as any,
+  };
+};
 
 export {
   useAdminCreationMutation,
   useGetAllFarmers,
   useGetAllAggregators,
   useGetAllProduce,
+  useGetAdminDashboard,
 };

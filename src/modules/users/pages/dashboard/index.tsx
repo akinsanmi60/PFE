@@ -69,6 +69,21 @@ function DashboardHome() {
     },
   ];
 
+  const renderActionView = () => {
+    return (
+      <>
+        <div className="flex justify-between mb-5">
+          <p className="text-[14px] font-[600] leading-[20px] text-secondary-light-2">
+            Recent Produces
+          </p>
+          <p className="text-[14px] font-[600] leading-[20px] text-tertiary-light-3 cursor-pointer">
+            see all
+          </p>
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       <AppHeader>
@@ -86,25 +101,16 @@ function DashboardHome() {
       />
 
       <PageContainer>
-        <div className="w-full bg-primary-white rounded-lg p-[24px]">
-          <div className="flex justify-between mb-5">
-            <p className="text-[14px] font-[600] leading-[20px] text-secondary-light-2">
-              Recent Produces
-            </p>
-            <p className="text-[14px] font-[600] leading-[20px] text-tertiary-light-3 cursor-pointer">
-              see all
-            </p>
-          </div>
-          <CustomTable<IRecentProduceDetail>
-            tableHeads={tableHead}
-            dataTableSource={data?.data || []}
-            loading={isLoading}
-            tableEmptyState={
-              <EmptyBar emptyStateSize="lg" componentType="produces" />
-            }
-            tableLoader={<TableLoading title="Loading Recent Produces" />}
-          />
-        </div>
+        <CustomTable<IRecentProduceDetail>
+          children={renderActionView()}
+          tableHeads={tableHead}
+          dataTableSource={data?.data || []}
+          loading={isLoading}
+          tableEmptyState={
+            <EmptyBar emptyStateSize="lg" componentType="produces" />
+          }
+          tableLoader={<TableLoading title="Loading Recent Produces" />}
+        />
       </PageContainer>
     </>
   );

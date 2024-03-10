@@ -80,23 +80,21 @@ function FarmerList() {
         </div>
       </AppHeader>
       <PageContainer className="pt-0">
-        <div className="w-full bg-primary-white rounded-lg mt-[30px] p-[24px]">
-          <CustomTable
-            tableHeads={tableHead}
-            total={data?.data?.total}
-            page_size={data?.data?.page_size}
-            dataTableSource={data?.data?.farmers_list || []}
-            loading={isLoading || isRefetching}
-            current_page={data?.data?.current_page}
-            tableEmptyState={
-              <EmptyBar emptyStateSize="lg" componentType="Farmers" />
-            }
-            tableLoader={<TableLoading title="Loading Farmers" />}
-            showPagination
-            setCurrentPage={(val: number) => updateQueryParams({ page: val })}
-            setLimit={(val: number) => updateQueryParams({ limit: val })}
-          />
-        </div>
+        <CustomTable
+          tableHeads={tableHead}
+          total={data?.data?.total}
+          page_size={data?.data?.page_size}
+          dataTableSource={data?.data?.farmers_list || []}
+          loading={isLoading || isRefetching}
+          current_page={data?.data?.current_page}
+          tableEmptyState={
+            <EmptyBar emptyStateSize="lg" componentType="Farmers" />
+          }
+          tableLoader={<TableLoading title="Loading Farmers" />}
+          showPagination
+          setCurrentPage={(val: number) => updateQueryParams({ page: val })}
+          setLimit={(val: number) => updateQueryParams({ limit: val })}
+        />
       </PageContainer>
     </div>
   );

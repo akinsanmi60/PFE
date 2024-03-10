@@ -1,10 +1,10 @@
 import { useAuthContext } from '@contexts/authContext';
 import { capitalize, getFirstSwordBeforeSpace } from '@utils/constants';
 import AppHeader from 'components/appHeader/appHeader';
+import AdminDashboardCard from './components/adminDashboardCard';
 
 function AdminDashboard() {
   const { authUser } = useAuthContext();
-
   const first_name = capitalize(
     getFirstSwordBeforeSpace(authUser?.full_name as unknown as string),
   );
@@ -16,6 +16,7 @@ function AdminDashboard() {
           Welcome, {first_name}
         </p>
       </AppHeader>
+      <AdminDashboardCard />
     </div>
   );
 }

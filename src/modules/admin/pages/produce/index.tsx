@@ -86,23 +86,21 @@ function ProduceList() {
         </div>
       </AppHeader>
       <PageContainer className="pt-0">
-        <div className="w-full bg-primary-white rounded-lg mt-[30px] p-[24px]">
-          <CustomTable
-            tableHeads={tableHead}
-            loading={isLoading || isRefetching}
-            dataTableSource={data?.data?.produces_list || []}
-            total={data?.data?.total}
-            page_size={data?.data?.page_size}
-            current_page={data?.data?.current_page}
-            tableEmptyState={
-              <EmptyBar emptyStateSize="lg" componentType="produces" />
-            }
-            tableLoader={<TableLoading title="Loading All Produces" />}
-            showPagination
-            setCurrentPage={(val: number) => updateQueryParams({ page: val })}
-            setLimit={(val: number) => updateQueryParams({ limit: val })}
-          />
-        </div>
+        <CustomTable
+          tableHeads={tableHead}
+          loading={isLoading || isRefetching}
+          dataTableSource={data?.data?.produces_list || []}
+          total={data?.data?.total}
+          page_size={data?.data?.page_size}
+          current_page={data?.data?.current_page}
+          tableEmptyState={
+            <EmptyBar emptyStateSize="lg" componentType="produces" />
+          }
+          tableLoader={<TableLoading title="Loading All Produces" />}
+          showPagination
+          setCurrentPage={(val: number) => updateQueryParams({ page: val })}
+          setLimit={(val: number) => updateQueryParams({ limit: val })}
+        />
       </PageContainer>
     </div>
   );

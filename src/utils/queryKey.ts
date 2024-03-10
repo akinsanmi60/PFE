@@ -6,4 +6,5 @@ export const queryKeys = {
   getIMyProduce: 'getIMyProduce',
   getAllFarmers: 'getAllFarmers',
   getAllProduce: 'getAllProduce',
+  getAdminDashboardCount: 'getAdminDashboardCount',
 };

@@ -155,7 +155,7 @@ export const removeByKey = (obj: any, keyToRemove: string) => {
 
 export function getFirstSwordBeforeSpace(str: string) {
   // Split the string by space
-  const words = str.split(' ');
+  const words = str?.split(' ');
 
   // Get the first word
   const firstWord = words[0];

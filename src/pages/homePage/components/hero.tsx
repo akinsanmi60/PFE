@@ -22,8 +22,9 @@ function Hero() {
               <p className="text-[80px] lg:text-[65px] lg:leading-[68px] mdxl:text-[47px] xlsm:text-[45px] mdxl:leading-[63px] font-playfair leading-[100px] font-[700] text-[#ffffff] xlsm:w-full w-[700px] tracking-normal">
                 Unlock the Power of Traceability
               </p>
-              <p className="text-[24px] leading-[30px] mdxl:text-[16px] xlsm:w-full mdxl:leading-[24px] font-[400] text-[#ffffff] ">
-                with our Innovative Software Solution.{' '}
+              <p className="text-[22px] leading-[30px] mdxl:text-[16px] xlsm:w-full mdxl:leading-[24px] font-[400] text-[#ffffff] w-[645px] sixm:w-[500px] mt-[10px]">
+                Start your export journey with a traceable supply chain, surpass
+                regulatory requirements, and unleash efficiency!{' '}
               </p>
               <div className="flex items-center mt-[62px] mdxl:mt-[40px] xlsm:flex-col xlsm:gap-[10px]">
                 <div className="w-[70%] xlsm:w-full">
