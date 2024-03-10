@@ -30,8 +30,8 @@ const CustomSelect = forwardRef(
             sx={{
               borderColor: '#E6E6E6',
               borderRadius: '10px',
-              paddingY: '24px',
             }}
+            size="lg"
           >
             {options?.map(option => (
               <option key={option?.label} value={option?.value || ''}>

@@ -17,7 +17,7 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
     defaultValues: {
       email: '',
       full_name: '',
-      user_type: 'farmer',
+      user_type: '',
       gender: '',
       phone_number: '',
     },
@@ -56,6 +56,7 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
               placeholder="Please select  user type"
             />
           </div>
+
           <div className="">
             <ControlledInput
               control={control}
