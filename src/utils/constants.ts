@@ -7,7 +7,7 @@ type IformData = {
 export const Account = {
   User: 'user',
   Admin: 'admin',
-  SuperAdmin: 'subAdmin',
+  SubAdmin: 'subAdmin',
   Aggregator: 'aggregator',
   Exporter: 'exporter',
   Offtakers: 'offtaker',

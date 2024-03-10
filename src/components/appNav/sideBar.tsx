@@ -35,7 +35,7 @@ function SideNav() {
       ? AGGREGATOR_SIDENAV
       : authUser?.role === Account.Exporter
       ? EXPORTER_SIDENAV
-      : authUser?.role === Account.Admin
+      : authUser?.role === Account.Admin || authUser?.role === Account.SubAdmin
       ? SUPER_ADMIN_SIDENAV
       : null;
   }, [authUser?.role]);
@@ -54,7 +54,7 @@ function SideNav() {
       ? SETTINGS_SIDENAV
       : authUser?.role === Account.Exporter
       ? null
-      : authUser?.role === Account.Admin
+      : authUser?.role === Account.Admin || authUser?.role === Account.SubAdmin
       ? ADMIN_SETTINGS_SIDENAV
       : null;
   }, [authUser?.role]);

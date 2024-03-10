@@ -88,7 +88,7 @@ const AdminRoutes = {
 export const AdminAppRoute = {
   AppLayout: DashboardLayout,
   IndexRoute: AdminDashboard,
-  AllowedRoles: [Account.Admin],
+  AllowedRoles: [Account.Admin, Account.SubAdmin],
   BasePath: adminPathsLinks.basePath,
   ListedRoutes: AdminRoutes,
 };

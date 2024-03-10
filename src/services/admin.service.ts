@@ -1,5 +1,5 @@
 import { displaySuccess, displayError } from '@shared/Toast/Toast';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getRequest, postRequest } from '@utils/apiCaller';
 import {
   ADD_ADMIN_URL,
@@ -15,6 +15,7 @@ import { queryParamsHelper } from 'config/query-params';
 import { IFarmerQueryProp } from 'types/admin.type';
 
 const useAdminCreationMutation = () => {
+  const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: IAddSubAdminPayload }) =>
       postRequest<IAddSubAdminPayload, IBaseResponse>({
@@ -25,6 +26,7 @@ const useAdminCreationMutation = () => {
     {
       onSuccess(res) {
         displaySuccess(res?.message);
+        queryClient.invalidateQueries([queryKeys.getAllAdmins]);
       },
       onError(error) {
         displayError(error);

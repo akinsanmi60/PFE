@@ -143,7 +143,9 @@ function AppHeader({ children }: { children: React.ReactNode }) {
                 <p>
                   {authUser?.status === 'pending'
                     ? 'Pending Verification'
-                    : 'Active Account'}
+                    : authUser?.status === 'active'
+                    ? 'Active Account'
+                    : 'Inactive Account'}
                 </p>
               </div>
             )}
