@@ -20,8 +20,6 @@ function ProduceList() {
     limit: 10,
   });
 
-  console.log(queryParams);
-
   const updateQueryParams = (params: IProduceQueryProp) => {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
