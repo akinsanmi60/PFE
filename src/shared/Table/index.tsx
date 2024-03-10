@@ -152,7 +152,7 @@ const CustomTable = <TData extends ITableBody>({
                   {sortedData?.map((rowData, indexKey) => {
                     return (
                       <Tr
-                        className={`w-full bg-white cursor-pointer capitalize   `}
+                        className={`w-full bg-white cursor-pointer capitalize`}
                         key={indexKey}
                       >
                         {tableHeads?.map(({ accessor, render }, i) => {
@@ -166,7 +166,7 @@ const CustomTable = <TData extends ITableBody>({
                               fontSize="sm"
                               key={i}
                               className={`first:capitalize ${
-                                !clickRow && 'cursor-default'
+                                !clickRow && 'cursor-pointer'
                               }`}
                               onClick={() => {
                                 clickRow &&
@@ -274,6 +274,7 @@ const CustomTable = <TData extends ITableBody>({
                 onChangeOfPage={handlePageChange}
                 lengthOfData={dataLength}
                 onChangeofPageSize={handleSetLimit}
+                limit={page_size as number}
               />
             </div>
           )}

@@ -8,7 +8,7 @@ import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
 import { UseFormReset } from 'react-hook-form';
 import { IBaseResponse } from 'types/auth.type';
-import { IHubQueryProps } from 'types/pentrarHub.type';
+import { IBaseQueryProps } from 'types/pentrarHub.type';
 import { IAddProducePayload, IMyProduceResponse } from 'types/produce.type';
 
 const useProduceCreationMutation = ({
@@ -54,7 +54,7 @@ const useProduceCreationMutation = ({
   return { mutate, isLoading, ...rest };
 };
 
-function useGetMyProduce(queryParams: IHubQueryProps) {
+function useGetMyProduce(queryParams: IBaseQueryProps) {
   const { authUser } = useAuthContext();
 
   const { isLoading, isRefetching, isError, data } =

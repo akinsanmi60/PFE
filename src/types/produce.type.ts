@@ -1,4 +1,7 @@
 import { IBaseResponse } from './auth.type';
+import { IBaseQueryProps } from './pentrarHub.type';
+
+export type IUserQueryProps = IBaseQueryProps;
 
 export type IAddProducePayload = {
   name: string;
@@ -33,6 +36,7 @@ export type IMyProduceData = {
   farm_address: string;
   farm_state: string;
   name: string;
+  certification: string;
 };
 
 export type IMyProduceResponse = IBaseResponse & {

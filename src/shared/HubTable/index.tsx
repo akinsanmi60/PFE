@@ -121,6 +121,7 @@ function CustomHubTable<TData extends IRowBody>({
                 startIndex={startIndex}
                 endIndex={endIndex}
                 onChangeofPageSize={handleSetLimit}
+                limit={page_size as number}
               />
             </div>
           )}

@@ -4,4 +4,6 @@ export const queryKeys = {
   getIndividualFarmer: 'getIndividualFarmer',
   getPentrarHubProduce: 'getPentrarHubProduce',
   getIMyProduce: 'getIMyProduce',
+  getAllFarmers: 'getAllFarmers',
+  getAllProduce: 'getAllProduce',
 };

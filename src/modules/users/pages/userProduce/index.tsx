@@ -10,10 +10,9 @@ import { useModalContext } from '@contexts/modalContext';
 import AddProduceComponent from 'components/addProduce';
 import { useGetMyProduce } from 'services/produce.service';
 import { ITableHead } from '@shared/Table/table.interface';
-import { IMyProduceData } from 'types/produce.type';
+import { IMyProduceData, IUserQueryProps } from 'types/produce.type';
 import { formatDate } from '@utils/constants';
 import TableLoading from '@shared/Table/tableLoading';
-import { IHubQueryProps } from 'types/pentrarHub.type';
 
 function UserProduce() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -24,7 +23,7 @@ function UserProduce() {
     limit: 10,
   });
 
-  const updateQueryParams = (params: IHubQueryProps) => {
+  const updateQueryParams = (params: IUserQueryProps) => {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
 
@@ -65,6 +64,7 @@ function UserProduce() {
       render: () => null,
     },
   ];
+
   return (
     <div className="">
       <AppHeader>
@@ -113,7 +113,7 @@ function UserProduce() {
               <EmptyBar emptyStateSize="lg" componentType="produces" />
             }
             tableLoader={<TableLoading title="Loading Produces" />}
-            showPagination={true}
+            showPagination
           />
         </div>
       </PageContainer>

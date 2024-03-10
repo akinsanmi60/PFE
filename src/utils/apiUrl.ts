@@ -24,6 +24,7 @@ export const START_FARMER_EMAIL_VERIFICATION_URL = (id: string) =>
   `farmer/${id}/update-email`;
 export const COMPLETE_FARMER_EMAIL_VERIFICATION_URL = (id: string) =>
   `farmer/${id}/complete-email-reset`;
+export const GET_ALL_FARMER_URL = () => 'farmer/allfarmers';
 
 //Aggregator urls
 export const GET_AGGREGATOR_DASHBOARD_COUNT_URL = (id: string) =>
@@ -41,15 +42,16 @@ export const START_AGGREGATOR_EMAIL_VERIFICATION_URL = (id: string) =>
   `aggregator/${id}/update-email`;
 export const COMPLETE_AGGREGATOR_EMAIL_VERIFICATION_URL = (id: string) =>
   `aggregator/${id}/complete-email-reset`;
+export const GET_ALL_AGGREGATOR_URL = () => 'aggregator/allAggregators';
 
 //Pentra Hub
 export const GET_PENTRAHUB_PRODUCE_URL = () => 'pentrar-hub/getAllHubProduce';
 
 //Produce urls
-export const GET_ALL_PRODUCE_URL = () => 'produce/allProduce';
+export const GET_ALL_PRODUCE_URL = () => 'produce/allProduces';
 export const ADD_PRODUCE_URL = (id: string) => `produce/${id}/create-produce`;
+export const GET_USER_PRODUCE_URL = (id: string, type: string) =>
+  `produce/${id}/get-produce-by/${type}`;
 
 // Admin urls
 export const ADD_ADMIN_URL = 'admin/create-admin';
-export const GET_USER_PRODUCE_URL = (id: string, type: string) =>
-  `produce/${id}/get-produce-by/${type}`;

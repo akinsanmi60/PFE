@@ -24,7 +24,7 @@ function PersonalInformation({ data }: { data: IIndividualFarmer }) {
     setValue('email', data?.email);
     setValue('full_name', capitalize(data?.full_name) as string);
     setValue('phone_number', data?.phone_number);
-    setValue('gender', data?.gender);
+    setValue('gender', capitalize(data?.gender) as string);
   }, [data, setValue]);
 
   const actionArray = [

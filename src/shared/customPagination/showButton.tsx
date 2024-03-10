@@ -3,11 +3,11 @@ import { ICustomPagination } from './pagination.interface';
 import { ReactComponent as ChevronUp } from '@assets/svg/chevron-up.svg';
 import { ReactComponent as DoubleMark } from '@assets/svg/doubleMark.svg';
 
-const pageSizeOptions = [10, 20, 30, 40, 50];
+const pageSizeOptions = [5, 10, 20, 30, 40, 50];
 
-function ShowButton({ onChangeofPageSize }: Partial<ICustomPagination>) {
+function ShowButton({ onChangeofPageSize, limit }: Partial<ICustomPagination>) {
   const [selectOption, setSelectOption] = useState({
-    pageSize: pageSizeOptions[0],
+    pageSize: limit ? limit : pageSizeOptions[1],
     isOpen: false,
   });
   const handleOpenOption = () => {
