@@ -4,6 +4,7 @@ import { InputGroup, Select } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 import { capitalize } from '@utils/constants';
 import { LegacyRef, forwardRef } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 const CustomSelect = forwardRef(
   (props: ISelectProps, ref: LegacyRef<HTMLInputElement>) => {
@@ -26,7 +27,7 @@ const CustomSelect = forwardRef(
             {...rest}
             icon={<TriangleDownIcon fontSize="x-small" />}
             placeholder={placeholder}
-            className="cursor-pointer text-primary-main"
+            className={twMerge('placeholder:text-[10px] cursor-pointer')}
             sx={{
               borderColor: '#E6E6E6',
               borderRadius: '10px',

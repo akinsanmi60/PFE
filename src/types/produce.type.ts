@@ -13,8 +13,7 @@ export type IAddProducePayload = {
   farm_state: string;
   planting_date: string;
   storage: string;
-  season: string;
-  weather: string;
+  produce_classification: string;
   images: FormData;
 };
 

@@ -2,6 +2,7 @@ import { useAuthContext } from '@contexts/authContext';
 import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
 import ModalBaseWrapper from '@shared/ModalBase';
+import ControlledSelect from '@shared/Select/ControlledSelect';
 import ControlledTextArea from '@shared/Textarea/ControlledInput';
 import ArrayImageUpload from '@shared/upload/ArrayImageUpload';
 import ModalHeader from 'components/appNav/modalHeader';
@@ -9,6 +10,16 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useProduceCreationMutation } from 'services/produce.service';
 import { IAddProducePayload } from 'types/produce.type';
+
+const produceClassification = [
+  'Cereal',
+  'Fruit',
+  'Vegetable',
+  'Root',
+  'Leaf',
+  'Fiber',
+  'Other',
+];
 
 function AddProduceComponent() {
   const { authUser } = useAuthContext();
@@ -24,8 +35,7 @@ function AddProduceComponent() {
       farm_state: '',
       planting_date: '',
       storage: '',
-      season: '',
-      weather: '',
+      produce_classification: '',
     },
     // resolver: yupResolver(addProduceValidationSchema),
   });
@@ -100,14 +110,13 @@ function AddProduceComponent() {
               control={control}
               type="date"
             />
-            {/* <ControlledSelect
-              name="season"
-              label="Season"
-              placeholder="Select Season"
+            <ControlledSelect
+              name="produce_classification"
+              label="Produce Classification"
+              placeholder="Select Classification"
               control={control}
-              optionArray={[]}
-            /> */}
-            <ControlledInput name="season" label="Season" control={control} />
+              optionArray={produceClassification}
+            />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <ControlledInput
@@ -116,16 +125,11 @@ function AddProduceComponent() {
               control={control}
               type="date"
             />
-            {/* <ControlledSelect
-              name="weather"
-              label="Weather Condition"
-              placeholder="Select Season"
-              control={control}
-              optionArray={[]}
-            /> */}
+
             <ControlledInput
-              name="weather"
-              label="Weather Condition"
+              name="quantity"
+              label="Quantity (kg)"
+              placeholder="Enter produce quantity"
               control={control}
             />
           </div>
@@ -150,12 +154,6 @@ function AddProduceComponent() {
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <ControlledInput
-              name="quantity"
-              label="Quantity"
-              placeholder="Enter produce quantity"
-              control={control}
-            />
             {/* <ControlledSelect
               name="storage"
               label="Storage"
@@ -172,7 +170,7 @@ function AddProduceComponent() {
               className="bg-primary-main text-primary-white w-[180px]"
               loading={isLoading}
             >
-              Save Produce
+              Submit Produce
             </CustomButton>
           </div>
         </div>
