@@ -33,10 +33,19 @@ export const capitalize = (text: string | undefined) => {
   return output.join(' ');
 };
 
-export const formatDate = ({ date }: { date: string | Date }) => {
+export const formatDate = ({
+  date,
+  time,
+}: {
+  date: string | Date;
+  time?: boolean;
+}) => {
   if (date === null) return;
-
-  return format(new Date(date), 'dd MMM, yyyy');
+  if (time) {
+    return format(new Date(date), 'dd MMM, yyyy • hh:mma');
+  } else {
+    return format(new Date(date), 'dd MMM, yyyy');
+  }
 };
 
 export const fullNameConcat = (
@@ -123,6 +132,7 @@ export const getClass = (text: string) => {
       return 'bg-[#DAFBEC] py-[2px] px-[12px] text-statusText-success font-[500] rounded-lg';
     case 'Inactive':
     case 'Blocked':
+    case 'Not Approved':
       return 'bg-[#FCD9DC] py-[5px] px-[12px] text-[#720B18] font-[500] rounded-lg';
     case 'Pending':
       return 'bg-[#FFE5E6] py-[5px] px-[12px] text-statusText-error font-[500] rounded-lg';

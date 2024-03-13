@@ -3,13 +3,22 @@ import { useModalContext } from '@contexts/modalContext';
 import { displaySuccess, displayError } from '@shared/Toast/Toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getRequest, postRequest } from '@utils/apiCaller';
-import { ADD_PRODUCE_URL, GET_USER_PRODUCE_URL } from '@utils/apiUrl';
+import {
+  ADD_PRODUCE_URL,
+  GET_PRODUCE_BY_ID_URL,
+  GET_USER_PRODUCE_URL,
+} from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
 import { UseFormReset } from 'react-hook-form';
 import { IBaseResponse } from 'types/auth.type';
 import { IBaseQueryProps } from 'types/pentrarHub.type';
-import { IAddProducePayload, IMyProduceResponse } from 'types/produce.type';
+import {
+  IAddProducePayload,
+  IGetSingleProduce,
+  IMyProduceData,
+  IMyProduceResponse,
+} from 'types/produce.type';
 
 const useProduceCreationMutation = ({
   id,
@@ -39,11 +48,9 @@ const useProduceCreationMutation = ({
         if (action) {
           action();
         }
-        queryClient.invalidateQueries([
-          queryKeys.getIMyProduce,
-          queryKeys.getFarmerAggregatorRecentProduce,
-          queryKeys.getPentrarHubProduce,
-        ]);
+        queryClient.invalidateQueries({
+          queryKey: [queryKeys.getIMyProduce],
+        });
       },
       onError(error) {
         displayError(error);
@@ -56,7 +63,6 @@ const useProduceCreationMutation = ({
 
 function useGetMyProduce(queryParams: IBaseQueryProps) {
   const { authUser } = useAuthContext();
-
   const { isLoading, isRefetching, isError, data } =
     useQuery<IMyProduceResponse>(
       [queryKeys.getIMyProduce, [queryParams]],
@@ -79,5 +85,25 @@ function useGetMyProduce(queryParams: IBaseQueryProps) {
     data: data as IMyProduceResponse,
   };
 }
+function useGetSingleProduce(id: string) {
+  const { isLoading, isRefetching, isError, data } =
+    useQuery<IGetSingleProduce>(
+      [queryKeys.getSingleProduce],
+      () =>
+        getRequest({
+          url: `${GET_PRODUCE_BY_ID_URL(id)}`,
+        }),
+      {
+        refetchOnWindowFocus: false,
+      },
+    );
 
-export { useProduceCreationMutation, useGetMyProduce };
+  return {
+    isLoading,
+    isRefetching,
+    isError,
+    data: data?.data as IMyProduceData,
+  };
+}
+
+export { useProduceCreationMutation, useGetMyProduce, useGetSingleProduce };

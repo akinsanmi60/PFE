@@ -118,7 +118,7 @@ const ProfileBox = ({ first_name }: { first_name: string }) => {
   );
 };
 
-function AppHeader({ children }: { children: React.ReactNode }) {
+function AppHeader({ children }: { children?: React.ReactNode }) {
   const { authUser } = useAuthContext();
 
   let first_name: string | undefined;

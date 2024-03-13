@@ -5,16 +5,32 @@ export type IUserQueryProps = IBaseQueryProps;
 
 export type IAddProducePayload = {
   name: string;
-  quantity: number;
+  quantity: string;
   unit: string;
   description: string;
   farm_address: string;
   harvest_date: string;
   farm_state: string;
   planting_date: string;
-  storage: string;
   produce_classification: string;
-  images: FormData;
+  storage: string;
+};
+
+export type IProduceHandlerType = Pick<
+  IAddProducePayload,
+  'quantity' | 'unit'
+> & {
+  id: string;
+  created_at: Date;
+  produce_id: string;
+  handler_farmer_id: string;
+  handler_aggregator_id: string;
+  handler_offtaker_id: string;
+  handler_exporter_id: string;
+  produce_location: string;
+  handler_name: string;
+  handler_phone: string;
+  handler_user_type: string;
 };
 
 export type IMyProduceData = {
@@ -32,10 +48,14 @@ export type IMyProduceData = {
   unit: string;
   on_pentrar_hub: boolean;
   harvest_date: string;
+  planting_date: string;
+  produce_classification: string;
   farm_address: string;
   farm_state: string;
   name: string;
   certification: string;
+  status: string;
+  transfer_handler: IProduceHandlerType[];
 };
 
 export type IMyProduceResponse = IBaseResponse & {
@@ -46,4 +66,8 @@ export type IMyProduceResponse = IBaseResponse & {
     page_size: number;
     produces_list: IMyProduceData[];
   };
+};
+
+export type IGetSingleProduce = IBaseResponse & {
+  data: IMyProduceData;
 };

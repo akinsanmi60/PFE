@@ -52,6 +52,8 @@ export const GET_ALL_PRODUCE_URL = () => 'produce/allProduces';
 export const ADD_PRODUCE_URL = (id: string) => `produce/${id}/create-produce`;
 export const GET_USER_PRODUCE_URL = (id: string, type: string) =>
   `produce/${id}/get-produce-by/${type}`;
+export const GET_PRODUCE_BY_ID_URL = (id: string) =>
+  `produce/${id}/get-produce`;
 
 // Admin urls
 export const ADD_ADMIN_URL = 'admin/create-admin';

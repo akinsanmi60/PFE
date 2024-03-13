@@ -38,6 +38,7 @@ const CustomTable = <TData extends ITableBody>({
   tableLoader,
   setLimit,
   children,
+  onRowClick,
 }: ITableProp<TData>) => {
   const [sortConfig, setSortConfig] = useState<ISortData>({
     key: '' || null,
@@ -157,6 +158,7 @@ const CustomTable = <TData extends ITableBody>({
                       <Tr
                         className={`w-full bg-white cursor-pointer capitalize`}
                         key={indexKey}
+                        onClick={() => onRowClick && onRowClick(rowData)}
                       >
                         {tableHeads?.map(({ accessor, render }, i) => {
                           const dataToShow =

@@ -13,6 +13,8 @@ import { ITableHead } from '@shared/Table/table.interface';
 import { IMyProduceData, IUserQueryProps } from 'types/produce.type';
 import { formatDate } from '@utils/constants';
 import TableLoading from '@shared/Table/tableLoading';
+import StatusBadge, { IStatusType } from '@shared/StatusBadge';
+import { useNavigate } from 'react-router-dom';
 
 function UserProduce() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -22,6 +24,7 @@ function UserProduce() {
     page: 1,
     limit: 10,
   });
+  const navigate = useNavigate();
 
   const updateQueryParams = (params: IUserQueryProps) => {
     setQueryParams(prev => ({ ...prev, ...params }));
@@ -55,13 +58,15 @@ function UserProduce() {
       label: 'Last Updated',
       accessor: '',
       render: ({ updated_at }) => {
-        return formatDate({ date: updated_at });
+        return formatDate({ date: updated_at, time: true });
       },
     },
     {
-      label: 'Certification',
-      accessor: 'certification',
-      // render: () => null,
+      label: 'Status',
+      accessor: 'status',
+      render: ({ status }) => {
+        return <StatusBadge status={status as IStatusType} />;
+      },
     },
   ];
 
@@ -119,6 +124,9 @@ function UserProduce() {
           }
           tableLoader={<TableLoading title="Loading Produces" />}
           showPagination
+          onRowClick={(row: IMyProduceData) => {
+            navigate(`/pentrar/user/my-produce/${row.id}/details`);
+          }}
         />
       </PageContainer>
 

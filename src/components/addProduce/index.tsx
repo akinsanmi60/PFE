@@ -24,20 +24,24 @@ const produceClassification = [
 function AddProduceComponent() {
   const { authUser } = useAuthContext();
   const [imageString, setImageString] = useState<File[] | null>(null);
-  const { control, handleSubmit, reset } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { isDirty },
+  } = useForm({
     defaultValues: {
       name: '',
-      quantity: 0,
+      quantity: '',
       unit: '',
       description: '',
       farm_address: '',
       harvest_date: '',
       farm_state: '',
       planting_date: '',
-      storage: '',
       produce_classification: '',
+      storage: '',
     },
-    // resolver: yupResolver(addProduceValidationSchema),
   });
 
   const { mutate, isLoading, isSuccess } = useProduceCreationMutation({
@@ -140,13 +144,7 @@ function AddProduceComponent() {
               placeholder="Enter Farm Address"
               control={control}
             />
-            {/* <ControlledSelect
-              name="farm_state"
-              label="Farm State"
-              placeholder="Select Farm State"
-              control={control}
-              optionArray={[]}
-            /> */}
+
             <ControlledInput
               name="farm_state"
               label="Farm State"
@@ -154,19 +152,17 @@ function AddProduceComponent() {
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            {/* <ControlledSelect
+            <ControlledInput
               name="storage"
-              label="Storage"
-              placeholder="Select produce name"
+              label="Farm Storage"
               control={control}
-              optionArray={[]}
-            /> */}
-            <ControlledInput name="storage" label="Storage" control={control} />
+            />
           </div>
 
           <div className="flex justify-end mt-[8px] mb-[-50px]">
             <CustomButton
               onClick={handleSubmit(onAddProduce)}
+              disabled={!isDirty}
               className="bg-primary-main text-primary-white w-[180px]"
               loading={isLoading}
             >

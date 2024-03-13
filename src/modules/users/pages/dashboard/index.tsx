@@ -17,6 +17,7 @@ import { useGetRecentProduce } from 'services/farmerAggregatorDashboard.service'
 import TableLoading from '@shared/Table/tableLoading';
 import { ITableHead } from '@shared/Table/table.interface';
 import { IRecentProduceDetail } from 'types/farmerAggregatorDash.type';
+import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 
 function DashboardHome() {
   const { authUser } = useAuthContext();
@@ -63,9 +64,11 @@ function DashboardHome() {
       },
     },
     {
-      label: 'Action',
-      accessor: '',
-      render: () => null,
+      label: 'Status',
+      accessor: 'status',
+      render: ({ status }) => {
+        return <StatusBadge status={status as IStatusType} />;
+      },
     },
   ];
 

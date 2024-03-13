@@ -33,10 +33,10 @@ function PendingProduce({ produceValue }: IPendingProducePprop) {
                 </span>
               </p>
             </div>
-            {produceDetail?.certification && (
+            {produceDetail?.status && (
               <div className="flex justify-end">
                 <div className="bg-[#FFE5E6] py-[5px] px-[12px] text-[10px] text-statusText-error font-[500] rounded-lg">
-                  <p>{produceDetail?.certification.toLocaleUpperCase()}</p>
+                  <p>{produceDetail?.status?.toLocaleUpperCase()}</p>
                 </div>
               </div>
             )}

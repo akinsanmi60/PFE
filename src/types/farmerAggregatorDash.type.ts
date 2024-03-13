@@ -4,7 +4,7 @@ export type IPendingData = {
   name: string;
   quantity: number;
   unit: string;
-  certification: string;
+  status: string;
 };
 export type IFarmerAggregatorDashboardcount = IBaseResponse & {
   data: {
@@ -40,6 +40,8 @@ export type IRecentProduceDetail = {
   farm_address: string;
   pentrar_produce_id: string;
   farm_state: string;
+  harvest_date: string;
+  status: string;
 };
 
 export type IDashboardRecentProduce = IBaseResponse & {

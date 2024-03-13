@@ -21,11 +21,16 @@ const ReportProblem = React.lazy(
   () => import('@modules/users/pages/reportProblem'),
 );
 
+const MyProduceDetailPage = React.lazy(
+  () => import('@modules/users/pages/userProduce/individualProduce'),
+);
+
 export const userPathsLinks = {
   basePath: 'pentrar/user',
   dashBoard: 'dashboard',
   pentrarHub: 'pentrar-hub',
   myProduces: 'my-produces',
+  myProduceDetails: 'my-produce/:id/details',
   settings: 'settings',
   reportProblem: 'report-problem',
   personalInfo: '/pentrar/user/settings/personal-information',
@@ -51,6 +56,11 @@ const userRoutes = {
   UserSettings: {
     element: UserSettings,
     path: userPathsLinks.settings,
+  },
+
+  MyProduceDetailPage: {
+    element: MyProduceDetailPage,
+    path: userPathsLinks.myProduceDetails,
   },
 
   ReportProblem: {
