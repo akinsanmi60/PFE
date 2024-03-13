@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   IBaseResponse,
   IForgetProp,
@@ -15,8 +15,9 @@ import jwt_decode from 'jwt-decode';
 import { IUserCTXType } from 'types/contextProvider.type';
 import { saveDetailToLocalStorage, setToken } from '@hooks/localStorageHook';
 import { useAuthContext } from '@contexts/authContext';
-import { postRequest } from '@utils/apiCaller';
+import { getRequest, postRequest } from '@utils/apiCaller';
 import {
+  CHECK_EMAIL_URL,
   PARTIAL_USER_CREATION_URL,
   USER_CHANGE_PASSWORD_URL,
   USER_FORGET_URL,
@@ -29,6 +30,8 @@ import { LOCAL_STORAGE_KEY } from '@utils/localStorageKey';
 import { RootLink } from 'routes/routeObject';
 import { displayError, displaySuccess } from '@shared/Toast/Toast';
 import { adminPathsLinks } from '@modules/admin/routes';
+import { queryKeys } from '@utils/queryKey';
+// import { queryParamsHelper } from 'config/query-params';
 
 const userDashboard = ['farmer', 'aggregator'];
 const adminDashboard = ['admin', 'subAdmin'];
@@ -222,4 +225,26 @@ export const useVerifyMutation = ({ action }: { action?: () => void }) => {
   );
 
   return { mutate, isLoading, ...rest };
+};
+
+export const useEmailCheck = (queryParams: string) => {
+  const { isLoading, isRefetching, isError, data, isFetching } = useQuery<any>(
+    [queryKeys.emailCheck, [queryParams]],
+    () =>
+      getRequest({
+        url: `${CHECK_EMAIL_URL}?email=${encodeURIComponent(queryParams)}`,
+      }),
+    {
+      refetchOnWindowFocus: false,
+      enabled: !!queryParams,
+    },
+  );
+
+  return {
+    isLoading,
+    isRefetching,
+    isError,
+    isFetching,
+    data: data as any,
+  };
 };

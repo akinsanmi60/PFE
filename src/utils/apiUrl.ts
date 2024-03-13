@@ -59,3 +59,6 @@ export const GET_PRODUCE_BY_ID_URL = (id: string) =>
 export const ADD_ADMIN_URL = 'admin/create-admin';
 export const GET_ADMIN_DASHBOARD_COUNT_URL = (id: string) =>
   `admin/${id}/dashboard-count`;
+
+// Check email
+export const CHECK_EMAIL_URL = 'auth/check-email-validity';

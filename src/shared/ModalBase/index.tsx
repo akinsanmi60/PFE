@@ -49,7 +49,9 @@ function ModalBaseWrapper({ children, modalBaseProp }: IModalBaseProps) {
           </div>
         )}
         <div
-          className={`w-[${formWidth}] rounded-[16px] p-[24px] bg-primary-white`}
+          className={`w-[${
+            formWidth ? formWidth : '100%'
+          }] rounded-[16px] p-[24px] bg-primary-white`}
         >
           {children}
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';

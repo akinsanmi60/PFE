@@ -7,9 +7,12 @@ import DetailCard from 'components/produceCard/detailCard';
 import { useNavigate } from 'react-router-dom';
 import { IMyProduceData } from 'types/produce.type';
 import ContributorsAccordionCard from './accordionCard';
+import { useModalContext } from '@contexts/modalContext';
+import MoveProduceTo from './moveProduce';
 
 function ProduceCard({ produceData }: { produceData: IMyProduceData }) {
   const navigate = useNavigate();
+  const { modalState, handleModalOpen } = useModalContext();
 
   const detailColumnsHeadTitleA: {
     label: string;
@@ -72,7 +75,10 @@ function ProduceCard({ produceData }: { produceData: IMyProduceData }) {
           <h2>Detail</h2>
         </div>
         <div>
-          <CustomButton className='"w-fullS text-primary-white'>
+          <CustomButton
+            className='"w-fullS text-primary-white'
+            onClick={() => handleModalOpen('MoveTo')}
+          >
             Move To
           </CustomButton>
         </div>
@@ -106,6 +112,7 @@ function ProduceCard({ produceData }: { produceData: IMyProduceData }) {
           <ContributorsAccordionCard itemData={produceData?.transfer_handler} />
         </div>
       </div>
+      {modalState?.modalType === 'MoveTo' && <MoveProduceTo />}
     </div>
   );
 }

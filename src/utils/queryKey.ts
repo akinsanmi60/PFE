@@ -9,4 +9,5 @@ export const queryKeys = {
   getSingleProduce: 'getSingleProduce',
   getAdminDashboardCount: 'getAdminDashboardCount',
   getAllAdmins: 'getAllAdmins',
+  emailCheck: 'emailCheck',
 };

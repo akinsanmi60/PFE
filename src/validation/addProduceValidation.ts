@@ -16,3 +16,12 @@ export const AddProduceValidationSchema = yup
     storage: yup.string().required('Enter storage'),
   })
   .required();
+
+export const MoveToValidationSchema = yup
+  .object({
+    email: yup.string().required('Enter your email'),
+    quantity: yup.string().required('Enter the quantity'),
+    unit: yup.string().required('Enter the unit'),
+    user_type: yup.string().required('Enter user type'),
+  })
+  .required();
