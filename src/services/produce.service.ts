@@ -7,6 +7,7 @@ import {
   ADD_PRODUCE_URL,
   GET_PRODUCE_BY_ID_URL,
   GET_USER_PRODUCE_URL,
+  TRANSFER_PRODUCE_URL,
 } from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
@@ -18,6 +19,7 @@ import {
   IGetSingleProduce,
   IMyProduceData,
   IMyProduceResponse,
+  ITransferProducePayload,
 } from 'types/produce.type';
 
 const useProduceCreationMutation = ({
@@ -106,4 +108,38 @@ function useGetSingleProduce(id: string) {
   };
 }
 
-export { useProduceCreationMutation, useGetMyProduce, useGetSingleProduce };
+function useTransferProduce({
+  id,
+  resetForm,
+}: {
+  id: string;
+  resetForm: UseFormReset<ITransferProducePayload>;
+}) {
+  const { mutate, isLoading, ...rest } = useMutation(
+    ({ payload }: { payload: ITransferProducePayload }) =>
+      postRequest<ITransferProducePayload, IBaseResponse>({
+        url: TRANSFER_PRODUCE_URL(id),
+        payload,
+      }),
+    {
+      onSuccess(res) {
+        if (resetForm) {
+          resetForm();
+        }
+        displaySuccess(res?.message);
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+}
+
+export {
+  useProduceCreationMutation,
+  useGetMyProduce,
+  useGetSingleProduce,
+  useTransferProduce,
+};

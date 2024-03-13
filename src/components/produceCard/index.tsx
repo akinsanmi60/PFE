@@ -142,7 +142,9 @@ function ProduceCard({
           componentType="Produce Detail not found"
         />
       )}
-      {modalState?.modalType === 'MoveTo' && <MoveProduceTo />}
+      {modalState?.modalType === 'MoveTo' && (
+        <MoveProduceTo produceId={produceData?.id} />
+      )}
     </div>
   );
 }

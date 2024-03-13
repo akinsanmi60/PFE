@@ -8,11 +8,14 @@ import ControlledSelect from '@shared/Select/ControlledSelect';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MoveToValidationSchema } from 'validation/addProduceValidation';
 import ControlledInput from '@shared/Input/ControlledInput';
+import { useTransferProduce } from 'services/produce.service';
+import { ITransferProducePayload } from 'types/produce.type';
 
-function MoveProduceTo() {
+function MoveProduceTo({ produceId }: { produceId: string }) {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { isValid, isDirty },
   } = useForm({
     defaultValues: {
@@ -25,8 +28,13 @@ function MoveProduceTo() {
     resolver: yupResolver(MoveToValidationSchema),
   });
 
-  const submitHandler = (val: any) => {
-    return val;
+  const { mutate, isLoading } = useTransferProduce({
+    id: produceId,
+    resetForm: reset,
+  });
+
+  const submitHandler = (val: ITransferProducePayload) => {
+    mutate({ payload: val });
   };
 
   return (
@@ -85,6 +93,7 @@ function MoveProduceTo() {
             onClick={handleSubmit(submitHandler)}
             disabled={!isValid || !isDirty}
             loadingText="Transfering..."
+            loading={isLoading}
           >
             Complete Transfer
           </CustomButton>

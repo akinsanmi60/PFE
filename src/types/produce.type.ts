@@ -16,6 +16,14 @@ export type IAddProducePayload = {
   storage: string;
 };
 
+export type ITransferProducePayload = Pick<
+  IAddProducePayload,
+  'quantity' | 'unit'
+> & {
+  email: string;
+  user_type: string;
+};
+
 export type IProduceHandlerType = Pick<
   IAddProducePayload,
   'quantity' | 'unit'
