@@ -28,14 +28,14 @@ function DetailCard<TData extends IRowBody>({
             </div>
 
             <div className="w-full">
-              <p className="font-[600] text-[14px] leading-[20px] text-primary-main">
+              <div className="font-[600] text-[14px] leading-[20px] text-primary-main">
                 {produceData &&
                   (render
                     ? render(produceData) || '--'
                     : accessor
                     ? (produceData[accessor] as string) || '--'
                     : '--')}
-              </p>
+              </div>
             </div>
           </div>
         );

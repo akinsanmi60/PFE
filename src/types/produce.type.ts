@@ -35,6 +35,7 @@ export type IProduceHandlerType = Pick<
 
 export type IMyProduceData = {
   id: string;
+  can_transfer: boolean;
   created_at: string;
   updated_at: string;
   pentrar_produce_id: string;

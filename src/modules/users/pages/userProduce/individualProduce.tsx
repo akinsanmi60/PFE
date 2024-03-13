@@ -6,12 +6,12 @@ import { useGetSingleProduce } from 'services/produce.service';
 
 function IndividualProduce() {
   const { id } = useParams();
-  const { data } = useGetSingleProduce(id as string);
+  const { data, isLoading } = useGetSingleProduce(id as string);
   return (
     <div>
       <AppHeader />
       <PageContainer className="">
-        <ProduceCard produceData={data} />
+        <ProduceCard produceData={data} loading={isLoading} />
       </PageContainer>
     </div>
   );

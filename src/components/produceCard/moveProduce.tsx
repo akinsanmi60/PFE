@@ -58,6 +58,7 @@ function MoveProduceTo() {
             control={control}
             name="email"
             label="Email"
+            placeholder="Enter user email"
           />
         </div>
 
@@ -67,6 +68,7 @@ function MoveProduceTo() {
               control={control}
               label="Quantity"
               name="quantity"
+              placeholder="Enter quantity"
               type="text"
             />
             <ControlledInput
@@ -82,8 +84,9 @@ function MoveProduceTo() {
             className='"w-full text-primary-white'
             onClick={handleSubmit(submitHandler)}
             disabled={!isValid || !isDirty}
+            loadingText="Transfering..."
           >
-            Move To
+            Complete Transfer
           </CustomButton>
         </div>
       </div>

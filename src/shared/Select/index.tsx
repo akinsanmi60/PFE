@@ -27,7 +27,9 @@ const CustomSelect = forwardRef(
             {...rest}
             icon={<TriangleDownIcon fontSize="x-small" />}
             placeholder={placeholder}
-            className={twMerge('placeholder:text-[10px] cursor-pointer')}
+            className={twMerge(
+              'placeholder:text-[10px] cursor-pointer text-gray-400',
+            )}
             sx={{
               borderColor: '#E6E6E6',
               borderRadius: '10px',

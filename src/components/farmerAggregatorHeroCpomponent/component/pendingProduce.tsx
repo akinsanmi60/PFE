@@ -1,4 +1,5 @@
 import CircularProgress from '@shared/CircularProgress';
+import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 import { capitalize } from '@utils/constants';
 import { IPendingProducePprop } from 'types/farmerAggregatorDash.type';
 
@@ -35,9 +36,10 @@ function PendingProduce({ produceValue }: IPendingProducePprop) {
             </div>
             {produceDetail?.status && (
               <div className="flex justify-end">
-                <div className="bg-[#FFE5E6] py-[5px] px-[12px] text-[10px] text-statusText-error font-[500] rounded-lg">
-                  <p>{produceDetail?.status?.toLocaleUpperCase()}</p>
-                </div>
+                <StatusBadge
+                  status={produceDetail?.status as IStatusType}
+                  className="py-[3px]"
+                />
               </div>
             )}
           </div>

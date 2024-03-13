@@ -11,7 +11,7 @@ interface AccordionProps {
 }
 
 const ContributorsAccordionCard: React.FC<AccordionProps> = ({ itemData }) => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(prevIndex => (prevIndex === index ? null : index));
@@ -40,7 +40,7 @@ const ContributorsAccordionCard: React.FC<AccordionProps> = ({ itemData }) => {
   ];
 
   return (
-    <div className="w-full">
+    <div className="">
       {itemData?.map((item, index) => (
         <div
           key={index}

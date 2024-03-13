@@ -132,8 +132,8 @@ export const getClass = (text: string) => {
       return 'bg-[#DAFBEC] py-[2px] px-[12px] text-statusText-success font-[500] rounded-lg';
     case 'Inactive':
     case 'Blocked':
-    case 'Not Approved':
       return 'bg-[#FCD9DC] py-[5px] px-[12px] text-[#720B18] font-[500] rounded-lg';
+    case 'Not Approved':
     case 'Pending':
       return 'bg-[#FFE5E6] py-[5px] px-[12px] text-statusText-error font-[500] rounded-lg';
     default:

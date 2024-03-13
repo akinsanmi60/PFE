@@ -9,10 +9,21 @@ import { IMyProduceData } from 'types/produce.type';
 import ContributorsAccordionCard from './accordionCard';
 import { useModalContext } from '@contexts/modalContext';
 import MoveProduceTo from './moveProduce';
+import TableLoading from '@shared/Table/tableLoading';
+import EmptyBar from '@shared/Table/tableEmpty';
+import { useAuthContext } from '@contexts/authContext';
 
-function ProduceCard({ produceData }: { produceData: IMyProduceData }) {
+const userArray = ['farmer', 'exporter', 'aggregator'];
+function ProduceCard({
+  produceData,
+  loading,
+}: {
+  produceData: IMyProduceData;
+  loading?: boolean;
+}) {
   const navigate = useNavigate();
   const { modalState, handleModalOpen } = useModalContext();
+  const { authUser } = useAuthContext();
 
   const detailColumnsHeadTitleA: {
     label: string;
@@ -64,6 +75,21 @@ function ProduceCard({ produceData }: { produceData: IMyProduceData }) {
     },
   ];
 
+  const renderActionBtn = () => {
+    if (userArray.includes(authUser?.role as string)) {
+      return (
+        <CustomButton
+          className='"w-full text-primary-white py-[2px]'
+          onClick={() => handleModalOpen('MoveTo')}
+        >
+          Transfer Produce
+        </CustomButton>
+      );
+    } else {
+      <CustomButton>Approve Produce</CustomButton>;
+    }
+  };
+
   return (
     <div className="p-[20px] bg-primary-white">
       <div className="flex items-center gap-x-1 mb-[14px] justify-between">
@@ -74,44 +100,48 @@ function ProduceCard({ produceData }: { produceData: IMyProduceData }) {
           />
           <h2>Detail</h2>
         </div>
-        <div>
-          <CustomButton
-            className='"w-fullS text-primary-white'
-            onClick={() => handleModalOpen('MoveTo')}
-          >
-            Move To
-          </CustomButton>
-        </div>
+        <div>{renderActionBtn()}</div>
       </div>
-      <div className="border-[1px] border-primary-light-1 rounded-[16px] p-[24px] xlsm:p-0">
-        <h1 className="text-primary-main pb-[13px] text-[20px] font-[600] tracking-normal  ">
-          {produceData?.name}
-        </h1>
-        <div
-          className="grid grid-cols-2 sixm:grid-cols-1
+      {loading ? (
+        <TableLoading title="Loading Produce Detail" />
+      ) : produceData && Object.keys(produceData).length > 0 ? (
+        <div className="border-[1px] border-primary-light-1 rounded-[16px] p-[24px] xlsm:p-0">
+          <h1 className="text-primary-main pb-[13px] text-[20px] font-[600] tracking-normal  ">
+            {produceData?.name}
+          </h1>
+          <div
+            className="grid grid-cols-2 sixm:grid-cols-1
          border-y-[1px] border-primary-light-1 py-[15px] "
-        >
-          <div>
-            <DetailCard<IMyProduceData>
-              detailProps={{
-                detailKeys: detailColumnsHeadTitleA,
-                produceData: produceData,
-              }}
-            />
+          >
+            <div>
+              <DetailCard<IMyProduceData>
+                detailProps={{
+                  detailKeys: detailColumnsHeadTitleA,
+                  produceData: produceData,
+                }}
+              />
+            </div>
+            <div className="sixm:mt-[10px]">
+              <DetailCard<IMyProduceData>
+                detailProps={{
+                  detailKeys: detailColumnsHeadTitleB,
+                  produceData: produceData,
+                }}
+              />
+            </div>
           </div>
-          <div className="sixm:mt-[10px]">
-            <DetailCard<IMyProduceData>
-              detailProps={{
-                detailKeys: detailColumnsHeadTitleB,
-                produceData: produceData,
-              }}
+          <div className="border-y-[1px] border-primary-light-1 py-[15px]">
+            <ContributorsAccordionCard
+              itemData={produceData?.transfer_handler}
             />
           </div>
         </div>
-        <div className="border-y-[1px] border-primary-light-1 py-[15px]">
-          <ContributorsAccordionCard itemData={produceData?.transfer_handler} />
-        </div>
-      </div>
+      ) : (
+        <EmptyBar
+          emptyStateSize="lg"
+          componentType="Produce Detail not found"
+        />
+      )}
       {modalState?.modalType === 'MoveTo' && <MoveProduceTo />}
     </div>
   );
