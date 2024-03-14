@@ -117,6 +117,9 @@ function useTransferProduce({
   id: string;
   resetForm: UseFormReset<ITransferProducePayload>;
 }) {
+  const queryClient = useQueryClient();
+  const { handleModalClose } = useModalContext();
+
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: ITransferProducePayload }) =>
       postRequest<ITransferProducePayload, IBaseResponse>({
@@ -127,6 +130,12 @@ function useTransferProduce({
       onSuccess(res) {
         if (resetForm) {
           resetForm();
+        }
+        queryClient.invalidateQueries({
+          queryKey: [queryKeys.getSingleProduce],
+        });
+        if (handleModalClose) {
+          handleModalClose('MoveTo');
         }
         displaySuccess(res?.message);
       },
@@ -148,6 +157,9 @@ function useApproveProduce({
   resetForm: UseFormReset<IApproveProducePayload>;
   userId: string;
 }) {
+  const queryClient = useQueryClient();
+  const { handleModalClose } = useModalContext();
+
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: IApproveProducePayload }) =>
       postRequest<IApproveProducePayload, IBaseResponse>({
@@ -156,9 +168,15 @@ function useApproveProduce({
       }),
     {
       onSuccess(res) {
+        queryClient.invalidateQueries({
+          queryKey: [queryKeys.getSingleProduce],
+        });
         displaySuccess(res?.message);
         if (resetForm) {
           resetForm();
+        }
+        if (handleModalClose) {
+          handleModalClose('approveProduce');
         }
       },
       onError(error) {
