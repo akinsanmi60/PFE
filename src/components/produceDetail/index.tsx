@@ -100,6 +100,9 @@ function ProduceCard({
         <CustomButton
           className='"w-full text-primary-white py-[2px]'
           onClick={() => {
+            if (produceData?.status === 'approved') {
+              return toast.error('Produce already approved', toastOptions);
+            }
             handleModalOpen('ApproveProduce');
           }}
         >
