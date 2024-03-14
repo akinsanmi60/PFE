@@ -11,8 +11,12 @@ import { ITableHead } from '@shared/Table/table.interface';
 import { IMyProduceData } from 'types/produce.type';
 import { formatDate } from '@utils/constants';
 import TableLoading from '@shared/Table/tableLoading';
+import { useNavigate } from 'react-router-dom';
+import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 
 function ProduceList() {
+  const navigate = useNavigate();
+
   const [searchTerm, setSearchTerm] = useState('');
   const [queryParams, setQueryParams] = useState({
     search: '',
@@ -56,8 +60,11 @@ function ProduceList() {
       },
     },
     {
-      label: 'Certification',
-      accessor: 'certification',
+      label: 'Status',
+      accessor: 'status',
+      render: ({ status }) => {
+        return <StatusBadge status={status as IStatusType} />;
+      },
     },
   ];
 
@@ -86,7 +93,7 @@ function ProduceList() {
         </div>
       </AppHeader>
       <PageContainer className="pt-0">
-        <CustomTable
+        <CustomTable<IMyProduceData>
           tableHeads={tableHead}
           loading={isLoading || isRefetching}
           dataTableSource={data?.data?.produces_list || []}
@@ -100,6 +107,9 @@ function ProduceList() {
           showPagination
           setCurrentPage={(val: number) => updateQueryParams({ page: val })}
           setLimit={(val: number) => updateQueryParams({ limit: val })}
+          onRowClick={(row: IMyProduceData) => {
+            navigate(`/pentrar/admin/all-produces/${row.id}/produce-detail`);
+          }}
         />
       </PageContainer>
     </div>

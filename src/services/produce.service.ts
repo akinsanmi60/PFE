@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getRequest, postRequest } from '@utils/apiCaller';
 import {
   ADD_PRODUCE_URL,
+  APPROVE_PRODUCE,
   GET_PRODUCE_BY_ID_URL,
   GET_USER_PRODUCE_URL,
   TRANSFER_PRODUCE_URL,
@@ -16,6 +17,7 @@ import { IBaseResponse } from 'types/auth.type';
 import { IBaseQueryProps } from 'types/pentrarHub.type';
 import {
   IAddProducePayload,
+  IApproveProducePayload,
   IGetSingleProduce,
   IMyProduceData,
   IMyProduceResponse,
@@ -137,9 +139,41 @@ function useTransferProduce({
   return { mutate, isLoading, ...rest };
 }
 
+function useApproveProduce({
+  produceId,
+  resetForm,
+  userId,
+}: {
+  produceId: string;
+  resetForm: UseFormReset<IApproveProducePayload>;
+  userId: string;
+}) {
+  const { mutate, isLoading, ...rest } = useMutation(
+    ({ payload }: { payload: IApproveProducePayload }) =>
+      postRequest<IApproveProducePayload, IBaseResponse>({
+        url: APPROVE_PRODUCE(produceId, userId),
+        payload,
+      }),
+    {
+      onSuccess(res) {
+        displaySuccess(res?.message);
+        if (resetForm) {
+          resetForm();
+        }
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+}
+
 export {
   useProduceCreationMutation,
   useGetMyProduce,
   useGetSingleProduce,
   useTransferProduce,
+  useApproveProduce,
 };

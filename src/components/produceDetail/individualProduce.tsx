@@ -1,6 +1,6 @@
 import PageContainer from 'components/Layout/PageContainer';
 import AppHeader from 'components/appHeader/appHeader';
-import ProduceCard from 'components/produceCard';
+import ProduceCard from 'components/produceDetail';
 import { useParams } from 'react-router-dom';
 import { useGetSingleProduce } from 'services/produce.service';
 

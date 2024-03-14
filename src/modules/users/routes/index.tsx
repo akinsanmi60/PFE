@@ -22,7 +22,7 @@ const ReportProblem = React.lazy(
 );
 
 const MyProduceDetailPage = React.lazy(
-  () => import('@modules/users/pages/userProduce/individualProduce'),
+  () => import('../../../components/produceDetail/individualProduce'),
 );
 
 export const userPathsLinks = {

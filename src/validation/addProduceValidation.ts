@@ -25,3 +25,12 @@ export const MoveToValidationSchema = yup
     user_type: yup.string().required('Enter user type'),
   })
   .required();
+
+export const ApproveProduceValidationSchema = yup
+  .object({
+    package_location: yup.string().required('Enter package location'),
+    quantity: yup.string().required('Enter the quantity'),
+    unit: yup.string().required('Enter the unit'),
+    package_state: yup.string().required('Enter packaging state'),
+  })
+  .required();

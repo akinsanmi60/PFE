@@ -3,7 +3,7 @@ import CustomButton from '@shared/Button';
 // import { detailKeyA } from '@db/produceData';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 import { formatDate } from '@utils/constants';
-import DetailCard from 'components/produceCard/detailCard';
+import DetailCard from 'components/produceDetail/detailCard';
 import { useNavigate } from 'react-router-dom';
 import { IMyProduceData } from 'types/produce.type';
 import ContributorsAccordionCard from './accordionCard';
@@ -12,6 +12,7 @@ import MoveProduceTo from './moveProduce';
 import TableLoading from '@shared/Table/tableLoading';
 import EmptyBar from '@shared/Table/tableEmpty';
 import { useAuthContext } from '@contexts/authContext';
+import ApproveProduceByAdmin from './approveProduce';
 
 const userArray = ['farmer', 'exporter', 'aggregator'];
 function ProduceCard({
@@ -86,7 +87,14 @@ function ProduceCard({
         </CustomButton>
       );
     } else {
-      <CustomButton>Approve Produce</CustomButton>;
+      return (
+        <CustomButton
+          className='"w-full text-primary-white py-[2px]'
+          onClick={() => handleModalOpen('ApproveProduce')}
+        >
+          Approve Produce
+        </CustomButton>
+      );
     }
   };
 
@@ -144,6 +152,9 @@ function ProduceCard({
       )}
       {modalState?.modalType === 'MoveTo' && (
         <MoveProduceTo produceId={produceData?.id} />
+      )}
+      {modalState?.modalType === 'ApproveProduce' && (
+        <ApproveProduceByAdmin produceData={produceData} />
       )}
     </div>
   );

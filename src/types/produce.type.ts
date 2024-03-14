@@ -41,6 +41,14 @@ export type IProduceHandlerType = Pick<
   handler_user_type: string;
 };
 
+export type IApproveProducePayload = Pick<
+  IAddProducePayload,
+  'quantity' | 'unit'
+> & {
+  package_location: string;
+  package_state: string;
+};
+
 export type IMyProduceData = {
   id: string;
   can_transfer: boolean;
