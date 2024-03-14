@@ -4,7 +4,6 @@ import { formatDate } from '@utils/constants';
 import { IProduceItemList } from 'types/pentrarHub.type';
 import { ReactComponent as CallingPhone } from '@assets/svg/callingPhoneWhite.svg';
 import ModalHeader from 'components/appNav/modalHeader';
-import { useAuthContext } from '@contexts/authContext';
 
 const detailKeys = ['Quantity', 'Unit', 'Harvest Date', 'Farm Location'];
 
@@ -13,7 +12,6 @@ function OnHubProduceDetail({
 }: {
   modalProduceDetail: IProduceItemList | null;
 }) {
-  const { authUser } = useAuthContext();
   const returnString = (): string =>
     modalProduceDetail?.unit === null || modalProduceDetail?.unit === ''
       ? 'KG'
@@ -27,6 +25,7 @@ function OnHubProduceDetail({
     }),
     modalProduceDetail?.farm_state,
   ];
+
   return (
     <ModalBaseWrapper
       modalBaseProp={{
@@ -43,7 +42,10 @@ function OnHubProduceDetail({
         />
         <div className="border border-background-borderlight-1 rounded-[16px] px-[20px] mb-[-40px]">
           <p className="font-[400] text-[12px] leading-[17px] text-primary-main mt-[15px] mb-[8px]">
-            ID: <span className="font-[500] ">{modalProduceDetail?.id}</span>
+            ID:{' '}
+            <span className="font-[500] ">
+              {modalProduceDetail?.pentrar_produce_id}
+            </span>
           </p>
 
           <div className="grid grid-cols-3 gap-x-[20px] w-full">
@@ -107,13 +109,13 @@ function OnHubProduceDetail({
             <div className="w-full">
               <div className="rounded-[16px] bg-primary-white p-[20px] shadow-lg h-[180px] flex flex-col justify-between">
                 <p className="bg-[#DAFBEC] py-[2px] px-[12px] text-statusText-success font-[500] text-center rounded-lg w-[50%]">
-                  {authUser?.role}
+                  {modalProduceDetail?.owner_type}
                 </p>
                 <h1 className="font-[500] text-[20px] leading-[28px] tracking-normal">
-                  {authUser?.full_name}
+                  {modalProduceDetail?.owner_name}
                 </h1>
                 <CustomButton className="w-full flex items-center gap-[4px] text-primary-white">
-                  <a href={`tel:${authUser?.phone_number}`}>
+                  <a href={`tel:${modalProduceDetail?.owner_phone}`}>
                     <span className="text-[15px] font-[500]">Call Me</span>
                   </a>
                   <span className="h-[20px] w-[20px]">

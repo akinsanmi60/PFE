@@ -1,4 +1,5 @@
 import { IBaseResponse } from './auth.type';
+import { IMyProduceData } from './produce.type';
 
 export type IPentrarHubDropdown = {
   setPopluar?: (_value: string) => void;
@@ -18,7 +19,16 @@ export type IProduceItemList = {
   images: string[];
   description: string;
   harvest_date: string;
-};
+  farmer_owner_id: string;
+  aggregator_owner_id: string;
+} & Pick<
+  IMyProduceData,
+  | 'owner_name'
+  | 'owner_phone'
+  | 'owner_phone'
+  | 'owner_pentrar_id'
+  | 'owner_type'
+>;
 
 export type IBaseQueryProps = {
   search?: string;
