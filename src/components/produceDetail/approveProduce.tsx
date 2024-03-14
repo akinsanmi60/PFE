@@ -34,7 +34,7 @@ function ApproveProduceByAdmin({
   });
 
   const { mutate, isLoading } = useApproveProduce({
-    produceId: produceData.id,
+    produceId: produceData?.id,
     resetForm: reset,
     userId: authUser?.id as string,
   });
