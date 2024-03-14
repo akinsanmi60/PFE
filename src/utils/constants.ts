@@ -127,7 +127,7 @@ export const getClass = (text: string) => {
   switch (classText) {
     case 'Active':
     case 'Verified':
-    case 'Approve':
+    case 'Approved':
     case 'Success':
       return 'bg-[#DAFBEC] py-[2px] px-[12px] text-statusText-success font-[500] rounded-lg';
     case 'Inactive':

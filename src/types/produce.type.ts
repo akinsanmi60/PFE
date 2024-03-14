@@ -39,6 +39,7 @@ export type IProduceHandlerType = Pick<
   handler_name: string;
   handler_phone: string;
   handler_user_type: string;
+  produce_created_from: string;
 };
 
 export type IApproveProducePayload = Pick<

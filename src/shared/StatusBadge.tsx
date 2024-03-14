@@ -5,7 +5,7 @@ export type IStatusType =
   | 'Active'
   | 'Inactive'
   | 'Verified'
-  | 'Approve'
+  | 'Approved'
   | 'Success'
   | 'Pending'
   | 'Certified'
