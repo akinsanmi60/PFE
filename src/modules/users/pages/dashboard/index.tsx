@@ -54,7 +54,10 @@ function DashboardHome() {
     {
       label: 'Quantity',
       accessor: 'quantity',
-      render: ({ quantity, unit }) => `${quantity}/${unit ? unit : 'KG'}`,
+      render: ({ quantity, unit }) =>
+        `${quantity === null ? 0 : quantity}/${
+          unit === null || unit === '' ? 'KG' : unit
+        }`,
     },
     {
       label: 'Last Updated',

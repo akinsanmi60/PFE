@@ -1,6 +1,5 @@
 import { ReactComponent as LeftChevron } from '@assets/svg/leftChevron.svg';
 import CustomButton from '@shared/Button';
-// import { detailKeyA } from '@db/produceData';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 import { formatDate } from '@utils/constants';
 import DetailCard from 'components/produceDetail/detailCard';
@@ -13,6 +12,8 @@ import TableLoading from '@shared/Table/tableLoading';
 import EmptyBar from '@shared/Table/tableEmpty';
 import { useAuthContext } from '@contexts/authContext';
 import ApproveProduceByAdmin from './approveProduce';
+import { toastOptions } from '@shared/Toast/Toast';
+import { toast } from 'react-toastify';
 
 const userArray = ['farmer', 'exporter', 'aggregator'];
 function ProduceCard({
@@ -81,7 +82,15 @@ function ProduceCard({
       return (
         <CustomButton
           className='"w-full text-primary-white py-[2px]'
-          onClick={() => handleModalOpen('MoveTo')}
+          onClick={() => {
+            if (produceData?.can_transfer === false) {
+              return toast.error(
+                'Produce needs approval by admin',
+                toastOptions,
+              );
+            }
+            handleModalOpen('MoveTo');
+          }}
         >
           Transfer Produce
         </CustomButton>
@@ -90,7 +99,9 @@ function ProduceCard({
       return (
         <CustomButton
           className='"w-full text-primary-white py-[2px]'
-          onClick={() => handleModalOpen('ApproveProduce')}
+          onClick={() => {
+            handleModalOpen('ApproveProduce');
+          }}
         >
           Approve Produce
         </CustomButton>
@@ -139,6 +150,9 @@ function ProduceCard({
             </div>
           </div>
           <div className="border-y-[1px] border-primary-light-1 py-[15px]">
+            <h1 className="text-primary-main mb-[10px] text-[20px] font-[600] tracking-normal">
+              Ownership History
+            </h1>
             <ContributorsAccordionCard
               itemData={produceData?.transfer_handler}
             />

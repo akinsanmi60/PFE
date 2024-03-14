@@ -73,6 +73,8 @@ export type IMyProduceData = {
   certification: string;
   status: string;
   transfer_handler: IProduceHandlerType[];
+  submitted_quantity: number;
+  submitted_unit: string;
 };
 
 export type IMyProduceResponse = IBaseResponse & {

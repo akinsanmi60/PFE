@@ -57,7 +57,7 @@ export const GET_USER_PRODUCE_URL = (id: string, type: string) =>
 export const GET_PRODUCE_BY_ID_URL = (id: string) =>
   `produce/${id}/get-produce`;
 export const APPROVE_PRODUCE = (produceID: string, adminID: string) =>
-  `produce/${produceID}approve-produce-by/${adminID}/`;
+  `produce/${produceID}/approved-produce-by/${adminID}/`;
 
 // Admin urls
 export const ADD_ADMIN_URL = 'admin/create-admin';

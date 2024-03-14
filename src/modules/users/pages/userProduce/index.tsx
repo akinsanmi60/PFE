@@ -44,15 +44,12 @@ function UserProduce() {
       render: ({ name }) => name,
     },
     {
-      label: 'Location',
-      accessor: 'farm_state',
-      render: ({ farm_state }) => farm_state,
-    },
-    {
-      label: 'Quantity',
+      label: 'Qty Approved',
       accessor: 'quantity',
       render: ({ quantity, unit }) =>
-        `${quantity}/${unit === null || unit === '' ? 'KG' : unit}`,
+        `${quantity === null ? 0 : quantity}/${
+          unit === null || unit === '' ? 'KG' : unit
+        }`,
     },
     {
       label: 'Last Updated',
@@ -60,6 +57,16 @@ function UserProduce() {
       render: ({ updated_at }) => {
         return formatDate({ date: updated_at, time: true });
       },
+    },
+    {
+      label: 'Qty Submitted',
+      accessor: 'submitted_quantity',
+      render: ({ submitted_quantity, submitted_unit }) =>
+        `${submitted_quantity === null ? 0 : submitted_quantity}/${
+          submitted_unit === null || submitted_unit === ''
+            ? 'KG'
+            : submitted_unit
+        }`,
     },
     {
       label: 'Status',
@@ -79,7 +86,7 @@ function UserProduce() {
   };
 
   return (
-    <div className="">
+    <div className="w-full">
       <AppHeader>
         <div className="flex justify-between items-center mt-[20px] px-[24px] pb-[14px] sixm:flex-col sixm:gap-y-[20px]">
           <div className="w-full">

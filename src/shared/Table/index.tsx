@@ -125,8 +125,8 @@ const CustomTable = <TData extends ITableBody>({
           tableLoader
         ) : !loading && dataTableSourceLength > 0 ? (
           <div className="relative">
-            <TableContainer className="scrollbar-thin sticky top-0 overflow-y-auto">
-              <Table>
+            <TableContainer>
+              <Table size="sm">
                 <Thead className="w-full bg-primary-light-2 sticky top-0 z-10">
                   <Tr>
                     {tableHeads?.map((heads, index) => {
