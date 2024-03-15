@@ -29,8 +29,8 @@ function OnHubProduceDetail({
   return (
     <ModalBaseWrapper
       modalBaseProp={{
-        formWidth: '700px',
         showCloseBtn: false,
+        className: 'w-[700px]',
       }}
     >
       <div className="p-[6px]">

@@ -40,8 +40,8 @@ function MoveProduceTo({ produceId }: { produceId: string }) {
   return (
     <ModalBaseWrapper
       modalBaseProp={{
-        formWidth: '690px',
         showCloseBtn: false,
+        className: 'w-[690px]',
       }}
     >
       <ModalHeader

@@ -5,14 +5,22 @@ import { capitalize } from '@utils/constants';
 import { Controller } from 'react-hook-form';
 
 const ControlledCheckbox = forwardRef((props: any, _ref) => {
-  const { label, checkboxValue, checked, control, name, className } = props;
+  const {
+    label,
+    checkboxValue,
+    checked,
+    control,
+    name,
+    className,
+    showError = true,
+  } = props;
   return (
     <Controller
       name={name}
       control={control}
       render={({ field: { onChange }, fieldState: { error } }) => (
         <FormControl isInvalid={Boolean(error)}>
-          {error?.message && (
+          {error?.message && showError && (
             <FormErrorMessage className="font-bold" fontSize={10} mt="0.5">
               {error?.message ? capitalize(error?.message) : ''}
             </FormErrorMessage>

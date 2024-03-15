@@ -14,6 +14,7 @@ function ModalBaseWrapper({ children, modalBaseProp }: IModalBaseProps) {
     useModalActionBtn,
     cancelText,
     actionText,
+    className,
   } = modalBaseProp;
   const { modalState, handleModalClose } = useModalContext();
 
@@ -51,7 +52,7 @@ function ModalBaseWrapper({ children, modalBaseProp }: IModalBaseProps) {
         <div
           className={`w-[${
             formWidth ? formWidth : '100%'
-          }] rounded-[16px] p-[24px] bg-primary-white`}
+          }] rounded-[16px] p-[24px] bg-primary-white ${className}`}
         >
           {children}
 

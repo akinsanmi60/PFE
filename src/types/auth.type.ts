@@ -73,3 +73,30 @@ export type IPartialCreateUser = {
   phone_number?: string;
   full_name?: string;
 };
+
+export type IFormComleteType = {
+  coy_name: string;
+  coy_address: string;
+  reg_number: string;
+  tin_id: string;
+  category_type: string;
+};
+
+export type IFormIndividualType = Pick<
+  IFormComleteType,
+  'coy_name' | 'coy_address'
+>;
+
+export type IFormCompanyType = Pick<
+  IFormComleteType,
+  'reg_number' | 'tin_id' | 'coy_address' | 'coy_name'
+>;
+
+export type IFormType = {
+  setRevealForm: React.Dispatch<
+    React.SetStateAction<{
+      formType: string;
+      showForm: boolean;
+    }>
+  >;
+};

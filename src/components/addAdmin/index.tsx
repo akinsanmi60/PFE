@@ -31,8 +31,8 @@ function AddAdminComponent() {
   return (
     <ModalBaseWrapper
       modalBaseProp={{
-        formWidth: '761px',
         showCloseBtn: false,
+        className: 'w-[761px]',
       }}
     >
       <div className="p-[6px]">

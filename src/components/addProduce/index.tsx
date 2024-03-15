@@ -66,8 +66,8 @@ function AddProduceComponent() {
   return (
     <ModalBaseWrapper
       modalBaseProp={{
-        formWidth: '761px',
         showCloseBtn: false,
+        className: 'w-[600px]',
       }}
     >
       <div className="p-[6px]">

@@ -1,7 +1,8 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   IBaseResponse,
   IForgetProp,
+  IFormComleteType,
   ILoginFormData,
   ILoginResponse,
   IPartialCreateUser,
@@ -15,7 +16,7 @@ import jwt_decode from 'jwt-decode';
 import { IUserCTXType } from 'types/contextProvider.type';
 import { saveDetailToLocalStorage, setToken } from '@hooks/localStorageHook';
 import { useAuthContext } from '@contexts/authContext';
-import { getRequest, postRequest } from '@utils/apiCaller';
+import { getRequest, postRequest, putRequest } from '@utils/apiCaller';
 import {
   CHECK_EMAIL_URL,
   PARTIAL_USER_CREATION_URL,
@@ -31,6 +32,8 @@ import { RootLink } from 'routes/routeObject';
 import { displayError, displaySuccess } from '@shared/Toast/Toast';
 import { adminPathsLinks } from '@modules/admin/routes';
 import { queryKeys } from '@utils/queryKey';
+import { useModalContext } from '@contexts/modalContext';
+import { UseFormReset } from 'react-hook-form';
 // import { queryParamsHelper } from 'config/query-params';
 
 const userDashboard = ['farmer', 'aggregator'];
@@ -247,4 +250,49 @@ export const useEmailCheck = (queryParams: string) => {
     isFetching,
     data: data as any,
   };
+};
+
+export const useCompleteProfile = ({
+  url,
+  resetForm,
+  setRevealForm,
+}: {
+  url: string;
+  resetForm: UseFormReset<Partial<IFormComleteType>>;
+  setRevealForm: React.Dispatch<
+    React.SetStateAction<{
+      formType: string;
+      showForm: boolean;
+    }>
+  >;
+}) => {
+  const { handleModalClose } = useModalContext();
+  const queryClient = useQueryClient();
+
+  const { mutate, isLoading, ...rest } = useMutation(
+    ({ payload }: { payload: any }) =>
+      putRequest<any, IBaseResponse>({
+        url: url,
+        payload,
+      }),
+    {
+      onSuccess(res) {
+        if (resetForm) {
+          resetForm();
+        }
+
+        handleModalClose('completeProfile');
+        displaySuccess(res?.message);
+        queryClient.invalidateQueries(['getIndividualFarmer']);
+        if (setRevealForm) {
+          setRevealForm({ formType: '', showForm: false });
+        }
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
 };

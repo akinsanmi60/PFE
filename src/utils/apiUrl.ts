@@ -25,6 +25,7 @@ export const START_FARMER_EMAIL_VERIFICATION_URL = (id: string) =>
 export const COMPLETE_FARMER_EMAIL_VERIFICATION_URL = (id: string) =>
   `farmer/${id}/complete-email-reset`;
 export const GET_ALL_FARMER_URL = () => 'farmer/allfarmers';
+export const UPDATE_FARMER_URL = (id: string) => `farmer/${id}/update-farmer`;
 
 //Aggregator urls
 export const GET_AGGREGATOR_DASHBOARD_COUNT_URL = (id: string) =>
@@ -43,6 +44,8 @@ export const START_AGGREGATOR_EMAIL_VERIFICATION_URL = (id: string) =>
 export const COMPLETE_AGGREGATOR_EMAIL_VERIFICATION_URL = (id: string) =>
   `aggregator/${id}/complete-email-reset`;
 export const GET_ALL_AGGREGATOR_URL = () => 'aggregator/allAggregators';
+export const UPDATE_AGGREGATOR_URL = (id: string) =>
+  `aggregator/${id}/update-aggregator`;
 
 //Pentra Hub
 export const GET_PENTRAHUB_PRODUCE_URL = () => 'pentrar-hub/getAllHubProduce';

@@ -8,6 +8,7 @@ export type IModalBaseProps = {
     formWidth?: string;
     useModalActionBtn?: boolean;
     cancelText?: string;
+    className?: string;
     actionText?: string;
   };
 };
