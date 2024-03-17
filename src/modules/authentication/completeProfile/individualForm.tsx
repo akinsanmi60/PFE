@@ -18,8 +18,10 @@ function IndividualFormProfile({ setRevealForm }: IFormType) {
 
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
-      coy_name: '',
-      coy_address: '',
+      farm_name: '',
+      farm_location: '',
+      farm_land_ownership: '',
+      farming_scale: '',
     } as Partial<IFormComleteType>,
     resolver: yupResolver(
       CompleteProfileIndividualSchema,
@@ -44,16 +46,24 @@ function IndividualFormProfile({ setRevealForm }: IFormType) {
   return (
     <div className="flex flex-col justify-between h-full pb-[30px]">
       <div className="flex flex-col gap-y-[16px]">
+        <ControlledInput control={control} name="farm_name" label="Farm Name" />
         <ControlledInput
           control={control}
-          name="coy_name"
-          label="Business Name"
+          name="farm_location"
+          label="Farm Address"
         />
-        <ControlledInput
-          control={control}
-          name="coy_address"
-          label="Business Address"
-        />
+        <div className="flex gap-x-[16px]">
+          <ControlledInput
+            control={control}
+            name="farm_land_ownership"
+            label="Land Ownership"
+          />
+          <ControlledInput
+            control={control}
+            name="farming_scale"
+            label="Farming Scale"
+          />
+        </div>
       </div>
 
       <div className="flex justify-end">

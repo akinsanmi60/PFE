@@ -38,7 +38,7 @@ function PendingProduce({ produceValue }: IPendingProducePprop) {
               <div className="flex justify-end">
                 <StatusBadge
                   status={produceDetail?.status as IStatusType}
-                  className="py-[3px]"
+                  className="py-[2px]"
                 />
               </div>
             )}

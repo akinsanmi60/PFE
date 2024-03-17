@@ -6,7 +6,7 @@ function TodoComponent() {
   const { handleModalOpen, modalState } = useModalContext();
   return (
     <>
-      <div className="bg-primary-white px-[24px] py-[10px] rounded-lg border-[#F8D3D4] border-[2px]">
+      <div className="bg-primary-white px-[24px] py-[11px] rounded-lg border-[#F8D3D4] border-[2px]">
         <p className="text-[16px] font-[600] text-primary-main tracking-normal">
           Action Needed
         </p>

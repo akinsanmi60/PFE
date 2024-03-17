@@ -80,16 +80,32 @@ export type IFormComleteType = {
   reg_number: string;
   tin_id: string;
   category_type: string;
+  coy_scale: string;
+  coy_establishment: string;
+  farm_name: string;
+  farm_location: string;
+  farming_scale: string;
+  farm_land_ownership: string;
 };
 
 export type IFormIndividualType = Pick<
   IFormComleteType,
-  'coy_name' | 'coy_address'
+  | 'coy_name'
+  | 'coy_address'
+  | 'farm_location'
+  | 'farm_name'
+  | 'farming_scale'
+  | 'farm_land_ownership'
 >;
 
 export type IFormCompanyType = Pick<
   IFormComleteType,
-  'reg_number' | 'tin_id' | 'coy_address' | 'coy_name'
+  | 'reg_number'
+  | 'tin_id'
+  | 'coy_address'
+  | 'coy_name'
+  | 'coy_scale'
+  | 'coy_establishment'
 >;
 
 export type IFormType = {

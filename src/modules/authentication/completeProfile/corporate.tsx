@@ -22,6 +22,8 @@ function CorporateFormProfile({ setRevealForm }: IFormType) {
       coy_address: '',
       reg_number: '',
       tin_id: '',
+      coy_establishment: '',
+      coy_scale: '',
     } as Partial<IFormComleteType>,
     resolver: yupResolver(CompleteProfileBusinessSchema) as unknown as Resolver<
       Partial<IFormComleteType>
@@ -70,6 +72,19 @@ function CorporateFormProfile({ setRevealForm }: IFormType) {
             control={control}
             name="coy_address"
             label="Business Address"
+          />
+        </div>
+
+        <div className="flex gap-x-[16px]">
+          <ControlledInput
+            control={control}
+            name="coy_establishment"
+            label="Year of Establishment"
+          />
+          <ControlledInput
+            control={control}
+            name="coy_scale"
+            label="Business Scale"
           />
         </div>
       </div>

@@ -13,6 +13,8 @@ import {
   SUPER_ADMIN_SIDENAV,
 } from '@utils/sideNaDetailsv';
 import pentrarLogo from '@assets/svg/LogoPentrar.svg';
+import { ReactComponent as ProfileICon } from '@assets/svg/profileIcon.svg';
+
 import { useMemo } from 'react';
 
 const active = ({ isActive }: { isActive: boolean }) => {
@@ -138,16 +140,19 @@ function SideNav() {
       </div>
       <div>
         <div className="w-full bg-[#E2E8F0] border[1px] h-[1px]" />
-        <div className="flex flex-col px-4 py-4 text-primary-light">
-          <div className="flex items-center justify-between">
-            <p className="text-[12px] font-[600]">{capitalize(first_name)}</p>
+        <div className="flex px-4  text-primary-light items-center">
+          <ProfileICon />
+          <div className="flex flex-col px-4 py-4 text-primary-light">
+            <div className="flex items-center justify-between">
+              <p className="text-[12px] font-[600]">{capitalize(first_name)}</p>
+            </div>
+            <p
+              className="text-[12px] font-[400] whitespace-nowrap"
+              role="username"
+            >
+              {authUser?.email}
+            </p>
           </div>
-          <p
-            className="text-[12px] font-[400] whitespace-nowrap"
-            role="username"
-          >
-            {authUser?.email}
-          </p>
         </div>
       </div>
     </div>

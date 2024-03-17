@@ -129,7 +129,7 @@ export const getClass = (text: string) => {
     case 'Verified':
     case 'Approved':
     case 'Success':
-      return 'bg-[#DAFBEC] py-[2px] px-[12px] text-statusText-success font-[500] rounded-lg';
+      return 'bg-[#DAFBEC] py-[6px] px-[12px] text-statusText-success font-[500] rounded-lg';
     case 'Inactive':
     case 'Blocked':
       return 'bg-[#FCD9DC] py-[5px] px-[12px] text-[#720B18] font-[500] rounded-lg';
