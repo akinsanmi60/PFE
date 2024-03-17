@@ -90,12 +90,7 @@ export type IFormComleteType = {
 
 export type IFormIndividualType = Pick<
   IFormComleteType,
-  | 'coy_name'
-  | 'coy_address'
-  | 'farm_location'
-  | 'farm_name'
-  | 'farming_scale'
-  | 'farm_land_ownership'
+  'farm_location' | 'farm_name' | 'farming_scale' | 'farm_land_ownership'
 >;
 
 export type IFormCompanyType = Pick<

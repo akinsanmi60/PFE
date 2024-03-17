@@ -3,7 +3,7 @@ import * as yup from 'yup';
 export const CompleteProfileIndividualSchema = yup
   .object({
     farm_name: yup.string().required('Enter your Farm name'),
-    farm_address: yup.string().required('Enter your Farm address'),
+    farm_location: yup.string().required('Enter your Farm address'),
     farm_land_ownership: yup
       .string()
       .required('Enter your Farm land ownership'),

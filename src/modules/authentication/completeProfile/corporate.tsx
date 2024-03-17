@@ -1,8 +1,10 @@
 import { useAuthContext } from '@contexts/authContext';
 import { useFormData } from '@contexts/formContext';
+import { businessScale } from '@db/authData';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
+import ControlledSelect from '@shared/Select/ControlledSelect';
 import { UPDATE_FARMER_URL, UPDATE_AGGREGATOR_URL } from '@utils/apiUrl';
 import { Resolver, useForm } from 'react-hook-form';
 import { useCompleteProfile } from 'services/auth.service';
@@ -81,10 +83,12 @@ function CorporateFormProfile({ setRevealForm }: IFormType) {
             name="coy_establishment"
             label="Year of Establishment"
           />
-          <ControlledInput
+          <ControlledSelect
             control={control}
             name="coy_scale"
             label="Business Scale"
+            placeholder="Please select"
+            optionArray={businessScale}
           />
         </div>
       </div>

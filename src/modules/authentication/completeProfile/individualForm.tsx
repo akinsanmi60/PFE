@@ -1,8 +1,10 @@
 import { useAuthContext } from '@contexts/authContext';
 import { useFormData } from '@contexts/formContext';
+import { businessScale, premisesOwnerShip } from '@db/authData';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
+import ControlledSelect from '@shared/Select/ControlledSelect';
 import { UPDATE_FARMER_URL, UPDATE_AGGREGATOR_URL } from '@utils/apiUrl';
 import { Resolver, useForm } from 'react-hook-form';
 import { useCompleteProfile } from 'services/auth.service';
@@ -53,15 +55,19 @@ function IndividualFormProfile({ setRevealForm }: IFormType) {
           label="Farm Address"
         />
         <div className="flex gap-x-[16px]">
-          <ControlledInput
+          <ControlledSelect
             control={control}
             name="farm_land_ownership"
             label="Land Ownership"
+            placeholder="Please select"
+            optionArray={premisesOwnerShip}
           />
-          <ControlledInput
+          <ControlledSelect
             control={control}
             name="farming_scale"
             label="Farming Scale"
+            placeholder="Please select"
+            optionArray={businessScale}
           />
         </div>
       </div>
