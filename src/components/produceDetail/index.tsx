@@ -43,7 +43,7 @@ function ProduceCard({
       label: 'Harvest Date',
       accessor: 'harvest_date',
       render: ({ harvest_date }) => {
-        return formatDate({ date: harvest_date, time: true });
+        return formatDate({ date: harvest_date });
       },
     },
     { label: 'Farm Location', accessor: 'farm_state' },
@@ -67,7 +67,7 @@ function ProduceCard({
       label: 'Planting Date',
       accessor: 'planting_date',
       render: ({ planting_date }) => {
-        return formatDate({ date: planting_date, time: true });
+        return formatDate({ date: planting_date });
       },
     },
     {
