@@ -12,6 +12,7 @@ const customColors = {
   secondary: {
     'light-1': '#2AA232',
     'light-2': '#333333',
+    'light-3': '#EDEAFB',
     'dark-1': '#111827',
   },
   tertiary: {

@@ -35,7 +35,7 @@ function DashboardHeroFOrFarmerAggregator({
             {isLoading ? (
               <CircularProgress color="#072723" size={30} />
             ) : (
-              data?.data?.countedProduce || 0
+              data?.data?.counted_produce || 0
             )}
           </p>
         </div>
@@ -47,7 +47,7 @@ function DashboardHeroFOrFarmerAggregator({
             {isLoading ? (
               <CircularProgress color="#072723" size={30} />
             ) : (
-              data?.data?.pendingProduce || 0
+              data?.data?.pending_produce || 0
             )}
           </p>
         </div>
@@ -57,7 +57,7 @@ function DashboardHeroFOrFarmerAggregator({
           </h3>
           <PendingProduce
             produceValue={{
-              produceDetail: data?.data?.detailPendingProduce,
+              produceDetail: data?.data?.detail_pending_produce,
               loading: isLoading,
             }}
           />{' '}

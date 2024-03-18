@@ -26,14 +26,15 @@ import {
   USER_SIGNUP_URL,
   USER_VERIFY_URL,
 } from '@utils/apiUrl';
-import { userPathsLinks } from '@modules/users/routes';
 import { LOCAL_STORAGE_KEY } from '@utils/localStorageKey';
 import { RootLink } from 'routes/routeObject';
 import { displayError, displaySuccess } from '@shared/Toast/Toast';
-import { adminPathsLinks } from '@modules/admin/routes';
 import { queryKeys } from '@utils/queryKey';
 import { useModalContext } from '@contexts/modalContext';
 import { UseFormReset } from 'react-hook-form';
+import { userPathsLinks } from '@modules/users/routes';
+import { adminPathsLinks } from '@modules/admin/routes';
+import { BasePath } from 'routes/Routes';
 // import { queryParamsHelper } from 'config/query-params';
 
 const userDashboard = ['farmer', 'aggregator'];
@@ -66,22 +67,20 @@ export const useLoginMutation = ({ url }: { url: string }) => {
             displaySuccess(res?.message || '');
             saveDetailToLocalStorage(
               LOCAL_STORAGE_KEY.URL,
-              `/${userPathsLinks.basePath}`,
+              `/${BasePath.USER}`,
             );
-            navigate(
-              `/${userPathsLinks.basePath}/${userPathsLinks.dashBoard}`,
-              { replace: true },
-            );
+            navigate(`/${BasePath.USER}/${userPathsLinks.dashBoard}`, {
+              replace: true,
+            });
           } else if (decodedUser && adminDashboard.includes(decodedUser.role)) {
             displaySuccess(res?.message || '');
             saveDetailToLocalStorage(
               LOCAL_STORAGE_KEY.URL,
-              `/${adminPathsLinks.basePath}/${adminPathsLinks.dashBoard}`,
+              `/${BasePath.ADMIN}/${adminPathsLinks.dashBoard}`,
             );
-            navigate(
-              `/${adminPathsLinks.basePath}/${adminPathsLinks.dashBoard}`,
-              { replace: true },
-            );
+            navigate(`/${BasePath.ADMIN}/${adminPathsLinks.dashBoard}`, {
+              replace: true,
+            });
           }
         }
       },

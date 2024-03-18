@@ -42,4 +42,6 @@ export type ITableProp<TData> = {
   current_page?: number;
   setLimit?: (_limit: number) => void;
   children?: React.ReactNode;
+  containerClassName?: string;
+  paginationArray?: number[];
 };

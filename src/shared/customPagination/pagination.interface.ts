@@ -6,4 +6,5 @@ export type ICustomPagination = {
   limit?: number;
   onChangeOfPage?: (_page: number) => void;
   onChangeofPageSize?: (_val: number) => void;
+  paginationArray?: number[];
 };

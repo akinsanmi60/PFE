@@ -29,6 +29,10 @@ const ProduceDetailPage = React.lazy(
   () => import('../../../components/produceDetail/individualProduce'),
 );
 
+const FarmerDetailPage = React.lazy(
+  () => import('@modules/admin/pages/farmer/farmerDetailPage'),
+);
+
 export const adminPathsLinks = {
   basePath: 'pentrar/admin',
   dashBoard: 'dashboard',
@@ -40,6 +44,7 @@ export const adminPathsLinks = {
   allExporters: 'all-exporters',
   allOfftakers: 'all-offtakers',
   allFarmers: 'all-farmers',
+  farmerDetail: 'all-farmers/:id/:userType/:tab',
   allTeams: 'all-teams',
 };
 
@@ -67,6 +72,11 @@ const AdminRoutes = {
   FarmerList: {
     element: FarmerList,
     path: adminPathsLinks.allFarmers,
+  },
+
+  FarmerDetail: {
+    element: FarmerDetailPage,
+    path: adminPathsLinks.farmerDetail,
   },
 
   AggregatorList: {

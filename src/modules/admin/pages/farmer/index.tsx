@@ -10,6 +10,9 @@ import TableLoading from '@shared/Table/tableLoading';
 import { ITableHead } from '@shared/Table/table.interface';
 import { formatDate } from '@utils/constants';
 import { IFarmerQueryProp } from 'types/admin.type';
+import { useNavigate } from 'react-router-dom';
+import { FarmersPath } from '@utils/paths';
+import { IIndividualFarmer } from 'types/individualFarmerAggregator.type';
 
 function FarmerList() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,6 +21,7 @@ function FarmerList() {
     page: 1,
     limit: 10,
   });
+  const navigate = useNavigate();
 
   const updateQueryParams = (params: IFarmerQueryProp) => {
     setQueryParams(prev => ({ ...prev, ...params }));
@@ -25,7 +29,7 @@ function FarmerList() {
 
   const { data, isLoading, isRefetching } = useGetAllFarmers(queryParams);
 
-  const tableHead: ITableHead<any>[] = [
+  const tableHead: ITableHead<IIndividualFarmer>[] = [
     {
       label: 'id',
       accessor: 'pentrar_id',
@@ -80,7 +84,7 @@ function FarmerList() {
         </div>
       </AppHeader>
       <PageContainer className="pt-0">
-        <CustomTable
+        <CustomTable<IIndividualFarmer>
           tableHeads={tableHead}
           total={data?.data?.total}
           page_size={data?.data?.page_size}
@@ -94,6 +98,16 @@ function FarmerList() {
           showPagination
           setCurrentPage={(val: number) => updateQueryParams({ page: val })}
           setLimit={(val: number) => updateQueryParams({ limit: val })}
+          onRowClick={row => {
+            // navigate(`/pentrar/admin/all-farmers/${row.id}/farmer-detail/overview`);
+            navigate(
+              `/${FarmersPath.farmersDetails(
+                row?.id as string,
+                row?.user_type,
+                'produces',
+              )}`,
+            );
+          }}
         />
       </PageContainer>
     </div>

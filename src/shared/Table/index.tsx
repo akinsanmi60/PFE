@@ -39,6 +39,8 @@ const CustomTable = <TData extends ITableBody>({
   setLimit,
   children,
   onRowClick,
+  containerClassName,
+  paginationArray,
 }: ITableProp<TData>) => {
   const [sortConfig, setSortConfig] = useState<ISortData>({
     key: '' || null,
@@ -114,7 +116,9 @@ const CustomTable = <TData extends ITableBody>({
   const borderValue = showDivider ? '1px' : '0px';
 
   return (
-    <div className="w-full bg-primary-white rounded-lg mt-[30px] p-[24px]">
+    <div
+      className={`w-full bg-primary-white rounded-lg mt-[30px] p-[24px] ${containerClassName}`}
+    >
       {children}
       <div
         id="tableContainer"
@@ -280,6 +284,7 @@ const CustomTable = <TData extends ITableBody>({
                 lengthOfData={dataLength}
                 onChangeofPageSize={handleSetLimit}
                 limit={page_size as number}
+                paginationArray={paginationArray}
               />
             </div>
           )}

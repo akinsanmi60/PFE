@@ -11,6 +11,7 @@ function CustomPagination({
   onChangeOfPage,
   onChangeofPageSize,
   limit,
+  paginationArray,
 }: ICustomPagination) {
   return (
     <div className="w-full mt-[24px] flex items-center justify-between relative xlsm:flex-col">
@@ -49,7 +50,11 @@ function CustomPagination({
           {Math.min(endIndex, lengthOfData) || 0} of {lengthOfData || 0} entries
         </p>
 
-        <ShowButton onChangeofPageSize={onChangeofPageSize} limit={limit} />
+        <ShowButton
+          onChangeofPageSize={onChangeofPageSize}
+          limit={limit}
+          paginationArray={paginationArray}
+        />
       </div>
     </div>
   );

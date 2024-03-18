@@ -92,3 +92,8 @@ export const RenderRoute = (incomingRoutes: IRenderRouteProp) => {
     );
   });
 };
+
+export const BasePath = {
+  USER: 'pentrar/user',
+  ADMIN: 'pentrar/admin',
+};

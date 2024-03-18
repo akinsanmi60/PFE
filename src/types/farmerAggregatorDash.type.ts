@@ -8,9 +8,10 @@ export type IPendingData = {
 };
 export type IFarmerAggregatorDashboardcount = IBaseResponse & {
   data: {
-    countedProduce: 0;
-    pendingProduce: 0;
-    detailPendingProduce: IPendingData;
+    counted_produce: number;
+    pending_produce: number;
+    detail_pending_produce: IPendingData;
+    approved_produce: number;
   };
 };
 
