@@ -37,7 +37,7 @@ function ShowButton({
     return () => {
       window.removeEventListener('click', handler);
     };
-  }, []);
+  }, [selectOption]);
 
   const pageSizeOptionsToUse = paginationArray
     ? paginationArray
