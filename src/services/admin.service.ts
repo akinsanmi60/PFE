@@ -88,6 +88,7 @@ const useApproveAggregator = (id: string) => {
   return { mutate, isLoading, ...rest };
 };
 
+//TODO: type response for useQuery AllFarmers
 const useGetAllFarmers = (queryParams: IFarmerQueryProp) => {
   const { isLoading, isRefetching, isError, data } = useQuery<any>(
     [queryKeys.getAllFarmers, queryParams],
@@ -108,6 +109,7 @@ const useGetAllFarmers = (queryParams: IFarmerQueryProp) => {
   };
 };
 
+//TODO: type response for useQuery AllAggregators
 const useGetAllAggregators = (queryParams: IFarmerQueryProp) => {
   const { isLoading, isRefetching, isError, data } = useQuery<any>(
     [queryKeys.getAllAggregator, queryParams],
@@ -128,6 +130,7 @@ const useGetAllAggregators = (queryParams: IFarmerQueryProp) => {
   };
 };
 
+//TODO: type response for useQuery AllProduce
 const useGetAllProduce = (queryParams: IFarmerQueryProp) => {
   const { isLoading, isRefetching, isError, data } = useQuery<any>(
     [queryKeys.getAllProduce, queryParams],
@@ -147,6 +150,8 @@ const useGetAllProduce = (queryParams: IFarmerQueryProp) => {
     data: data as any,
   };
 };
+
+//TODO: type response for useQuery AdminDashboard
 const useGetAdminDashboard = (id: string) => {
   const { isLoading, isRefetching, isError, data } = useQuery<any>(
     [queryKeys.getAdminDashboardCount],

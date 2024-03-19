@@ -6,13 +6,13 @@ import AppHeader from 'components/appHeader/appHeader';
 import FarmerAggregatorUserDetailPpage from 'components/userDetail';
 import ViewActionButtons from 'components/userDetail/viewActionButtons';
 import { useParams } from 'react-router-dom';
-import { useGetIndividualFarmer } from 'services/individualFarmerAggregator.service';
+import { useGetIndividualAggregator } from 'services/individualFarmerAggregator.service';
 
 function AggreggatorDetailPage() {
   const { id, tab, userType } = useParams();
   const currentTab = (tab || 'produces') as IFarmersAggregatorTab;
 
-  const { data, isLoading } = useGetIndividualFarmer({
+  const { data, isLoading } = useGetIndividualAggregator({
     queryParamsId: id as string,
     url: GET_INDIVIDUAL_AGGREGATOR_URL,
   });

@@ -29,6 +29,28 @@ function useGetIndividualFarmer({ queryParamsId, url }: IIndividualUrlParams) {
   };
 }
 
+//TODO: type this response for useQuery IndividualAggregator
+function useGetIndividualAggregator({
+  queryParamsId,
+  url,
+}: IIndividualUrlParams) {
+  const { isLoading, isRefetching, isError, data } =
+    useQuery<IIndividualResponse>(
+      [queryKeys.getIndividualAggregator, queryParamsId],
+      () => getRequest({ url: url(queryParamsId) }),
+      {
+        refetchOnWindowFocus: false,
+      },
+    );
+
+  return {
+    isLoading,
+    isRefetching,
+    isError,
+    data: data?.data as IIndividualFarmer,
+  };
+}
+
 function useFarmerAggregatorProduce(
   queryParams: IBaseQueryProps,
   id: string,
@@ -56,4 +78,8 @@ function useFarmerAggregatorProduce(
     data: data as IMyProduceResponse,
   };
 }
-export { useGetIndividualFarmer, useFarmerAggregatorProduce };
+export {
+  useGetIndividualFarmer,
+  useFarmerAggregatorProduce,
+  useGetIndividualAggregator,
+};

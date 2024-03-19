@@ -12,4 +12,5 @@ export const queryKeys = {
   emailCheck: 'emailCheck',
   getAllSubAdmin: 'getAllSubAdmin',
   getAllAggregator: 'getAllAggregator',
+  getIndividualAggregator: 'getIndividualAggregator',
 };
