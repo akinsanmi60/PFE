@@ -4,7 +4,15 @@ import { capitalize } from '@utils/constants';
 import { FarmersPath } from '@utils/paths';
 import { useApproveAggregator, useApproveFarmer } from 'services/admin.service';
 
-function ViewActionButtons({ id, userType }: { id: string; userType: string }) {
+function ViewActionButtons({
+  id,
+  userType,
+  status,
+}: {
+  id: string;
+  userType: string;
+  status: string;
+}) {
   const { mutate: farmerApproveMutate, isLoading: isLoadingApprove } =
     useApproveFarmer(id as string);
 
@@ -35,15 +43,17 @@ function ViewActionButtons({ id, userType }: { id: string; userType: string }) {
           },
         ]}
       />
-      <CustomButton
-        className={`bg-secondary-light-1 text-primary-white text-[8px] font-[600]`}
-        sx={{ borderRadius: '8px', px: 4, py: 0 }}
-        onClick={handleApprove}
-        loading={isLoadingApprove || isLoadingApproveAggregator}
-        loadingText="Approving..."
-      >
-        Approve {capitalize(userType)}
-      </CustomButton>{' '}
+      {status === 'pending' && (
+        <CustomButton
+          className={`bg-secondary-light-1 text-primary-white text-[8px] font-[600]`}
+          sx={{ borderRadius: '8px', px: 4, py: 0 }}
+          onClick={handleApprove}
+          loading={isLoadingApprove || isLoadingApproveAggregator}
+          loadingText="Approving..."
+        >
+          Approve {capitalize(userType)}
+        </CustomButton>
+      )}
     </div>
   );
 }

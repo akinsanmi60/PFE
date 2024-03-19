@@ -55,8 +55,8 @@ const useApproveFarmer = (id: string) => {
 
     {
       onSuccess(res) {
+        queryClient.invalidateQueries([queryKeys.getIndividualFarmer]);
         displaySuccess(res?.message);
-        queryClient.invalidateQueries([queryKeys.getAllFarmers]);
       },
       onError(error) {
         displayError(error);
@@ -76,8 +76,8 @@ const useApproveAggregator = (id: string) => {
 
     {
       onSuccess(res) {
+        queryClient.invalidateQueries([queryKeys.getIndividualAggregator]);
         displaySuccess(res?.message);
-        queryClient.invalidateQueries([queryKeys.getAllAggregator]);
       },
       onError(error) {
         displayError(error);

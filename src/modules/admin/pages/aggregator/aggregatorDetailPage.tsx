@@ -21,7 +21,11 @@ function AggreggatorDetailPage() {
     <div>
       <AppHeader>
         <PageContainer>
-          <ViewActionButtons id={id as string} userType={userType as string} />
+          <ViewActionButtons
+            id={id as string}
+            userType={userType as string}
+            status={data?.status}
+          />
         </PageContainer>
       </AppHeader>
       <PageContainer className="pt-0">
