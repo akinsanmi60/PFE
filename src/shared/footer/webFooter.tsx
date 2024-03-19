@@ -23,7 +23,7 @@ const socialLinks = [
 ];
 function Footer() {
   return (
-    <footer className="w-full bg-[var(--dark-primary)] text-primary-white  pt-[50px] pb-[20px] ">
+    <footer className="w-full bg-[var(--dark-primary)] text-primary-white  pt-[23px] pb-[20px] ">
       <div className="max-content">
         <div className="container">
           <div className="flex justify-between items-center">
@@ -44,7 +44,7 @@ function Footer() {
               ))}
             </div>
           </div>
-          <p className="text-center font-[400] text-[14px] leading-[29px] mt-[26px]">
+          <p className="text-center font-[400] text-[14px] leading-[29px] mt-[15px]">
             {getYear()} @ Pentrar
           </p>
         </div>

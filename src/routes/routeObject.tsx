@@ -31,14 +31,14 @@ const AgencyLogin = React.lazy(
 );
 
 export const RootLink = {
-  login: '/login',
-  registerFarmerAggregator: '/register-form',
-  forgotPassword: '/forgot-password',
-  resetPassword: '/reset-password',
-  adminLogin: '/admin-login',
-  agencyLogin: '/agency-login',
-  registerExporterOfftaker: '/register',
-  unauthourized: '/unauthourized',
+  login: 'login',
+  registerFarmerAggregator: 'register-form',
+  forgotPassword: 'forgot-password',
+  resetPassword: 'reset-password',
+  adminLogin: 'admin-login',
+  agencyLogin: 'agency-login',
+  registerExporterOfftaker: 'register',
+  unauthourized: 'unauthourized',
   error: '*',
 };
 

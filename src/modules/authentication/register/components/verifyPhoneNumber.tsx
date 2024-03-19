@@ -62,7 +62,7 @@ function GetVerifyCode({ currentStep, action, previous }: IFormComponentType) {
         <div className="mt-[140px] flex justify-end items-baseline">
           <div className="flex justify-between gap-4">
             <CustomButton
-              className="border-primary-main border-[1px] w-[150px] bg-primary-white text-primary-main"
+              className="border-primary-main border-[1px] w-[50%] bg-primary-white text-primary-main"
               loadingText="Verifying..."
               type="submit"
               onClick={previous}
@@ -70,7 +70,7 @@ function GetVerifyCode({ currentStep, action, previous }: IFormComponentType) {
               Go Back{' '}
             </CustomButton>
             <CustomButton
-              className=" w-[300px] bg-primary-main text-primary-white"
+              className=" w-[50%] text-primary-white"
               loading={isLoading}
               loadingText="Verifying..."
               type="submit"

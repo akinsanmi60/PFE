@@ -1,6 +1,7 @@
 import rightArrow from '@assets/svg/rightArrow.svg';
 import { useNavigate } from 'react-router-dom';
 import logoIcon from '@assets/svg/logoIcon.svg';
+import CustomButton from '@shared/Button';
 function AccessCard() {
   const navigate = useNavigate();
   return (
@@ -12,7 +13,7 @@ function AccessCard() {
               Lorem ipsum dolor sit amet consectetur. Mauris velit sit eleifend
               faucibus urna in id{' '}
             </p>
-            <button
+            <CustomButton
               onClick={() => navigate('/login')}
               className="mt-[20px] cursor-pointer flex items-center gap-[10px] bg-[#6AD871] border-[2px] border-[#072723] rounded-[40px] py-[20px] px-[48px] xlsm:py-[12px] xlsm:px-[24px]"
             >
@@ -20,7 +21,7 @@ function AccessCard() {
                 Get Access
               </p>
               <img src={rightArrow} alt="arrow" className="w-[16px] h-[16px]" />
-            </button>
+            </CustomButton>
           </div>
           <div>
             <img

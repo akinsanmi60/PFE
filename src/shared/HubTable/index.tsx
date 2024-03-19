@@ -1,7 +1,7 @@
 import CustomPagination from '@shared/customPagination';
 import { IHubProp, IRowBody } from './type';
 import { formatDate } from '@utils/constants';
-import defaultImage from '@assets/png/hubImgC.png';
+import defaultImage from '@assets/png/hubImgDefault.png';
 
 function CustomHubTable<TData extends IRowBody>({
   dataBody,

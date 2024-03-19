@@ -8,14 +8,14 @@ type IDetailProps<TData> = {
       render?: ((_object: TData) => React.ReactNode) | undefined;
     }[];
 
-    produceData?: TData;
+    incomingData?: TData;
   };
 };
 
 function UserCard<TData extends IRowBody>({
   detailProps,
 }: IDetailProps<TData>) {
-  const { detailKeys, produceData } = detailProps;
+  const { detailKeys, incomingData } = detailProps;
   return (
     <div className="flex flex-col gap-y-[10px] w-full">
       {detailKeys.map(({ label, accessor, render }) => {
@@ -26,11 +26,11 @@ function UserCard<TData extends IRowBody>({
             </span>{' '}
             <span className="font-[600] text-[14px] leading-[20px] text-primary-main">
               {' '}
-              {produceData &&
+              {incomingData &&
                 (render
-                  ? render(produceData) || '--'
+                  ? render(incomingData) || '--'
                   : accessor
-                  ? (produceData[accessor] as string) || '--'
+                  ? (incomingData[accessor] as string) || '--'
                   : '--')}
             </span>
           </div>

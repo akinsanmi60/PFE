@@ -9,6 +9,7 @@ import { useGetPentrarHubProduce } from 'services/pentrar.service';
 import { useModalContext } from '@contexts/modalContext';
 import OnHubProduceDetail from 'components/hubProduceDetail';
 import TableLoading from '@shared/Table/tableLoading';
+import { formatDate } from '@utils/constants';
 
 function HubProduce() {
   const { modalState, handleModalOpen } = useModalContext();
@@ -39,7 +40,14 @@ function HubProduce() {
 
   const viewProduce = (produceData: IProduceItemList) => {
     handleModalOpen('hubProduceDetail');
-    setModalProduceDetail(produceData);
+
+    const formattedData = {
+      ...produceData,
+      harvest_date: produceData.harvest_date
+        ? formatDate({ date: produceData.harvest_date })
+        : null,
+    };
+    setModalProduceDetail(formattedData);
   };
 
   return (

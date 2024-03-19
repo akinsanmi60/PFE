@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
 import ModalBaseWrapper from '@shared/ModalBase';
+import ControlledSelect from '@shared/Select/ControlledSelect';
 import ModalHeader from 'components/appNav/modalHeader';
 import { useForm } from 'react-hook-form';
 import { useAdminCreationMutation } from 'services/admin.service';
@@ -65,11 +66,12 @@ function AddAdminComponent() {
             control={control}
           />
 
-          <ControlledInput
+          <ControlledSelect
             name="role"
             label="Role"
             placeholder="Enter user role"
             control={control}
+            options={[{ value: 'subAdmin', label: 'Sub Admin' }]}
           />
 
           <div className="flex justify-end mt-[8px] mb-[-50px]">

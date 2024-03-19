@@ -148,7 +148,7 @@ function ViewDetail<TData extends IRowBody>({
           <UserCard
             detailProps={{
               detailKeys: detailAColumnsTitleA,
-              produceData: userData,
+              incomingData: userData,
             }}
           />
         </div>
@@ -162,7 +162,7 @@ function ViewDetail<TData extends IRowBody>({
           <UserCard
             detailProps={{
               detailKeys: detailAColumnsTitleB,
-              produceData: userData,
+              incomingData: userData,
             }}
           />
         </div>
@@ -172,7 +172,7 @@ function ViewDetail<TData extends IRowBody>({
             <UserCard
               detailProps={{
                 detailKeys: detailAColumnsTitleC,
-                produceData: userData,
+                incomingData: userData,
               }}
             />
           </div>

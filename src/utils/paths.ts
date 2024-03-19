@@ -2,6 +2,34 @@ import { adminFarmersTabs } from './enums';
 import { adminPathsLinks } from '@modules/admin/routes';
 import { BasePath } from 'routes/Routes';
 import { joinPath } from './navigation';
+import { RootLink } from 'routes/routeObject';
+
+export const webPaths = {
+  root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.WEB}` : ''}`,
+  home: (fullPath: boolean = true) => `${webPaths.root(fullPath)}`,
+  about: (fullPath: boolean = true) => `${webPaths.root(fullPath)}about`,
+  services: (fullpath: boolean = true) => `${webPaths.root(fullpath)}services`,
+};
+
+export const authPaths = {
+  root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.WEB}` : ''}`,
+  login: (fullPath: boolean = true) =>
+    `${authPaths.root(fullPath)}${RootLink.login}`,
+  registerFarmerAggregator: (fullPath: boolean = true) =>
+    `${authPaths.root(fullPath)}${RootLink.registerFarmerAggregator}`,
+  registerExporterOfftaker: (fullPath: boolean = true) =>
+    `${authPaths.root(fullPath)}${RootLink.registerExporterOfftaker}`,
+  forgotPassword: (fullPath: boolean = true) =>
+    `${authPaths.root(fullPath)}${RootLink.forgotPassword}`,
+  resetPassword: (fullPath: boolean = true) =>
+    `${authPaths.root(fullPath)}${RootLink.resetPassword}`,
+  adminLogin: (fullPath: boolean = true) =>
+    `${authPaths.root(fullPath)}${RootLink.adminLogin}`,
+  agencyLogin: (fullPath: boolean = true) =>
+    `${authPaths.root(fullPath)}${RootLink.agencyLogin}`,
+  unauthourized: (fullPath: boolean = true) =>
+    `${authPaths.root(fullPath)}${RootLink.unauthourized}`,
+};
 
 export type IFarmersAggregatorTab = typeof adminFarmersTabs[number];
 export const FarmersPath = {

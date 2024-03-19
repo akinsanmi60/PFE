@@ -1,6 +1,5 @@
 import CustomButton from '@shared/Button';
 import ModalBaseWrapper from '@shared/ModalBase';
-import { formatDate } from '@utils/constants';
 import { IProduceItemList } from 'types/pentrarHub.type';
 import { ReactComponent as CallingPhone } from '@assets/svg/callingPhoneWhite.svg';
 import ModalHeader from 'components/appNav/modalHeader';
@@ -20,9 +19,7 @@ function OnHubProduceDetail({
   const detailValue = [
     modalProduceDetail?.quantity,
     returnString(),
-    formatDate({
-      date: modalProduceDetail?.harvest_date as string,
-    }),
+    modalProduceDetail?.harvest_date,
     modalProduceDetail?.farm_state,
   ];
 

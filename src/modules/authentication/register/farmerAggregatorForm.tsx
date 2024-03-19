@@ -5,6 +5,7 @@ import PersonalinfoForm from './components/personalinfoForm';
 import GetVerifyCode from './components/verifyPhoneNumber';
 import CreatePassword from './components/createPassword';
 import { useNavigate } from 'react-router-dom';
+import { webPaths } from '@utils/paths';
 
 function FarmerAggregatorRegister() {
   const steps = ['Personal Information', 'Verify Phone', 'Create Password'];
@@ -31,7 +32,7 @@ function FarmerAggregatorRegister() {
         <img
           src={pentrarLogo}
           alt="logo"
-          onClick={() => navigate('/')}
+          onClick={() => navigate(`${webPaths.home()}`)}
           className="cursor-pointer"
         />
       </>

@@ -13,6 +13,7 @@ import { ReactComponent as ChevronDown } from '@assets/svg/chevronDown.svg';
 import { logOut } from '@hooks/auth';
 import { getToken } from '@hooks/localStorageHook';
 import { useNavigate } from 'react-router-dom';
+import { webPaths } from '@utils/paths';
 
 const ProfileBox = ({ first_name }: { first_name: string }) => {
   const { setAuthUser } = useAuthContext();
@@ -27,7 +28,7 @@ const ProfileBox = ({ first_name }: { first_name: string }) => {
     if (!token) {
       setAuthUser(null);
       localStorage.removeItem('presentUrl');
-      navigate('/');
+      navigate(`${webPaths.home()}`);
     }
   };
 
