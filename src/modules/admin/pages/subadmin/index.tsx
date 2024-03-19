@@ -8,10 +8,52 @@ import EmptyBar from '@shared/Table/tableEmpty';
 import CustomButton from '@shared/Button';
 import { useModalContext } from '@contexts/modalContext';
 import AddAdminComponent from 'components/addAdmin';
+import { useGetAllSubAdmin } from 'services/admin.service';
+import TableLoading from '@shared/Table/tableLoading';
+import { IAdminData, ISubAdminQuery } from 'types/admin.type';
+import { ITableHead } from '@shared/Table/table.interface';
+import { formatDate } from '@utils/constants';
 
 function SubAdmin() {
   const [searchTerm, setSearchTerm] = useState('');
   const { modalState, handleModalOpen } = useModalContext();
+  const [queryParams, setQueryParams] = useState({
+    search: '',
+    page: 1,
+    limit: 10,
+  });
+
+  const updateQueryParams = (params: ISubAdminQuery) => {
+    setQueryParams(prev => ({ ...prev, ...params }));
+  };
+
+  const { data, isLoading, isRefetching } = useGetAllSubAdmin(queryParams);
+
+  const tableHead: ITableHead<IAdminData>[] = [
+    {
+      label: 'id',
+      accessor: 'pentrar_id',
+    },
+    {
+      label: 'Full Name',
+      accessor: 'full_name',
+    },
+    {
+      label: 'Phone Number',
+      accessor: 'phone_number',
+    },
+    {
+      label: 'Last Login',
+      accessor: '',
+      render: ({ last_active }) => {
+        return formatDate({ date: last_active });
+      },
+    },
+    {
+      label: 'Status',
+      accessor: 'status',
+    },
+  ];
 
   return (
     <div className="">
@@ -43,12 +85,20 @@ function SubAdmin() {
       </AppHeader>
       <PageContainer className="pt-0">
         <div className="w-full bg-primary-white rounded-lg mt-[30px]">
-          <CustomTable
-            tableHeads={[]}
-            dataTableSource={[]}
+          <CustomTable<IAdminData>
+            tableHeads={tableHead}
+            loading={isLoading || isRefetching}
+            total={data?.total}
+            page_size={data?.page_size}
+            dataTableSource={data?.subAdmin_list || []}
+            current_page={data?.current_page}
             tableEmptyState={
-              <EmptyBar emptyStateSize="lg" componentType="Subadmin" />
+              <EmptyBar emptyStateSize="lg" componentType="Sub-Admins" />
             }
+            tableLoader={<TableLoading title="Loading Sub-Admins" />}
+            showPagination
+            setCurrentPage={(val: number) => updateQueryParams({ page: val })}
+            setLimit={(val: number) => updateQueryParams({ limit: val })}
           />
         </div>
       </PageContainer>

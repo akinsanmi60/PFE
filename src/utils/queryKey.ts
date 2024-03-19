@@ -10,4 +10,5 @@ export const queryKeys = {
   getAdminDashboardCount: 'getAdminDashboardCount',
   getAllAdmins: 'getAllAdmins',
   emailCheck: 'emailCheck',
+  getAllSubAdmin: 'getAllSubAdmin',
 };

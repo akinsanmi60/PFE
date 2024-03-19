@@ -81,7 +81,8 @@ function ProduceCard({
     if (userArray.includes(authUser?.role as string)) {
       return (
         <CustomButton
-          className='"w-full text-primary-white py-[2px]'
+          sx={{ borderRadius: '8px', px: 4, py: 0 }}
+          className='"w-full text-primary-white py-[2px] bg-secondary-light-1'
           onClick={() => {
             if (produceData?.can_transfer === false) {
               return toast.error(
@@ -98,7 +99,8 @@ function ProduceCard({
     } else {
       return (
         <CustomButton
-          className='"w-full text-primary-white py-[2px]'
+          sx={{ borderRadius: '8px', px: 4, py: 0 }}
+          className='"w-full text-primary-white py-[2px] bg-secondary-light-1'
           onClick={() => {
             if (produceData?.status === 'approved') {
               return toast.error('Produce already approved', toastOptions);
@@ -106,7 +108,11 @@ function ProduceCard({
             handleModalOpen('ApproveProduce');
           }}
         >
-          Approve Produce
+          {loading
+            ? 'Loading...'
+            : produceData?.status === 'approved'
+            ? 'Approved'
+            : 'Approve Produce'}
         </CustomButton>
       );
     }

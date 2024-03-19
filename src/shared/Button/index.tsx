@@ -45,7 +45,7 @@ const CustomButton = ({
       default: {
         return {
           className:
-            'tracking-normal py-[8px] duration-300 ease-in-out px-[32px] outline-none text-base cursor-pointer font-medium bg-[#072723] text-white focus:outline-none xlsm:text-[1rem]',
+            'tracking-normal py-[8px] duration-300 ease-in-out px-[32px] outline-none text-base cursor-pointer font-medium  bg-secondary-light-1 text-white focus:outline-none xlsm:text-[1rem]',
         };
       }
     }
@@ -58,9 +58,11 @@ const CustomButton = ({
       disabled={disabled}
       role={role}
       sx={{
-        borderRadius: '40px',
+        // borderRadius: '40px',
+        borderRadius: '8px',
         paddingY: '22px',
-        borderColor: variant === 'outlined' ? 'border-primary-main' : 'none',
+        borderColor:
+          variant === 'outlined' ? 'border-secondary-light-1' : 'none',
       }}
       className={twMerge(className, _className)}
       {...rest}

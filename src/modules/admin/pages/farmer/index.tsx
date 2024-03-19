@@ -99,7 +99,6 @@ function FarmerList() {
           setCurrentPage={(val: number) => updateQueryParams({ page: val })}
           setLimit={(val: number) => updateQueryParams({ limit: val })}
           onRowClick={row => {
-            // navigate(`/pentrar/admin/all-farmers/${row.id}/farmer-detail/overview`);
             navigate(
               `/${FarmersPath.farmersDetails(
                 row?.id as string,

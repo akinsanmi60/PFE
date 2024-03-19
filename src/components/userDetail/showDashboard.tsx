@@ -35,7 +35,7 @@ function ShowDashboard({ dashboardProp }: IshowDashboard) {
           </p>
           <p className="text-primary-main text-[20px] font-[600] leading-[42px]">
             {dashboardProp?.isLoading ? (
-              <CircularProgress color="#072723" size={30} />
+              <CircularProgress color="#2AA232" size={30} />
             ) : (
               item.count
             )}

@@ -5,9 +5,12 @@ import PageContainer from 'components/Layout/PageContainer';
 import AppHeader from 'components/appHeader/appHeader';
 import { ReactComponent as SearchVector } from '@assets/svg/searchVector.svg';
 import { useState } from 'react';
+import CustomButton from '@shared/Button';
+import { useModalContext } from '@contexts/modalContext';
 
 function AgencyList() {
   const [searchTerm, setSearchTerm] = useState('');
+  const { modalState, handleModalOpen } = useModalContext();
 
   return (
     <div className="">
@@ -28,6 +31,13 @@ function AgencyList() {
                 term: searchTerm,
               }}
             />
+            <CustomButton
+              className="text-primary-white w-[180px] bg-secondary-light-1"
+              sx={{ borderRadius: '8px', px: 4, py: 0 }}
+              onClick={() => handleModalOpen('createAgency')}
+            >
+              Add Agency
+            </CustomButton>
           </div>
         </div>
       </AppHeader>
@@ -42,6 +52,8 @@ function AgencyList() {
           />
         </div>
       </PageContainer>
+
+      {modalState?.modalType === 'createAgency' && <>Hello </>}
     </div>
   );
 }

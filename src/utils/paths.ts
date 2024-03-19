@@ -14,3 +14,14 @@ export const FarmersPath = {
     fullPath: boolean = true,
   ) => `${joinPath(FarmersPath.root(fullPath), farmerId, detail, tab)}`,
 };
+
+export const AggregatorsPath = {
+  root: (fullPath: boolean = true) =>
+    `${fullPath ? `${BasePath.ADMIN}/` : ''}${adminPathsLinks.allAggregators}`,
+  aggregatorsDetails: (
+    aggregatorId: string,
+    detail: string,
+    tab: IFarmersAggregatorTab | null,
+    fullPath: boolean = true,
+  ) => `${joinPath(AggregatorsPath.root(fullPath), aggregatorId, detail, tab)}`,
+};

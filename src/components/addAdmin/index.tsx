@@ -32,7 +32,7 @@ function AddAdminComponent() {
     <ModalBaseWrapper
       modalBaseProp={{
         showCloseBtn: false,
-        className: 'w-[761px]',
+        className: 'w-[600px]',
       }}
     >
       <div className="p-[6px]">
@@ -75,7 +75,7 @@ function AddAdminComponent() {
           <div className="flex justify-end mt-[8px] mb-[-50px]">
             <CustomButton
               onClick={handleSubmit(onAddSubAdmin)}
-              className="bg-primary-main text-primary-white w-[180px]"
+              className="text-primary-white w-[180px]"
               loading={isLoading}
             >
               Save Admin

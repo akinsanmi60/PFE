@@ -146,11 +146,8 @@ function SideNav() {
             <div className="flex items-center justify-between">
               <p className="text-[12px] font-[600]">{capitalize(first_name)}</p>
             </div>
-            <p
-              className="text-[12px] font-[400] whitespace-nowrap"
-              role="username"
-            >
-              {authUser?.email}
+            <p className="text-[14px] font-[400] whitespace-nowrap">
+              {capitalize(authUser?.role)}
             </p>
           </div>
         </div>

@@ -38,7 +38,7 @@ export const START_AGGREGATOR_PHONE_VERIFICATION_URL = (id: string) =>
 export const COMPLETE_AGGREGATOR_PHONE_VERIFICATION_URL = (id: string) =>
   `aggregator/${id}/complete-phonenumber-reset`;
 export const GET_INDIVIDUAL_AGGREGATOR_URL = (id: string) =>
-  `farmer/${id}/individual-aggregator`;
+  `aggregator/${id}/individual-aggregator`;
 export const START_AGGREGATOR_EMAIL_VERIFICATION_URL = (id: string) =>
   `aggregator/${id}/update-email`;
 export const COMPLETE_AGGREGATOR_EMAIL_VERIFICATION_URL = (id: string) =>
@@ -66,6 +66,7 @@ export const APPROVE_PRODUCE = (produceID: string, adminID: string) =>
 export const ADD_ADMIN_URL = 'admin/create-admin';
 export const GET_ADMIN_DASHBOARD_COUNT_URL = (id: string) =>
   `admin/${id}/dashboard-count`;
+export const GET_ALL_ADMIN_OFFICERS = 'admin/all-admins';
 
 // Check email
 export const CHECK_EMAIL_URL = 'auth/check-email-validity';

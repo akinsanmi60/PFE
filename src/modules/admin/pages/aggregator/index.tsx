@@ -10,6 +10,8 @@ import { formatDate } from '@utils/constants';
 import { ITableHead } from '@shared/Table/table.interface';
 import { IAggregatorQueryProp } from 'types/admin.type';
 import { useGetAllAggregators } from 'services/admin.service';
+import { useNavigate } from 'react-router-dom';
+import { AggregatorsPath } from '@utils/paths';
 
 function AggregatorList() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,6 +20,7 @@ function AggregatorList() {
     page: 1,
     limit: 10,
   });
+  const navigate = useNavigate();
 
   const updateQueryParams = (params: IAggregatorQueryProp) => {
     setQueryParams(prev => ({ ...prev, ...params }));
@@ -94,6 +97,15 @@ function AggregatorList() {
           tableEmptyState={
             <EmptyBar emptyStateSize="lg" componentType="Aggregator" />
           }
+          onRowClick={row => {
+            navigate(
+              `/${AggregatorsPath.aggregatorsDetails(
+                row?.id as string,
+                row?.user_type,
+                'produces',
+              )}`,
+            );
+          }}
         />
       </PageContainer>
     </div>

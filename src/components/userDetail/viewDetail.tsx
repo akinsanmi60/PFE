@@ -167,7 +167,7 @@ function ViewDetail<TData extends IRowBody>({
           />
         </div>
         <div className="w-full bg-[#E2E8F0] border[1px] h-[1px] my-2" />
-        {userData?.category_type !== null && (
+        {userData?.category_type !== null ? (
           <div className="mt-[0px]">
             <UserCard
               detailProps={{
@@ -175,6 +175,10 @@ function ViewDetail<TData extends IRowBody>({
                 produceData: userData,
               }}
             />
+          </div>
+        ) : (
+          <div className="w-full h-full text-center p-[32px]">
+            <p>No Category Details Submitted</p>
           </div>
         )}
 
@@ -188,7 +192,7 @@ function ViewDetail<TData extends IRowBody>({
             sx={{ borderRadius: '8px', px: 4, py: 0 }}
           >
             {userData?.is_active === false ? 'Activate' : 'Inactivate'}{' '}
-            {userData?.user_type}
+            {capitalize(userData?.user_type)}
           </CustomButton>
         </div>
       </div>

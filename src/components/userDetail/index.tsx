@@ -17,7 +17,7 @@ function FarmerAggregatorUserDetailPpage<TData extends IRowBody>({
   userDetailProps,
 }: IUserDetailPage<TData>) {
   return (
-    <div className="grid grid-cols-[470px_1fr] gap-x-3">
+    <div className="grid grid-cols-[470px_1fr] gap-x-3 lg:grid lg:grid-cols-1 lg:gap-y-[20px]">
       <div className="bg-primary-white sticky top-0">
         <ViewDetail userData={userDetailProps.userData} />
       </div>

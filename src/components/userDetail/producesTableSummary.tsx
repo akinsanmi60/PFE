@@ -23,7 +23,7 @@ function FarmerAggregatorProduce({ fetcherProp }: IProps) {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
 
-  const { data, isLoading } = useFarmerAggregatorProduce(
+  const { data, isLoading, isRefetching } = useFarmerAggregatorProduce(
     queryParams,
     fetcherProp?.id,
     fetcherProp?.role,
@@ -62,7 +62,7 @@ function FarmerAggregatorProduce({ fetcherProp }: IProps) {
       <CustomTable<IMyProduceData>
         containerClassName="p-0"
         tableHeads={tableHead}
-        loading={isLoading}
+        loading={isLoading || isRefetching}
         dataTableSource={data?.data?.produces_list || []}
         page_size={data?.data?.page_size}
         total={data?.data?.total}
@@ -70,9 +70,15 @@ function FarmerAggregatorProduce({ fetcherProp }: IProps) {
         setCurrentPage={(val: number) => updateQueryParams({ page: val })}
         setLimit={(val: number) => updateQueryParams({ limit: val })}
         tableEmptyState={
-          <EmptyBar emptyStateSize="lg" componentType="produces" />
+          <EmptyBar emptyStateSize="sm" componentType="produces" />
         }
-        tableLoader={<TableLoading title="Loading Produces" />}
+        tableLoader={
+          <TableLoading
+            title="Loading Produces"
+            size={70}
+            className="h-[250px]"
+          />
+        }
         showPagination
         paginationArray={[5]}
       />

@@ -112,7 +112,7 @@ function ApproveProduceByAdmin({
 
         <div className="w-full flex justify-end mb-[-40px]">
           <CustomButton
-            className='"w-full text-primary-white'
+            className='"w-full text-primary-white bg-secondary-light-1'
             onClick={handleSubmit(submitHandler)}
             disabled={!isValid || !isDirty}
             loadingText="Approving..."

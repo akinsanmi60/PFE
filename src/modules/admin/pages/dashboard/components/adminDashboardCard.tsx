@@ -44,8 +44,10 @@ function AdminDashboardCard() {
             <p className="text-primary-main text-[30px] font-[600] leading-[42px]">
               {isLoading ? (
                 <CircularProgress color="#072723" size={30} />
+              ) : item?.count === undefined ? (
+                0
               ) : (
-                `${item?.count}` || 0
+                item?.count
               )}
             </p>
           </div>
