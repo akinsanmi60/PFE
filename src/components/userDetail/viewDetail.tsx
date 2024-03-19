@@ -7,6 +7,8 @@ import {
 } from '@utils/constants';
 import { IRowBody } from '@shared/HubTable/type';
 import CustomButton from '@shared/Button';
+import { toast } from 'react-toastify';
+import { toastOptions } from '@shared/Toast/Toast';
 
 type ViewDetailProps<TData> = {
   userData: TData;
@@ -138,6 +140,15 @@ function ViewDetail<TData extends IRowBody>({
     },
   ];
 
+  const toggleActiveStatus = () => {
+    if (userData?.status !== 'active') {
+      return toast.error(
+        `Please approve ${capitalize(userData?.user_type as string)} first`,
+        toastOptions,
+      );
+    }
+  };
+
   return (
     <div className="p-[20px] flex flex-col gap-y-[35px]">
       <div className="flex gap-x-3 items-center">
@@ -190,6 +201,7 @@ function ViewDetail<TData extends IRowBody>({
                 : 'bg-statusText-error'
             } text-primary-white text-[8px] font-[600]`}
             sx={{ borderRadius: '8px', px: 4, py: 0 }}
+            onClick={toggleActiveStatus}
           >
             {userData?.is_active === false ? 'Activate' : 'Inactivate'}{' '}
             {capitalize(userData?.user_type)}

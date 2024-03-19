@@ -1,10 +1,10 @@
-import BreadCrumbs from '@shared/BreadCrumbs';
 import TableLoading from '@shared/Table/tableLoading';
 import { GET_INDIVIDUAL_FARMER_URL } from '@utils/apiUrl';
 import { FarmersPath, IFarmersAggregatorTab } from '@utils/paths';
 import PageContainer from 'components/Layout/PageContainer';
 import AppHeader from 'components/appHeader/appHeader';
 import FarmerAggregatorUserDetailPpage from 'components/userDetail';
+import ViewActionButtons from 'components/userDetail/viewActionButtons';
 import { useParams } from 'react-router-dom';
 import { useGetIndividualFarmer } from 'services/individualFarmerAggregator.service';
 
@@ -21,18 +21,7 @@ function FarmerDetailPage() {
     <div>
       <AppHeader>
         <PageContainer>
-          <BreadCrumbs
-            items={[
-              {
-                href: `/${FarmersPath.root()}`,
-                text: 'Farmers',
-              },
-              {
-                href: '',
-                text: 'Farmer Detail',
-              },
-            ]}
-          />
+          <ViewActionButtons id={id as string} userType={userType as string} />
         </PageContainer>
       </AppHeader>
       <PageContainer className="pt-0">

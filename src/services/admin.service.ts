@@ -3,6 +3,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getRequest, postRequest } from '@utils/apiCaller';
 import {
   ADD_ADMIN_URL,
+  APPROVE_AGGREGATOR_URL,
+  APPROVE_FARMER_URL,
   GET_ADMIN_DASHBOARD_COUNT_URL,
   GET_ALL_ADMIN_OFFICERS,
   GET_ALL_AGGREGATOR_URL,
@@ -43,6 +45,49 @@ const useAdminCreationMutation = () => {
   return { mutate, isLoading, ...rest };
 };
 
+const useApproveFarmer = (id: string) => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, ...rest } = useMutation(
+    () =>
+      postRequest<any, IBaseResponse>({
+        url: APPROVE_FARMER_URL(id),
+      }),
+
+    {
+      onSuccess(res) {
+        displaySuccess(res?.message);
+        queryClient.invalidateQueries([queryKeys.getAllFarmers]);
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+const useApproveAggregator = (id: string) => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, ...rest } = useMutation(
+    () =>
+      postRequest<any, IBaseResponse>({
+        url: APPROVE_AGGREGATOR_URL(id),
+      }),
+
+    {
+      onSuccess(res) {
+        displaySuccess(res?.message);
+        queryClient.invalidateQueries([queryKeys.getAllAggregator]);
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+
 const useGetAllFarmers = (queryParams: IFarmerQueryProp) => {
   const { isLoading, isRefetching, isError, data } = useQuery<any>(
     [queryKeys.getAllFarmers, queryParams],
@@ -65,7 +110,7 @@ const useGetAllFarmers = (queryParams: IFarmerQueryProp) => {
 
 const useGetAllAggregators = (queryParams: IFarmerQueryProp) => {
   const { isLoading, isRefetching, isError, data } = useQuery<any>(
-    [queryKeys.getAllFarmers, queryParams],
+    [queryKeys.getAllAggregator, queryParams],
     () =>
       getRequest({
         url: `${GET_ALL_AGGREGATOR_URL()}${queryParamsHelper(queryParams)}`,
@@ -150,4 +195,6 @@ export {
   useGetAllProduce,
   useGetAdminDashboard,
   useGetAllSubAdmin,
+  useApproveFarmer,
+  useApproveAggregator,
 };
