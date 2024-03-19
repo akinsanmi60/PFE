@@ -7,6 +7,7 @@ import { IForgetProp } from 'types/auth.type';
 import { forgetPasswordSchema } from 'validation/changePasswordValidation';
 import pentrarLogo from '@assets/svg/LogoPentrar.svg';
 import { useNavigate } from 'react-router-dom';
+import { webPaths } from '@utils/paths';
 
 function ForgotPassword() {
   const { handleSubmit, control } = useForm<IForgetProp>({
@@ -31,7 +32,7 @@ function ForgotPassword() {
         <img
           src={pentrarLogo}
           alt="logo"
-          onClick={() => navigate('/')}
+          onClick={() => navigate(`${webPaths.home()}`)}
           className="cursor-pointer"
         />
       </>

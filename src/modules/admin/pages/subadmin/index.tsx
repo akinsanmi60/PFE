@@ -13,10 +13,13 @@ import TableLoading from '@shared/Table/tableLoading';
 import { IAdminData, ISubAdminQuery } from 'types/admin.type';
 import { ITableHead } from '@shared/Table/table.interface';
 import { formatDate } from '@utils/constants';
+import ViewAdminComponent from 'components/viewAdmin';
+import StatusBadge from '@shared/StatusBadge';
 
 function SubAdmin() {
   const [searchTerm, setSearchTerm] = useState('');
   const { modalState, handleModalOpen } = useModalContext();
+  const [collectData, setCollectData] = useState<IAdminData | null>(null);
   const [queryParams, setQueryParams] = useState({
     search: '',
     page: 1,
@@ -51,7 +54,11 @@ function SubAdmin() {
     },
     {
       label: 'Status',
-      accessor: 'status',
+      accessor: '',
+      render: ({ is_active }) => {
+        const activeStatus = is_active ? 'Active' : 'Inactive';
+        return <StatusBadge status={activeStatus} />;
+      },
     },
   ];
 
@@ -99,10 +106,17 @@ function SubAdmin() {
             showPagination
             setCurrentPage={(val: number) => updateQueryParams({ page: val })}
             setLimit={(val: number) => updateQueryParams({ limit: val })}
+            onRowClick={(rowData: IAdminData) => {
+              handleModalOpen('viewSubAdmin');
+              setCollectData(rowData);
+            }}
           />
         </div>
       </PageContainer>
       {modalState?.modalType === 'addSubAdmin' && <AddAdminComponent />}
+      {modalState?.modalType === 'viewSubAdmin' && (
+        <ViewAdminComponent incomingData={collectData as IAdminData} />
+      )}
     </div>
   );
 }

@@ -10,6 +10,7 @@ import { useLoginMutation } from 'services/auth.service';
 import { useNavigate } from 'react-router-dom';
 import { ILoginFormData } from 'types/auth.type';
 import pentrarLogo from '@assets/svg/LogoPentrar.svg';
+import { webPaths } from '@utils/paths';
 
 function GeneralLoginPage({
   url,
@@ -58,7 +59,7 @@ function GeneralLoginPage({
         <img
           src={pentrarLogo}
           alt="logo"
-          onClick={() => navigate('/')}
+          onClick={() => navigate(`${webPaths.home()}`)}
           className="cursor-pointer"
         />
       </>

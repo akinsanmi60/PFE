@@ -7,6 +7,7 @@ import ShowDashboard from './showDashboard';
 import PageNavTabs from '@shared/PageNavTabs';
 import { IFarmersAggregatorTab } from '@utils/paths';
 import FarmerAggregatorProduce from './producesTableSummary';
+import FarmerAggregatorTransaction from './transactionTableSummary';
 
 type IShowAnalysis = {
   showAnalysisProp: {
@@ -55,6 +56,10 @@ function ShowAnalysis({ showAnalysisProp }: IShowAnalysis) {
             role: showAnalysisProp?.role,
           }}
         />
+      )}
+
+      {showAnalysisProp.currentTab === 'transactions' && (
+        <FarmerAggregatorTransaction />
       )}
     </div>
   );

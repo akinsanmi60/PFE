@@ -18,7 +18,7 @@ export type IProduceItemList = {
   updated_at: string;
   images: string[];
   description: string;
-  harvest_date: string;
+  harvest_date: string | undefined | null;
   farmer_owner_id: string;
   aggregator_owner_id: string;
 } & Pick<

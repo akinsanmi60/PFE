@@ -94,7 +94,7 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
         <div className="flex justify-end mt-[40px]">
           <CustomButton
             type="button"
-            className=" w-[50%] bg-primary-main text-primary-white"
+            className=" w-[30%]  text-primary-white"
             onClick={handleSubmit(onSubmit)}
             loading={isLoading}
           >

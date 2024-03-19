@@ -1,6 +1,7 @@
 import { useAuthContext } from '@contexts/authContext';
 import { adminPathsLinks } from '@modules/admin/routes';
 import { userPathsLinks } from '@modules/users/routes';
+import { webPaths } from '@utils/paths';
 import { useNavigate } from 'react-router-dom';
 import { BasePath } from 'routes/Routes';
 
@@ -17,7 +18,7 @@ function CantView() {
       case 'farmer' || 'aggregator':
         return `/${BasePath.USER}/${userPathsLinks.dashBoard}`;
       default:
-        return '/';
+        return `${webPaths.home()}`;
     }
   };
 
@@ -36,7 +37,7 @@ function CantView() {
                 currently signed in. Please click{' '}
                 <span
                   className="font-[700] underline cursor-pointer"
-                  onClick={() => navigate('/')}
+                  onClick={() => navigate(`${webPaths.home()}`)}
                 >
                   HOME
                 </span>{' '}

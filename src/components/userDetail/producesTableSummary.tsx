@@ -75,8 +75,8 @@ function FarmerAggregatorProduce({ fetcherProp }: IProps) {
         tableLoader={
           <TableLoading
             title="Loading Produces"
-            size={70}
-            className="h-[250px]"
+            size={80}
+            loadingStateSize="sm"
           />
         }
         showPagination

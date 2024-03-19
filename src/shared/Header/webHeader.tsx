@@ -6,6 +6,7 @@ import menuOpen from '@assets/svg/menuOpen.svg';
 import menuClose from '@assets/svg/menuCLose.svg';
 import CustomButton from '@shared/Button';
 import { useDetailContext } from '@contexts/saveDetailContext';
+import { authPaths, webPaths } from '@utils/paths';
 
 function Header() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ function Header() {
           <div className="container">
             <div className="flex items-center justify-between cursor-pointer">
               <img
-                onClick={() => navigate('/')}
+                onClick={() => navigate(`${webPaths.home()}`)}
                 src={logo}
                 alt="logo"
                 className="w-[146px] h-[40px]"
@@ -45,13 +46,10 @@ function Header() {
               ) : (
                 <div className="flex gap-[20px] items-center mdxl:hidden ">
                   <CustomButton
-                    onClick={() => navigate('/login')}
-                    className="py-[12px] w-[110px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#ffffff] border-[1px] border-[#ffffff]"
+                    onClick={() => navigate(`${authPaths.login()}`)}
+                    className="py-[12px] w-[110px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#ffffff]"
                   >
                     Login
-                  </CustomButton>
-                  <CustomButton className="text-[16px] leading-[22px] w-[150px] font-[600] text-[#072723] border-[1px] border-[#6AD871] bg-[#6AD871]">
-                    Get Started
                   </CustomButton>
                 </div>
               )}
@@ -92,7 +90,7 @@ function Header() {
             </div>
             <div className="flex gap-[20px] mt-[50px] items-center xlsm:flex-col xlsm:items-start">
               <button
-                onClick={() => navigate('/login')}
+                onClick={() => navigate(`${authPaths.login()}`)}
                 className="rounded-[40px] xlsm:w-full py-[12px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#072723] border-[1px] border-[#072723]"
               >
                 Login

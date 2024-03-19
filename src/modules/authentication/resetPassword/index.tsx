@@ -10,6 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { InputRightElement } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { webPaths } from '@utils/paths';
 
 function ResetPassword() {
   const [pshow, setPshow] = useState(false);
@@ -38,7 +39,7 @@ function ResetPassword() {
         <img
           src={pentrarLogo}
           alt="logo"
-          onClick={() => navigate('/')}
+          onClick={() => navigate(`${webPaths.home()}`)}
           className="cursor-pointer"
         />
       </>

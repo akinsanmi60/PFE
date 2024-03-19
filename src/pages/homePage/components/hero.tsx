@@ -35,7 +35,7 @@ function Hero() {
                 </div>
                 <button
                   onClick={handleSend}
-                  className="px-[40px] py-[20px] h-[67px] xlsm:w-full  mdxl:py-[10px] bg-background-light text-background-main font-[600] text-[18px] mdxl:text-[14px] leading-[25px] text-center rounded-tl-[0px] rounded-tr-[12px] rounded-br-[12px] xlsm:rounded-[12px] rounded-bl-[0px] border-none focus:outline-none"
+                  className="px-[40px] py-[20px] h-[67px] xlsm:w-full  mdxl:py-[10px] bg-secondary-light-1 text-primary-white font-[600] text-[18px] mdxl:text-[14px] leading-[25px] text-center rounded-tl-[0px] rounded-tr-[12px] rounded-br-[12px] xlsm:rounded-[12px] rounded-bl-[0px] border-none focus:outline-none"
                 >
                   Get Started
                 </button>{' '}

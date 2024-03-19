@@ -1,4 +1,5 @@
 import farmerNetwork from '@assets/png/farmerNetworkImg.png';
+import CustomButton from '@shared/Button';
 function FarmerNetwork() {
   return (
     <div className="max-content py-[32px]">
@@ -35,15 +36,15 @@ function FarmerNetwork() {
                 </p>
               </div>
               <div className="flex gap-[20px] mt-[32px] items-center xlsm:flex-col xlsm:items-start">
-                <button
+                <CustomButton
                   //   onClick={() => navigate('/login')}
                   className="rounded-[40px] xlsm:w-full py-[12px] px-[24px] text-[16px] leading-[22px] font-[500] text-[#ffffff] bg-[#072723]  border-[1px] border-[#072723]"
                 >
                   Get Started
-                </button>
-                <button className="rounded-[40px] xlsm:w-full py-[12px] px-[24px] text-[16px] leading-[22px] font-[500] text-primary-main border-[1px] border-[#1A1A1A] ">
+                </CustomButton>
+                <CustomButton className="rounded-[40px] xlsm:w-full py-[12px] px-[24px] text-[16px] leading-[22px] font-[500] text-primary-white border-[1px] border-primary-white ">
                   Learn More{' '}
-                </button>
+                </CustomButton>
               </div>
             </div>
           </div>
