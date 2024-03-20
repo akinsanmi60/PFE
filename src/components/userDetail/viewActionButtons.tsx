@@ -1,17 +1,18 @@
-import BreadCrumbs from '@shared/BreadCrumbs';
+import BreadCrumbs, { IBreadCrumbItem } from '@shared/BreadCrumbs';
 import CustomButton from '@shared/Button';
 import { capitalize } from '@utils/constants';
-import { FarmersPath } from '@utils/paths';
 import { useApproveAggregator, useApproveFarmer } from 'services/admin.service';
 
 function ViewActionButtons({
   id,
   userType,
   status,
+  items,
 }: {
   id: string;
   userType: string;
   status: string;
+  items: IBreadCrumbItem[];
 }) {
   const { mutate: farmerApproveMutate, isLoading: isLoadingApprove } =
     useApproveFarmer(id as string);
@@ -31,18 +32,7 @@ function ViewActionButtons({
 
   return (
     <div className="flex justify-between items-center">
-      <BreadCrumbs
-        items={[
-          {
-            href: `/${FarmersPath.root()}`,
-            text: 'Farmers',
-          },
-          {
-            href: '',
-            text: 'Farmer Detail',
-          },
-        ]}
-      />
+      <BreadCrumbs items={items} />
       {status === 'pending' && (
         <CustomButton
           className={`bg-secondary-light-1 text-primary-white text-[8px] font-[600]`}

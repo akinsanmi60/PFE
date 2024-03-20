@@ -2,9 +2,13 @@ import { displaySuccess, displayError } from '@shared/Toast/Toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getRequest, postRequest } from '@utils/apiCaller';
 import {
+  ACTIVATE_AGGREGATOR_URL,
+  ACTIVATE_FARMER_URL,
   ADD_ADMIN_URL,
   APPROVE_AGGREGATOR_URL,
   APPROVE_FARMER_URL,
+  DEACTIVATE_AGGREGATOR_URL,
+  DEACTIVATE_FARMER_URL,
   GET_ADMIN_DASHBOARD_COUNT_URL,
   GET_ALL_ADMIN_OFFICERS,
   GET_ALL_AGGREGATOR_URL,
@@ -66,12 +70,101 @@ const useApproveFarmer = (id: string) => {
 
   return { mutate, isLoading, ...rest };
 };
+
+const useActivateFarmer = (id: string) => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, ...rest } = useMutation(
+    () =>
+      postRequest<any, IBaseResponse>({
+        url: ACTIVATE_FARMER_URL(id),
+      }),
+
+    {
+      onSuccess(res) {
+        queryClient.invalidateQueries([queryKeys.getIndividualFarmer]);
+        displaySuccess(res?.message);
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+
+const useDeactivateFarmer = (id: string) => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, ...rest } = useMutation(
+    () =>
+      postRequest<any, IBaseResponse>({
+        url: DEACTIVATE_FARMER_URL(id),
+      }),
+
+    {
+      onSuccess(res) {
+        queryClient.invalidateQueries([queryKeys.getIndividualFarmer]);
+        displaySuccess(res?.message);
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+
 const useApproveAggregator = (id: string) => {
   const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
     () =>
       postRequest<any, IBaseResponse>({
         url: APPROVE_AGGREGATOR_URL(id),
+      }),
+
+    {
+      onSuccess(res) {
+        queryClient.invalidateQueries([queryKeys.getIndividualAggregator]);
+        displaySuccess(res?.message);
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+
+const useActivateAggregator = (id: string) => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, ...rest } = useMutation(
+    () =>
+      postRequest<any, IBaseResponse>({
+        url: ACTIVATE_AGGREGATOR_URL(id),
+      }),
+
+    {
+      onSuccess(res) {
+        queryClient.invalidateQueries([queryKeys.getIndividualAggregator]);
+        displaySuccess(res?.message);
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+
+const useDeactivateAggregator = (id: string) => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, ...rest } = useMutation(
+    () =>
+      postRequest<any, IBaseResponse>({
+        url: DEACTIVATE_AGGREGATOR_URL(id),
       }),
 
     {
@@ -202,4 +295,8 @@ export {
   useGetAllSubAdmin,
   useApproveFarmer,
   useApproveAggregator,
+  useDeactivateFarmer,
+  useActivateFarmer,
+  useDeactivateAggregator,
+  useActivateAggregator,
 };

@@ -28,6 +28,10 @@ export const GET_ALL_FARMER_URL = () => 'farmer/allfarmers';
 export const UPDATE_FARMER_URL = (id: string) => `farmer/${id}/update-farmer`;
 export const APPROVE_FARMER_URL = (farmerID: string) =>
   `farmer/${farmerID}/approve-farmer`;
+export const ACTIVATE_FARMER_URL = (farmerID: string) =>
+  `farmer/${farmerID}/activate-farmer`;
+export const DEACTIVATE_FARMER_URL = (farmerID: string) =>
+  `farmer/${farmerID}/deactivate-farmer`;
 
 //Aggregator urls
 export const GET_AGGREGATOR_DASHBOARD_COUNT_URL = (id: string) =>
@@ -50,6 +54,10 @@ export const UPDATE_AGGREGATOR_URL = (id: string) =>
   `aggregator/${id}/update-aggregator`;
 export const APPROVE_AGGREGATOR_URL = (aggregatorID: string) =>
   `aggregator/${aggregatorID}/approve-aggregator`;
+export const ACTIVATE_AGGREGATOR_URL = (aggregatorID: string) =>
+  `aggregator/${aggregatorID}/activate-aggregator`;
+export const DEACTIVATE_AGGREGATOR_URL = (aggregatorID: string) =>
+  `aggregator/${aggregatorID}/deactivate-aggregator`;
 
 //Pentra Hub
 export const GET_PENTRAHUB_PRODUCE_URL = () => 'pentrar-hub/getAllHubProduce';

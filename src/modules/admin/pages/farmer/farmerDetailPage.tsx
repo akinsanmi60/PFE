@@ -25,6 +25,16 @@ function FarmerDetailPage() {
             id={id as string}
             userType={userType as string}
             status={data?.status}
+            items={[
+              {
+                href: `/${FarmersPath.root()}`,
+                text: 'Farmers',
+              },
+              {
+                href: '',
+                text: 'Farmer Detail',
+              },
+            ]}
           />
         </PageContainer>
       </AppHeader>

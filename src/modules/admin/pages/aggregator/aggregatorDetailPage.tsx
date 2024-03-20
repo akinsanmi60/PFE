@@ -25,6 +25,16 @@ function AggreggatorDetailPage() {
             id={id as string}
             userType={userType as string}
             status={data?.status}
+            items={[
+              {
+                href: `/${AggregatorsPath.root()}`,
+                text: 'Aggregators',
+              },
+              {
+                href: '',
+                text: 'Aggregator Detail',
+              },
+            ]}
           />
         </PageContainer>
       </AppHeader>

@@ -1,4 +1,3 @@
-import pentrarLogo from '@assets/svg/LogoPentrar.svg';
 import UserCard from './userCard';
 import {
   capitalize,
@@ -6,9 +5,8 @@ import {
   getFirstSwordBeforeSpace,
 } from '@utils/constants';
 import { IRowBody } from '@shared/HubTable/type';
-import CustomButton from '@shared/Button';
-import { toast } from 'react-toastify';
-import { toastOptions } from '@shared/Toast/Toast';
+import imagePlaceholder from '@assets/png/maleImagePlaceholder.png';
+import ChangeStatusButton from './changeStatusButton';
 
 type ViewDetailProps<TData> = {
   userData: TData;
@@ -140,20 +138,11 @@ function ViewDetail<TData extends IRowBody>({
     },
   ];
 
-  const toggleActiveStatus = () => {
-    if (userData?.status !== 'active') {
-      return toast.error(
-        `Please approve ${capitalize(userData?.user_type as string)} first`,
-        toastOptions,
-      );
-    }
-  };
-
   return (
     <div className="p-[20px] flex flex-col gap-y-[35px]">
       <div className="flex gap-x-3 items-center">
         <div className="w-[140px] h-[140px] border-[1px] border-[E2E8F0]">
-          <img src={pentrarLogo} alt="imp" />
+          <img src={imagePlaceholder} alt="imp" className="w-full h-full" />
         </div>
         <div>
           <UserCard
@@ -194,18 +183,14 @@ function ViewDetail<TData extends IRowBody>({
         )}
 
         <div className="mt-[20px]">
-          <CustomButton
-            className={`${
-              userData?.is_active === false
-                ? 'bg-secondary-light-1'
-                : 'bg-statusText-error'
-            } text-primary-white text-[8px] font-[600]`}
-            sx={{ borderRadius: '8px', px: 4, py: 0 }}
-            onClick={toggleActiveStatus}
-          >
-            {userData?.is_active === false ? 'Activate' : 'Inactivate'}{' '}
-            {capitalize(userData?.user_type)}
-          </CustomButton>
+          <ChangeStatusButton
+            statusProp={{
+              id: userData?.id,
+              status: userData?.status,
+              userType: userData?.user_type,
+              is_active: userData?.is_active,
+            }}
+          />
         </div>
       </div>
     </div>

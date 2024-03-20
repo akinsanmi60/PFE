@@ -4,7 +4,7 @@ import { IButtonProps } from './interface';
 import { Button, CircularProgress } from '@chakra-ui/react';
 
 const CustomButton = ({
-  color,
+  btnColor,
   variant,
   className: _className,
   loading,
@@ -16,7 +16,7 @@ const CustomButton = ({
   ...rest
 }: IButtonProps) => {
   const props = useMemo(() => {
-    switch (color) {
+    switch (btnColor) {
       case 'secondary': {
         let className = '';
         if (variant === 'outlined') {
@@ -49,16 +49,15 @@ const CustomButton = ({
         };
       }
     }
-  }, [color, variant]);
+  }, [btnColor, variant]);
 
   const { className } = props;
   return (
     <Button
       variant={variant}
-      disabled={disabled}
+      isDisabled={disabled}
       role={role}
       sx={{
-        // borderRadius: '40px',
         borderRadius: '8px',
         paddingY: '22px',
         borderColor:

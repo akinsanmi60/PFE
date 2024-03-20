@@ -4,6 +4,6 @@ import React from 'react';
 export type IButtonProps = ButtonProps & {
   loading?: boolean;
   loadingText?: React.ReactNode;
-  color?: 'primary' | 'secondary' | 'error';
+  btnColor?: 'primary' | 'secondary' | 'error';
   btnText?: string;
 };
