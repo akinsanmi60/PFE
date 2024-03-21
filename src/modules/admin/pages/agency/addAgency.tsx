@@ -37,10 +37,15 @@ function AddAgency() {
 
   const submitHandler = (val: ICreateAgency) => {
     let phone_number;
+    let head_of_agency_phone;
     let payload;
-    if (val.phone_number?.startsWith('0')) {
+    if (
+      val.phone_number?.startsWith('0') &&
+      val.head_of_agency_phone?.startsWith('0')
+    ) {
       phone_number = val.phone_number.replace('0', '+234');
-      payload = { ...val, phone_number };
+      head_of_agency_phone = val.head_of_agency_phone.replace('0', '+234');
+      payload = { ...val, phone_number, head_of_agency_phone };
     } else {
       payload = val;
     }
