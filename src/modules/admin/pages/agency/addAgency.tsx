@@ -6,6 +6,8 @@ import Drawer from '@shared/Drawer';
 import ControlledInput from '@shared/Input/ControlledInput';
 import ControlledSelect from '@shared/Select/ControlledSelect';
 import { useForm } from 'react-hook-form';
+import { useAgencyCreationMutation } from 'services/agency.service';
+import { ICreateAgency } from 'types/admin.type';
 import { AddNewAgencySchema } from 'validation/AdminAgencyValidation';
 
 function AddAgency() {
@@ -30,8 +32,10 @@ function AddAgency() {
     resolver: yupResolver(AddNewAgencySchema),
   });
 
-  const submitHandler = (val: any) => {
-    return val;
+  const { mutate, isLoading } = useAgencyCreationMutation();
+
+  const submitHandler = (val: ICreateAgency) => {
+    mutate({ payload: val });
   };
 
   return (
@@ -133,8 +137,8 @@ function AddAgency() {
           className='"w-full text-primary-white mt-[30px]'
           onClick={handleSubmit(submitHandler)}
           disabled={!isValid || !isDirty}
-          loadingText="Transfering..."
-          // loading={isLoading}
+          loadingText="Loading..."
+          loading={isLoading}
           variant={!isDirty || !isValid ? 'solid' : ''}
         >
           Create Agency

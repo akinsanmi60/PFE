@@ -9,6 +9,8 @@ export type IProduceQueryProp = IBaseQueryProps;
 
 export type ISubAdminQuery = IBaseQueryProps;
 
+export type IAgencyQuery = IBaseQueryProps;
+
 export type IAdminData = {
   id: string;
   created_at: Date;

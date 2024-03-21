@@ -83,3 +83,7 @@ export const GET_ALL_ADMIN_OFFICERS = 'admin/all-admins';
 
 // Check email
 export const CHECK_EMAIL_URL = 'auth/check-email-validity';
+
+// Agency urls
+export const ADD_AGENCY_URL = 'agency/create-agency';
+export const GET_ALL_AGENCY_URL = 'agency/all-agencies';

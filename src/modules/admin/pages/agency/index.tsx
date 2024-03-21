@@ -8,10 +8,57 @@ import { useState } from 'react';
 import CustomButton from '@shared/Button';
 import { useModalContext } from '@contexts/modalContext';
 import AddAgency from './addAgency';
+import { IAgencyQuery } from 'types/admin.type';
+import { useGetAllAgency } from 'services/agency.service';
+import { IIndividualAgencyData } from 'types/agency.type';
+import { formatDate } from '@utils/constants';
+import { ITableHead } from '@shared/Table/table.interface';
+import TableLoading from '@shared/Table/tableLoading';
+import { useNavigate } from 'react-router-dom';
+import { AgencyPath } from '@utils/paths';
 
 function AgencyList() {
   const [searchTerm, setSearchTerm] = useState('');
   const { modalState, handleModalOpen } = useModalContext();
+  const [queryParams, setQueryParams] = useState({
+    search: '',
+    page: 1,
+    limit: 10,
+  });
+
+  const updateQueryParams = (params: IAgencyQuery) => {
+    setQueryParams(prev => ({ ...prev, ...params }));
+  };
+
+  const navigate = useNavigate();
+
+  const tableHead: ITableHead<IIndividualAgencyData>[] = [
+    {
+      label: 'id',
+      accessor: 'pentrar_id',
+    },
+    {
+      label: 'Full Name',
+      accessor: 'agency_name',
+    },
+    {
+      label: 'Phone Number',
+      accessor: 'phone_number',
+    },
+    {
+      label: 'Last Login',
+      accessor: '',
+      render: ({ last_active }) => {
+        return formatDate({ date: last_active, time: true });
+      },
+    },
+    {
+      label: 'Status',
+      accessor: 'status',
+    },
+  ];
+
+  const { data, isLoading, isRefetching } = useGetAllAgency(queryParams);
 
   return (
     <div className="">
@@ -27,8 +74,10 @@ function AgencyList() {
               searchBarProps={{
                 placeholder: 'Search agency by name or ID',
                 useStartAdornment: <SearchVector />,
-                onSetTermChange: ({ target: { value } }) =>
-                  setSearchTerm(value),
+                onSetTermChange: ({ target: { value } }) => {
+                  setSearchTerm(value);
+                  updateQueryParams({ search: value });
+                },
                 term: searchTerm,
               }}
             />
@@ -44,11 +93,24 @@ function AgencyList() {
       </AppHeader>
       <PageContainer className="pt-0">
         <div className="w-full bg-primary-white rounded-lg mt-[30px]">
-          <CustomTable
-            tableHeads={[]}
-            dataTableSource={[]}
+          <CustomTable<IIndividualAgencyData>
+            tableHeads={tableHead}
+            loading={isLoading || isRefetching}
+            total={data?.total}
+            page_size={data?.page_size}
+            dataTableSource={data?.agency_list || []}
             tableEmptyState={
               <EmptyBar emptyStateSize="lg" componentType="Agency" />
+            }
+            tableLoader={<TableLoading title="Loading Agencies" />}
+            showPagination
+            setCurrentPage={(val: number) => updateQueryParams({ page: val })}
+            setLimit={(val: number) => updateQueryParams({ limit: val })}
+            current_page={data?.current_page}
+            onRowClick={row =>
+              navigate(
+                `/${AgencyPath.agencyDetails(row?.pentrar_id, 'members')}`,
+              )
             }
           />
         </div>

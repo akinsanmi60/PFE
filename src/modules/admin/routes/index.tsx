@@ -37,10 +37,15 @@ const AggregatorDetailPage = React.lazy(
   () => import('@modules/admin/pages/aggregator/aggregatorDetailPage'),
 );
 
+const AgencyDetailPage = React.lazy(
+  () => import('@modules/admin/pages/agency/agencyDetailPage'),
+);
+
 export const adminPathsLinks = {
   basePath: 'pentrar/admin',
   dashBoard: 'dashboard',
   allAgencies: 'all-agencies',
+  agencyDetail: 'all-agencies/:id/:tab',
   allProduce: 'all-produces',
   produceDtail: 'all-produces/:id/produce-detail',
   allTransporters: 'all-transporters',
@@ -97,6 +102,11 @@ const AdminRoutes = {
   AgencyList: {
     element: AgencyList,
     path: adminPathsLinks.allAgencies,
+  },
+
+  AgencyDetail: {
+    element: AgencyDetailPage,
+    path: adminPathsLinks.agencyDetail,
   },
 
   TransporterList: {

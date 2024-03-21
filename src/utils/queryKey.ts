@@ -13,4 +13,5 @@ export const queryKeys = {
   getAllSubAdmin: 'getAllSubAdmin',
   getAllAggregator: 'getAllAggregator',
   getIndividualAggregator: 'getIndividualAggregator',
+  getAllAgencies: 'getAllAgencies',
 };

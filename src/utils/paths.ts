@@ -1,4 +1,4 @@
-import { adminFarmersTabs } from './enums';
+import { adminFarmersTabs, agencyTabs } from './enums';
 import { adminPathsLinks } from '@modules/admin/routes';
 import { BasePath } from 'routes/Routes';
 import { joinPath } from './navigation';
@@ -52,6 +52,18 @@ export const AggregatorsPath = {
     tab: IFarmersAggregatorTab | null,
     fullPath: boolean = true,
   ) => `${joinPath(AggregatorsPath.root(fullPath), aggregatorId, detail, tab)}`,
+};
+
+export type IAgencyTab = typeof agencyTabs[number];
+export const AgencyPath = {
+  root: (fullPath: boolean = true) =>
+    `${fullPath ? `${BasePath.ADMIN}/` : ''}${adminPathsLinks.allAgencies}`,
+
+  agencyDetails: (
+    agencyId: string,
+    tab: IAgencyTab | null,
+    fullPath: boolean = true,
+  ) => `${joinPath(AgencyPath.root(fullPath), agencyId, tab)}`,
 };
 
 export type ISettingsTab =
