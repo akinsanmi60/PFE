@@ -123,6 +123,7 @@ function GeneralLoginPage({
             type="submit"
             disabled={!isValid}
             onClick={handleSubmit(onSubmitForm)}
+            variant={!isValid || isLoading ? 'solid' : ''}
           >
             Login
           </CustomButton>

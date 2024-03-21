@@ -7,6 +7,7 @@ import { ReactComponent as SearchVector } from '@assets/svg/searchVector.svg';
 import { useState } from 'react';
 import CustomButton from '@shared/Button';
 import { useModalContext } from '@contexts/modalContext';
+import AddAgency from './addAgency';
 
 function AgencyList() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -53,7 +54,7 @@ function AgencyList() {
         </div>
       </PageContainer>
 
-      {modalState?.modalType === 'createAgency' && <>Hello </>}
+      {modalState?.modalType === 'createAgency' && <AddAgency />}
     </div>
   );
 }

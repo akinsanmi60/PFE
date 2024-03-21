@@ -27,6 +27,7 @@ export type IModalProps = IModalBaseProps & {
   subHeader?: React.ReactNode;
   action?: IModalActionProps;
   secondaryAction?: IModalActionProps;
+  openDrawerBox?: boolean;
 };
 
 export type IFilterModalProps<TFieldValues extends FieldValues> =

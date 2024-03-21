@@ -34,3 +34,16 @@ export type IDataRes = IDataCount & {
 export type IAdminDataResponse = IBaseResponse & {
   data: IDataRes;
 };
+
+export type ICreateAgency = {
+  agency_name: string;
+  email: string;
+  phone_number: string;
+  agency_address: string;
+  agency_state: string;
+  agency_establishment: string;
+  agency_reg_number: string;
+  head_name: string;
+  head_of_agency_phone: string;
+  head_of_agency_email: string;
+};

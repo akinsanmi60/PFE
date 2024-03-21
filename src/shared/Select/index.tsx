@@ -34,7 +34,7 @@ const CustomSelect = forwardRef(
               borderColor: '#E6E6E6',
               borderRadius: '10px',
               py: '4px',
-              fontSize: '17px',
+              fontSize: '14px',
             }}
             size="lg"
           >

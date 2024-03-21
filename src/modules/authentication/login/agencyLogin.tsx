@@ -1,10 +1,10 @@
-import { USER_LOGIN_URL } from '@utils/apiUrl';
+import { AGENCY_LOGIN_URL } from '@utils/apiUrl';
 import GeneralLoginPage from './LoginComponent';
 
 function AgencyLoginPage() {
   return (
     <>
-      <GeneralLoginPage url={USER_LOGIN_URL} pageTitle="Agency" />;
+      <GeneralLoginPage url={AGENCY_LOGIN_URL} pageTitle="Agency" />;
     </>
   );
 }
