@@ -11,7 +11,7 @@ export const AddNewAgencySchema = yup
       .string()
       .required('Enter your phone number')
       .matches(REGEX_CODE, 'Special characters and alphabet are not accepted')
-      .max(14, 'Phone number must not be greater than 14 characters'),
+      .max(11, 'Phone number must not be greater than 14 characters'),
     agency_establishment: yup
       .string()
       .required('Enter your agency establishment')
@@ -29,7 +29,7 @@ export const AddNewAgencySchema = yup
       .string()
       .required('Enter your agency head phone number')
       .matches(REGEX_CODE, 'Special characters and alphabet are not accepted')
-      .max(14, 'Phone number must not be greater than 14 characters'),
+      .max(11, 'Phone number must not be greater than 14 characters'),
     head_of_agency_email: yup
       .string()
       .required('Enter your agency head email')

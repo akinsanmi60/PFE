@@ -1,3 +1,4 @@
+import { UseFormReset } from 'react-hook-form';
 import { useModalContext } from '@contexts/modalContext';
 import { displaySuccess, displayError } from '@shared/Toast/Toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -30,7 +31,11 @@ const useGetAllAgency = (queryParams: IAgencyQuery) => {
   };
 };
 
-const useAgencyCreationMutation = () => {
+const useAgencyCreationMutation = ({
+  resetForm,
+}: {
+  resetForm: UseFormReset<ICreateAgency>;
+}) => {
   const { handleModalClose } = useModalContext();
 
   const queryClient = useQueryClient();
@@ -46,6 +51,7 @@ const useAgencyCreationMutation = () => {
         displaySuccess(res?.message);
         queryClient.invalidateQueries([queryKeys.getAllAgencies]);
         if (handleModalClose) {
+          resetForm();
           handleModalClose('createAgency');
         }
       },

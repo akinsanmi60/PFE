@@ -16,6 +16,7 @@ function AddAgency() {
     control,
     handleSubmit,
     formState: { isDirty, isValid },
+    reset,
   } = useForm({
     defaultValues: {
       agency_name: '',
@@ -32,10 +33,18 @@ function AddAgency() {
     resolver: yupResolver(AddNewAgencySchema),
   });
 
-  const { mutate, isLoading } = useAgencyCreationMutation();
+  const { mutate, isLoading } = useAgencyCreationMutation({ resetForm: reset });
 
   const submitHandler = (val: ICreateAgency) => {
-    mutate({ payload: val });
+    let phone_number;
+    let payload;
+    if (val.phone_number?.startsWith('0')) {
+      phone_number = val.phone_number.replace('0', '+234');
+      payload = { ...val, phone_number };
+    } else {
+      payload = val;
+    }
+    mutate({ payload: payload });
   };
 
   return (
