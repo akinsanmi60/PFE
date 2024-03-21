@@ -50,16 +50,22 @@ function SideNav() {
     );
   }
 
+  const SUBADMIN_SETTINGS = ADMIN_SETTINGS_SIDENAV.filter(
+    navLink => navLink.name !== 'Team',
+  );
+
   const settingsNavLink = useMemo(() => {
     return authUser?.role === Account.Aggregator ||
       authUser?.role === Account.Farmer
       ? SETTINGS_SIDENAV
       : authUser?.role === Account.Exporter
       ? null
-      : authUser?.role === Account.Admin || authUser?.role === Account.SubAdmin
+      : authUser?.role === Account.Admin
       ? ADMIN_SETTINGS_SIDENAV
+      : authUser?.role === Account.SubAdmin
+      ? SUBADMIN_SETTINGS
       : null;
-  }, [authUser?.role]);
+  }, [SUBADMIN_SETTINGS, authUser?.role]);
 
   return (
     <div className="bg-[#F4FAF5] text-[#999999] flex flex-col justify-between border-r-2 border-[#F7F7F8] h-screen">

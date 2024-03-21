@@ -140,7 +140,7 @@ const CustomTable = <TData extends ITableBody>({
                             requestSort(heads.accessor as string | null);
                           }}
                           key={index}
-                          className={`text-left px-[10px] py-[13px] font-[500] bg-white capitalize text-sm text-[#64748B] border-b-[${borderValue}]`}
+                          className={`text-left px-[10px] py-[80px] font-[500] bg-white capitalize text-sm text-[#64748B] border-b-[${borderValue}]`}
                         >
                           {heads.label}
                           {sortConfig.key === heads.accessor && (

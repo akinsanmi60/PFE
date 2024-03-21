@@ -49,7 +49,7 @@ function SubAdmin() {
       label: 'Last Login',
       accessor: '',
       render: ({ last_active }) => {
-        return formatDate({ date: last_active });
+        return formatDate({ date: last_active, time: true });
       },
     },
     {

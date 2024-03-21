@@ -3,7 +3,6 @@ import { useFormData } from '@contexts/formContext';
 import { useModalContext } from '@contexts/modalContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
-import CircularProgress from '@shared/CircularProgress';
 import ControlledInput from '@shared/Input/ControlledInput';
 import {
   START_AGGREGATOR_PHONE_VERIFICATION_URL,
@@ -69,6 +68,7 @@ function StartPhoneVerification({
       <p className="text-[20px] font-[600] leading-[28px]">
         Edit your phone number
       </p>
+
       <form className="mt-[24px]">
         <div className="flex flex-col gap-y-[20px]">
           <ControlledInput
@@ -101,14 +101,12 @@ function StartPhoneVerification({
               Decline{' '}
             </CustomButton>
             <CustomButton
-              className="bg-primary-main text-primary-white w-[180px]"
+              className=" text-primary-white w-[180px]"
               onClick={handleSubmit(onSubmit)}
+              loading={isLoading}
+              loadingText="Loading..."
             >
-              {isLoading ? (
-                <CircularProgress color="#FFFFFF" size={30} />
-              ) : (
-                'Confirm'
-              )}
+              Continue
             </CustomButton>
           </div>
         </div>

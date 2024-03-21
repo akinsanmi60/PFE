@@ -162,9 +162,11 @@ function AddProduceComponent() {
           <div className="flex justify-end mt-[8px] mb-[-50px]">
             <CustomButton
               onClick={handleSubmit(onAddProduce)}
-              disabled={!isDirty}
-              className="bg-primary-main text-primary-white w-[180px]"
+              disabled={!isDirty || isLoading}
+              className="text-primary-white w-[180px]"
               loading={isLoading}
+              loadingText="Adding..."
+              variant={!isDirty || isLoading ? 'solid' : ''}
             >
               Submit Produce
             </CustomButton>

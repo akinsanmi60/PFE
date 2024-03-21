@@ -53,3 +53,17 @@ export const AggregatorsPath = {
     fullPath: boolean = true,
   ) => `${joinPath(AggregatorsPath.root(fullPath), aggregatorId, detail, tab)}`,
 };
+
+export type ISettingsTab =
+  | 'personal-information'
+  | 'change-password'
+  | 'notifications'
+  | 'business-information';
+export const FarmerAggregatorPath = {
+  root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.USER}` : ''}`,
+  settings: (
+    linkdetail: string,
+    tab: ISettingsTab | null,
+    fullPath: boolean = true,
+  ) => `${joinPath(FarmerAggregatorPath.root(fullPath), linkdetail, tab)}`,
+};

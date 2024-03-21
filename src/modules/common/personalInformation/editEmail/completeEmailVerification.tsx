@@ -3,7 +3,6 @@ import { useFormData } from '@contexts/formContext';
 import { useModalContext } from '@contexts/modalContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
-import CircularProgress from '@shared/CircularProgress';
 import ControlledInput from '@shared/Input/ControlledInput';
 import {
   COMPLETE_AGGREGATOR_EMAIL_VERIFICATION_URL,
@@ -93,12 +92,10 @@ function CompleteEmailVerification() {
             <CustomButton
               className="bg-primary-main text-primary-white w-[180px]"
               onClick={handleSubmit(onSubmit)}
+              loading={isLoading}
+              loadingText="Confirming..."
             >
-              {isLoading ? (
-                <CircularProgress color="#FFFFFF" size={30} />
-              ) : (
-                'Confirm'
-              )}{' '}
+              Confirm
             </CustomButton>
           </div>
         </div>

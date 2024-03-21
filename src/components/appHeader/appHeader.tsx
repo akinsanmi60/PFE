@@ -21,11 +21,11 @@ const ProfileBox = ({ first_name }: { first_name: string }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const token = getToken();
 
   const handleLogout = () => {
     logOut();
-    const token = getToken();
-    if (!token) {
+    if (token) {
       setAuthUser(null);
       localStorage.removeItem('presentUrl');
       navigate(`${webPaths.home()}`);

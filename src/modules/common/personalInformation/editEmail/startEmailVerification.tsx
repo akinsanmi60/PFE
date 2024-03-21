@@ -3,7 +3,6 @@ import { useFormData } from '@contexts/formContext';
 import { useModalContext } from '@contexts/modalContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
-import CircularProgress from '@shared/CircularProgress';
 import ControlledInput from '@shared/Input/ControlledInput';
 import {
   START_AGGREGATOR_EMAIL_VERIFICATION_URL,
@@ -102,14 +101,12 @@ function StartEmailVerification({
               Decline{' '}
             </CustomButton>
             <CustomButton
-              className="bg-primary-main text-primary-white w-[180px]"
+              className=" text-primary-white w-[180px]"
               onClick={handleSubmit(onSubmit)}
+              loading={isLoading}
+              loadingText="Loading..."
             >
-              {isLoading ? (
-                <CircularProgress color="#FFFFFF" size={30} />
-              ) : (
-                'Confirm'
-              )}
+              Continue
             </CustomButton>
           </div>
         </div>

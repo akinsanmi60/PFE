@@ -94,6 +94,7 @@ function MoveProduceTo({ produceId }: { produceId: string }) {
             disabled={!isValid || !isDirty}
             loadingText="Transfering..."
             loading={isLoading}
+            variant={!isDirty || isLoading ? 'solid' : ''}
           >
             Complete Transfer
           </CustomButton>

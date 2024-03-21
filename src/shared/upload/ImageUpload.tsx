@@ -1,28 +1,37 @@
 import { Input } from '@chakra-ui/react';
 import { resetInputValue } from '@utils/constants';
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { ReactComponent as UploadUserPlaceholder } from '@assets/svg/userPlacholderBig.svg';
+import { ReactComponent as UploadCamCoder } from '@assets/svg/camCoder.svg';
 
 type UploadProp = {
   keyName?: string;
   url?: string;
   className?: string;
-  setPreviewImage1: React.Dispatch<React.SetStateAction<string | null>>;
   acceptType: string;
-  imageFileSetter: React.Dispatch<React.SetStateAction<File | null>>;
+  successWatcher: boolean;
+  setChosenImage?: (_val: File) => void;
 };
 
 const MAX_IMAGE_SIZE = 600 * 600; // 1MB
 
 function ImageUpload({
   keyName,
-  setPreviewImage1,
-  url,
   className,
   acceptType,
-  imageFileSetter,
+  successWatcher,
+  setChosenImage,
 }: UploadProp) {
+  const [previewImage, setPreviewImage] = useState<string>('');
+  const [imageString, setImageString] = useState<File | null>(null);
   const sideClasses =
-    'h-[150px] w-[150px] cursor-pointer primary-self-text flex justify-center items-center overflow-hidden mx-auto ';
+    'relative h-[150px] w-[150px] cursor-pointer primary-self-text flex rounded-full justify-center items-center bg-tertiary-light-4 overflow-hidden mx-auto ';
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -33,6 +42,19 @@ function ImageUpload({
     return sideClasses;
   }, [className]);
 
+  useEffect(() => {
+    setChosenImage && setChosenImage(imageString as File);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imageString]);
+
+  useEffect(() => {
+    if (successWatcher) {
+      setPreviewImage('');
+      setImageString(null);
+    }
+  }, [successWatcher]);
+
   const onClickImage = useCallback(() => {
     inputRef?.current?.click();
   }, []);
@@ -41,7 +63,7 @@ function ImageUpload({
     const file = e.target.files?.[0] as File;
     const allowedExtensions = /(jpg|jpeg|png|svg)$/i;
     //checking the img type
-    const isValid = allowedExtensions.exec(file.type);
+    const isValid = allowedExtensions.exec(file?.type);
 
     if (!isValid) {
       alert('Not Valid Image type');
@@ -51,8 +73,8 @@ function ImageUpload({
       alert('Image size exceeds the maximum allowed size (240kb).');
       return resetInputValue(e);
     } else if (file) {
-      imageFileSetter(file);
-      setPreviewImage1(URL.createObjectURL(file));
+      setImageString(file);
+      setPreviewImage(URL.createObjectURL(file));
     }
   };
 
@@ -71,29 +93,24 @@ function ImageUpload({
         }}
       />
 
-      <div className={classes} onClick={onClickImage}>
-        {url ? (
-          <img
-            className={'object-cover w-[100%]'}
-            src={url}
-            alt="upload_image"
-          />
-        ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-[50px] w-[50px]"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+      <div className="relative w-[150px]">
+        <div className={classes} onClick={onClickImage}>
+          {previewImage ? (
+            <img
+              className={'object-cover w-[100%] h-[100%]'}
+              src={previewImage}
+              alt="upload_image"
             />
-          </svg>
-        )}
+          ) : (
+            <UploadUserPlaceholder className="h-[100%] w-[100%]" />
+          )}
+        </div>
+        <div
+          className="absolute bottom-0 right-0 cursor-pointer"
+          onClick={onClickImage}
+        >
+          <UploadCamCoder className="h-[36px] w-[36px]" />
+        </div>
       </div>
     </>
   );
