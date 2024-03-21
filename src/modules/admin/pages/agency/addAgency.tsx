@@ -78,7 +78,7 @@ function AddAgency() {
         <div>
           <ControlledInput
             control={control}
-            name="email"
+            name="agency_establishment"
             label="Date of Incorporation"
             placeholder="Enter date of incorporation"
           />
