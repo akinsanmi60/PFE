@@ -3,8 +3,8 @@ import { GET_INDIVIDUAL_AGGREGATOR_URL } from '@utils/apiUrl';
 import { AggregatorsPath, IFarmersAggregatorTab } from '@utils/paths';
 import PageContainer from 'components/Layout/PageContainer';
 import AppHeader from 'components/appHeader/appHeader';
-import FarmerAggregatorUserDetailPpage from 'components/userDetail';
-import ViewActionButtons from 'components/userDetail/viewActionButtons';
+import FarmerAggregatorUserDetailPpage from 'components/farmerAggregatorUserDetail';
+import ViewActionButtons from 'components/farmerAggregatorUserDetail/viewActionButtons';
 import { useParams } from 'react-router-dom';
 import { useGetIndividualAggregator } from 'services/individualFarmerAggregator.service';
 
@@ -41,7 +41,7 @@ function AggreggatorDetailPage() {
       <PageContainer className="pt-0">
         {isLoading ? (
           <div className="w-full bg-primary-white rounded-lg mt-[30px]">
-            <TableLoading title="Loading Farmers" />
+            <TableLoading title="Loading Aggregator Detail" />
           </div>
         ) : (
           <FarmerAggregatorUserDetailPpage

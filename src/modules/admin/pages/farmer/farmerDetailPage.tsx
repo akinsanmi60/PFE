@@ -3,8 +3,8 @@ import { GET_INDIVIDUAL_FARMER_URL } from '@utils/apiUrl';
 import { FarmersPath, IFarmersAggregatorTab } from '@utils/paths';
 import PageContainer from 'components/Layout/PageContainer';
 import AppHeader from 'components/appHeader/appHeader';
-import FarmerAggregatorUserDetailPpage from 'components/userDetail';
-import ViewActionButtons from 'components/userDetail/viewActionButtons';
+import FarmerAggregatorUserDetailPpage from 'components/farmerAggregatorUserDetail';
+import ViewActionButtons from 'components/farmerAggregatorUserDetail/viewActionButtons';
 import { useParams } from 'react-router-dom';
 import { useGetIndividualFarmer } from 'services/individualFarmerAggregator.service';
 

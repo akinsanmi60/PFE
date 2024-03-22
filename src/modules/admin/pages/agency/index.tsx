@@ -108,9 +108,7 @@ function AgencyList() {
             setLimit={(val: number) => updateQueryParams({ limit: val })}
             current_page={data?.current_page}
             onRowClick={row =>
-              navigate(
-                `/${AgencyPath.agencyDetails(row?.pentrar_id, 'members')}`,
-              )
+              navigate(`/${AgencyPath.agencyDetails(row?.id, 'members')}`)
             }
           />
         </div>

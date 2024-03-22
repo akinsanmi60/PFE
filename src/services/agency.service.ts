@@ -3,11 +3,24 @@ import { useModalContext } from '@contexts/modalContext';
 import { displaySuccess, displayError } from '@shared/Toast/Toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getRequest, postRequest } from '@utils/apiCaller';
-import { ADD_AGENCY_URL, GET_ALL_AGENCY_URL } from '@utils/apiUrl';
+import {
+  ADD_AGENCY_URL,
+  GET_AGENCYTEAM_MEMBER_URL,
+  GET_ALL_AGENCY_URL,
+  GET_INDIVIDUAL_AGENCY_URL,
+} from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
 import { IAgencyQuery, ICreateAgency } from 'types/admin.type';
-import { IAgencyDataResponse, IAgencyDataRes } from 'types/agency.type';
+import {
+  IAgencyDataResponse,
+  IAgencyDataRes,
+  IIndividualAgencyResponse,
+  IIndividualAgencyData,
+  IAgencyTeamMemberQuery,
+  IGetAgencyTeamResponse,
+  IGetAgencyTeamData,
+} from 'types/agency.type';
 import { IBaseResponse } from 'types/auth.type';
 
 const useGetAllAgency = (queryParams: IAgencyQuery) => {
@@ -64,4 +77,56 @@ const useAgencyCreationMutation = ({
   return { mutate, isLoading, ...rest };
 };
 
-export { useGetAllAgency, useAgencyCreationMutation };
+const useGetIndividualAgency = (id: string) => {
+  const { data, isLoading, isRefetching, isError } =
+    useQuery<IIndividualAgencyResponse>(
+      [queryKeys.getIndividualAgency],
+      () =>
+        getRequest({
+          url: GET_INDIVIDUAL_AGENCY_URL(id),
+        }),
+      {
+        refetchOnWindowFocus: false,
+      },
+    );
+
+  return {
+    isLoading,
+    isRefetching,
+    isError,
+    data: data?.data as IIndividualAgencyData,
+  };
+};
+
+const useGetAgencyTeamMember = (
+  queryParams: IAgencyTeamMemberQuery,
+  id: string,
+) => {
+  const { data, isLoading, isRefetching, isError } =
+    useQuery<IGetAgencyTeamResponse>(
+      [queryKeys.getIndividualAgency, queryParams],
+      () =>
+        getRequest({
+          url: `${GET_AGENCYTEAM_MEMBER_URL(id)}${queryParamsHelper(
+            queryParams,
+          )}`,
+        }),
+      {
+        refetchOnWindowFocus: false,
+      },
+    );
+
+  return {
+    isLoading,
+    isRefetching,
+    isError,
+    data: data?.data as IGetAgencyTeamData,
+  };
+};
+
+export {
+  useGetAllAgency,
+  useAgencyCreationMutation,
+  useGetIndividualAgency,
+  useGetAgencyTeamMember,
+};

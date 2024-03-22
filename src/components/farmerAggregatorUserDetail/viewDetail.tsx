@@ -1,4 +1,3 @@
-import UserCard from './userCard';
 import {
   capitalize,
   formatDate,
@@ -7,6 +6,7 @@ import {
 import { IRowBody } from '@shared/HubTable/type';
 import imagePlaceholder from '@assets/png/maleImagePlaceholder.png';
 import ChangeStatusButton from './changeStatusButton';
+import UserCard from 'components/userCard';
 
 type ViewDetailProps<TData> = {
   userData: TData;
