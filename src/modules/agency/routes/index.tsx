@@ -3,55 +3,78 @@ import React from 'react';
 import DashboardLayout from '../../AppDashboard';
 
 const HomeDashBoard = React.lazy(
-  () => import('@modules/users/pages/dashboard'),
+  () => import('@modules/agency/pages/dashboard'),
 );
-const UserPentrarHub = React.lazy(
-  () => import('@modules/users/pages/userPentrarHub'),
-);
-
-const UserProduce = React.lazy(
-  () => import('@modules/users/pages/userProduce'),
+const AgencyCertification = React.lazy(
+  () => import('@modules/agency/pages/certifications'),
 );
 
-const UserSettings = React.lazy(
-  () => import('@modules/users/pages/userSettings'),
+const AgencyPendingCertification = React.lazy(
+  () => import('@modules/agency/pages/certifications/pendingCretification'),
 );
 
-const ReportProblem = React.lazy(
-  () => import('@modules/users/pages/reportProblem'),
+const AgencyProcessingCertification = React.lazy(
+  () => import('@modules/agency/pages/certifications/processingCertification'),
 );
 
-const userRoutes = {
+const AgencyTeamMember = React.lazy(
+  () => import('@modules/agency/pages/teamMember'),
+);
+
+const AgencySettings = React.lazy(
+  () => import('@modules/agency/pages/settings'),
+);
+
+export const agencyPathsLinks = {
+  basePath: 'pentrar/agency',
+  dashBoard: 'dashboard',
+  certifications: 'certifications',
+  processingCertifications: 'processing',
+  teamMember: 'team-member',
+  settings: 'settings',
+};
+
+const agencyRoutes = {
   HomeDashBoard: {
     element: HomeDashBoard,
-    path: 'dashboard',
+    path: agencyPathsLinks.dashBoard,
   },
 
-  UserPentrarHub: {
-    element: UserPentrarHub,
-    path: 'pentrar-hub',
+  AgencyCertification: {
+    element: AgencyCertification,
+    path: agencyPathsLinks.certifications,
+    childrenRoutes: [
+      {
+        element: AgencyPendingCertification,
+        path: '',
+        useIndex: true,
+      },
+      {
+        element: AgencyProcessingCertification,
+        path: agencyPathsLinks.processingCertifications,
+      },
+    ],
   },
 
-  UserProduce: {
-    element: UserProduce,
-    path: 'my-produces',
+  AgencyTeamMember: {
+    element: AgencyTeamMember,
+    path: agencyPathsLinks.teamMember,
   },
 
-  UserSettings: {
-    element: UserSettings,
-    path: 'settings',
-  },
-
-  ReportProblem: {
-    element: ReportProblem,
-    path: 'report-problem',
+  AgencySettings: {
+    element: AgencySettings,
+    path: agencyPathsLinks.settings,
   },
 };
 
-export const UserAppRoute = {
+export const AgencyAppRoute = {
   AppLayout: DashboardLayout,
   IndexRoute: HomeDashBoard,
-  AllowedRoles: [Account.Aggregator, Account.Farmer],
-  BasePath: 'pentrar/user',
-  ListedRoutes: userRoutes,
+  AllowedRoles: [
+    Account.Agency,
+    Account['Agency Staff'],
+    Account['Agency Admin'],
+  ],
+  BasePath: 'pentrar/agency',
+  ListedRoutes: agencyRoutes,
 };

@@ -35,10 +35,12 @@ import { UseFormReset } from 'react-hook-form';
 import { userPathsLinks } from '@modules/users/routes';
 import { adminPathsLinks } from '@modules/admin/routes';
 import { BasePath } from 'routes/Routes';
+import { agencyPathsLinks } from '@modules/agency/routes';
 // import { queryParamsHelper } from 'config/query-params';
 
 const userDashboard = ['farmer', 'aggregator'];
 const adminDashboard = ['admin', 'subAdmin'];
+const agencyDashboard = ['agency', 'agencySubAdmin', 'agencyAdmin'];
 
 export const useLoginMutation = ({ url }: { url: string }) => {
   const { setAuthUser } = useAuthContext();
@@ -79,6 +81,18 @@ export const useLoginMutation = ({ url }: { url: string }) => {
               `/${BasePath.ADMIN}/${adminPathsLinks.dashBoard}`,
             );
             navigate(`/${BasePath.ADMIN}/${adminPathsLinks.dashBoard}`, {
+              replace: true,
+            });
+          } else if (
+            decodedUser &&
+            agencyDashboard.includes(decodedUser.role)
+          ) {
+            displaySuccess(res?.message || '');
+            saveDetailToLocalStorage(
+              LOCAL_STORAGE_KEY.URL,
+              `/${BasePath.AGENCY}/${agencyPathsLinks.dashBoard}`,
+            );
+            navigate(`/${BasePath.AGENCY}/${agencyPathsLinks.dashBoard}`, {
               replace: true,
             });
           }

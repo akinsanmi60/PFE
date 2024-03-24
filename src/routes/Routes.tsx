@@ -14,6 +14,11 @@ type IProtectedRouteProp = {
     [x: string]: {
       element: React.LazyExoticComponent<() => JSX.Element>;
       path: string;
+      childrenRoutes?: {
+        element: React.LazyExoticComponent<() => JSX.Element>;
+        useIndex?: boolean;
+        path: string;
+      }[];
     };
   };
 };
@@ -50,18 +55,50 @@ export const RenderProtectedRoute = (routeObject: IProtectedRouteProp) => {
         <Route index element={<IndexRoute />} />
         {Object.values(ListedRoutes).map(value => {
           const AppRouteComponent = value.element;
-          return (
-            <Route
-              key={value.path}
-              path={value.path}
-              element={
-                <>
-                  <Wrapper />
-                  <AppRouteComponent />
-                </>
-              }
-            />
-          );
+          if (value.childrenRoutes) {
+            return (
+              <Route
+                key={value.path}
+                path={value.path}
+                element={
+                  <>
+                    <Wrapper />
+                    <AppRouteComponent />
+                  </>
+                }
+              >
+                {value.childrenRoutes.map(childRoute => {
+                  const ChildAppRouteComponent = childRoute.element;
+                  return childRoute.useIndex ? (
+                    <Route
+                      key={childRoute.path}
+                      index
+                      element={<ChildAppRouteComponent />}
+                    />
+                  ) : (
+                    <Route
+                      key={childRoute.path}
+                      path={childRoute.path}
+                      element={<ChildAppRouteComponent />}
+                    />
+                  );
+                })}
+              </Route>
+            );
+          } else {
+            return (
+              <Route
+                key={value.path}
+                path={value.path}
+                element={
+                  <>
+                    <Wrapper />
+                    <AppRouteComponent />
+                  </>
+                }
+              />
+            );
+          }
         })}
       </Route>
     </Route>
@@ -96,5 +133,6 @@ export const RenderRoute = (incomingRoutes: IRenderRouteProp) => {
 export const BasePath = {
   USER: 'pentrar/user',
   ADMIN: 'pentrar/admin',
+  AGENCY: 'pentrar/agency',
   WEB: '/',
 };

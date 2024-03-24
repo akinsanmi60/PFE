@@ -11,7 +11,9 @@ function AgencyDetailPage() {
   const { id, tab } = useParams();
   const currentTab = (tab || 'members') as IAgencyTab;
 
-  const { data, isLoading } = useGetIndividualAgency(id as string);
+  const { data, isLoading, isRefetching } = useGetIndividualAgency(
+    id as string,
+  );
 
   return (
     <div>
@@ -33,7 +35,7 @@ function AgencyDetailPage() {
       </AppHeader>
 
       <PageContainer>
-        {isLoading ? (
+        {isLoading || isRefetching ? (
           <div className="w-full bg-primary-white rounded-lg mt-[30px]">
             <TableLoading title="Loadiing Agency Details" />
           </div>

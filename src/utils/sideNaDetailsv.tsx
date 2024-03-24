@@ -24,6 +24,9 @@ import { ReactComponent as ExporterIcon } from '@assets/svg/exporterIcon.svg';
 import { ReactComponent as OfftakerIcon } from '@assets/svg/offtakerIcon.svg';
 import { ReactComponent as AgencyIcon } from '@assets/svg/agencyIcon.svg';
 import { ReactComponent as TeamIcon } from '@assets/svg/teamIcon.svg';
+import { ReactComponent as TeamWhite } from '@assets/svg/teamWhite.svg';
+import { ReactComponent as BadgeWhite } from '@assets/svg/badgeWhite.svg';
+import { ReactComponent as Badge } from '@assets/svg/badge.svg';
 
 export type NavLInk = {
   name: string;
@@ -102,6 +105,7 @@ const ADMIN_SETTINGS_SIDENAV: NavLInk[] = [
     name: 'Team',
     path: 'all-teams',
     Icon: <TeamIcon />,
+    IconBlue: <TeamWhite />,
   },
   {
     name: 'Settings',
@@ -116,6 +120,7 @@ const SUPER_ADMIN_SIDENAV: NavLInk[] = [
     name: 'Dashboard',
     path: 'dashboard',
     Icon: <Home />,
+    IconBlue: <HomeWhite />,
   },
   {
     name: 'Produces',
@@ -178,6 +183,44 @@ const SETTINGS_PAGE_NAVLIST: SettingNavLink[] = [
   },
 ];
 
+const AGENCY_SIDENAV: NavLInk[] = [
+  {
+    name: 'Dashboard',
+    path: 'dashboard',
+    Icon: <Home />,
+    IconBlue: <HomeWhite />,
+  },
+  {
+    name: 'Certifications',
+    path: 'certifications',
+    Icon: <Badge />,
+    IconBlue: <BadgeWhite />,
+  },
+  {
+    name: 'Team',
+    path: 'team-member',
+    Icon: <TeamIcon />,
+    IconBlue: <TeamWhite />,
+  },
+  {
+    name: 'Settings',
+    path: 'settings',
+    Icon: <SettingIcon />,
+    IconBlue: <SettingsWhite />,
+  },
+];
+
+const SUBADMIN_NAVLINK: NavLInk[] = SUPER_ADMIN_SIDENAV.filter(
+  item => item.name !== 'Dashboard',
+);
+const SUBADMIN_SETTINGS = ADMIN_SETTINGS_SIDENAV.filter(
+  navLink => navLink.name !== 'Team',
+);
+
+const SUBADGENCY_NAVLINK: NavLInk[] = AGENCY_SIDENAV.filter(
+  item => item.name !== 'Team',
+);
+
 export {
   AGGREGATOR_SIDENAV,
   EXPORTER_SIDENAV,
@@ -185,4 +228,8 @@ export {
   SUPER_ADMIN_SIDENAV,
   SETTINGS_PAGE_NAVLIST,
   ADMIN_SETTINGS_SIDENAV,
+  SUBADMIN_NAVLINK,
+  SUBADMIN_SETTINGS,
+  AGENCY_SIDENAV,
+  SUBADGENCY_NAVLINK,
 };

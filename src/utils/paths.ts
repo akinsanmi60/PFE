@@ -3,6 +3,7 @@ import { adminPathsLinks } from '@modules/admin/routes';
 import { BasePath } from 'routes/Routes';
 import { joinPath } from './navigation';
 import { RootLink } from 'routes/routeObject';
+import { agencyPathsLinks } from '@modules/agency/routes';
 
 export const webPaths = {
   root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.WEB}` : ''}`,
@@ -64,6 +65,15 @@ export const AgencyPath = {
     tab: IAgencyTab | null,
     fullPath: boolean = true,
   ) => `${joinPath(AgencyPath.root(fullPath), agencyId, tab)}`,
+};
+
+export const AgencyUserPath = {
+  root: (fullPath: boolean = true) =>
+    `${fullPath ? `${BasePath.AGENCY}/` : ''}`,
+  certifications: (fullPath: boolean = true) =>
+    `${AgencyUserPath.root(fullPath)}${agencyPathsLinks.certifications}`,
+  certificationsProcessing: (fullPath: boolean = true) =>
+    `${joinPath(AgencyUserPath.certifications(fullPath), 'processing')}`,
 };
 
 export type ISettingsTab =

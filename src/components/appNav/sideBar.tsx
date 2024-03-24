@@ -7,9 +7,11 @@ import {
 } from '@utils/constants';
 import {
   ADMIN_SETTINGS_SIDENAV,
+  AGENCY_SIDENAV,
   AGGREGATOR_SIDENAV,
   EXPORTER_SIDENAV,
   SETTINGS_SIDENAV,
+  SUBADMIN_SETTINGS,
   SUPER_ADMIN_SIDENAV,
 } from '@utils/sideNaDetailsv';
 import pentrarLogo from '@assets/svg/LogoPentrar.svg';
@@ -39,6 +41,8 @@ function SideNav() {
       ? EXPORTER_SIDENAV
       : authUser?.role === Account.Admin || authUser?.role === Account.SubAdmin
       ? SUPER_ADMIN_SIDENAV
+      : authUser?.role === Account.Agency
+      ? AGENCY_SIDENAV
       : null;
   }, [authUser?.role]);
 
@@ -49,10 +53,6 @@ function SideNav() {
       getFirstSwordBeforeSpace(authUser?.full_name as unknown as string),
     );
   }
-
-  const SUBADMIN_SETTINGS = ADMIN_SETTINGS_SIDENAV.filter(
-    navLink => navLink.name !== 'Team',
-  );
 
   const settingsNavLink = useMemo(() => {
     return authUser?.role === Account.Aggregator ||
@@ -65,7 +65,7 @@ function SideNav() {
       : authUser?.role === Account.SubAdmin
       ? SUBADMIN_SETTINGS
       : null;
-  }, [SUBADMIN_SETTINGS, authUser?.role]);
+  }, [authUser?.role]);
 
   return (
     <div className="bg-[#F4FAF5] text-[#999999] flex flex-col justify-between border-r-2 border-[#F7F7F8] h-screen">
@@ -106,43 +106,47 @@ function SideNav() {
         </div>
 
         {/* Settings */}
-        <div className="mt-[20px]">
-          <div className="w-full bg-background-borderlight border[1px] h-[1px]" />
-          <p className="p-4 text-primary-light text-[12px] font-primary">
-            Settings
-          </p>
-          <div className="flex flex-col gap-2">
-            {settingsNavLink?.map(sidenav => {
-              const checkPath = pathName === sidenav.path;
-              return (
-                <div
-                  className={
-                    checkPath ? 'text-[14px] text-primary-white' : 'text-[14px]'
-                  }
-                  key={sidenav.name}
-                >
-                  <NavLink
+        {settingsNavLink && (
+          <div className="mt-[20px]">
+            <div className="w-full bg-background-borderlight border[1px] h-[1px]" />
+            <p className="p-4 text-primary-light text-[12px] font-primary">
+              Settings
+            </p>
+            <div className="flex flex-col gap-2">
+              {settingsNavLink?.map(sidenav => {
+                const checkPath = pathName === sidenav.path;
+                return (
+                  <div
                     className={
                       checkPath
-                        ? 'text-[18px] font-[400] h-[40px] active:font-[400]  flex items-center gap-3 px-3 py-[25px]'
-                        : 'text-[18px] font-[400] h-[40px] active:font-[400]  flex items-center gap-3 px-3'
+                        ? 'text-[14px] text-primary-white'
+                        : 'text-[14px]'
                     }
-                    to={sidenav.path}
                     key={sidenav.name}
-                    style={active}
-                    role={sidenav.name}
                   >
-                    <span className={checkPath ? '-ml-[2px]' : 'ml-0'}>
-                      {checkPath ? sidenav.IconBlue : sidenav.Icon}
-                    </span>
+                    <NavLink
+                      className={
+                        checkPath
+                          ? 'text-[18px] font-[400] h-[40px] active:font-[400]  flex items-center gap-3 px-3 py-[25px]'
+                          : 'text-[18px] font-[400] h-[40px] active:font-[400]  flex items-center gap-3 px-3'
+                      }
+                      to={sidenav.path}
+                      key={sidenav.name}
+                      style={active}
+                      role={sidenav.name}
+                    >
+                      <span className={checkPath ? '-ml-[2px]' : 'ml-0'}>
+                        {checkPath ? sidenav.IconBlue : sidenav.Icon}
+                      </span>
 
-                    <span>{sidenav.name}</span>
-                  </NavLink>
-                </div>
-              );
-            })}
+                      <span>{sidenav.name}</span>
+                    </NavLink>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <div>
         <div className="w-full bg-[#E2E8F0] border[1px] h-[1px]" />

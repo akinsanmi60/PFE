@@ -21,7 +21,8 @@ const PageNavTabs = ({ tabs, currentHref }: IPageNavTabsProps) => {
             <div
               key={i}
               className={
-                capitalize(currentHref) === item.name
+                capitalize(currentHref) === item.name ||
+                currentHref === item.href
                   ? 'bg-secondary-light-1 text-primary-white text-[14px] font-[500] text-center  gap-2 items-center border-[#E2E8F0] px-[14px] py-[7px] cursor-pointer  rounded-[8px] border'
                   : ' text-[#475467] gap-2 items-center  font-[400] text-[14px]  px-[14px] py-[7px] cursor-pointer'
               }

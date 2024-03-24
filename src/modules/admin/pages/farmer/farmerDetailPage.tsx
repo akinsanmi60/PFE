@@ -12,7 +12,7 @@ function FarmerDetailPage() {
   const { id, tab, userType } = useParams();
   const currentTab = (tab || 'produces') as IFarmersAggregatorTab;
 
-  const { data, isLoading } = useGetIndividualFarmer({
+  const { data, isLoading, isRefetching } = useGetIndividualFarmer({
     queryParamsId: id as string,
     url: GET_INDIVIDUAL_FARMER_URL,
   });
@@ -39,7 +39,7 @@ function FarmerDetailPage() {
         </PageContainer>
       </AppHeader>
       <PageContainer className="pt-0">
-        {isLoading ? (
+        {isLoading || isRefetching ? (
           <div className="w-full bg-primary-white rounded-lg mt-[30px]">
             <TableLoading title="Loading Farmers" />
           </div>

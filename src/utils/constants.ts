@@ -12,6 +12,9 @@ export const Account = {
   Exporter: 'exporter',
   Offtakers: 'offtaker',
   Farmer: 'farmer',
+  Agency: 'agency',
+  'Agency Admin': 'agencyAdmin',
+  'Agency Staff': 'agencySubAdmin',
 };
 
 export const REGEX_CODE = /^[0-9]+$/;
