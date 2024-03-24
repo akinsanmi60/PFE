@@ -41,6 +41,8 @@ const AgencyDetailPage = React.lazy(
   () => import('@modules/admin/pages/agency/agencyDetailPage'),
 );
 
+const AdminSetings = React.lazy(() => import('@modules/admin/pages/settings'));
+
 export const adminPathsLinks = {
   basePath: 'pentrar/admin',
   dashBoard: 'dashboard',
@@ -56,6 +58,7 @@ export const adminPathsLinks = {
   allFarmers: 'all-farmers',
   farmerDetail: 'all-farmers/:id/:userType/:tab',
   allTeams: 'all-teams',
+  allSettings: 'settings',
 };
 
 const AdminRoutes = {
@@ -122,6 +125,11 @@ const AdminRoutes = {
   OfftakerList: {
     element: OfftakerList,
     path: adminPathsLinks.allOfftakers,
+  },
+
+  AdminSettings: {
+    element: AdminSetings,
+    path: adminPathsLinks.allSettings,
   },
 };
 

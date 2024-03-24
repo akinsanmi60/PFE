@@ -33,6 +33,11 @@ export type IModalContextType = {
   handleModalOpen: (_type: string) => void;
 };
 
+export type IAgencyContextValue = {
+  agency_attached_to: string;
+  agency_name: string;
+};
+
 export type IUserCTXType = {
   exp: number;
   id: string;
@@ -55,4 +60,4 @@ export type IUserCTXType = {
   reg_number: string;
   tin_id: string;
   coy_address: string;
-};
+} & IAgencyContextValue;

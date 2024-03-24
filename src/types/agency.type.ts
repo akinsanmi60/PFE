@@ -18,7 +18,7 @@ export type IAgencyViewDetailPage<TData> = {
 
 export type IShowAgencyAnalysis = {
   showAgencyAnalysisProp: IBaseAnalysisProps & {
-    pentrar_id: string;
+    pentrar_id?: string;
   };
 };
 

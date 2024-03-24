@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getRequest, postRequest } from '@utils/apiCaller';
 import {
   ADD_AGENCY_URL,
+  GET_AGENCY_DASHBOARD_COUNT_URL,
   GET_AGENCYTEAM_MEMBER_URL,
   GET_ALL_AGENCY_URL,
   GET_INDIVIDUAL_AGENCY_URL,
@@ -124,9 +125,30 @@ const useGetAgencyTeamMember = (
   };
 };
 
+const useGetAgencyDashboard = (id: string) => {
+  const { isLoading, isRefetching, isError, data } = useQuery<any>(
+    [queryKeys.getAdminDashboardCount],
+    () =>
+      getRequest({
+        url: GET_AGENCY_DASHBOARD_COUNT_URL(id),
+      }),
+    {
+      refetchOnWindowFocus: false,
+    },
+  );
+
+  return {
+    isLoading,
+    isRefetching,
+    isError,
+    data: data as any,
+  };
+};
+
 export {
   useGetAllAgency,
   useAgencyCreationMutation,
   useGetIndividualAgency,
   useGetAgencyTeamMember,
+  useGetAgencyDashboard,
 };

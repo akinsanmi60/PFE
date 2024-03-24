@@ -90,3 +90,5 @@ export const GET_ALL_AGENCY_URL = 'agency/all-agencies';
 export const GET_INDIVIDUAL_AGENCY_URL = (id: string) => `agency/${id}/agency`;
 export const GET_AGENCYTEAM_MEMBER_URL = (agencyId: string) =>
   `agency/${agencyId}/agency-team`;
+export const GET_AGENCY_DASHBOARD_COUNT_URL = (id: string) =>
+  `agency/${id}/dashboard-count`;
