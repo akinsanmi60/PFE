@@ -139,6 +139,12 @@ export const getClass = (text: string) => {
     case 'Not Approved':
     case 'Pending':
       return 'bg-[#FFE5E6] py-[5px] px-[12px] text-statusText-error font-[500] rounded-lg';
+    case 'Incoming':
+      return 'bg-[#E1E8F1] py-[5px] px-[12px] text-[#E6BB20] font-[500] rounded-lg';
+    case 'Collected':
+      return 'bg-[#FEF3C7] py-[5px] px-[12px] text-[#B45309] font-[500] rounded-lg';
+    case 'Processing':
+      return 'bg-[#D4F7F3] py-[5px] px-[12px] text-[#178275] font-[500] rounded-lg';
     default:
       return '';
   }

@@ -17,11 +17,11 @@ function HeroAnimated() {
 
   return (
     <div className="">
-      <div className="absolute mdxl:hidden">
+      <div className="absolute mdxl:hidden xxlA:h-screen">
         <img
           src={imageData?.img}
           alt=""
-          className="w-[604px] h-[562px] realtive rounded-[4px]"
+          className="w-[604px] h-[562px] xxlA:h-screen xxlA:w-screen realtive rounded-[4px]"
         />
         <div className="absolute bottom-[16px] right-[12px]">
           <div className="bg-[#FFFFFFBF]  rounded-[4px] p-[8px] min-w-[253px] border-[1px] border-[linear-gradient(103.24deg, rgba(189, 183, 183, 0.78) 40.47%, rgba(0, 0, 0, 0) 77.6%)]">

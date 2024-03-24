@@ -32,7 +32,7 @@ function ShowDashboardAnalysis({
       {showAgencyAnalysisProp.currentTab === 'members' && (
         <AgencyTeamTableSummary
           analysisProp={{
-            id: showAgencyAnalysisProp.pentrar_id,
+            id: showAgencyAnalysisProp.id,
           }}
         />
       )}

@@ -41,7 +41,7 @@ function Hero() {
                 </button>{' '}
               </div>
             </div>
-            <div className="w-[604px] h-[562px] mdxl:w-full mdxl:h-full">
+            <div className="w-[604px] h-[562px] mdxl:w-full mdxl:h-full xxlA:h-screen">
               <HeroAnimated />
             </div>
           </div>

@@ -11,7 +11,11 @@ export type IStatusType =
   | 'Certified'
   | 'Not Certified'
   | 'Rejected'
-  | 'Not Approved';
+  | 'Not Approved'
+  | 'Incoming'
+  | 'Collected'
+  | 'Testing'
+  | 'Processing';
 const StatusBadge = ({
   status,
   className,

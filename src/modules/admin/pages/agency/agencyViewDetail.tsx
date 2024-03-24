@@ -17,7 +17,7 @@ function AgencyViewDetail<TData extends IRowBody>({
         <ShowDashboardAnalysis
           showAgencyAnalysisProp={{
             id: userData?.id,
-            pentrar_id: userData?.pentrar_id,
+            // pentrar_id: userData?.pentrar_id,
             currentTab: agencyDetailProps?.currentTab,
             tabsHref: agencyDetailProps?.tabsHref,
           }}
