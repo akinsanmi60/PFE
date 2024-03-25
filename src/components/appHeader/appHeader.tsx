@@ -11,7 +11,7 @@ import { ReactComponent as DashBell } from '@assets/svg/dashBell.svg';
 import { ReactComponent as DashBellRed } from '@assets/svg/dashBellRed.svg';
 import { ReactComponent as ChevronDown } from '@assets/svg/chevronDown.svg';
 import { logOut } from '@hooks/auth';
-import { getToken } from '@hooks/localStorageHook';
+// import { getToken } from '@hooks/localStorageHook';
 import { useNavigate } from 'react-router-dom';
 import { webPaths } from '@utils/paths';
 
@@ -21,15 +21,15 @@ const ProfileBox = ({ first_name }: { first_name: string }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const token = getToken();
+  // const token = getToken();
 
   const handleLogout = () => {
     logOut();
-    if (token) {
-      setAuthUser(null);
-      localStorage.removeItem('presentUrl');
-      navigate(`${webPaths.home()}`);
-    }
+    // if (token) {
+    setAuthUser(null);
+    localStorage.removeItem('presentUrl');
+    navigate(`${webPaths.home()}`);
+    // }
   };
 
   const toggleHoverState = () => {
