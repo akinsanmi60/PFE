@@ -7,11 +7,13 @@ import menuClose from '@assets/svg/menuCLose.svg';
 import CustomButton from '@shared/Button';
 import { useDetailContext } from '@contexts/saveDetailContext';
 import { authPaths, webPaths } from '@utils/paths';
+import { useAuthContext } from '@contexts/authContext';
 
 function Header() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { saveDetails } = useDetailContext();
+  const { authUser } = useAuthContext();
 
   return (
     <div className="bg-background-main">
@@ -36,10 +38,10 @@ function Header() {
                   </p>
                 ))}
               </div>
-              {saveDetails.url !== null ? (
+              {authUser !== null ? (
                 <p
                   className=" text-primary-white"
-                  onClick={() => navigate(`${saveDetails.url}/dashboard`)}
+                  onClick={() => navigate(`${saveDetails.url}`)}
                 >
                   Dashboard
                 </p>
