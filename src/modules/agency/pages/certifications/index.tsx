@@ -10,7 +10,7 @@ function CertificationPage() {
   return (
     <div>
       <AppHeader>
-        <PageContainer className="py-0">
+        <PageContainer className="pt-0">
           <PageNavTabs
             currentHref={pathname}
             tabs={[
@@ -26,8 +26,9 @@ function CertificationPage() {
           />
         </PageContainer>
       </AppHeader>
-      CertificationPage
-      <Outlet />
+      <PageContainer className="pt-0">
+        <Outlet />
+      </PageContainer>
     </div>
   );
 }
