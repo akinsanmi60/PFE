@@ -60,4 +60,5 @@ export type IUserCTXType = {
   reg_number: string;
   tin_id: string;
   coy_address: string;
+  is_active: boolean;
 } & IAgencyContextValue;

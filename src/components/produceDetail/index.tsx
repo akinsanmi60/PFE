@@ -37,7 +37,9 @@ function ProduceCard({
       label: 'Quantity',
       accessor: 'quantity',
       render: ({ quantity, unit }) =>
-        `${quantity} / ${unit === null || unit === '' ? 'KG' : unit}`,
+        `${quantity === null ? 0 : quantity} / ${
+          unit === null || unit === '' ? 'KG' : unit
+        }`,
     },
     {
       label: 'Harvest Date',
@@ -74,6 +76,16 @@ function ProduceCard({
       label: 'Avail. on Pentrar Hub',
       accessor: 'on_pentrar_hub',
       render: ({ on_pentrar_hub }) => (on_pentrar_hub ? 'Yes' : 'No'),
+    },
+    {
+      label: 'Submitted Qty',
+      accessor: 'submitted_quantity',
+      render: ({ submitted_quantity, submitted_unit }) =>
+        `${submitted_quantity === null ? 0 : submitted_quantity} / ${
+          submitted_unit === null || submitted_unit === ''
+            ? 'KG'
+            : submitted_unit
+        }`,
     },
   ];
 
