@@ -15,9 +15,21 @@ import { formatDate } from '@utils/constants';
 import TableLoading from '@shared/Table/tableLoading';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '@contexts/authContext';
+import { toastOptions } from '@shared/Toast/Toast';
+import { toast } from 'react-toastify';
+import {
+  useGetIndividualAggregator,
+  useGetIndividualFarmer,
+} from 'services/individualFarmerAggregator.service';
+import {
+  GET_INDIVIDUAL_AGGREGATOR_URL,
+  GET_INDIVIDUAL_FARMER_URL,
+} from '@utils/apiUrl';
 
 function UserProduce() {
   const [searchTerm, setSearchTerm] = useState('');
+  const { authUser } = useAuthContext();
   const { modalState, handleModalOpen } = useModalContext();
   const [queryParams, setQueryParams] = useState({
     search: '',
@@ -25,6 +37,25 @@ function UserProduce() {
     limit: 10,
   });
   const navigate = useNavigate();
+
+  const { data: individualFarmer } = useGetIndividualFarmer({
+    queryParamsId: authUser?.id as string,
+    url: GET_INDIVIDUAL_FARMER_URL,
+  });
+
+  const { data: individualAggregator } = useGetIndividualAggregator({
+    queryParamsId: authUser?.id as string,
+    url: GET_INDIVIDUAL_AGGREGATOR_URL,
+  });
+
+  const currentUserStatus = () => {
+    switch (authUser?.role) {
+      case 'farmer':
+        return individualFarmer?.is_active;
+      case 'aggregator':
+        return individualAggregator?.is_active;
+    }
+  };
 
   const updateQueryParams = (params: IUserQueryProps) => {
     setQueryParams(prev => ({ ...prev, ...params }));
@@ -108,7 +139,19 @@ function UserProduce() {
             />
             <CustomButton
               className="text-primary-white w-[180px]"
-              onClick={() => handleModalOpen('addProduce')}
+              onClick={() => {
+                if (
+                  authUser?.status === 'pending' ||
+                  currentUserStatus() === false
+                ) {
+                  return toast.error(
+                    'Account not approved, please contact admin',
+                    toastOptions,
+                  );
+                } else {
+                  handleModalOpen('addProduce');
+                }
+              }}
             >
               Add Produce
             </CustomButton>

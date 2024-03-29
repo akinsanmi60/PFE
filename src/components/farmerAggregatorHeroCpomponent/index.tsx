@@ -31,7 +31,7 @@ function DashboardHeroFOrFarmerAggregator({
           <p className="text-tertiary-light-2 text-[14px] font-[500]">
             My Produces
           </p>
-          <p className="text-primary-main text-[30px] font-[600] leading-[42px]">
+          <p className="text-secondary-light-1 text-[30px] font-[600] leading-[42px]">
             {isLoading ? (
               <CircularProgress color="#072723" size={30} />
             ) : (
@@ -43,7 +43,7 @@ function DashboardHeroFOrFarmerAggregator({
           <p className="text-tertiary-light-2 text-[14px] font-[500]">
             Pending
           </p>
-          <p className="text-primary-main text-[30px] font-[600] leading-[42px]">
+          <p className="text-secondary-light-1 text-[30px] font-[600] leading-[42px]">
             {isLoading ? (
               <CircularProgress color="#072723" size={30} />
             ) : (
