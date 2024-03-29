@@ -12,8 +12,6 @@ type ViewDetailProps<TData> = {
 function ViewAgencyDetail<TData extends IRowBody>({
   userData,
 }: ViewDetailProps<TData>) {
-  console.log(userData);
-
   const detailAColumnsTitleA: {
     label: string;
     accessor: keyof TData | null;
