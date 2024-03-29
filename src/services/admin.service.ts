@@ -49,11 +49,11 @@ const useAdminCreationMutation = () => {
   return { mutate, isLoading, ...rest };
 };
 
-const useApproveFarmer = (id: string) => {
+const useApproveFarmer = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
-    () =>
-      postRequest<any, IBaseResponse>({
+    ({ id }: { id: string }) =>
+      postRequest<string, IBaseResponse>({
         url: APPROVE_FARMER_URL(id),
       }),
 
@@ -71,11 +71,11 @@ const useApproveFarmer = (id: string) => {
   return { mutate, isLoading, ...rest };
 };
 
-const useActivateFarmer = (id: string) => {
+const useActivateFarmer = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
-    () =>
-      postRequest<any, IBaseResponse>({
+    ({ id }: { id: string }) =>
+      postRequest<string, IBaseResponse>({
         url: ACTIVATE_FARMER_URL(id),
       }),
 
@@ -93,11 +93,11 @@ const useActivateFarmer = (id: string) => {
   return { mutate, isLoading, ...rest };
 };
 
-const useDeactivateFarmer = (id: string) => {
+const useDeactivateFarmer = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
-    () =>
-      postRequest<any, IBaseResponse>({
+    ({ id }: { id: string }) =>
+      postRequest<string, IBaseResponse>({
         url: DEACTIVATE_FARMER_URL(id),
       }),
 
@@ -115,11 +115,11 @@ const useDeactivateFarmer = (id: string) => {
   return { mutate, isLoading, ...rest };
 };
 
-const useApproveAggregator = (id: string) => {
+const useApproveAggregator = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
-    () =>
-      postRequest<any, IBaseResponse>({
+    ({ id }: { id: string }) =>
+      postRequest<string, IBaseResponse>({
         url: APPROVE_AGGREGATOR_URL(id),
       }),
 
@@ -137,11 +137,11 @@ const useApproveAggregator = (id: string) => {
   return { mutate, isLoading, ...rest };
 };
 
-const useActivateAggregator = (id: string) => {
+const useActivateAggregator = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
-    () =>
-      postRequest<any, IBaseResponse>({
+    ({ id }: { id: string }) =>
+      postRequest<string, IBaseResponse>({
         url: ACTIVATE_AGGREGATOR_URL(id),
       }),
 
@@ -159,11 +159,11 @@ const useActivateAggregator = (id: string) => {
   return { mutate, isLoading, ...rest };
 };
 
-const useDeactivateAggregator = (id: string) => {
+const useDeactivateAggregator = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
-    () =>
-      postRequest<any, IBaseResponse>({
+    ({ id }: { id: string }) =>
+      postRequest<string, IBaseResponse>({
         url: DEACTIVATE_AGGREGATOR_URL(id),
       }),
 

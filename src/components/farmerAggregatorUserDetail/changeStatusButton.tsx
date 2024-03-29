@@ -20,22 +20,22 @@ function ChangeStatusButton({
   };
 }) {
   const { mutate: activateFarmer, isLoading: isLoadingActivateFarmer } =
-    useActivateFarmer(statusProp?.id as string);
+    useActivateFarmer();
   const { mutate: deactivateFarmer, isLoading: isLoadingDeactivateFarmer } =
-    useDeactivateFarmer(statusProp?.id as string);
+    useDeactivateFarmer();
   const { mutate: activateAggregator, isLoading: isLoadingActivateAggregator } =
-    useActivateAggregator(statusProp?.id as string);
+    useActivateAggregator();
   const {
     mutate: deactivateAggregator,
     isLoading: isLoadingDeactivateAggregator,
-  } = useDeactivateAggregator(statusProp?.id as string);
+  } = useDeactivateAggregator();
 
   const renderAggregatorStatusFunction = () => {
     switch (statusProp?.userType === 'aggregator') {
       case statusProp?.is_active === true:
-        return deactivateAggregator();
+        return deactivateAggregator({ id: statusProp?.id });
       case statusProp?.is_active === false:
-        return activateAggregator();
+        return activateAggregator({ id: statusProp?.id });
       default:
         break;
     }
@@ -44,9 +44,9 @@ function ChangeStatusButton({
   const renderFarmerStatusFunction = () => {
     switch (statusProp?.userType === 'farmer') {
       case statusProp?.is_active === true:
-        return deactivateFarmer();
+        return deactivateFarmer({ id: statusProp?.id });
       case statusProp?.is_active === false:
-        return activateFarmer();
+        return activateFarmer({ id: statusProp?.id });
       default:
         break;
     }

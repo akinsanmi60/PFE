@@ -15,18 +15,18 @@ function ViewActionButtons({
   items: IBreadCrumbItem[];
 }) {
   const { mutate: farmerApproveMutate, isLoading: isLoadingApprove } =
-    useApproveFarmer(id as string);
+    useApproveFarmer();
 
   const {
     mutate: aggregatorApproveMutate,
     isLoading: isLoadingApproveAggregator,
-  } = useApproveAggregator(id as string);
+  } = useApproveAggregator();
 
   const handleApprove = () => {
     if (userType === 'farmer') {
-      farmerApproveMutate();
+      farmerApproveMutate({ id: id as string });
     } else if (userType === 'aggregator') {
-      aggregatorApproveMutate();
+      aggregatorApproveMutate({ id: id as string });
     }
   };
 
