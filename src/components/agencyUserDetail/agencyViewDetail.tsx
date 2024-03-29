@@ -2,6 +2,7 @@ import { capitalize, formatDate } from '@utils/constants';
 import { IRowBody } from '@shared/HubTable/type';
 import imagePlaceholder from '@assets/png/maleImagePlaceholder.png';
 import UserCard from 'components/userCard';
+import ChangeStatusButton from 'components/farmerAggregatorUserDetail/changeStatusButton';
 // import ChangeStatusButton from './changeStatusButton';
 
 type ViewDetailProps<TData> = {
@@ -11,6 +12,8 @@ type ViewDetailProps<TData> = {
 function ViewAgencyDetail<TData extends IRowBody>({
   userData,
 }: ViewDetailProps<TData>) {
+  console.log(userData);
+
   const detailAColumnsTitleA: {
     label: string;
     accessor: keyof TData | null;
@@ -139,7 +142,7 @@ function ViewAgencyDetail<TData extends IRowBody>({
           />
         </div>
         <div className="w-full bg-[#E2E8F0] border[1px] h-[1px] my-2" />
-        {/* <div className="mt-[20px]">
+        <div className="mt-[20px]">
           <ChangeStatusButton
             statusProp={{
               id: userData?.id,
@@ -148,7 +151,7 @@ function ViewAgencyDetail<TData extends IRowBody>({
               is_active: userData?.is_active,
             }}
           />
-        </div> */}
+        </div>
       </div>
     </div>
   );
