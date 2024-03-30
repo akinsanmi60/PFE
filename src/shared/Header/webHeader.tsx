@@ -15,8 +15,13 @@ function Header() {
   const { saveDetails } = useDetailContext();
   const { authUser } = useAuthContext();
 
+  const handleNavigate = (path: string) => {
+    setOpen(false);
+    navigate(path);
+  };
+
   return (
-    <div className="bg-background-main">
+    <div className="bg-background-main sticky top-0 z-50">
       <nav className="w-full transition-colors duration-500 py-[20px] bg-[#072723] border-0">
         <div className="max-content">
           <div className="container">
@@ -83,23 +88,20 @@ function Header() {
               {navLinks.map((link, index) => (
                 <p
                   key={index}
-                  onClick={() => navigate(link.path)}
-                  className="text-[#072723] text-[16px] leading-[24px] font-[500]"
+                  onClick={() => handleNavigate(link.path)}
+                  className="text-primary-white text-[16px] leading-[24px] font-[500]"
                 >
                   {link?.title}
                 </p>
               ))}
             </div>
             <div className="flex gap-[20px] mt-[50px] items-center xlsm:flex-col xlsm:items-start">
-              <button
+              <CustomButton
                 onClick={() => navigate(`${authPaths.login()}`)}
-                className="rounded-[40px] xlsm:w-full py-[12px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#072723] border-[1px] border-[#072723]"
+                className="rounded-[40px] xlsm:w-full py-[12px] px-[40px] text-[16px] leading-[22px] font-[600] text-primary-white border-[1px] border-[#072723]"
               >
                 Login
-              </button>
-              <button className="rounded-[40px] xlsm:w-full py-[12px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#072723] border-[1px] border-[#6AD871] bg-[#6AD871]">
-                Get Started
-              </button>
+              </CustomButton>
             </div>
           </div>
         </div>

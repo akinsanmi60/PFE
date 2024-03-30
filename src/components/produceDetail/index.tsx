@@ -14,6 +14,7 @@ import { useAuthContext } from '@contexts/authContext';
 import ApproveProduceByAdmin from './approveProduce';
 import { toastOptions } from '@shared/Toast/Toast';
 import { toast } from 'react-toastify';
+import AddProduceComponent from 'components/addProduce';
 
 const userArray = ['farmer', 'exporter', 'aggregator'];
 function ProduceCard({
@@ -130,6 +131,10 @@ function ProduceCard({
     }
   };
 
+  const handleEditProduce = () => {
+    handleModalOpen('editProduce');
+  };
+
   return (
     <div className="p-[20px] bg-primary-white">
       <div className="flex items-center gap-x-1 mb-[14px] justify-between">
@@ -146,9 +151,17 @@ function ProduceCard({
         <TableLoading title="Loading Produce Detail" />
       ) : produceData && Object.keys(produceData).length > 0 ? (
         <div className="border-[1px] border-primary-light-1 rounded-[16px] p-[24px] xlsm:p-0">
-          <h1 className="text-primary-main pb-[13px] text-[20px] font-[600] tracking-normal  ">
-            {produceData?.name}
-          </h1>
+          <div className="flex justify-between items-center">
+            <h1 className="text-primary-main pb-[13px] text-[20px] font-[600] tracking-normal  ">
+              {produceData?.name}
+            </h1>
+            {produceData?.status === 'not_approved' && (
+              <div className="flex gap-[20px]">
+                <p onClick={handleEditProduce}>Edit</p>
+                <p>Delete</p>
+              </div>
+            )}
+          </div>
           <div
             className="grid grid-cols-2 sixm:grid-cols-1
          border-y-[1px] border-primary-light-1 py-[15px] "
@@ -191,6 +204,17 @@ function ProduceCard({
       {modalState?.modalType === 'ApproveProduce' && (
         <ApproveProduceByAdmin produceData={produceData} />
       )}
+
+      {modalState?.modalType === 'editProduce' && (
+        <AddProduceComponent
+          produceAddProps={{
+            formTitle: 'Edit Produce',
+            actionText: 'editProduce',
+            produceData: produceData,
+          }}
+        />
+      )}
+      {modalState?.modalType === 'deleteProduce' && 'Delete Produce'}
     </div>
   );
 }

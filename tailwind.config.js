@@ -31,6 +31,7 @@ const customColors = {
     light: '#6AD871',
     borderlight: '#F2F2F2',
     'borderlight-1': '#F1F2F4',
+    dark: '#072723',
   },
   gray: {
     50: '#9ca3af',

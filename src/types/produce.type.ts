@@ -76,6 +76,7 @@ export type IMyProduceData = {
   transfer_handler: IProduceHandlerType[];
   submitted_quantity: number;
   submitted_unit: string;
+  storage: string;
 };
 
 export type IMyProduceResponse = IBaseResponse & {

@@ -4,12 +4,17 @@ import ControlledInput from '@shared/Input/ControlledInput';
 import ModalBaseWrapper from '@shared/ModalBase';
 import ControlledSelect from '@shared/Select/ControlledSelect';
 import ControlledTextArea from '@shared/Textarea/ControlledInput';
+import { toastOptions } from '@shared/Toast/Toast';
 import ArrayImageUpload from '@shared/upload/ArrayImageUpload';
 import ModalHeader from 'components/appNav/modalHeader';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useProduceCreationMutation } from 'services/produce.service';
-import { IAddProducePayload } from 'types/produce.type';
+import { toast } from 'react-toastify';
+import {
+  useProduceCreationMutation,
+  useProduceUpdateMutation,
+} from 'services/produce.service';
+import { IAddProducePayload, IMyProduceData } from 'types/produce.type';
 
 const produceClassification = [
   'Cereal',
@@ -21,7 +26,15 @@ const produceClassification = [
   'Other',
 ];
 
-function AddProduceComponent() {
+type IAddProduce = {
+  produceAddProps: {
+    formTitle: string;
+    actionText: string;
+    produceData?: IMyProduceData;
+  };
+};
+
+function AddProduceComponent({ produceAddProps }: IAddProduce) {
   const { authUser } = useAuthContext();
   const [imageString, setImageString] = useState<File[] | null>(null);
   const {
@@ -31,16 +44,17 @@ function AddProduceComponent() {
     formState: { isDirty },
   } = useForm({
     defaultValues: {
-      name: '',
-      quantity: '',
-      unit: '',
-      description: '',
-      farm_address: '',
+      name: (produceAddProps?.produceData?.name as string) || '',
+      quantity: String(produceAddProps?.produceData?.submitted_quantity) || '',
+      unit: produceAddProps?.produceData?.unit || '',
+      description: produceAddProps?.produceData?.description || '',
+      farm_address: produceAddProps?.produceData?.farm_address || '',
       harvest_date: '',
-      farm_state: '',
+      farm_state: produceAddProps?.produceData?.farm_state || '',
       planting_date: '',
-      produce_classification: '',
-      storage: '',
+      produce_classification:
+        produceAddProps?.produceData?.produce_classification || '',
+      storage: produceAddProps?.produceData?.storage || '',
     },
   });
 
@@ -50,7 +64,22 @@ function AddProduceComponent() {
     setImageString,
   });
 
+  const {
+    mutate: updateMutate,
+    isLoading: updateIsLoading,
+    isSuccess: updateIsSuccess,
+  } = useProduceUpdateMutation({
+    id: authUser?.id as string,
+    reset,
+    setImageString,
+  });
+
   const onAddProduce = (val: Omit<IAddProducePayload, 'images'>) => {
+    if (!imageString) {
+      toast.error('Please add at least one image', toastOptions);
+      return;
+    }
+
     const imgData = new FormData();
 
     Array.from(imageString as File[]).forEach(file => {
@@ -60,7 +89,12 @@ function AddProduceComponent() {
       ...val,
       images: imgData,
     };
-    mutate({ payload });
+
+    if (produceAddProps?.actionText === 'addProduce') {
+      mutate({ payload });
+    } else if (produceAddProps?.actionText === 'editProduce') {
+      updateMutate({ payload });
+    }
   };
 
   return (
@@ -73,8 +107,8 @@ function AddProduceComponent() {
       <div className="p-[6px]">
         <ModalHeader
           modalHeaderProp={{
-            title: 'Add Produce',
-            actionText: 'addProduce',
+            title: produceAddProps?.formTitle,
+            actionText: produceAddProps?.actionText,
           }}
         />
 
@@ -89,7 +123,7 @@ function AddProduceComponent() {
             <ArrayImageUpload
               setChosenImages={val => setImageString(val)}
               acceptType="image/*"
-              successWatcher={isSuccess}
+              successWatcher={isSuccess || updateIsSuccess}
             />
           </div>
 
@@ -162,11 +196,11 @@ function AddProduceComponent() {
           <div className="flex justify-end mt-[8px] mb-[-50px]">
             <CustomButton
               onClick={handleSubmit(onAddProduce)}
-              disabled={!isDirty || isLoading}
+              disabled={!isDirty || isLoading || updateIsLoading}
               className="text-primary-white w-[180px]"
               loading={isLoading}
               loadingText="Adding..."
-              variant={!isDirty || isLoading ? 'solid' : ''}
+              variant={!isDirty || isLoading || updateIsLoading ? 'solid' : ''}
             >
               Submit Produce
             </CustomButton>

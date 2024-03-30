@@ -180,7 +180,14 @@ function UserProduce() {
         />
       </PageContainer>
 
-      {modalState?.modalType === 'addProduce' && <AddProduceComponent />}
+      {modalState?.modalType === 'addProduce' && (
+        <AddProduceComponent
+          produceAddProps={{
+            formTitle: 'Add Produce',
+            actionText: 'addProduce',
+          }}
+        />
+      )}
     </div>
   );
 }
