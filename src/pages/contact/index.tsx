@@ -33,7 +33,7 @@ function Page() {
                     Get in Touch{' '}
                   </p>
                   <p className="font-secondary mt-[16px] font-[400] text-[18px] leading-[27px] xlsm:text-[16px] xlsm:leading-[24px] text-primary-light">
-                    We appreciate your interest in EdgeHR. To request a demo or
+                    We appreciate your interest in Pentrar. To request a demo or
                     for any inquiries, please use the contact information below
                     or fill out the form, and our team will get back to you
                     promptly.
