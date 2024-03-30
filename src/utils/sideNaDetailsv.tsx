@@ -27,6 +27,8 @@ import { ReactComponent as TeamIcon } from '@assets/svg/teamIcon.svg';
 import { ReactComponent as TeamWhite } from '@assets/svg/teamWhite.svg';
 import { ReactComponent as BadgeWhite } from '@assets/svg/badgeWhite.svg';
 import { ReactComponent as Badge } from '@assets/svg/badge.svg';
+import { ReactComponent as OrderWhite } from '@assets/svg/orderWhite.svg';
+import { ReactComponent as OrderDark } from '@assets/svg/orderDark.svg';
 
 export type NavLInk = {
   name: string;
@@ -69,19 +71,19 @@ const EXPORTER_SIDENAV: NavLInk[] = [
     name: 'Pentrar Hub',
     path: 'pentrar-hub',
     Icon: <Search />,
-    // IconBlue: BlueCustomer,
+    IconBlue: <SearchWhite />,
   },
   {
     name: 'My Produces',
-    path: 'myproduces-list',
+    path: 'my-produces',
     Icon: <Folder />,
-    // IconBlue: BlueGroup,
+    IconBlue: <FolderWhite />,
   },
   {
     name: 'My Order',
     path: 'myorder-list',
-    Icon: <Folder />,
-    // IconBlue: BlueGroup,
+    Icon: <OrderDark />,
+    IconBlue: <OrderWhite />,
   },
 ];
 

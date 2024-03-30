@@ -45,9 +45,9 @@ function GeneralLoginPage({
   const registerScreenLink = () => {
     switch (pageTitle) {
       case 'FarmerAggregator':
-        return '/register-form';
+        return '/register-form/farmer';
       case 'offtakerExporter':
-        return '/register/form';
+        return '/register/form/exporter';
     }
   };
 

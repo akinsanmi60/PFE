@@ -10,8 +10,9 @@ function Hero() {
   const [selectedOption, setSelectedOption] = useState<string>('');
 
   const handleSend = () => {
+    if (!selectedOption) return;
     navigate(
-      `${authPaths.registerFarmerAggregator(
+      `${authPaths.registerUser(
         false,
         'register-form',
         selectedOption.toLowerCase(),

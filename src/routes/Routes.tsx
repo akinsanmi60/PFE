@@ -135,4 +135,5 @@ export const BasePath = {
   ADMIN: 'pentrar/admin',
   AGENCY: 'pentrar/agency',
   WEB: '/',
+  EXPORTER: 'pentrar/exporter',
 };

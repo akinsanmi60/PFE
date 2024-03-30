@@ -16,11 +16,8 @@ export const authPaths = {
   root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.WEB}` : ''}`,
   login: (fullPath: boolean = true) =>
     `${authPaths.root(fullPath)}${RootLink.login}`,
-  registerFarmerAggregator: (
-    fullPath: boolean = true,
-    namePath: string,
-    type: string,
-  ) => `${joinPath(authPaths.root(fullPath), namePath, type)}`,
+  registerUser: (fullPath: boolean = true, namePath: string, type: string) =>
+    `${joinPath(authPaths.root(fullPath), namePath, type)}`,
   registerExporterOfftaker: (fullPath: boolean = true) =>
     `${authPaths.root(fullPath)}${RootLink.registerExporterOfftaker}`,
   forgotPassword: (fullPath: boolean = true) =>
@@ -91,4 +88,9 @@ export const FarmerAggregatorPath = {
     tab: ISettingsTab | null,
     fullPath: boolean = true,
   ) => `${joinPath(FarmerAggregatorPath.root(fullPath), linkdetail, tab)}`,
+};
+
+export const ExporterPath = {
+  root: (fullPath: boolean = true) =>
+    `${fullPath ? `${BasePath.EXPORTER}` : ''}`,
 };

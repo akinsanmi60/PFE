@@ -13,6 +13,7 @@ import { AppRouteWithLayout, AppRouteWithoutLayout } from 'routes/routeObject';
 import { UserAppRoute } from '@modules/users/routes';
 import { AdminAppRoute } from '@modules/admin/routes';
 import { AgencyAppRoute } from '@modules/agency/routes';
+import { RenderExporterRoute } from '@modules/exporter/routes';
 
 function App() {
   const router = createBrowserRouter(
@@ -23,6 +24,7 @@ function App() {
         {RenderProtectedRoute(UserAppRoute)}
         {RenderProtectedRoute(AdminAppRoute)}
         {RenderProtectedRoute(AgencyAppRoute)}
+        {RenderProtectedRoute(RenderExporterRoute)}
       </>,
     ),
   );

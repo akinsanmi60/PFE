@@ -3,7 +3,7 @@ import HubAnimation from 'components/hub/hubAnimation';
 import HubProduce from 'components/hub/hubProduce';
 import PageContainer from 'components/Layout/PageContainer';
 
-function UserPentrarHub() {
+function ExporterPentrarHub() {
   return (
     <>
       <AppHeader>
@@ -19,4 +19,4 @@ function UserPentrarHub() {
   );
 }
 
-export default UserPentrarHub;
+export default ExporterPentrarHub;

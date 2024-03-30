@@ -7,7 +7,7 @@ import CustomHubTable from '@shared/HubTable';
 import EmptyBar from '@shared/Table/tableEmpty';
 import { useGetPentrarHubProduce } from 'services/pentrar.service';
 import { useModalContext } from '@contexts/modalContext';
-import OnHubProduceDetail from 'components/hubProduceDetail';
+import OnHubProduceDetail from 'components/hub/hubProduceDetail';
 import TableLoading from '@shared/Table/tableLoading';
 import { formatDate } from '@utils/constants';
 

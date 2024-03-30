@@ -36,12 +36,19 @@ import { userPathsLinks } from '@modules/users/routes';
 import { adminPathsLinks } from '@modules/admin/routes';
 import { BasePath } from 'routes/Routes';
 import { agencyPathsLinks } from '@modules/agency/routes';
-// import { queryParamsHelper } from 'config/query-params';
+import { exporterPathsLinks } from '@modules/exporter/routes';
 
-const userDashboard = ['farmer', 'aggregator'];
-const adminDashboard = ['admin', 'subAdmin'];
-const agencyDashboard = ['agency', 'agencySubAdmin', 'agencyAdmin'];
-
+const dashboardPaths: Record<string, string> = {
+  farmer: `/${BasePath.USER}/${userPathsLinks.dashBoard}`,
+  aggregator: `/${BasePath.USER}/${userPathsLinks.dashBoard}`,
+  admin: `/${BasePath.ADMIN}/${adminPathsLinks.dashBoard}`,
+  subAdmin: `/${BasePath.ADMIN}/${adminPathsLinks.dashBoard}`,
+  agency: `/${BasePath.AGENCY}/${agencyPathsLinks.dashBoard}`,
+  agencySubAdmin: `/${BasePath.AGENCY}/${agencyPathsLinks.dashBoard}`,
+  agencyAdmin: `/${BasePath.AGENCY}/${agencyPathsLinks.dashBoard}`,
+  exporter: `/${BasePath.EXPORTER}/${exporterPathsLinks.dashBoard}`,
+  offtaker: `/${BasePath.EXPORTER}/${exporterPathsLinks.dashBoard}`,
+};
 export const useLoginMutation = ({ url }: { url: string }) => {
   const { setAuthUser } = useAuthContext();
   const navigate = useNavigate();
@@ -61,40 +68,11 @@ export const useLoginMutation = ({ url }: { url: string }) => {
           ) as unknown as IUserCTXType;
           setToken(accessToken);
           setAuthUser(decodedUser);
-          if (
-            decodedUser &&
-            decodedUser.isEmail_verified &&
-            userDashboard.includes(decodedUser.role)
-          ) {
+          const dashboardPath = dashboardPaths[decodedUser.role];
+          if (decodedUser && decodedUser.isEmail_verified && dashboardPath) {
             displaySuccess(res?.message || '');
-            saveDetailToLocalStorage(
-              LOCAL_STORAGE_KEY.URL,
-              `/${BasePath.USER}`,
-            );
-            navigate(`/${BasePath.USER}/${userPathsLinks.dashBoard}`, {
-              replace: true,
-            });
-          } else if (decodedUser && adminDashboard.includes(decodedUser.role)) {
-            displaySuccess(res?.message || '');
-            saveDetailToLocalStorage(
-              LOCAL_STORAGE_KEY.URL,
-              `/${BasePath.ADMIN}/${adminPathsLinks.dashBoard}`,
-            );
-            navigate(`/${BasePath.ADMIN}/${adminPathsLinks.dashBoard}`, {
-              replace: true,
-            });
-          } else if (
-            decodedUser &&
-            agencyDashboard.includes(decodedUser.role)
-          ) {
-            displaySuccess(res?.message || '');
-            saveDetailToLocalStorage(
-              LOCAL_STORAGE_KEY.URL,
-              `/${BasePath.AGENCY}/${agencyPathsLinks.dashBoard}`,
-            );
-            navigate(`/${BasePath.AGENCY}/${agencyPathsLinks.dashBoard}`, {
-              replace: true,
-            });
+            saveDetailToLocalStorage(LOCAL_STORAGE_KEY.URL, dashboardPath);
+            navigate(dashboardPath, { replace: true });
           }
         }
       },
@@ -103,6 +81,7 @@ export const useLoginMutation = ({ url }: { url: string }) => {
       },
     },
   );
+
   return { mutate, isLoading, ...rest };
 };
 

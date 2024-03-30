@@ -56,10 +56,9 @@ function SideNav() {
 
   const settingsNavLink = useMemo(() => {
     return authUser?.role === Account.Aggregator ||
-      authUser?.role === Account.Farmer
+      authUser?.role === Account.Farmer ||
+      authUser?.role === Account.Exporter
       ? SETTINGS_SIDENAV
-      : authUser?.role === Account.Exporter
-      ? null
       : authUser?.role === Account.Admin
       ? ADMIN_SETTINGS_SIDENAV
       : authUser?.role === Account.SubAdmin

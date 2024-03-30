@@ -1,6 +1,8 @@
 export const SEARCH_ALL_VICTIMS = 'https://dummyjson.com/users/search';
 
 export const USER_LOGIN_URL = 'auth/login';
+export const EXPORTER_LOGIN_URL = 'auth/login/exporter';
+export const OFFTAKER_LOGIN_URL = 'auth/login/offtaker';
 export const AGENCY_LOGIN_URL = 'agency/login';
 export const ADMIN_LOGIN_URL = 'admin/login';
 export const USER_SIGNUP_URL = 'auth/signup';

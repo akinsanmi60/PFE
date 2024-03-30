@@ -32,6 +32,10 @@ const AgencyLogin = React.lazy(
   () => import('@modules/authentication/login/agencyLogin'),
 );
 
+const ExporterLogin = React.lazy(
+  () => import('@modules/authentication/login/exporterOfftaker'),
+);
+
 export const RootLink = {
   login: 'login',
   registerFarmerAggregator: 'register-form/:type',
@@ -39,6 +43,7 @@ export const RootLink = {
   resetPassword: 'reset-password',
   adminLogin: 'admin-login',
   agencyLogin: 'agency-login',
+  exporterLogin: 'login/:type',
   registerExporterOfftaker: 'register',
   unauthourized: 'unauthourized',
   error: '*',
@@ -83,6 +88,11 @@ const noLayoutRoutes = {
   ResetPasswordPage: {
     element: ResetPasswordPage,
     path: RootLink.resetPassword,
+  },
+
+  ExporterLogin: {
+    element: ExporterLogin,
+    path: RootLink.exporterLogin,
   },
 };
 
