@@ -3,8 +3,10 @@ import { toastOptions } from '@shared/Toast/Toast';
 import { capitalize } from '@utils/constants';
 import { toast } from 'react-toastify';
 import {
+  useActivateAgency,
   useActivateAggregator,
   useActivateFarmer,
+  useDeactivateAgency,
   useDeactivateAggregator,
   useDeactivateFarmer,
 } from 'services/admin.service';
@@ -29,6 +31,10 @@ function ChangeStatusButton({
     mutate: deactivateAggregator,
     isLoading: isLoadingDeactivateAggregator,
   } = useDeactivateAggregator();
+  const { mutate: activateAgency, isLoading: isLoadingActivateAgency } =
+    useActivateAgency();
+  const { mutate: deactivateAgency, isLoading: isLoadingDeactivateAgency } =
+    useDeactivateAgency();
 
   const renderAggregatorStatusFunction = () => {
     switch (statusProp?.userType === 'aggregator') {
@@ -51,6 +57,17 @@ function ChangeStatusButton({
         break;
     }
   };
+
+  const renderAgencyStatusFunction = () => {
+    switch (statusProp?.userType === 'agency') {
+      case statusProp?.is_active === true:
+        return deactivateAgency({ id: statusProp?.id });
+      case statusProp?.is_active === false:
+        return activateAgency({ id: statusProp?.id });
+      default:
+        break;
+    }
+  };
   const toggleActiveStatus = () => {
     if (statusProp?.status !== 'active') {
       return toast.error(
@@ -61,6 +78,8 @@ function ChangeStatusButton({
       return renderFarmerStatusFunction();
     } else if (statusProp?.userType === 'aggregator') {
       return renderAggregatorStatusFunction();
+    } else if (statusProp?.userType === 'agency') {
+      return renderAgencyStatusFunction();
     }
   };
 
@@ -68,7 +87,9 @@ function ChangeStatusButton({
     isLoadingActivateFarmer ||
     isLoadingDeactivateFarmer ||
     isLoadingActivateAggregator ||
-    isLoadingDeactivateAggregator;
+    isLoadingDeactivateAggregator ||
+    isLoadingActivateAgency ||
+    isLoadingDeactivateAgency;
 
   return (
     <div>

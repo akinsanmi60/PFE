@@ -18,22 +18,27 @@ function FarmerNetwork() {
                 Find a great network to sell produce for export.
               </p>
               <p className="mt-[20px] font-[400] text-[20px] leading-[28px] xlsm:text-[16px] xlsm:leading-[24px]">
-                Lorem ipsum dolors sit amet consectetur. Velit vitae odio nec
-                vulputate proin ut facilisi hendrerit leo. Amet vitae et lacus
-                bibendum.
+                In the realm of agricultural exports, finding the right network
+                can make all the difference. Pentar offers farmers a gateway to
+                a vast ecosystem of buyers, importers, and distributors,
+                facilitating seamless connections and unlocking new
+                opportunities for growth.
               </p>
             </div>
             <div className="max-w-[442px] pt-[24px] border-t-[1px] border-[#FFFFFF80]">
               <div className="flex gap-[24px] text-[#ffffff]">
                 <p className="font-[500] text-[14px] leading-[20px]">
-                  Lorem ipsum dolor sit amet consecte tur. Sociis nisl eu a
+                  Access to invaluable market insights, trends, and demand
+                  forecasts{' '}
                 </p>
                 <p className="font-[500] text-[14px] leading-[20px]">
-                  Lorem ipsum dolor sit amet consecte tur. Sociis nisl eu a
+                  Empowerment to make informed decisions about what and where to
+                  sell{' '}
                 </p>
-                <p className="font-[500] text-[14px] leading-[20px]">
-                  Lorem ipsum dolor sit amet consecte tur. Sociis nisl eu a
-                </p>
+                {/* <p className="font-[500] text-[14px] leading-[20px]">
+                  Connection with niche markets seeking organic produce or
+                  global distributors for bulk shipments{' '}
+                </p> */}
               </div>
               <div className="flex gap-[20px] mt-[32px] items-center xlsm:flex-col xlsm:items-start">
                 <CustomButton

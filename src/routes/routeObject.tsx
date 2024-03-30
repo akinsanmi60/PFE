@@ -7,8 +7,10 @@ const ErrorPage = React.lazy(() => import('@pages/error/error'));
 const UnauthourizedPage = React.lazy(() => import('@pages/error/unauthorized'));
 
 const HomePage = React.lazy(() => import('@pages/homePage'));
-const AboutPage = React.lazy(() => import('@pages/about'));
+// const AboutPage = React.lazy(() => import('@pages/about'));
+const AboutPage = React.lazy(() => import('@pages/features'));
 const ServicePage = React.lazy(() => import('@pages/servicesPage'));
+const ContactUsPage = React.lazy(() => import('@pages/contact'));
 
 const FarmerAggregatorRegisterPage = React.lazy(
   () => import('@modules/authentication/register/farmerAggregatorForm'),
@@ -102,6 +104,10 @@ const routeWithLayout = {
   ServicePage: {
     element: ServicePage,
     path: '/services',
+  },
+  ContactUsPage: {
+    element: ContactUsPage,
+    path: '/contact',
   },
 };
 

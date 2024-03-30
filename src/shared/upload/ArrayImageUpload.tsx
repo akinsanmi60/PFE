@@ -64,14 +64,18 @@ function ArrayImageUpload({
       return true;
     });
 
-    if (validFiles.length === 4) {
+    if (validFiles.length >= 5) {
       alert('You can only upload 4 images');
     }
 
     if (validFiles.length > 0) {
-      setImageString(prevFiles => [...prevFiles, ...validFiles]);
+      // setImageString(prevFiles => [...prevFiles, ...validFiles]);
+      // const previewUrls = validFiles.map(file => URL.createObjectURL(file));
+      // setPreviewImages(prevUrls => [...prevUrls, ...previewUrls]);
+      setPreviewImages([]);
+      setImageString(validFiles);
       const previewUrls = validFiles.map(file => URL.createObjectURL(file));
-      setPreviewImages(prevUrls => [...prevUrls, ...previewUrls]);
+      setPreviewImages(previewUrls);
     }
   };
 

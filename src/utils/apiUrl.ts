@@ -66,6 +66,8 @@ export const GET_PENTRAHUB_PRODUCE_URL = () => 'pentrar-hub/getAllHubProduce';
 //Produce urls
 export const GET_ALL_PRODUCE_URL = () => 'produce/allProduces';
 export const ADD_PRODUCE_URL = (id: string) => `produce/${id}/create-produce`;
+export const UPDATE_PRODUCE_URL = (id: string) =>
+  `produce/${id}/update-produce`;
 export const TRANSFER_PRODUCE_URL = (id: string) =>
   `produce/${id}/partial-transfer`;
 export const GET_USER_PRODUCE_URL = (id: string, type: string) =>
@@ -92,3 +94,7 @@ export const GET_AGENCYTEAM_MEMBER_URL = (agencyId: string) =>
   `agency/${agencyId}/agency-team`;
 export const GET_AGENCY_DASHBOARD_COUNT_URL = (id: string) =>
   `agency/${id}/dashboard-count`;
+export const ACTIVATE_AGENCY_URL = (agencyID: string) =>
+  `agency/${agencyID}/activate-agency`;
+export const DEACTIVATE_AGENCY_URL = (agencyID: string) =>
+  `agency/${agencyID}/deactivate-agency`;
