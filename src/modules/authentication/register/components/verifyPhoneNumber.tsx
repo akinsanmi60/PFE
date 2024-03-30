@@ -11,7 +11,11 @@ function GetVerifyCode({ currentStep, action, previous }: IFormComponentType) {
   const { setFormValues, multiFormValues } = useFormData();
   const { mutate, isLoading } = useVerifyMutation({ action });
 
-  const { control, handleSubmit } = useForm<IVerifyProp>({
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid, isDirty },
+  } = useForm<IVerifyProp>({
     defaultValues: {
       code: '',
       phone_number: multiFormValues?.phone_number as string,
@@ -75,6 +79,8 @@ function GetVerifyCode({ currentStep, action, previous }: IFormComponentType) {
               loadingText="Verifying..."
               type="submit"
               onClick={handleSubmit(onSubmit)}
+              disabled={!isValid || !isDirty}
+              variant={!isValid || !isDirty || isLoading ? 'solid' : ''}
             >
               Proceed
             </CustomButton>

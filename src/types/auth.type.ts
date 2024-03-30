@@ -66,6 +66,7 @@ export type IRegister = {
   phone_number?: string;
   gender?: string;
   code?: string;
+  terms_condition?: boolean | string;
 };
 
 export type IPartialCreateUser = {

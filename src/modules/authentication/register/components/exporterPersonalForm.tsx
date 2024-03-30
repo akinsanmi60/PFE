@@ -1,5 +1,5 @@
 import { useFormData } from '@contexts/formContext';
-import { genderData, userTypeData } from '@db/authData';
+import { userTypeDataB } from '@db/authData';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
@@ -7,9 +7,9 @@ import ControlledSelect from '@shared/Select/ControlledSelect';
 import { useForm } from 'react-hook-form';
 import { usePartialUserCreationMutation } from 'services/auth.service';
 import { IFormComponentType, IRegister } from 'types/auth.type';
-import { personalInfoSchema } from 'validation/registerValidation';
+import { exporterInfoSchema } from 'validation/registerValidation';
 
-function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
+function ExporterInfoForm({ currentStep, action }: IFormComponentType) {
   const { setFormValues } = useFormData();
   const { mutate, isLoading } = usePartialUserCreationMutation({ action });
 
@@ -20,13 +20,13 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
   } = useForm({
     defaultValues: {
       email: '',
-      full_name: '',
+      coy_name: '',
       user_type: '',
-      gender: '',
+      reg_number: '',
       phone_number: '',
     },
     mode: 'all',
-    resolver: yupResolver(personalInfoSchema),
+    resolver: yupResolver(exporterInfoSchema),
   });
 
   const onSubmit = (values: Partial<IRegister>) => {
@@ -46,7 +46,7 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
   return (
     <div className={currentStep === 1 ? 'block' : 'hidden'}>
       <h2 className="mb-[20px] text-[20px] tracking-normal font-[700]">
-        Personal Information
+        Company Information
       </h2>{' '}
       <form>
         {/* email */}
@@ -56,7 +56,7 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
               control={control}
               label="User Type"
               name="user_type"
-              optionArray={userTypeData}
+              optionArray={userTypeDataB}
               placeholder="Please select  user type"
             />
           </div>
@@ -64,8 +64,8 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
           <div className="">
             <ControlledInput
               control={control}
-              label="Full Name"
-              name="full_name"
+              label="Company Name"
+              name="coy_name"
             />
           </div>
           <div className="">
@@ -85,12 +85,10 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
           </div>
 
           <div className="">
-            <ControlledSelect
+            <ControlledInput
               control={control}
-              label="Gender"
-              name="gender"
-              optionArray={genderData}
-              placeholder="Please select  gender"
+              label="Registration Number"
+              name="reg_number"
             />
           </div>
         </div>
@@ -112,4 +110,4 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
   );
 }
 
-export default PersonalinfoForm;
+export default ExporterInfoForm;

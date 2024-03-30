@@ -3,16 +3,22 @@ import HeroAnimated from './heroAnimated';
 import { useState } from 'react';
 import { allUserType } from '@db/heroImageData';
 import Dropdown from '@shared/Select/uncontrolledSelect';
+import { authPaths } from '@utils/paths';
 
 function Hero() {
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState<string>('');
 
   const handleSend = () => {
-    if (selectedOption === 'Farmer' || selectedOption === 'Aggregator') {
-      navigate('/register-form');
-    }
+    navigate(
+      `${authPaths.registerFarmerAggregator(
+        false,
+        'register-form',
+        selectedOption.toLowerCase(),
+      )}`,
+    );
   };
+
   return (
     <div className="h-screen w-full bg-background-main mdxl:h-full">
       <div className="max-content">

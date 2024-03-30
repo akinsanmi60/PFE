@@ -7,14 +7,14 @@ import WhyPentrar from './components/whyPentrar';
 
 function HomePage() {
   return (
-    <div className="">
+    <>
       <Hero />
       <WhyPentrar />
       <BoostBusiness />
       <FarmerNetwork />
       <Insight />
       <UnlockPentrar />
-    </div>
+    </>
   );
 }
 

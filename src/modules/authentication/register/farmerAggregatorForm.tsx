@@ -4,11 +4,19 @@ import { useState } from 'react';
 import PersonalinfoForm from './components/personalinfoForm';
 import GetVerifyCode from './components/verifyPhoneNumber';
 import CreatePassword from './components/createPassword';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { webPaths } from '@utils/paths';
+import ExporterInfoForm from './components/exporterPersonalForm';
 
-function FarmerAggregatorRegister() {
-  const steps = ['Personal Information', 'Verify Phone', 'Create Password'];
+function Register() {
+  const { type } = useParams();
+
+  const infoWord =
+    type === 'farmer' || type === 'aggregator'
+      ? 'Personal Information'
+      : 'Company Information';
+
+  const steps = [infoWord, 'Verify Phone', 'Create Password'];
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
 
@@ -24,20 +32,36 @@ function FarmerAggregatorRegister() {
 
   const navigate = useNavigate();
 
+  const infoForm = () => {
+    switch (type) {
+      case 'farmer':
+      case 'aggregator':
+        return (
+          <PersonalinfoForm currentStep={currentStep} action={moveToNextForm} />
+        );
+      case 'exporter':
+        return (
+          <ExporterInfoForm currentStep={currentStep} action={moveToNextForm} />
+        );
+      default:
+        return <PersonalinfoForm />;
+    }
+  };
+
   return (
     <div
-      className={`flex flex-col items-center justify-between h-screen py-[10px]`}
+      className={`flex flex-col items-center justify-between gap-y-[60px] h-screen py-[10px]`}
     >
-      <>
+      <div>
         <img
           src={pentrarLogo}
           alt="logo"
           onClick={() => navigate(`${webPaths.home()}`)}
           className="cursor-pointer"
         />
-      </>
+      </div>
 
-      <div className="mt-[60px]">
+      <div className="">
         <FormWithStepperWrapper
           complete={complete}
           steps={steps}
@@ -45,12 +69,12 @@ function FarmerAggregatorRegister() {
           setComplete={setComplete}
           setCurrentStep={setCurrentStep}
         >
-          {currentStep >= 1 && (
-            <PersonalinfoForm
-              currentStep={currentStep}
-              action={moveToNextForm}
-            />
-          )}
+          {currentStep >= 1 &&
+            // <PersonalinfoForm
+            //   currentStep={currentStep}
+            //   action={moveToNextForm}
+            // />
+            infoForm()}
 
           {currentStep >= 2 && (
             <GetVerifyCode
@@ -72,4 +96,4 @@ function FarmerAggregatorRegister() {
   );
 }
 
-export default FarmerAggregatorRegister;
+export default Register;

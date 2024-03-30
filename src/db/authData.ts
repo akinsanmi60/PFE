@@ -1,6 +1,7 @@
 export const genderData = ['male', 'female'];
 
-export const userTypeData = ['farmer', 'aggregator', 'exporter', 'offtaker'];
+export const userTypeData = ['farmer', 'aggregator'];
+export const userTypeDataB = ['exporter', 'offtaker'];
 
 export const premisesOwnerShip = ['owned', 'rented', 'leased'];
 

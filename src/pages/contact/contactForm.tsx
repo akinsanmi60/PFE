@@ -133,10 +133,11 @@ function ContactForm() {
               placeholder="Enter your message"
             />
           </div>
-          <div className="flex justify-center  w-full">
+          <div className="flex justify-end  w-full">
             <CustomButton
-              disabled={!isDirty || !isValid}
-              className="text-primary-white"
+              disabled={!isValid || !isDirty}
+              variant={!isValid || !isDirty ? 'solid' : ''}
+              className="text-primary-white w-[120px]"
             >
               {'Submit'}
             </CustomButton>

@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { ILoginFormData } from 'types/auth.type';
 import pentrarLogo from '@assets/svg/LogoPentrar.svg';
 import { webPaths } from '@utils/paths';
+import { getYear } from '@utils/constants';
 
 function GeneralLoginPage({
   url,
@@ -145,7 +146,7 @@ function GeneralLoginPage({
       </form>
 
       <p className="text-[15px] leading-[23px] tracking-normal font-[500] text-[#999999]">
-        © 2023 Pentrar. All Rights reserved.{' '}
+        © {getYear()} Pentrar. All Rights reserved.{' '}
         <strong className="text-[#1A1A1A]">
           Terms & Conditions and Privacy Policy
         </strong>

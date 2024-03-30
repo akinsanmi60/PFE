@@ -12,7 +12,7 @@ const AboutPage = React.lazy(() => import('@pages/features'));
 const ServicePage = React.lazy(() => import('@pages/servicesPage'));
 const ContactUsPage = React.lazy(() => import('@pages/contact'));
 
-const FarmerAggregatorRegisterPage = React.lazy(
+const RegisterPage = React.lazy(
   () => import('@modules/authentication/register/farmerAggregatorForm'),
 );
 
@@ -34,7 +34,7 @@ const AgencyLogin = React.lazy(
 
 export const RootLink = {
   login: 'login',
-  registerFarmerAggregator: 'register-form',
+  registerFarmerAggregator: 'register-form/:type',
   forgotPassword: 'forgot-password',
   resetPassword: 'reset-password',
   adminLogin: 'admin-login',
@@ -70,8 +70,8 @@ const noLayoutRoutes = {
     path: RootLink.unauthourized,
   },
 
-  FarmerAggregatorRegisterPage: {
-    element: FarmerAggregatorRegisterPage,
+  RegisterPage: {
+    element: RegisterPage,
     path: RootLink.registerFarmerAggregator,
   },
 

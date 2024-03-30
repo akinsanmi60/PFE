@@ -1,6 +1,7 @@
 import { useFormData } from '@contexts/formContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
+import ControlledCheckbox from '@shared/Checkbox';
 import ControlledInput from '@shared/Input/ControlledInput';
 import { useForm } from 'react-hook-form';
 import { useRegisterMutation } from 'services/auth.service';
@@ -11,11 +12,16 @@ function CreatePassword({ previous, currentStep }: IFormComponentType) {
   const { multiFormValues } = useFormData();
   const { mutate, isLoading } = useRegisterMutation();
 
-  const { handleSubmit, control } = useForm({
+  const {
+    handleSubmit,
+    control,
+    formState: { isDirty, isValid },
+  } = useForm({
     mode: 'all',
     defaultValues: {
       password: '',
       confirm_password: '',
+      terms_condition: '',
     },
     resolver: yupResolver(createPasswordSchema),
   });
@@ -24,8 +30,8 @@ function CreatePassword({ previous, currentStep }: IFormComponentType) {
     const payload = {
       ...multiFormValues,
       password: values.password,
+      terms_condition: values.terms_condition !== '' && true,
     };
-
     mutate({ payload });
   };
 
@@ -58,6 +64,15 @@ function CreatePassword({ previous, currentStep }: IFormComponentType) {
               type="password"
             />
           </div>
+          <div>
+            <ControlledCheckbox
+              control={control}
+              name="terms_condition"
+              label={`I have read and agree to Pentrar's Terms and Conditions
+              `}
+              checkboxValue="terms_condition"
+            />
+          </div>
         </div>
 
         <div className="mt-[140px] flex justify-end items-baseline">
@@ -76,6 +91,8 @@ function CreatePassword({ previous, currentStep }: IFormComponentType) {
               loadingText="Creating..."
               type="submit"
               onClick={handleSubmit(onSubmit)}
+              disabled={!isValid || !isDirty}
+              variant={!isValid || !isDirty || isLoading ? 'solid' : ''}
             >
               Proceed
             </CustomButton>

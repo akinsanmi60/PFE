@@ -49,7 +49,7 @@ function Insight() {
 
                 <p className="mt-[16px] font-[300] font-primary text-[16px] line-clamp-4 leading-[24px] xlsm:text-[14px] xlsm:leading-[21px] text-primary-light">
                   {item?.textBlockA?.slice(0, 1)?.map((item: any) => (
-                    <p key={item}>{item?.paragraph}</p>
+                    <span key={item}>{item?.paragraph}</span>
                   ))}{' '}
                 </p>
                 <CustomButton
