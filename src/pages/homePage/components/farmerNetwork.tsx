@@ -12,7 +12,7 @@ function FarmerNetwork() {
               className="w-[758px] h-[654px] mdxl:w-full xlsm:h-[450px] rounded-[12px]"
             />
           </div>
-          <div className="max-w-[546px] h-[654px] rounded-[12px] bg-[#2AA232] p-[32px] flex flex-col justify-between">
+          <div className="max-w-[546px] h-[654px] rounded-[12px] bg-background-dark p-[32px] flex flex-col justify-between">
             <div className="text-[#ffffff] max-w-[442px]">
               <p className="font-[700] text-[38px] leading-[48px] xlsm:text-[30px] xlsm:leading-[38px] font-playfair">
                 Find a great network to sell produce for export.
@@ -35,19 +35,15 @@ function FarmerNetwork() {
                   Empowerment to make informed decisions about what and where to
                   sell{' '}
                 </p>
-                {/* <p className="font-[500] text-[14px] leading-[20px]">
-                  Connection with niche markets seeking organic produce or
-                  global distributors for bulk shipments{' '}
-                </p> */}
               </div>
               <div className="flex gap-[20px] mt-[32px] items-center xlsm:flex-col xlsm:items-start">
                 <CustomButton
                   //   onClick={() => navigate('/login')}
-                  className="rounded-[40px] xlsm:w-full py-[12px] px-[24px] text-[16px] leading-[22px] font-[500] text-[#ffffff] bg-[#072723]  border-[1px] border-[#072723]"
+                  className="rounded-[40px] xlsm:w-full py-[12px] px-[24px] text-[16px] leading-[22px] font-[500] text-primary-main bg-primary-white  border-[1px] border-primary-white "
                 >
                   Get Started
                 </CustomButton>
-                <CustomButton className="rounded-[40px] xlsm:w-full py-[12px] px-[24px] text-[16px] leading-[22px] font-[500] text-primary-white border-[1px] border-primary-white ">
+                <CustomButton className="rounded-[40px] xlsm:w-full py-[12px] px-[24px] text-[16px] leading-[22px] font-[500] text-primary-white border-[1px] border-secondary-light-1 ">
                   Learn More{' '}
                 </CustomButton>
               </div>

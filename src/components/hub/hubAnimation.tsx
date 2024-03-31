@@ -25,7 +25,7 @@ function HubAnimation() {
           <p className="font-[500] text-[16px] leading-[22px]">
             {imageData?.smallText}
           </p>
-          <p className="font-[500] text-[36px] leading-[50px] lg:text-[30px] lg:leading-[40px] mt-[4px]">
+          <p className="font-[500] text-[26px] leading-[32px] lg:text-[24px] lg:leading-[32px] mt-[16px]">
             {imageData?.bigText}
           </p>
           <div className="mt-[11px] flex items-center gap-[4px]">

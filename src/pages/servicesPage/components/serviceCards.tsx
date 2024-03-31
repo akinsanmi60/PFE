@@ -1,4 +1,5 @@
 import { servicesData } from '@db/servicesData';
+import CustomButton from '@shared/Button';
 import { useNavigate } from 'react-router-dom';
 
 function ServiceCards() {
@@ -21,18 +22,18 @@ function ServiceCards() {
                 <p className="font-[600] text-[#2AA232] text-[20px] leading-[28px] xlsm:text-[16px] xlsm:leading-[22px]">
                   {item?.smallText}
                 </p>
-                <p className="font-[700] font-playfair mt-[20px] text-[#072723] text-[64px] leading-[80px] mdxl:text-[50px] mdxl:leading-[63px] xlsm:text-[45px] xlsm:leading-[50px]">
+                <p className="font-[700] font-playfair mt-[20px] text-[#072723] text-[45px] leading-[56px]  xlsm:text-[32px] xlsm:leading-[40px]">
                   {item?.title}
                 </p>
                 <p className="font-[400] mt-[20px] text-[#333333] text-[19px] leading-[28px] mdxl:text-[16px] mdxl:leading-[24px] xlsm:text-[14px] xlsm:leading-[20px]">
                   {item?.subTitle}
                 </p>
-                <button
+                <CustomButton
                   onClick={() => navigate('/login')}
                   className="mt-[20px] bg-[#2AA232] text-[#FFFFFF] rounded-[40px] px-[40px] py-[21px] mdxl:px-[30px] mdxl:py-[16px] xlsm:px-[20px] xlsm:py-[12px] font-[600] text-[16px] xlsm:text-[14px] leading-[22px] text-center"
                 >
                   {item?.btnText}
-                </button>
+                </CustomButton>
               </div>
             </div>
           ))}

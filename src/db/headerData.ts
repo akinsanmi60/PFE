@@ -9,7 +9,11 @@ export const navLinks = [
   },
   {
     title: 'Track ID',
-    path: '/',
+    path: '',
+  },
+  {
+    title: 'Blog',
+    path: '/blog',
   },
   {
     title: 'Contact Us',

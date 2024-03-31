@@ -11,6 +11,7 @@ const HomePage = React.lazy(() => import('@pages/homePage'));
 const AboutPage = React.lazy(() => import('@pages/features'));
 const ServicePage = React.lazy(() => import('@pages/servicesPage'));
 const ContactUsPage = React.lazy(() => import('@pages/contact'));
+const BlogPage = React.lazy(() => import('@pages/blog'));
 
 const RegisterPage = React.lazy(
   () => import('@modules/authentication/register/farmerAggregatorForm'),
@@ -118,6 +119,10 @@ const routeWithLayout = {
   ContactUsPage: {
     element: ContactUsPage,
     path: '/contact',
+  },
+  BlogPage: {
+    element: BlogPage,
+    path: '/blog',
   },
 };
 

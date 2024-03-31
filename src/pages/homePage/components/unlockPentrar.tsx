@@ -11,7 +11,7 @@ function UnlockPentrar() {
               <img
                 src={unlockImg}
                 alt="image"
-                className="w-[400px] h-[370px] xlsm:h-[260px] xlsm:w-full rounded-[8px]"
+                className="w-[400px] h-[370px] xlsm:h-[320px] xlsm:w-full rounded-[8px]"
               />
             </div>
             <div className="w-[513px] xlsm:w-full sixm:flex sixm:flex-col sixm:items-center sixm:text-center">
