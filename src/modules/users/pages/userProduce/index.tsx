@@ -19,13 +19,9 @@ import { useAuthContext } from '@contexts/authContext';
 import { toastOptions } from '@shared/Toast/Toast';
 import { toast } from 'react-toastify';
 import {
-  useGetIndividualAggregator,
-  useGetIndividualFarmer,
+  useGetIndividualAggregatorDependent,
+  useGetIndividualFarmerDependent,
 } from 'services/individualFarmerAggregator.service';
-import {
-  GET_INDIVIDUAL_AGGREGATOR_URL,
-  GET_INDIVIDUAL_FARMER_URL,
-} from '@utils/apiUrl';
 
 function UserProduce() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -38,15 +34,8 @@ function UserProduce() {
   });
   const navigate = useNavigate();
 
-  const { data: individualFarmer } = useGetIndividualFarmer({
-    queryParamsId: authUser?.id as string,
-    url: GET_INDIVIDUAL_FARMER_URL,
-  });
-
-  const { data: individualAggregator } = useGetIndividualAggregator({
-    queryParamsId: authUser?.id as string,
-    url: GET_INDIVIDUAL_AGGREGATOR_URL,
-  });
+  const { data: individualAggregator } = useGetIndividualAggregatorDependent();
+  const { data: individualFarmer } = useGetIndividualFarmerDependent();
 
   const currentUserStatus = () => {
     switch (authUser?.role) {

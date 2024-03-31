@@ -22,6 +22,10 @@ const ExporterSettings = React.lazy(
   () => import('@modules/exporter/pages/settings'),
 );
 
+const ReportProblem = React.lazy(
+  () => import('@modules/exporter/pages/reportProblem'),
+);
+
 export const exporterPathsLinks = {
   basePath: 'pentrar/exporter',
   dashBoard: 'dashboard',
@@ -29,6 +33,7 @@ export const exporterPathsLinks = {
   produces: 'my-produces',
   pentraHub: 'pentrar-hub',
   settings: 'settings',
+  reportProblem: 'report-problem',
 };
 
 const ExporterRoutes = {
@@ -55,6 +60,11 @@ const ExporterRoutes = {
   ExporterSettings: {
     element: ExporterSettings,
     path: exporterPathsLinks.settings,
+  },
+
+  ReportProblem: {
+    element: ReportProblem,
+    path: exporterPathsLinks.reportProblem,
   },
 };
 

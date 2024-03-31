@@ -1,6 +1,11 @@
+import { useAuthContext } from '@contexts/authContext';
 import { useQuery } from '@tanstack/react-query';
 import { getRequest } from '@utils/apiCaller';
-import { GET_USER_PRODUCE_URL } from '@utils/apiUrl';
+import {
+  GET_INDIVIDUAL_AGGREGATOR_URL,
+  GET_INDIVIDUAL_FARMER_URL,
+  GET_USER_PRODUCE_URL,
+} from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
 import {
@@ -29,6 +34,28 @@ function useGetIndividualFarmer({ queryParamsId, url }: IIndividualUrlParams) {
   };
 }
 
+function useGetIndividualFarmerDependent() {
+  const { authUser } = useAuthContext();
+
+  const { isLoading, isRefetching, isError, data } =
+    useQuery<IIndividualResponse>(
+      [queryKeys.getIndividualFarmer],
+      () =>
+        getRequest({ url: GET_INDIVIDUAL_FARMER_URL(authUser?.id as string) }),
+      {
+        refetchOnWindowFocus: false,
+        enabled: authUser?.role === 'farmer' && !!authUser?.id,
+      },
+    );
+
+  return {
+    isLoading,
+    isRefetching,
+    isError,
+    data: data?.data as IIndividualFarmer,
+  };
+}
+
 //TODO: type this response for useQuery IndividualAggregator
 function useGetIndividualAggregator({
   queryParamsId,
@@ -40,6 +67,31 @@ function useGetIndividualAggregator({
       () => getRequest({ url: url(queryParamsId) }),
       {
         refetchOnWindowFocus: false,
+      },
+    );
+
+  return {
+    isLoading,
+    isRefetching,
+    isError,
+    data: data?.data as IIndividualFarmer,
+  };
+}
+
+//TODO: type this response for useQuery IndividualAggregator
+function useGetIndividualAggregatorDependent() {
+  const { authUser } = useAuthContext();
+
+  const { isLoading, isRefetching, isError, data } =
+    useQuery<IIndividualResponse>(
+      [queryKeys.getIndividualAggregator],
+      () =>
+        getRequest({
+          url: GET_INDIVIDUAL_AGGREGATOR_URL(authUser?.id as string),
+        }),
+      {
+        refetchOnWindowFocus: false,
+        enabled: authUser?.role === 'aggregator' && !!authUser?.id,
       },
     );
 
@@ -82,4 +134,6 @@ export {
   useGetIndividualFarmer,
   useFarmerAggregatorProduce,
   useGetIndividualAggregator,
+  useGetIndividualFarmerDependent,
+  useGetIndividualAggregatorDependent,
 };
