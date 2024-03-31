@@ -7,38 +7,21 @@ import produceC from '@assets/png/produceC.png';
 export const hubData = [
   {
     img: hubImgA,
-    smallText: 'Lorem ipsum dolor sit amet consectetur.',
-    bigText:
-      'Lorem ipsum dolor sit amet consectetur. Pulvinar lectus fermentum at et.',
+    smallText: 'Traceability for Trustworthy Food',
+    bigText: `From farm to table, know your food's journey. Build consumer confidence, and elevate your brand with innovative traceability feature.`,
     theme: '#2AA232',
   },
   {
     img: hubImgB,
-    smallText: 'Lorem ipsum dolor sit amet consectetur.',
-    bigText:
-      'Lorem ipsum dolor sit amet consectetur. Pulvinar lectus fermentum at et.',
+    smallText: 'Building a Transparent Food Chain',
+    bigText: `See it. Source it. Track it. Connect with farmers, aggregators, and exporters for a transparent and traceable supply chain.`,
     theme: '#FFAE00',
   },
   {
     img: hubImgC,
-    smallText: 'Lorem ipsum dolor sit amet consectetur.',
-    bigText:
-      'Lorem ipsum dolor sit amet consectetur. Pulvinar lectus fermentum at et.',
+    smallText: 'Empowering Farmers, Reaching the World',
+    bigText: `Showcase your harvest, connect with global buyers, and build lasting relationships with farmers and partnerships.`,
     theme: '#ED6E11',
-  },
-  {
-    img: hubImgA,
-    smallText: 'Lorem ipsum dolor sit amet consectetur.',
-    bigText:
-      'Lorem ipsum dolor sit amet consectetur. Pulvinar lectus fermentum at et.',
-    theme: '#2AA232',
-  },
-  {
-    img: hubImgB,
-    smallText: 'Lorem ipsum dolor sit amet consectetur.',
-    bigText:
-      'Lorem ipsum dolor sit amet consectetur. Pulvinar lectus fermentum at et.',
-    theme: '#FFAE00',
   },
 ];
 

@@ -1,7 +1,10 @@
-import { insightData } from '@db/insightData';
+import { blogData } from '@db/blogData';
 import CustomButton from '@shared/Button';
+import { useNavigate } from 'react-router-dom';
 
 function Insight() {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-gray-100 mt-[100px] py-[100px]">
       <div className="max-content">
@@ -17,7 +20,10 @@ function Insight() {
                 and unleash efficiency!
               </p>
               <div className=" flex justify-center">
-                <CustomButton className=" mt-[32px] font-[500] font-primary text-[14px] leading-[20px] text-primary-white bg-secondary-light-1">
+                <CustomButton
+                  onClick={() => navigate('/blog')}
+                  className=" mt-[32px] font-[500] font-primary text-[14px] leading-[20px] text-primary-white bg-secondary-light-1"
+                >
                   Explore all articles
                 </CustomButton>
               </div>
@@ -26,7 +32,7 @@ function Insight() {
         </div>
 
         <div className="mt-[48px] gap-[24px] flex lg:flex-wrap justify-center">
-          {insightData?.slice(0, 3)?.map((item, i) => (
+          {blogData?.slice(0, 3)?.map((item, i) => (
             <div
               key={i}
               className="rounded-[8px] w-[357px] bg-primary-white overflow-hidden"
@@ -38,7 +44,7 @@ function Insight() {
               />
               <div className="p-[24px]">
                 <p className="font-[500] font-primary text-[14px] leading-[21px] xlsm:text-[12px] xlsm:leading-[18px] text-primary-light">
-                  {item?.type.toUpperCase()}
+                  {item?.service.toUpperCase()}
                 </p>
                 <p
                   // onClick={() => router.push(`/blog/${item?.title}`)}
@@ -48,9 +54,11 @@ function Insight() {
                 </p>
 
                 <p className="mt-[16px] font-[300] font-primary text-[16px] line-clamp-4 leading-[24px] xlsm:text-[14px] xlsm:leading-[21px] text-primary-light">
-                  {item?.textBlockA?.slice(0, 1)?.map((item: any) => (
-                    <span key={item}>{item?.paragraph}</span>
-                  ))}{' '}
+                  {item?.textBlockA?.paragraphs
+                    ?.slice(0, 1)
+                    ?.map((item: any) => (
+                      <p key={item}>{item?.paragraph}</p>
+                    ))}
                 </p>
                 <CustomButton
                   // onClick={() => router.push(`/blog/${item?.title}`)}
