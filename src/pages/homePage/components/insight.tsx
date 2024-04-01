@@ -47,7 +47,9 @@ function Insight() {
                   {item?.service.toUpperCase()}
                 </p>
                 <p
-                  // onClick={() => router.push(`/blog/${item?.title}`)}
+                  onClick={() =>
+                    navigate(`/blog/${item?.title.replace(/\s+/g, '-')}`)
+                  }
                   className="mt-[8px] font-[700] font-primary line-clamp-2 text-[24px] leading-[31px] xlsm:text-[20px] xlsm:leading-[26px] text-primary-main hover:underline cursor-pointer"
                 >
                   {item?.title}
@@ -61,7 +63,9 @@ function Insight() {
                     ))}
                 </p>
                 <CustomButton
-                  // onClick={() => router.push(`/blog/${item?.title}`)}
+                  onClick={() =>
+                    navigate(`/blog/${item?.title.replace(/\s+/g, '-')}`)
+                  }
                   className=" mt-[32px] font-[500] font-primary text-[14px] leading-[20px] text-primary-white bg-secondary-light-1"
                 >
                   Learn more

@@ -1,8 +1,10 @@
 import { blogData } from '@db/blogData';
 import dot from '@assets/svg/dot.svg';
 import dotGrey from '@assets/svg/dotGrey.svg';
+import { useNavigate } from 'react-router-dom';
 
 function BlogSectionA() {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="max-content py-[80px] xlsm:py-[24px]">
@@ -27,14 +29,18 @@ function BlogSectionA() {
                         {item?.service.toUpperCase()}
                       </p>
                       <p
-                        // onClick={() => router.push(`/blog/${item?.title}`)}
+                        onClick={() =>
+                          navigate(`/blog/${item?.title.replace(/\s+/g, '-')}`)
+                        }
                         className="mt-[13px] font-[500] line-clamp-2 font-primary text-[20px] leading-[30px]  cursor-pointer  xlsm:text-[18px] xlsm:leading-[27px] text-primary-white"
                       >
                         {item?.title}
                       </p>
 
                       <p
-                        // onClick={() => router.push(`/blog/${item?.title}`)}
+                        onClick={() =>
+                          navigate(`/blog/${item?.title.replace(/\s+/g, '-')}`)
+                        }
                         className="mt-[12px] font-[400] cursor-pointer line-clamp-2 xlsm:line-clamp-3 font-primary text-[16px] leading-[24px] xlsm:text-[14px] xlsm:leading-[21px] text-primary-white"
                       >
                         {item?.textBlockA?.paragraphs
@@ -78,7 +84,9 @@ function BlogSectionA() {
                         {item?.service.toUpperCase()}
                       </p>
                       <p
-                        // onClick={() => router.push(`/blog/${item?.title}`)}
+                        onClick={() =>
+                          navigate(`/blog/${item?.title.replace(/\s+/g, '-')}`)
+                        }
                         className="mt-[23px] xlsm:mt-[8px] font-[400] font-primary text-[16px] leading-[21px]  cursor-pointer text-primary-main"
                       >
                         {item?.title}
@@ -86,7 +94,11 @@ function BlogSectionA() {
 
                       <div className="hidden md:block ">
                         <p
-                          // onClick={() => router.push(`/blog/${item?.title}`)}
+                          onClick={() =>
+                            navigate(
+                              `/blog/${item?.title.replace(/\s+/g, '-')}`,
+                            )
+                          }
                           className="mt-[12px] font-[400] cursor-pointer line-clamp-2 xlsm:line-clamp-3 font-primary text-[16px] leading-[24px] xlsm:text-[14px] xlsm:leading-[21px] text-primary-main"
                         >
                           {item?.textBlockA?.paragraphs

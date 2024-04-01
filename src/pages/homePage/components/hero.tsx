@@ -21,11 +21,11 @@ function Hero() {
   };
 
   return (
-    <div className="h-screen w-full bg-background-main mdxl:h-full bg-[url('/src/assets/png/pentrarHeroBg.png')] bg-repeat bg-contain">
+    <div className="h-screen w-full bg-background-main mdxl:h-full bg-[url('/src/assets/png/pentrarHeroBg.png')] bg-repeat bg-contain mdxl:bg-cover">
       <div className="max-content">
         <div className="container">
-          <div className="flex items-center justify-between mdxl:flex-col-reverse gap-[78px] lg:gap-[30px]">
-            <div className="mdxl:w-full mb-[50px]">
+          <div className="flex items-center justify-between mdxl:flex-col gap-[78px] lg:gap-[30px]">
+            <div className="mdxl:w-full xlsm:my-[20px] mb-[50px]">
               <p className="text-[80px] lg:text-[65px] lg:leading-[68px] mdxl:text-[47px] xlsm:text-[45px] mdxl:leading-[63px] font-playfair leading-[100px] font-[700] text-[#ffffff] xlsm:w-full w-[700px] tracking-normal">
                 Unlock the Power of Traceability
               </p>
@@ -42,7 +42,7 @@ function Hero() {
                 </div>
                 <button
                   onClick={handleSend}
-                  className="px-[40px] py-[20px] h-[67px] xlsm:w-full  mdxl:py-[10px] bg-secondary-light-1 text-primary-white font-[600] text-[18px] mdxl:text-[14px] leading-[25px] text-center rounded-tl-[0px] rounded-tr-[12px] rounded-br-[12px] xlsm:rounded-[12px] rounded-bl-[0px] border-none focus:outline-none"
+                  className="px-[40px] py-[20px] h-[67px] xlsm:w-full   mdxl:py-[10px] bg-secondary-light-1 text-primary-white font-[600] text-[18px] mdxl:text-[14px] leading-[25px] text-center rounded-tl-[0px] rounded-tr-[12px] rounded-br-[12px] xlsm:rounded-[12px] rounded-bl-[0px] border-none focus:outline-none"
                 >
                   Get Started
                 </button>{' '}

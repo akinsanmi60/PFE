@@ -1,10 +1,12 @@
 import CustomButton from '@shared/Button';
 import unlockImg from '@assets/png/unlockImgW.png';
+import { useNavigate } from 'react-router-dom';
 
 function UnlockPentrar() {
+  const navigate = useNavigate();
   return (
     <div className="py-[80px] px-[20px]  sixm:py-[50px]">
-      <div className="max-content bg-background-dark rounded-[16px] py-[32px]">
+      <div className="max-content bg-background-dark rounded-[16px] py-[32px] bg-[url('/src/assets/png/pentrarHeroBg.png')] bg-repeat bg-cover">
         <div className="container ">
           <div className="flex items-center justify-center gap-[55px] sixm:flex-col">
             <div>
@@ -25,8 +27,8 @@ function UnlockPentrar() {
               </p>
               <div className=" mt-[32px] flex gap-[8px] xlsm:flex-row-reverse xlsm:justify-end">
                 <CustomButton
+                  onClick={() => navigate('/contact')}
                   className="bg-primary-white font-[500] font-primary text-[14px] leading-[20px] text-secondary-light-1"
-                  // onClick={() => router.push('/contactUs')}
                 >
                   Request a Demo{' '}
                 </CustomButton>

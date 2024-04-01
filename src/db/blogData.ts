@@ -14,7 +14,14 @@ export const blogData = [
     publishedAt: 'April 1, 2024',
     readingTime: '5 mins read',
     img2: blogImgA,
-    img2TagText: '',
+    img2TagText: `“Agriculture is our wisest pursuit, because it will in the end contribute most to real wealth, good morals, and happiness.” – Thomas Jefferson`,
+    tags: [
+      'farmer',
+      'agriculture',
+      'traceability',
+      'farmer network',
+      'food chain',
+    ],
     author: 'Mona Kone',
     authorImg: author,
     authorPosition: 'CTO, Pentar',
@@ -22,18 +29,6 @@ export const blogData = [
     introParagraph:
       'In this article, we delve into enhancing Agricultural Supply Chains for Sustainable Export',
     textBlockA: {
-      paragraphs: [
-        {
-          head: 'Introduction',
-          paragraph:
-            'In the realm of modern agriculture, traceability emerges as a pivotal tool reshaping how we perceive and manage our food systems. For farmers, it represents not just a technological advancement but a gateway to empowerment. By embracing traceability, farmers can track their produce from the moment it sprouts from the soil to its journey across borders.',
-        },
-        {
-          paragraph: `With Pentar's innovative solutions, farmers can transcend traditional boundaries, ensuring their products meet stringent regulatory standards and quality benchmarks. This newfound transparency fosters trust among exporters, transporters, and certification agencies, paving the way for seamless collaboration and heightened efficiency.`,
-        },
-      ],
-    },
-    textBlockB: {
       paragraphs: [
         {
           head: 'Introduction',
@@ -63,6 +58,18 @@ export const blogData = [
         ],
       },
     },
+    textBlockB: {
+      paragraphs: [
+        {
+          head: 'Introduction',
+          paragraph:
+            'In the realm of modern agriculture, traceability emerges as a pivotal tool reshaping how we perceive and manage our food systems. For farmers, it represents not just a technological advancement but a gateway to empowerment. By embracing traceability, farmers can track their produce from the moment it sprouts from the soil to its journey across borders.',
+        },
+        {
+          paragraph: `With Pentar's innovative solutions, farmers can transcend traditional boundaries, ensuring their products meet stringent regulatory standards and quality benchmarks. This newfound transparency fosters trust among exporters, transporters, and certification agencies, paving the way for seamless collaboration and heightened efficiency.`,
+        },
+      ],
+    },
 
     conclusionParagraph: {
       head: 'Conclusion',
@@ -79,6 +86,13 @@ export const blogData = [
     readingTime: '5 mins read',
     img2: blogImgB,
     img2TagText: '',
+    tags: [
+      'farmer',
+      'agriculture',
+      'traceability',
+      'farmer network',
+      'food chain',
+    ],
     author: 'Mona Kone',
     authorImg: author,
     authorPosition: 'CTO, Pentar',
@@ -143,6 +157,13 @@ export const blogData = [
     readingTime: '5 mins read',
     img2: blogImgB,
     img2TagText: '',
+    tags: [
+      'farmer',
+      'agriculture',
+      'traceability',
+      'farmer network',
+      'food chain',
+    ],
     author: 'Mona Kone',
     authorImg: author,
     authorPosition: 'CTO, Pentar',
@@ -207,6 +228,13 @@ export const blogData = [
     readingTime: '5 mins read',
     img2: blogImgB,
     img2TagText: '',
+    tags: [
+      'farmer',
+      'agriculture',
+      'traceability',
+      'farmer network',
+      'food chain',
+    ],
     author: 'Mona Kone',
     authorImg: author,
     authorPosition: 'CTO, Pentar',
@@ -271,6 +299,13 @@ export const blogData = [
     readingTime: '5 mins read',
     img2: blogImgB,
     img2TagText: '',
+    tags: [
+      'farmer',
+      'agriculture',
+      'traceability',
+      'farmer network',
+      'food chain',
+    ],
     author: 'Mona Kone',
     authorImg: author,
     authorPosition: 'CTO, Pentar',
@@ -335,6 +370,13 @@ export const blogData = [
     readingTime: '5 mins read',
     img2: blogImgB,
     img2TagText: '',
+    tags: [
+      'farmer',
+      'agriculture',
+      'traceability',
+      'farmer network',
+      'food chain',
+    ],
     author: 'Mona Kone',
     authorImg: author,
     authorPosition: 'CTO, Pentar',

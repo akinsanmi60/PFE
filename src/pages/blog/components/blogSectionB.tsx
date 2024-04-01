@@ -3,14 +3,15 @@ import { useEffect, useState } from 'react';
 import prev from '@assets/svg/prev.svg';
 import next from '@assets/svg/next.svg';
 import dotGrey from '@assets/svg/dotGrey.svg';
+import { useNavigate } from 'react-router-dom';
 
 type Post = /*unresolved*/ any;
 
 function BlogSectionB() {
   // const [postsToShow, setPostsToShow] = useState<number>(6);
   const [postsToShow, setPostsToShow] = useState<Post[]>([]);
-
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const navigate = useNavigate();
 
   const resetFilter = () => {
     window.location.reload();
@@ -122,13 +123,17 @@ function BlogSectionB() {
                     {item?.service.toUpperCase()}
                   </p>
                   <p
-                    // onClick={() => router.push(`/blog/${item?.title}`)}
+                    onClick={() =>
+                      navigate(`/blog/${item?.title.replace(/\s+/g, '-')}`)
+                    }
                     className="mt-[16px] font-[500] font-primary line-clamp-2 text-[20px] leading-[30px] xlsm:text-[16px] xlsm:leading-[22px] text-[#181D25]  cursor-pointer"
                   >
                     {item?.title}
                   </p>
                   <p
-                    // onClick={() => router.push(`/blog/${item?.title}`)}
+                    onClick={() =>
+                      navigate(`/blog/${item?.title.replace(/\s+/g, '-')}`)
+                    }
                     className="mt-[12px] font-[400] cursor-pointer line-clamp-2 xlsm:line-clamp-3 font-primary text-[16px] leading-[24px] xlsm:text-[14px] xlsm:leading-[21px] text-primary-main"
                   >
                     {item?.textBlockA?.paragraphs

@@ -22,8 +22,8 @@ function Header() {
   };
 
   return (
-    <div className="bg-background-main sticky top-0 z-50">
-      <nav className="w-full transition-colors duration-500 py-[20px] bg-[#072723] border-0">
+    <div className="bg-background-main sticky top-0 z-50 bg-[url('/src/assets/png/pentrarHeroBg.png')] bg-repeat bg-cover">
+      <nav className="w-full transition-colors duration-500 py-[20px]  border-0">
         <div className="max-content">
           <div className="container">
             <div className="flex items-center justify-between cursor-pointer">
@@ -33,12 +33,12 @@ function Header() {
                 alt="logo"
                 className="w-[146px] h-[40px]"
               />
-              <div className="flex gap-[48px] lg:gap-[20px] mdxl:hidden">
+              <div className="flex gap-[35px] lg:gap-[20px] mdxl:hidden">
                 {navLinks.map((link, index) => (
                   <p
                     key={index}
                     onClick={() => navigate(link.path)}
-                    className="text-[#fff] text-[16px] leading-[24px] font-[500]"
+                    className="text-primary-white hover:text-secondary-light-1 text-[16px] leading-[24px] font-primary font-[500]"
                   >
                     {link?.title}
                   </p>
@@ -53,23 +53,16 @@ function Header() {
                 </p>
               ) : (
                 <div className="flex gap-[20px] items-center mdxl:hidden ">
-                  {/* <CustomButton
-                    onClick={() => navigate(`${authPaths.login()}`)}
-                    className="py-[12px] w-[110px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#ffffff]"
-                  >
-                    Login
-                  </CustomButton> */}
-
                   <LoginButton />
                 </div>
               )}
               <div className=" hidden mdxl:block">
                 {open ? (
                   <img
-                    onClick={() => setOpen(!open)}
+                    onClick={() => setOpen(false)}
                     src={menuClose}
                     alt="logo"
-                    className="w-[30px] h-[30px]"
+                    className="w-[20px] h-[20px]"
                   />
                 ) : (
                   <img
@@ -103,7 +96,7 @@ function Header() {
                 onClick={() =>
                   navigate(`${authPaths.login(false, 'login', 'farmer')}`)
                 }
-                className="rounded-[40px] xlsm:w-full py-[12px] px-[40px] text-[16px] leading-[22px] font-[600] text-primary-white border-[1px] border-[#072723]"
+                className="rounded-[40px] xlsm:w-full py-[12px] px-[40px] text-[16px] leading-[22px] font-[600] text-primary-white border-[1px] border-background-main"
               >
                 Login
               </CustomButton>

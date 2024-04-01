@@ -3,6 +3,8 @@ import logo from '@assets/svg/logoWhite.svg';
 import facebook from '@assets/svg/facebook.svg';
 import instagram from '@assets/svg/instagram.svg';
 import twitter from '@assets/svg/twitter.svg';
+import { useNavigate } from 'react-router-dom';
+import { authPaths } from '@utils/paths';
 
 const socialLinks = [
   {
@@ -22,8 +24,9 @@ const socialLinks = [
   },
 ];
 function Footer() {
+  const navigate = useNavigate();
   return (
-    <footer className="w-full bg-[var(--dark-primary)] text-primary-white  pt-[23px] pb-[20px] ">
+    <footer className="w-full bg-[var(--dark-primary)] bg-[url('/src/assets/png/pentrarHeroBg.png')] bg-repeat bg-cover text-primary-white  pt-[23px] pb-[20px] ">
       <div className="max-content">
         <div className="container">
           <div className="flex justify-between items-center">
@@ -45,7 +48,14 @@ function Footer() {
             </div>
           </div>
           <p className="text-center font-[400] text-[14px] leading-[29px] mt-[15px]">
-            {getYear()} @ Pentrar
+            Copyright{' '}
+            <span
+              className="cursor-pointer"
+              onClick={() => navigate(authPaths.adminLogin())}
+            >
+              Pentrar
+            </span>{' '}
+            &copy; {getYear()}
           </p>
         </div>
       </div>
