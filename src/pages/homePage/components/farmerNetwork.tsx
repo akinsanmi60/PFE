@@ -12,7 +12,7 @@ function FarmerNetwork() {
               className="w-[758px] h-[654px] mdxl:w-full xlsm:h-[450px] rounded-[12px]"
             />
           </div>
-          <div className="max-w-[546px] h-[654px] rounded-[12px] bg-background-dark p-[32px] flex flex-col justify-between">
+          <div className="max-w-[546px] h-[654px] rounded-[12px] bg-background-dark bg-[url('/src/assets/png/pentrarHeroBg.png')] bg-repeat bg-cover p-[32px] flex flex-col justify-between">
             <div className="text-[#ffffff] max-w-[442px]">
               <p className="font-[700] text-[38px] leading-[48px] xlsm:text-[30px] xlsm:leading-[38px] font-playfair">
                 Find a great network to sell produce for export.

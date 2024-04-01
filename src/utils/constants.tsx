@@ -184,3 +184,22 @@ export function getFirstSwordBeforeSpace(str: string, key?: string) {
   // Return the first word
   return words[0];
 }
+
+export const renderParagraph = (paragraph: string) => {
+  // Split paragraph by <bold> tags
+  const parts = paragraph.split(/(<bold>.*?<\/bold>)/);
+
+  return parts.map((part, index) => {
+    if (part.startsWith('<bold>') && part.endsWith('</bold>')) {
+      // If part is bold, render with bold style
+      return (
+        <span key={index} className="font-bold">
+          {part.replace(/<\/?bold>/g, '')}
+        </span>
+      );
+    } else {
+      // Otherwise, render normal text
+      return <span key={index}>{part}</span>;
+    }
+  });
+};
