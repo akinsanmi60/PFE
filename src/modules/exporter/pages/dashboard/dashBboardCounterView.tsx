@@ -9,7 +9,7 @@ function DashBboardCounterView() {
 
   const { data, isLoading } = GetDasboardOfFarmerAggregator({
     queryParamsId: authUser?.id as string,
-    url: () => 'a',
+    url: () => '',
   });
 
   return (
