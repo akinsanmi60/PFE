@@ -25,7 +25,11 @@ function CustomPagination({
           }}
           disabled={currentPage === 1}
         >
-          <PrevIcon />
+          {currentPage === 1 ? (
+            <PrevIcon />
+          ) : (
+            <NextIcon className="rotate-180" />
+          )}
         </button>
         <div>
           <p className="w-[32px] h-[32px] font-[600] text-[12px] leading-[19px] text-secondary-dark-1 flex justify-center items-center rounded-[10px] bg-tertiary-light-4   cursor-pointer">
@@ -41,7 +45,11 @@ function CustomPagination({
           }}
           disabled={endIndex >= lengthOfData}
         >
-          <NextIcon />
+          {endIndex >= lengthOfData ? (
+            <PrevIcon className="rotate-180" />
+          ) : (
+            <NextIcon />
+          )}
         </button>
       </div>
       <div className="flex items-center gap-[16px]">

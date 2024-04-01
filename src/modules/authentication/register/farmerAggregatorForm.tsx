@@ -14,7 +14,9 @@ function Register() {
   const infoWord =
     type === 'farmer' || type === 'aggregator'
       ? 'Personal Information'
-      : 'Company Information';
+      : type === 'exporter' || type === 'offtaker'
+      ? 'Company Information'
+      : '';
 
   const steps = [infoWord, 'Verify Phone', 'Create Password'];
   const [currentStep, setCurrentStep] = useState(1);
@@ -37,14 +39,29 @@ function Register() {
       case 'farmer':
       case 'aggregator':
         return (
-          <PersonalinfoForm currentStep={currentStep} action={moveToNextForm} />
+          <PersonalinfoForm
+            currentStep={currentStep}
+            action={moveToNextForm}
+            currentTab={type}
+          />
         );
       case 'exporter':
+      case 'offtaker':
         return (
-          <ExporterInfoForm currentStep={currentStep} action={moveToNextForm} />
+          <ExporterInfoForm
+            currentStep={currentStep}
+            action={moveToNextForm}
+            currentTab={type}
+          />
         );
       default:
-        return <PersonalinfoForm />;
+        return (
+          <PersonalinfoForm
+            currentStep={currentStep}
+            action={moveToNextForm}
+            currentTab={type}
+          />
+        );
     }
   };
 
@@ -69,12 +86,7 @@ function Register() {
           setComplete={setComplete}
           setCurrentStep={setCurrentStep}
         >
-          {currentStep >= 1 &&
-            // <PersonalinfoForm
-            //   currentStep={currentStep}
-            //   action={moveToNextForm}
-            // />
-            infoForm()}
+          {currentStep >= 1 && infoForm()}
 
           {currentStep >= 2 && (
             <GetVerifyCode

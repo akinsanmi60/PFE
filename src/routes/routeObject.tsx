@@ -38,12 +38,12 @@ const ExporterLogin = React.lazy(
 );
 
 export const RootLink = {
-  login: 'login',
+  login: ':type/login',
   registerFarmerAggregator: 'register-form/:type',
   forgotPassword: 'forgot-password',
   resetPassword: 'reset-password',
   adminLogin: 'admin-login',
-  agencyLogin: 'agency-login',
+  agencyLogin: 'agency-login/:type',
   exporterLogin: 'login/:type',
   registerExporterOfftaker: 'register',
   unauthourized: 'unauthourized',

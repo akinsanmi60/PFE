@@ -45,5 +45,5 @@ export const allUserType = [
   'Aggregator',
   'Exporter',
   // 'Transporter',
-  // 'Offtaker',
+  'Offtaker',
 ];

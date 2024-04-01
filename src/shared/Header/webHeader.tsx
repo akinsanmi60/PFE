@@ -8,6 +8,7 @@ import CustomButton from '@shared/Button';
 import { useDetailContext } from '@contexts/saveDetailContext';
 import { authPaths, webPaths } from '@utils/paths';
 import { useAuthContext } from '@contexts/authContext';
+import LoginButton from './loginButton';
 
 function Header() {
   const navigate = useNavigate();
@@ -52,12 +53,14 @@ function Header() {
                 </p>
               ) : (
                 <div className="flex gap-[20px] items-center mdxl:hidden ">
-                  <CustomButton
+                  {/* <CustomButton
                     onClick={() => navigate(`${authPaths.login()}`)}
                     className="py-[12px] w-[110px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#ffffff]"
                   >
                     Login
-                  </CustomButton>
+                  </CustomButton> */}
+
+                  <LoginButton />
                 </div>
               )}
               <div className=" hidden mdxl:block">
@@ -97,7 +100,9 @@ function Header() {
             </div>
             <div className="flex gap-[20px] mt-[50px] items-center xlsm:flex-col xlsm:items-start">
               <CustomButton
-                onClick={() => navigate(`${authPaths.login()}`)}
+                onClick={() =>
+                  navigate(`${authPaths.login(false, 'login', 'farmer')}`)
+                }
                 className="rounded-[40px] xlsm:w-full py-[12px] px-[40px] text-[16px] leading-[22px] font-[600] text-primary-white border-[1px] border-[#072723]"
               >
                 Login
