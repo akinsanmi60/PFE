@@ -14,12 +14,11 @@ export const webPaths = {
 
 export const authPaths = {
   root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.WEB}` : ''}`,
-  login: (fullPath: boolean = true) =>
-    `${authPaths.root(fullPath)}${RootLink.login}`,
+  login: (fullPath: boolean = true, namePath: string, type: string) =>
+    `${joinPath(authPaths.root(fullPath), namePath, type)}`,
   registerUser: (fullPath: boolean = true, namePath: string, type: string) =>
     `${joinPath(authPaths.root(fullPath), namePath, type)}`,
-  registerExporterOfftaker: (fullPath: boolean = true) =>
-    `${authPaths.root(fullPath)}${RootLink.registerExporterOfftaker}`,
+
   forgotPassword: (fullPath: boolean = true) =>
     `${authPaths.root(fullPath)}${RootLink.forgotPassword}`,
   resetPassword: (fullPath: boolean = true) =>

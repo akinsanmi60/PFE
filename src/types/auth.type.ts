@@ -2,6 +2,7 @@ export type IFormComponentType = {
   currentStep?: number;
   action?: () => void;
   previous?: () => void;
+  currentTab?: string;
 };
 
 export type IVerifyProp = {

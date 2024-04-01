@@ -1,5 +1,5 @@
 import { useFormData } from '@contexts/formContext';
-import { genderData, userTypeData } from '@db/authData';
+import { genderData } from '@db/authData';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
@@ -8,8 +8,13 @@ import { useForm } from 'react-hook-form';
 import { usePartialUserCreationMutation } from 'services/auth.service';
 import { IFormComponentType, IRegister } from 'types/auth.type';
 import { personalInfoSchema } from 'validation/registerValidation';
+import { capitalize } from '../../../../utils/constants';
 
-function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
+function PersonalinfoForm({
+  currentStep,
+  action,
+  currentTab,
+}: IFormComponentType) {
   const { setFormValues } = useFormData();
   const { mutate, isLoading } = usePartialUserCreationMutation({ action });
 
@@ -21,7 +26,7 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
     defaultValues: {
       email: '',
       full_name: '',
-      user_type: '',
+      user_type: capitalize(currentTab) || '',
       gender: '',
       phone_number: '',
     },
@@ -52,12 +57,12 @@ function PersonalinfoForm({ currentStep, action }: IFormComponentType) {
         {/* email */}
         <div className="flex gap-[20px] mt-[20px] flex-col">
           <div className="">
-            <ControlledSelect
+            <ControlledInput
               control={control}
               label="User Type"
               name="user_type"
-              optionArray={userTypeData}
               placeholder="Please select  user type"
+              readonly
             />
           </div>
 

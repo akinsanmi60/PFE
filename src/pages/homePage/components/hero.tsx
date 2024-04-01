@@ -21,7 +21,7 @@ function Hero() {
   };
 
   return (
-    <div className="h-screen w-full bg-background-main mdxl:h-full">
+    <div className="h-screen w-full bg-background-main mdxl:h-full bg-[url('/src/assets/png/pentrarHeroBg.png')] bg-repeat bg-contain">
       <div className="max-content">
         <div className="container">
           <div className="flex items-center justify-between mdxl:flex-col-reverse gap-[78px] lg:gap-[30px]">

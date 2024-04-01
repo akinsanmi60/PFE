@@ -1,15 +1,18 @@
 import { useFormData } from '@contexts/formContext';
-import { userTypeDataB } from '@db/authData';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
-import ControlledSelect from '@shared/Select/ControlledSelect';
+import { capitalize } from '@utils/constants';
 import { useForm } from 'react-hook-form';
 import { usePartialUserCreationMutation } from 'services/auth.service';
 import { IFormComponentType, IRegister } from 'types/auth.type';
 import { exporterInfoSchema } from 'validation/registerValidation';
 
-function ExporterInfoForm({ currentStep, action }: IFormComponentType) {
+function ExporterInfoForm({
+  currentStep,
+  action,
+  currentTab,
+}: IFormComponentType) {
   const { setFormValues } = useFormData();
   const { mutate, isLoading } = usePartialUserCreationMutation({ action });
 
@@ -21,7 +24,7 @@ function ExporterInfoForm({ currentStep, action }: IFormComponentType) {
     defaultValues: {
       email: '',
       coy_name: '',
-      user_type: '',
+      user_type: capitalize(currentTab) || '',
       reg_number: '',
       phone_number: '',
     },
@@ -52,12 +55,11 @@ function ExporterInfoForm({ currentStep, action }: IFormComponentType) {
         {/* email */}
         <div className="flex gap-[20px] mt-[20px] flex-col">
           <div className="">
-            <ControlledSelect
+            <ControlledInput
               control={control}
               label="User Type"
               name="user_type"
-              optionArray={userTypeDataB}
-              placeholder="Please select  user type"
+              readonly
             />
           </div>
 
