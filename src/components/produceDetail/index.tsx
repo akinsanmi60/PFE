@@ -160,12 +160,14 @@ function ProduceCard({
             <h1 className="text-primary-main pb-[13px] text-[20px] font-[600] tracking-normal  ">
               {produceData?.name}
             </h1>
-            {produceData?.status === 'not_approved' && (
-              <div className="flex gap-[20px]">
-                <p onClick={handleEditProduce}>Edit</p>
-                <p onClick={handleDeleteProduce}>Delete</p>
-              </div>
-            )}
+            {authUser?.role === 'admin' || authUser?.role === 'subadmin'
+              ? null
+              : produceData?.status === 'not_approved' && (
+                  <div className="flex gap-[20px]">
+                    <p onClick={handleEditProduce}>Edit</p>
+                    <p onClick={handleDeleteProduce}>Delete</p>
+                  </div>
+                )}
           </div>
           <div
             className="grid grid-cols-2 sixm:grid-cols-1
