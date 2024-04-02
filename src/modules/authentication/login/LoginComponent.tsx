@@ -68,7 +68,7 @@ function GeneralLoginPage({
       <form
         action=""
         role="loginForm"
-        className="w-[490px] p-[24px]  text-[#1A1A1A]"
+        className="w-[490px] xlsm:w-full p-[24px] xlsm:px-0  text-[#1A1A1A]"
       >
         <h1 className="text-[24px] leading-[32px] tracking-normal text-center text-[#111827] font-[700]">
           Login to your account
@@ -145,11 +145,9 @@ function GeneralLoginPage({
         )}
       </form>
 
-      <p className="text-[15px] leading-[23px] tracking-normal font-[500] text-[#999999]">
+      <p className="text-[15px] leading-[23px] tracking-normal font-[500] text-[#999999] xlsm:text-center">
         © {getYear()} Pentrar. All Rights reserved.{' '}
-        <strong className="text-[#1A1A1A]">
-          Terms & Conditions and Privacy Policy
-        </strong>
+        <b className="text-[#1A1A1A]">Terms & Conditions and Privacy Policy</b>
       </p>
     </div>
   );

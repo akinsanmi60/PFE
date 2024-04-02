@@ -9,9 +9,11 @@ function ExporterOfftakerLoginPage() {
     type === 'exporter' ? EXPORTER_LOGIN_URL : OFFTAKER_LOGIN_URL;
 
   return (
-    <>
-      <GeneralLoginPage url={urlSwitch} pageTitle="ExporterOfftaker" />;
-    </>
+    <div className="max-content">
+      <div className="container">
+        <GeneralLoginPage url={urlSwitch} pageTitle="ExporterOfftaker" />;
+      </div>
+    </div>
   );
 }
 

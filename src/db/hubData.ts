@@ -28,11 +28,13 @@ export const hubData = [
 export const popularArray = [
   'Cocoa Beans',
   'Cashew Nuts',
+  'Agbalumo',
   'Sweet Potatoes',
   'Coffee',
   'Orange',
   'Watermelon',
   'Apple',
+  'Yam',
 ];
 
 export const stateArray = [

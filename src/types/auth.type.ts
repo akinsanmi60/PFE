@@ -79,6 +79,7 @@ export type IPartialCreateUser = {
 export type IFormComleteType = {
   coy_name: string;
   coy_address: string;
+  coy_state: string;
   reg_number: string;
   tin_id: string;
   category_type: string;
@@ -86,6 +87,7 @@ export type IFormComleteType = {
   coy_establishment: string;
   farm_name: string;
   farm_location: string;
+  farm_state: string;
   farming_scale: string;
   farm_land_ownership: string;
 };

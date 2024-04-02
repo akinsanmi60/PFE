@@ -38,11 +38,13 @@ function Hero() {
                   <Dropdown
                     dropDownArray={allUserType}
                     setSelectedOption={setSelectedOption}
+                    height="h-[67px] xlsm:h-[45px]"
+                    paddingY="py-[20px] xlsm:py-[10px]"
                   />
                 </div>
                 <button
                   onClick={handleSend}
-                  className="px-[40px] py-[20px] h-[67px] xlsm:w-full   mdxl:py-[10px] bg-secondary-light-1 text-primary-white font-[600] text-[18px] mdxl:text-[14px] leading-[25px] text-center rounded-tl-[0px] rounded-tr-[12px] rounded-br-[12px] xlsm:rounded-[12px] rounded-bl-[0px] border-none focus:outline-none"
+                  className="px-[40px] py-[20px] h-[67px] xlsm:h-[45px] xlsm:w-full   mdxl:py-[10px] bg-secondary-light-1 text-primary-white font-[600] text-[18px] mdxl:text-[14px] leading-[25px] text-center rounded-tl-[0px] rounded-tr-[12px] rounded-br-[12px] xlsm:rounded-[12px] rounded-bl-[0px] border-none focus:outline-none"
                 >
                   Get Started
                 </button>{' '}

@@ -3,10 +3,10 @@ import { MouseEvent, useEffect, useRef, useState } from 'react';
 function Dropdown({
   dropDownArray,
   setSelectedOption,
-  height = '67px',
+  height = 'h-[67px]',
   backgroundColor = 'bg-primary-white',
   dropdownTitle = 'Select a user type',
-  paddingY = '20px',
+  paddingY = 'py-[20px]',
   top = '60px',
 }: {
   dropDownArray: string[];
@@ -52,7 +52,7 @@ function Dropdown({
 
   return (
     <div
-      className={`h-[${height}] ${backgroundColor} py-[${paddingY}] relative w-full cursor-pointer rounded-tl-[12px] rounded-bl-[12px] border-none xlsm:rounded-[12px]`}
+      className={`${height} ${backgroundColor} ${paddingY} relative w-full cursor-pointer rounded-tl-[12px] rounded-bl-[12px] border-none xlsm:rounded-[12px]`}
     >
       <div
         ref={inputRef}

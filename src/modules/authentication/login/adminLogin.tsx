@@ -3,9 +3,11 @@ import GeneralLoginPage from './LoginComponent';
 
 function AdminLoginPage() {
   return (
-    <>
-      <GeneralLoginPage url={ADMIN_LOGIN_URL} pageTitle="Admin" />
-    </>
+    <div className="max-content">
+      <div className="container">
+        <GeneralLoginPage url={ADMIN_LOGIN_URL} pageTitle="Admin" />
+      </div>
+    </div>
   );
 }
 

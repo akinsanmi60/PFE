@@ -37,6 +37,7 @@ import { adminPathsLinks } from '@modules/admin/routes';
 import { BasePath } from 'routes/Routes';
 import { agencyPathsLinks } from '@modules/agency/routes';
 import { exporterPathsLinks } from '@modules/exporter/routes';
+import { useFormData } from '@contexts/formContext';
 
 const dashboardPaths: Record<string, string> = {
   farmer: `/${BasePath.USER}/${userPathsLinks.dashBoard}`,
@@ -112,7 +113,9 @@ export const usePartialUserCreationMutation = ({
   return { mutate, isLoading, ...rest };
 };
 export const useRegisterMutation = () => {
+  const { multiFormValues } = useFormData();
   const navigate = useNavigate();
+
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: IRegister }) =>
       postRequest<IRegister, IBaseResponse>({
@@ -122,7 +125,14 @@ export const useRegisterMutation = () => {
     {
       onSuccess(res) {
         displaySuccess(res?.message);
-        navigate('/login');
+        if (
+          multiFormValues.user_type === 'farmer' ||
+          multiFormValues.user_type === 'aggregator'
+        ) {
+          navigate(`/login/${multiFormValues.user_type}`);
+        } else {
+          navigate(`/${multiFormValues.user_type}/login`);
+        }
       },
       onError(error) {
         displayError(error);
@@ -262,8 +272,8 @@ export const useCompleteProfile = ({
   const queryClient = useQueryClient();
 
   const { mutate, isLoading, ...rest } = useMutation(
-    ({ payload }: { payload: any }) =>
-      putRequest<any, IBaseResponse>({
+    ({ payload }: { payload: Partial<IFormComleteType> }) =>
+      putRequest<Partial<IFormComleteType>, IBaseResponse>({
         url: url,
         payload,
       }),

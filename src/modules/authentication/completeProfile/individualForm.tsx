@@ -1,6 +1,7 @@
 import { useAuthContext } from '@contexts/authContext';
 import { useFormData } from '@contexts/formContext';
 import { businessScale, premisesOwnerShip } from '@db/authData';
+import { givenState } from '@db/general';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
@@ -22,6 +23,7 @@ function IndividualFormProfile({ setRevealForm }: IFormType) {
     defaultValues: {
       farm_name: '',
       farm_location: '',
+      farm_state: '',
       farm_land_ownership: '',
       farming_scale: '',
     } as Partial<IFormComleteType>,
@@ -42,18 +44,32 @@ function IndividualFormProfile({ setRevealForm }: IFormType) {
       category_type: multiFormValues?.category_type,
     };
 
-    mutate({ payload: payload });
+    mutate({ payload: payload as Partial<IFormComleteType> });
   };
 
   return (
     <div className="flex flex-col justify-between h-full pb-[30px]">
       <div className="flex flex-col gap-y-[16px]">
         <ControlledInput control={control} name="farm_name" label="Farm Name" />
-        <ControlledInput
-          control={control}
-          name="farm_location"
-          label="Farm Address"
-        />
+        <div className="flex gap-[16px] xlsm:flex-col">
+          <div className="w-[70%] xlsm:w-full">
+            <ControlledInput
+              control={control}
+              name="farm_location"
+              label="Farm Address"
+            />
+          </div>
+          <div className="w-[30%] xlsm:w-full">
+            <ControlledSelect
+              control={control}
+              name="farm_state"
+              label="Farm State"
+              placeholder="Please select"
+              optionArray={givenState()}
+            />
+          </div>
+        </div>
+
         <div className="flex gap-x-[16px]">
           <ControlledSelect
             control={control}

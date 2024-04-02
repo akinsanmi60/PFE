@@ -1,11 +1,11 @@
-import HashLoader from 'react-spinners/HashLoader';
+import logo from '@assets/svg/logoIcon.svg';
 
 function Loader() {
   return (
     <div className="h-screen text-[#072723]">
       <div className="flex flex-col items-center justify-center min-h-full">
         <div className="">
-          <HashLoader color="#072723" size={60} speedMultiplier={2} />
+          <img src={logo} alt="" className="w-[80px] h-[100px] animate-spin" />
           <h1 className="text-[28px] font-[900]">Pentrar</h1>
         </div>
       </div>

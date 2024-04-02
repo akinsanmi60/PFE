@@ -3,9 +3,12 @@ import GeneralLoginPage from './LoginComponent';
 
 function FarmerAggregatorLoginPage() {
   return (
-    <>
-      <GeneralLoginPage url={USER_LOGIN_URL} pageTitle="FarmerAggregator" />;
-    </>
+    <div className="max-content">
+      <div className="container">
+        {' '}
+        <GeneralLoginPage url={USER_LOGIN_URL} pageTitle="FarmerAggregator" />;
+      </div>
+    </div>
   );
 }
 

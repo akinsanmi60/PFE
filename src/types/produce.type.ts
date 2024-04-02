@@ -14,6 +14,7 @@ export type IAddProducePayload = {
   planting_date: string;
   produce_classification: string;
   storage: string;
+  nearest_landmark: string;
 };
 
 export type ITransferProducePayload = Pick<
@@ -77,6 +78,7 @@ export type IMyProduceData = {
   submitted_quantity: number;
   submitted_unit: string;
   storage: string;
+  nearest_landmark: string;
 };
 
 export type IMyProduceResponse = IBaseResponse & {

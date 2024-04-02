@@ -15,6 +15,7 @@ import ApproveProduceByAdmin from './approveProduce';
 import { toastOptions } from '@shared/Toast/Toast';
 import { toast } from 'react-toastify';
 import AddProduceComponent from 'components/addProduce';
+import DeleteProduce from './deleteProduce';
 
 const userArray = ['farmer', 'exporter', 'aggregator'];
 function ProduceCard({
@@ -135,6 +136,10 @@ function ProduceCard({
     handleModalOpen('editProduce');
   };
 
+  const handleDeleteProduce = () => {
+    handleModalOpen('deleteProduce');
+  };
+
   return (
     <div className="p-[20px] bg-primary-white">
       <div className="flex items-center gap-x-1 mb-[14px] justify-between">
@@ -158,7 +163,7 @@ function ProduceCard({
             {produceData?.status === 'not_approved' && (
               <div className="flex gap-[20px]">
                 <p onClick={handleEditProduce}>Edit</p>
-                <p>Delete</p>
+                <p onClick={handleDeleteProduce}>Delete</p>
               </div>
             )}
           </div>
@@ -210,11 +215,14 @@ function ProduceCard({
           produceAddProps={{
             formTitle: 'Edit Produce',
             actionText: 'editProduce',
-            produceData: produceData,
+            // produceData: produceData,
           }}
+          produceData={produceData}
         />
       )}
-      {modalState?.modalType === 'deleteProduce' && 'Delete Produce'}
+      {modalState?.modalType === 'deleteProduce' && (
+        <DeleteProduce id={produceData?.id as string} />
+      )}
     </div>
   );
 }
