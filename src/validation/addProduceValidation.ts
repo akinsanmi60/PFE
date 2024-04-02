@@ -14,6 +14,7 @@ export const AddProduceValidationSchema = yup
       .string()
       .required('Enter produce classification'),
     storage: yup.string().required('Enter storage'),
+    nearest_landmark: yup.string().required('Enter Landmark'),
   })
   .required();
 

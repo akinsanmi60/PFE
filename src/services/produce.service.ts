@@ -2,18 +2,25 @@ import { useAuthContext } from './../contexts/authContext';
 import { useModalContext } from '@contexts/modalContext';
 import { displaySuccess, displayError } from '@shared/Toast/Toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getRequest, postRequest, putRequest } from '@utils/apiCaller';
+import {
+  deleteRequest,
+  getRequest,
+  postRequest,
+  putRequest,
+} from '@utils/apiCaller';
 import {
   ADD_PRODUCE_URL,
   APPROVE_PRODUCE,
+  DELETE_PRODUCE_URL,
+  EDIT_PRODUCE_URL,
   GET_PRODUCE_BY_ID_URL,
   GET_USER_PRODUCE_URL,
   TRANSFER_PRODUCE_URL,
-  UPDATE_PRODUCE_URL,
 } from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
 import { UseFormReset } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { IBaseResponse } from 'types/auth.type';
 import { IBaseQueryProps } from 'types/pentrarHub.type';
 import {
@@ -68,35 +75,59 @@ const useProduceCreationMutation = ({
 
 const useProduceUpdateMutation = ({
   id,
-  action,
   reset,
   setImageString,
 }: {
-  action?: () => void;
   id: string;
   reset: UseFormReset<Omit<IAddProducePayload, 'images'>>;
   setImageString: React.Dispatch<React.SetStateAction<File[] | null>>;
 }) => {
   const queryClient = useQueryClient();
+  const { authUser } = useAuthContext();
   const { handleModalClose } = useModalContext();
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: IAddProducePayload }) =>
       putRequest<IAddProducePayload, IBaseResponse>({
-        url: UPDATE_PRODUCE_URL(id),
+        url: EDIT_PRODUCE_URL(
+          id,
+          authUser?.id as string,
+          authUser?.role as string,
+        ),
         payload,
       }),
     {
       onSuccess(res) {
         displaySuccess(res?.message);
         setImageString(null);
-        reset();
         handleModalClose('editProduce');
-        if (action) {
-          action();
-        }
+        queryClient.invalidateQueries({
+          queryKey: [queryKeys.getSingleProduce],
+        });
+        reset();
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+const useProduceDeleteMutation = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, ...rest } = useMutation(
+    ({ id }: { id: string }) =>
+      deleteRequest<IBaseResponse>({
+        url: DELETE_PRODUCE_URL(id),
+      }),
+    {
+      onSuccess(res) {
+        displaySuccess(res?.message);
         queryClient.invalidateQueries({
           queryKey: [queryKeys.getIMyProduce],
         });
+        navigate('/pentrar/user/my-produces');
       },
       onError(error) {
         displayError(error);
@@ -237,4 +268,5 @@ export {
   useTransferProduce,
   useApproveProduce,
   useProduceUpdateMutation,
+  useProduceDeleteMutation,
 };

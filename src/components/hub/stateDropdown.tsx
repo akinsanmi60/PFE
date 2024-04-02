@@ -1,4 +1,4 @@
-import { stateArray } from '@db/hubData';
+import { givenState } from '@db/general';
 import Dropdown from '@shared/Select/uncontrolledSelect';
 import { useEffect, useState } from 'react';
 import { IPentrarHubDropdown } from 'types/pentrarHub.type';
@@ -12,9 +12,9 @@ function StateDropdown({ setState }: IPentrarHubDropdown) {
   }, [stateChosen]);
 
   return (
-    <div className="w-[130px]">
+    <div className="w-[150px]">
       <Dropdown
-        dropDownArray={stateArray as string[]}
+        dropDownArray={givenState() as string[]}
         setSelectedOption={setStateChosen}
         dropdownTitle="State"
         backgroundColor="none"

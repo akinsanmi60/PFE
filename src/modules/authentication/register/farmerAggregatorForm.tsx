@@ -66,43 +66,47 @@ function Register() {
   };
 
   return (
-    <div
-      className={`flex flex-col items-center justify-between gap-y-[60px] h-screen py-[10px]`}
-    >
-      <div>
-        <img
-          src={pentrarLogo}
-          alt="logo"
-          onClick={() => navigate(`${webPaths.home()}`)}
-          className="cursor-pointer"
-        />
-      </div>
-
-      <div className="">
-        <FormWithStepperWrapper
-          complete={complete}
-          steps={steps}
-          currentStep={currentStep}
-          setComplete={setComplete}
-          setCurrentStep={setCurrentStep}
+    <div className="max-content">
+      <div className="container">
+        <div
+          className={`flex flex-col  justify-between gap-y-[60px]  xlsm:h-full xlsm:gap-y-[30px]  h-screen py-[10px]`}
         >
-          {currentStep >= 1 && infoForm()}
-
-          {currentStep >= 2 && (
-            <GetVerifyCode
-              currentStep={currentStep}
-              action={moveToNextForm}
-              previous={moveToPrevForm}
+          <div className="flex justify-center">
+            <img
+              src={pentrarLogo}
+              alt="logo"
+              onClick={() => navigate(`${webPaths.home()}`)}
+              className="cursor-pointer"
             />
-          )}
+          </div>
 
-          {currentStep >= 3 && (
-            <CreatePassword
+          <div className="">
+            <FormWithStepperWrapper
+              complete={complete}
+              steps={steps}
               currentStep={currentStep}
-              previous={moveToPrevForm}
-            />
-          )}
-        </FormWithStepperWrapper>
+              setComplete={setComplete}
+              setCurrentStep={setCurrentStep}
+            >
+              {currentStep >= 1 && infoForm()}
+
+              {currentStep >= 2 && (
+                <GetVerifyCode
+                  currentStep={currentStep}
+                  action={moveToNextForm}
+                  previous={moveToPrevForm}
+                />
+              )}
+
+              {currentStep >= 3 && (
+                <CreatePassword
+                  currentStep={currentStep}
+                  previous={moveToPrevForm}
+                />
+              )}
+            </FormWithStepperWrapper>
+          </div>
+        </div>
       </div>
     </div>
   );

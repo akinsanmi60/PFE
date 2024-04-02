@@ -1,6 +1,7 @@
 import { useAuthContext } from '@contexts/authContext';
 import { useFormData } from '@contexts/formContext';
 import { businessScale } from '@db/authData';
+import { givenState } from '@db/general';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
@@ -22,6 +23,7 @@ function CorporateFormProfile({ setRevealForm }: IFormType) {
     defaultValues: {
       coy_name: '',
       coy_address: '',
+      coy_state: '',
       reg_number: '',
       tin_id: '',
       coy_establishment: '',
@@ -44,7 +46,7 @@ function CorporateFormProfile({ setRevealForm }: IFormType) {
       category_type: multiFormValues?.category_type,
     };
 
-    mutate({ payload: payload });
+    mutate({ payload: payload as Partial<IFormComleteType> });
   };
 
   return (
@@ -69,12 +71,23 @@ function CorporateFormProfile({ setRevealForm }: IFormType) {
             label="Tax Identification Number"
           />
         </div>
-        <div>
-          <ControlledInput
-            control={control}
-            name="coy_address"
-            label="Business Address"
-          />
+        <div className="flex gap-[16px] xlsm:flex-col">
+          <div className="w-[70%] xlsm:w-full">
+            <ControlledInput
+              control={control}
+              name="coy_address"
+              label="Business Address"
+            />
+          </div>
+          <div className="w-[30%] xlsm:w-full">
+            <ControlledSelect
+              control={control}
+              name="coy_state"
+              label="Business State"
+              placeholder="Please select"
+              optionArray={givenState()}
+            />
+          </div>
         </div>
 
         <div className="flex gap-x-[16px]">

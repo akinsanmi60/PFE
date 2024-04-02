@@ -16,7 +16,7 @@ function FormWithStepperWrapper({
 }) {
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="">
+      <div className="xlsm:hidden">
         <CustomStepper
           complete={complete}
           steps={steps}
@@ -24,7 +24,7 @@ function FormWithStepperWrapper({
         />
       </div>
 
-      <div className="w-[715px] bg-gray-100 rounded-[16px] p-[24px] mt-[40px]">
+      <div className="w-[715px] xlsm:w-full  bg-gray-100 rounded-[16px] p-[24px] mt-[40px]">
         <div className="bg-primary-white rounded-[16px] p-[15px] ">
           {children}
         </div>

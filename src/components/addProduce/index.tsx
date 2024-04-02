@@ -1,4 +1,6 @@
 import { useAuthContext } from '@contexts/authContext';
+import { givenState } from '@db/general';
+import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
 import ModalBaseWrapper from '@shared/ModalBase';
@@ -7,14 +9,15 @@ import ControlledTextArea from '@shared/Textarea/ControlledInput';
 import { toastOptions } from '@shared/Toast/Toast';
 import ArrayImageUpload from '@shared/upload/ArrayImageUpload';
 import ModalHeader from 'components/appNav/modalHeader';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { Resolver, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import {
   useProduceCreationMutation,
   useProduceUpdateMutation,
 } from 'services/produce.service';
 import { IAddProducePayload, IMyProduceData } from 'types/produce.type';
+import { AddProduceValidationSchema } from 'validation/addProduceValidation';
 
 const produceClassification = [
   'Cereal',
@@ -32,31 +35,59 @@ type IAddProduce = {
     actionText: string;
     produceData?: IMyProduceData;
   };
+
+  produceData?: IMyProduceData;
 };
 
-function AddProduceComponent({ produceAddProps }: IAddProduce) {
+function AddProduceComponent({ produceAddProps, produceData }: IAddProduce) {
   const { authUser } = useAuthContext();
   const [imageString, setImageString] = useState<File[] | null>(null);
   const {
     control,
     handleSubmit,
     reset,
-    formState: { isDirty },
+    formState: { isDirty, isValid },
+    setValue,
   } = useForm({
+    resolver: yupResolver(AddProduceValidationSchema) as unknown as Resolver<
+      Omit<IAddProducePayload, 'images'>
+    >,
     defaultValues: {
-      name: (produceAddProps?.produceData?.name as string) || '',
-      quantity: String(produceAddProps?.produceData?.submitted_quantity) || '',
-      unit: produceAddProps?.produceData?.unit || '',
-      description: produceAddProps?.produceData?.description || '',
-      farm_address: produceAddProps?.produceData?.farm_address || '',
+      name: '',
+      quantity: '',
+      unit: '',
+      description: '',
+      nearest_landmark: '',
+      farm_address: '',
       harvest_date: '',
-      farm_state: produceAddProps?.produceData?.farm_state || '',
+      farm_state: '',
       planting_date: '',
-      produce_classification:
-        produceAddProps?.produceData?.produce_classification || '',
-      storage: produceAddProps?.produceData?.storage || '',
-    },
+      produce_classification: '',
+      storage: '',
+    } as IAddProducePayload,
   });
+
+  useEffect(() => {
+    setValue('unit', produceData?.unit || 'KG');
+    setValue('storage', produceData?.storage || '');
+    setValue('nearest_landmark', produceData?.nearest_landmark || '');
+    setValue('farm_address', produceData?.farm_address || '');
+    setValue('farm_state', produceData?.farm_state || '');
+    setValue('harvest_date', '');
+    setValue('planting_date', '');
+    setValue(
+      'produce_classification',
+      produceData?.produce_classification || '',
+    );
+    setValue('description', produceData?.description || '');
+    setValue(
+      'quantity',
+      produceData?.submitted_quantity
+        ? String(produceData?.submitted_quantity)
+        : '',
+    );
+    setValue('name', produceData?.name || '');
+  }, [produceData, setValue]);
 
   const { mutate, isLoading, isSuccess } = useProduceCreationMutation({
     id: authUser?.id as string,
@@ -69,12 +100,12 @@ function AddProduceComponent({ produceAddProps }: IAddProduce) {
     isLoading: updateIsLoading,
     isSuccess: updateIsSuccess,
   } = useProduceUpdateMutation({
-    id: authUser?.id as string,
-    reset,
+    id: produceData?.id as string,
     setImageString,
+    reset,
   });
 
-  const onAddProduce = (val: Omit<IAddProducePayload, 'images'>) => {
+  const onAddProduce = (val: IAddProducePayload) => {
     if (!imageString) {
       toast.error('Please add at least one image', toastOptions);
       return;
@@ -179,10 +210,12 @@ function AddProduceComponent({ produceAddProps }: IAddProduce) {
               control={control}
             />
 
-            <ControlledInput
+            <ControlledSelect
               name="farm_state"
-              label="Farm State"
+              label="Farm State "
+              placeholder="Select state"
               control={control}
+              optionArray={givenState()}
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -191,16 +224,28 @@ function AddProduceComponent({ produceAddProps }: IAddProduce) {
               label="Farm Storage"
               control={control}
             />
+            <ControlledInput name="unit" label="Unit" control={control} />
           </div>
+
+          <ControlledTextArea
+            name="nearest_landmark"
+            label="Nearest Landmark"
+            placeholder="Enter Landmark"
+            control={control}
+          />
 
           <div className="flex justify-end mt-[8px] mb-[-50px]">
             <CustomButton
               onClick={handleSubmit(onAddProduce)}
-              disabled={!isDirty || isLoading || updateIsLoading}
+              disabled={!isDirty || !isValid || isLoading || updateIsLoading}
               className="text-primary-white w-[180px]"
-              loading={isLoading}
+              loading={isLoading || updateIsLoading}
               loadingText="Adding..."
-              variant={!isDirty || isLoading || updateIsLoading ? 'solid' : ''}
+              variant={
+                !isDirty || !isValid || isLoading || updateIsLoading
+                  ? 'solid'
+                  : ''
+              }
             >
               Submit Produce
             </CustomButton>

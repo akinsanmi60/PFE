@@ -70,6 +70,14 @@ export const GET_ALL_PRODUCE_URL = () => 'produce/allProduces';
 export const ADD_PRODUCE_URL = (id: string) => `produce/${id}/create-produce`;
 export const UPDATE_PRODUCE_URL = (id: string) =>
   `produce/${id}/update-produce`;
+export const EDIT_PRODUCE_URL = (
+  id: string,
+  userId: string,
+  user_type: string,
+) => `/produce/${id}/edit-produce/${userId}/${user_type}`;
+export const DELETE_PRODUCE_URL = (id: string) =>
+  `produce/${id}/delete-produce`;
+
 export const TRANSFER_PRODUCE_URL = (id: string) =>
   `produce/${id}/partial-transfer`;
 export const GET_USER_PRODUCE_URL = (id: string, type: string) =>
