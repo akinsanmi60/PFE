@@ -129,10 +129,7 @@ function UserProduce() {
             <CustomButton
               className="text-primary-white w-[180px]"
               onClick={() => {
-                if (
-                  // authUser?.status === 'pending' ||
-                  currentUserStatus() === 'pending'
-                ) {
+                if (currentUserStatus() === 'pending') {
                   return toast.error(
                     'Account not approved, please contact admin',
                     toastOptions,
