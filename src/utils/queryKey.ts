@@ -1,6 +1,7 @@
 export const queryKeys = {
   getFarmerAggregatorDashboardCount: 'getFarmerAggregatorDashboardCount',
   getFarmerAggregatorRecentProduce: 'getFarmerAggregatorRecentProduce',
+  getExporterDashboardCount: 'getExporterDashboardCount',
   getIndividualFarmer: 'getIndividualFarmer',
   getPentrarHubProduce: 'getPentrarHubProduce',
   getIMyProduce: 'getIMyProduce',

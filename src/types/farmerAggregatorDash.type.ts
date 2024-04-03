@@ -1,4 +1,5 @@
 import { IBaseResponse } from './auth.type';
+import { IMyProduceData } from './produce.type';
 
 export type IPendingData = {
   name: string;
@@ -47,4 +48,13 @@ export type IRecentProduceDetail = {
 
 export type IDashboardRecentProduce = IBaseResponse & {
   data: IRecentProduceDetail[];
+};
+
+export type IExporterDashBoardCount = IBaseResponse & {
+  data: {
+    counted_produce: number;
+    counted_request: number;
+    recent_request: number;
+    recent_produce: Partial<IMyProduceData>;
+  };
 };

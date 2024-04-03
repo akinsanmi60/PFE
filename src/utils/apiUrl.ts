@@ -113,3 +113,13 @@ export const ACTIVATE_AGENCY_URL = (agencyID: string) =>
   `agency/${agencyID}/activate-agency`;
 export const DEACTIVATE_AGENCY_URL = (agencyID: string) =>
   `agency/${agencyID}/deactivate-agency`;
+
+// Exporter urls
+export const ADD_EXPORTER_URL = 'exporter/create-exporter';
+export const GET_ALL_EXPORTER_URL = 'exporter/all-exporters';
+export const GET_INDIVIDUAL_EXPORTER_URL = (id: string) =>
+  `exporter/${id}/exporter`;
+export const GET_EXPORTER_DASHBOARD_COUNT_URL = (id: string) =>
+  `exporter/${id}/dashboard-count`;
+export const GET_EXPORTER_RECENT_PRODUCE_URL = (id: string) =>
+  `exporter/${id}/recentproduce`;

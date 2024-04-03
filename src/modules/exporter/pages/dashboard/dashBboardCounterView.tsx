@@ -1,15 +1,14 @@
 import { CircularProgress } from '@chakra-ui/react';
 import { useAuthContext } from '@contexts/authContext';
-import PendingProduce from 'components/farmerAggregatorHeroCpomponent/component/pendingProduce';
+// import PendingProduce from 'components/farmerAggregatorHeroCpomponent/component/pendingProduce';
 import PageContainer from 'components/Layout/PageContainer';
-import { GetDasboardOfFarmerAggregator } from 'services/farmerAggregatorDashboard.service';
+import { GetDasboardOfExporter } from 'services/exporter.service';
 
 function DashBboardCounterView() {
   const { authUser } = useAuthContext();
 
-  const { data, isLoading } = GetDasboardOfFarmerAggregator({
+  const { data, isLoading } = GetDasboardOfExporter({
     queryParamsId: authUser?.id as string,
-    url: () => '',
   });
 
   return (
@@ -35,7 +34,7 @@ function DashBboardCounterView() {
             {isLoading ? (
               <CircularProgress color="#072723" size={30} />
             ) : (
-              data?.data?.pending_produce || 0
+              data?.data?.counted_request || 0
             )}
           </p>
         </div>
@@ -47,21 +46,21 @@ function DashBboardCounterView() {
             {isLoading ? (
               <CircularProgress color="#072723" size={30} />
             ) : (
-              data?.data?.pending_produce || 0
+              data?.data?.recent_request || 0
             )}
           </p>
         </div>
-        <div>
+        {/* <div>
           <h3 className="text-primary-main mb-[4px] text-[14px] font-[600]">
             Pending Cert. Request
           </h3>
           <PendingProduce
             produceValue={{
-              produceDetail: data?.data?.detail_pending_produce,
+              produceDetail: {},
               loading: isLoading,
             }}
           />{' '}
-        </div>
+        </div> */}
       </div>
     </PageContainer>
   );
