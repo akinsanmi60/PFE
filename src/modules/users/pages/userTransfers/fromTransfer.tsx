@@ -47,10 +47,10 @@ function FromTransfers() {
         }`,
     },
     {
-      label: 'Produce Owner',
+      label: 'Transfer To',
       accessor: '',
-      render: ({ from_owner }) => {
-        return from_owner;
+      render: ({ to_owner }) => {
+        return to_owner;
       },
     },
     {
