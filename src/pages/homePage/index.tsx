@@ -8,7 +8,7 @@ import WhyPentrar from './components/whyPentrar';
 
 function HomePage() {
   return (
-    <>
+    <div>
       <Hero />
       <WhyPentrar />
       <BoostBusiness />
@@ -16,7 +16,7 @@ function HomePage() {
       <Insight />
       <UnlockPentrar />
       <Partners />
-    </>
+    </div>
   );
 }
 
