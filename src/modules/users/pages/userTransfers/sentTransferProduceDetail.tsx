@@ -14,7 +14,7 @@ const detailKeys = [
   'Sent on',
 ];
 
-function TransferProduceDetail({
+function SentTransferProduceDetail({
   transferDetail,
 }: {
   transferDetail: ITransferedProduceData | null;
@@ -29,7 +29,7 @@ function TransferProduceDetail({
   const detailValue = [
     transferDetail?.qty_in_transefer,
     transferDetail?.unit,
-    transferDetail?.harvest_date,
+    transferDetail?.harvest_date ? transferDetail?.harvest_date : 'N/A',
     transferDetail?.from_location,
     returnString(),
   ];
@@ -45,7 +45,7 @@ function TransferProduceDetail({
         <ModalHeader
           modalHeaderProp={{
             title: 'Transfer Detail',
-            actionText: 'transferDetailProduce',
+            actionText: 'toTransferDetailProduce',
           }}
         />
 
@@ -112,13 +112,13 @@ function TransferProduceDetail({
             <div className="w-full">
               <div className="rounded-[16px] bg-primary-white p-[20px] shadow-lg h-[180px] flex flex-col justify-between">
                 <p className="bg-[#DAFBEC] py-[2px] px-[12px] text-statusText-success font-[500] text-center rounded-lg w-[50%]">
-                  {transferDetail?.from_user_type}
+                  {transferDetail?.to_user_type}
                 </p>
                 <h1 className="font-[500] text-[20px] leading-[28px] tracking-normal">
-                  {transferDetail?.from_owner}
+                  {transferDetail?.to_owner}
                 </h1>
                 <CustomButton className="w-full flex items-center gap-[4px] text-primary-white">
-                  <a href={`tel:${transferDetail?.from_phone}}`}>
+                  <a href={`tel:${transferDetail?.to_phone}}`}>
                     <span className="text-[15px] font-[500]">Call Me</span>
                   </a>
                   <span className="h-[20px] w-[20px]">
@@ -134,4 +134,4 @@ function TransferProduceDetail({
   );
 }
 
-export default TransferProduceDetail;
+export default SentTransferProduceDetail;

@@ -11,7 +11,7 @@ import { ITableHead } from '@shared/Table/table.interface';
 import { formatDate } from '@utils/constants';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 import { useModalContext } from '@contexts/modalContext';
-import TransferProduceDetail from './transferProduceDetail';
+import SentTransferProduceDetail from './sentTransferProduceDetail';
 
 function FromTransfers() {
   const { modalState, handleModalOpen } = useModalContext();
@@ -77,7 +77,7 @@ function FromTransfers() {
   ];
 
   const viewProduce = (produceData: ITransferedProduceData) => {
-    handleModalOpen('transferDetailProduce');
+    handleModalOpen('fromTransferDetailProduce');
 
     setTransferDetail(produceData);
   };
@@ -122,8 +122,8 @@ function FromTransfers() {
         showPagination
         onRowClick={rowData => viewProduce(rowData)}
       />
-      {modalState.modalType === 'transferDetailProduce' && (
-        <TransferProduceDetail transferDetail={transferDetail} />
+      {modalState.modalType === 'fromTransferDetailProduce' && (
+        <SentTransferProduceDetail transferDetail={transferDetail} />
       )}
     </div>
   );

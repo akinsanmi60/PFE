@@ -11,11 +11,10 @@ import { ITableHead } from '@shared/Table/table.interface';
 import { formatDate } from '@utils/constants';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 import { useModalContext } from '@contexts/modalContext';
-import TransferProduceDetail from './transferProduceDetail';
+import ReceivedTransferProduceDetail from './ReceivedTransferProduceDetail';
 
 function ToTransfers() {
   const { modalState, handleModalOpen } = useModalContext();
-
   const { authUser } = useAuthContext();
   const [searchTerm, setSearchTerm] = useState('');
   const [queryParams, setQueryParams] = useState({
@@ -77,7 +76,7 @@ function ToTransfers() {
   ];
 
   const viewProduce = (produceData: ITransferedProduceData) => {
-    handleModalOpen('transferDetailProduce');
+    handleModalOpen('toTransferDetailProduce');
 
     setTransferDetail(produceData);
   };
@@ -122,8 +121,8 @@ function ToTransfers() {
         showPagination
         onRowClick={rowData => viewProduce(rowData)}
       />
-      {modalState.modalType === 'transferDetailProduce' && (
-        <TransferProduceDetail transferDetail={transferDetail} />
+      {modalState.modalType === 'toTransferDetailProduce' && (
+        <ReceivedTransferProduceDetail transferDetail={transferDetail} />
       )}
     </div>
   );
