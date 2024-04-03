@@ -90,7 +90,7 @@ function ToTransfers() {
             {/* Transfer Produces{' '} */}
           </h2>
         </div>
-        <div className="w-full flex justify-between items-center gap-x-[15px] ">
+        <div className="w-full flex justify-between items-center gap-x-[15px] s">
           <SearchFilterBox
             searchBarProps={{
               placeholder: 'Search produce by name or ID',
