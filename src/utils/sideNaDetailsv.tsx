@@ -80,6 +80,12 @@ const EXPORTER_SIDENAV: NavLInk[] = [
     IconBlue: <SearchWhite />,
   },
   {
+    name: 'Transfers',
+    path: 'my-transfers',
+    Icon: <Folder />,
+    IconBlue: <FolderWhite />,
+  },
+  {
     name: 'My Produces',
     path: 'my-produces',
     Icon: <Folder />,

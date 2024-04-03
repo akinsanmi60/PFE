@@ -5,6 +5,7 @@ import { joinPath } from './navigation';
 import { RootLink } from 'routes/routeObject';
 import { agencyPathsLinks } from '@modules/agency/routes';
 import { userPathsLinks } from '@modules/users/routes';
+import { exporterPathsLinks } from '@modules/exporter/routes';
 
 export const webPaths = {
   root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.WEB}` : ''}`,
@@ -100,5 +101,9 @@ export const FarmerAggregatorPath = {
 
 export const ExporterPath = {
   root: (fullPath: boolean = true) =>
-    `${fullPath ? `${BasePath.EXPORTER}` : ''}`,
+    `${fullPath ? `${BasePath.EXPORTER}/` : ''}`,
+  myTransfers: (fullPath: boolean = true) =>
+    `${ExporterPath.root(fullPath)}${exporterPathsLinks.myTransfers}`,
+  fromTransfer: (fullPath: boolean = true) =>
+    `${joinPath(ExporterPath.myTransfers(fullPath), 'from-transfer')}`,
 };

@@ -26,12 +26,26 @@ const ReportProblem = React.lazy(
   () => import('@modules/exporter/pages/reportProblem'),
 );
 
+const MyTransferPage = React.lazy(
+  () => import('@modules/exporter/pages/transfers'),
+);
+
+const ToTransferPage = React.lazy(
+  () => import('@modules/exporter/pages/transfers/toTransfer'),
+);
+
+const FromTransferPage = React.lazy(
+  () => import('@modules/exporter/pages/transfers/fromTransfer'),
+);
+
 export const exporterPathsLinks = {
   basePath: 'pentrar/exporter',
   dashBoard: 'dashboard',
   orders: 'myorder-list',
   produces: 'my-produces',
   pentraHub: 'pentrar-hub',
+  myTransfers: 'my-transfers',
+  fromTransfer: 'from-transfer',
   settings: 'settings',
   reportProblem: 'report-problem',
 };
@@ -65,6 +79,23 @@ const ExporterRoutes = {
   ReportProblem: {
     element: ReportProblem,
     path: exporterPathsLinks.reportProblem,
+  },
+
+  MyTransfers: {
+    element: MyTransferPage,
+    path: exporterPathsLinks.myTransfers,
+    childrenRoutes: [
+      {
+        element: FromTransferPage,
+        path: '',
+        useIndex: true,
+      },
+
+      {
+        element: ToTransferPage,
+        path: exporterPathsLinks.fromTransfer,
+      },
+    ],
   },
 };
 
