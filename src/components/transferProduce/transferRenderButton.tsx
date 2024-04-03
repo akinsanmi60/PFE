@@ -16,10 +16,10 @@ function TransferRenderButton({ id }: { id: string }) {
   };
 
   const { mutate: rejectMutate, isLoading: rejectLoading } =
-    useRejectTransferProduce();
+    useRejectTransferProduce({ setOpen });
 
   const { mutate: acceptMutate, isLoading: acceptLoading } =
-    useAcceptTransferProduce();
+    useAcceptTransferProduce({ setOpen });
 
   const actions = [
     {
@@ -42,14 +42,16 @@ function TransferRenderButton({ id }: { id: string }) {
 
   return (
     <div className="relative">
-      <CustomButton
-        loading={loading}
-        loadingText="Loading..."
-        onClick={handleOpen}
-        className="py-[8px] flex items-center gap-[10px]  px-[40px] text-[16px] leading-[22px] font-[600] text-[#ffffff]"
-      >
-        <SettingsWhite /> Action
-      </CustomButton>
+      <div className="">
+        <CustomButton
+          loading={loading}
+          loadingText="Loading..."
+          onClick={handleOpen}
+          className="py-[8px] flex items-center gap-[10px] w-[130px] px-[40px] text-[16px] leading-[22px] font-[600] text-[#ffffff]"
+        >
+          <SettingsWhite /> Action
+        </CustomButton>
+      </div>
 
       <div>
         {open && (
@@ -57,7 +59,9 @@ function TransferRenderButton({ id }: { id: string }) {
             {actions.map(actionObj => (
               <p
                 key={actionObj.title}
-                onClick={() => switchAction(actionObj.title)}
+                onClick={() => {
+                  switchAction(actionObj.title);
+                }}
                 className="text-primary-main text-[16px] leading-[24px] font-[500] py-[4px] cursor-pointer hover:text-secondary-light-1 hover:font-[500]"
               >
                 {actionObj?.title}

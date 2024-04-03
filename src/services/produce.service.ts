@@ -284,7 +284,11 @@ const useGetTransferProduces = (queryParams: ITransferProp) => {
   };
 };
 
-const useAcceptTransferProduce = () => {
+const useAcceptTransferProduce = ({
+  setOpen,
+}: {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const queryClient = useQueryClient();
   const { mutate, ...rest } = useMutation(
     ({ payload }: { payload: { id: string; userId: string } }) =>
@@ -293,6 +297,7 @@ const useAcceptTransferProduce = () => {
       }),
     {
       onSuccess: res => {
+        setOpen(false);
         displaySuccess(res?.message);
 
         queryClient.invalidateQueries({
@@ -307,7 +312,11 @@ const useAcceptTransferProduce = () => {
   return { mutate, ...rest };
 };
 
-const useRejectTransferProduce = () => {
+const useRejectTransferProduce = ({
+  setOpen,
+}: {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const queryClient = useQueryClient();
   const { mutate, ...rest } = useMutation(
     ({ payload }: { payload: { id: string; userId: string } }) =>
@@ -316,6 +325,7 @@ const useRejectTransferProduce = () => {
       }),
     {
       onSuccess: res => {
+        setOpen(false);
         displaySuccess(res?.message);
 
         queryClient.invalidateQueries({
