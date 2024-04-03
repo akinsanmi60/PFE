@@ -119,9 +119,6 @@ function ExporterProduce() {
           }
           tableLoader={<TableLoading title="Loading Produces" />}
           showPagination
-          // onRowClick={(row: IMyProduceData) => {
-          //   navigate(`/pentrar/user/my-produce/${row.id}/details`);
-          // }}
         />
       </PageContainer>
     </div>
