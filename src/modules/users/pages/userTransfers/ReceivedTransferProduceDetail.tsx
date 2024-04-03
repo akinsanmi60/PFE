@@ -5,6 +5,7 @@ import defaultImage from '@assets/png/hubImgDefault.png';
 import CustomButton from '@shared/Button';
 import { ReactComponent as CallingPhone } from '@assets/svg/callingPhoneWhite.svg';
 import { formatDate } from '@utils/constants';
+import TransferRenderButton from '../../../../components/transferProduce/transferRenderButton';
 
 const detailKeys = [
   'Quantity',
@@ -42,12 +43,19 @@ function ReceivedTransferProduceDetail({
       }}
     >
       <div className="p-[6px]">
-        <ModalHeader
-          modalHeaderProp={{
-            title: 'Transfer Detail',
-            actionText: 'toTransferDetailProduce',
-          }}
-        />
+        <div className="flex justify-between items-center">
+          <div>
+            <ModalHeader
+              modalHeaderProp={{
+                title: 'Transfer Detail',
+                actionText: 'toTransferDetailProduce',
+              }}
+            />
+          </div>
+          <div>
+            <TransferRenderButton id={transferDetail?.id as string} />
+          </div>
+        </div>
 
         <div className="border border-background-borderlight-1 rounded-[16px] p-[20px] mb-[-40px]">
           <div className="grid grid-cols-3 gap-x-[20px] w-full">
