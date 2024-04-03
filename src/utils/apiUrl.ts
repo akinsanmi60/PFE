@@ -87,6 +87,10 @@ export const GET_PRODUCE_BY_ID_URL = (id: string) =>
 export const APPROVE_PRODUCE = (produceID: string, adminID: string) =>
   `produce/${produceID}/approved-produce-by/${adminID}`;
 export const TRANSFER_PROODUCE = `produce/transfered-produces`;
+export const ACCEPT_TRANSFERED_PRODUCE = (id: string, userId: string) =>
+  `/produce/${id}/accept-transfer/${userId}`;
+export const REJECT_TRANSFERED_PRODUCE = (id: string, userId: string) =>
+  `/produce/${id}/accept-transfer/${userId}`;
 
 // Admin urls
 export const ADD_ADMIN_URL = 'admin/create-admin';

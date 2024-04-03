@@ -9,12 +9,14 @@ import {
   putRequest,
 } from '@utils/apiCaller';
 import {
+  ACCEPT_TRANSFERED_PRODUCE,
   ADD_PRODUCE_URL,
   APPROVE_PRODUCE,
   DELETE_PRODUCE_URL,
   EDIT_PRODUCE_URL,
   GET_PRODUCE_BY_ID_URL,
   GET_USER_PRODUCE_URL,
+  REJECT_TRANSFERED_PRODUCE,
   TRANSFER_PRODUCE_URL,
   TRANSFER_PROODUCE,
 } from '@utils/apiUrl';
@@ -282,6 +284,62 @@ const useGetTransferProduces = (queryParams: ITransferProp) => {
   };
 };
 
+const useAcceptTransferProduce = ({
+  setOpen,
+}: {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const queryClient = useQueryClient();
+  const { mutate, ...rest } = useMutation(
+    ({ payload }: { payload: { id: string; userId: string } }) =>
+      postRequest<{ id: string; userId: string }, IBaseResponse>({
+        url: ACCEPT_TRANSFERED_PRODUCE(payload?.id, payload?.userId),
+      }),
+    {
+      onSuccess: res => {
+        setOpen(false);
+        displaySuccess(res?.message);
+
+        queryClient.invalidateQueries({
+          queryKey: [queryKeys.getAllTransferProduces],
+        });
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+  return { mutate, ...rest };
+};
+
+const useRejectTransferProduce = ({
+  setOpen,
+}: {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const queryClient = useQueryClient();
+  const { mutate, ...rest } = useMutation(
+    ({ payload }: { payload: { id: string; userId: string } }) =>
+      postRequest<{ id: string; userId: string }, IBaseResponse>({
+        url: REJECT_TRANSFERED_PRODUCE(payload?.id, payload?.userId),
+      }),
+    {
+      onSuccess: res => {
+        setOpen(false);
+        displaySuccess(res?.message);
+
+        queryClient.invalidateQueries({
+          queryKey: [queryKeys.getAllTransferProduces],
+        });
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+  return { mutate, ...rest };
+};
+
 export {
   useProduceCreationMutation,
   useGetMyProduce,
@@ -291,4 +349,6 @@ export {
   useProduceUpdateMutation,
   useProduceDeleteMutation,
   useGetTransferProduces,
+  useAcceptTransferProduce,
+  useRejectTransferProduce,
 };
