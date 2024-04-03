@@ -290,6 +290,7 @@ const useAcceptTransferProduce = ({
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const queryClient = useQueryClient();
+  const { handleModalClose } = useModalContext();
   const { mutate, ...rest } = useMutation(
     ({ payload }: { payload: { id: string; userId: string } }) =>
       postRequest<{ id: string; userId: string }, IBaseResponse>({
@@ -299,7 +300,7 @@ const useAcceptTransferProduce = ({
       onSuccess: res => {
         setOpen(false);
         displaySuccess(res?.message);
-
+        handleModalClose('toTransferDetailProduce');
         queryClient.invalidateQueries({
           queryKey: [queryKeys.getAllTransferProduces],
         });
@@ -318,6 +319,7 @@ const useRejectTransferProduce = ({
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const queryClient = useQueryClient();
+  const { handleModalClose } = useModalContext();
   const { mutate, ...rest } = useMutation(
     ({ payload }: { payload: { id: string; userId: string } }) =>
       postRequest<{ id: string; userId: string }, IBaseResponse>({
@@ -327,7 +329,7 @@ const useRejectTransferProduce = ({
       onSuccess: res => {
         setOpen(false);
         displaySuccess(res?.message);
-
+        handleModalClose('toTransferDetailProduce');
         queryClient.invalidateQueries({
           queryKey: [queryKeys.getAllTransferProduces],
         });

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { IProduceHandlerType } from 'types/produce.type';
 import { ReactComponent as ChevronUp } from '@assets/svg/chevronUp.svg';
 import { ReactComponent as DoubleMark } from '@assets/svg/chevronDown.svg';
-import { formatDate } from '@utils/constants';
+import { capitalize, formatDate } from '@utils/constants';
 import DetailCard from './detailCard';
 
 interface AccordionProps {
@@ -40,7 +40,7 @@ const ContributorsAccordionCard: React.FC<AccordionProps> = ({ itemData }) => {
   ];
 
   return (
-    <div className="">
+    <div className="flex flex-col gap-y-[10px] h-[350px] overflow-hidden overflow-y-auto">
       {itemData?.map((item, index) => (
         <div
           key={index}
@@ -56,7 +56,7 @@ const ContributorsAccordionCard: React.FC<AccordionProps> = ({ itemData }) => {
           >
             <div className="flex items-center w-full gap-x-[15px]">
               <p className="bg-[#DAFBEC] py-[2px] px-[12px] text-statusText-success font-[500] text-center rounded-lg">
-                {item?.handler_user_type || 'Nil'}
+                {capitalize(item?.handler_user_type) || 'Nil'}
               </p>
               <h3
                 className={` text-[18px] xlsm:text-[15px] xlsm:leading-[21px] leading-[22px] text-primary-main ${
