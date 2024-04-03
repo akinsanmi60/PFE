@@ -2,6 +2,7 @@ import UnlockPentrar from '@pages/homePage/components/unlockPentrar';
 import BlogHero from './components/bloghero';
 import BlogSectionA from './components/blogSectionA';
 import BlogSectionB from './components/blogSectionB';
+import Partners from '@pages/homePage/components/partners';
 
 function BlogPage() {
   return (
@@ -9,9 +10,8 @@ function BlogPage() {
       <BlogHero />
       <BlogSectionA />
       <BlogSectionB />
-      <div className="py-[80px] xlsm:py-[40px]">
-        <UnlockPentrar />
-      </div>
+      <UnlockPentrar />
+      <Partners />
     </div>
   );
 }
