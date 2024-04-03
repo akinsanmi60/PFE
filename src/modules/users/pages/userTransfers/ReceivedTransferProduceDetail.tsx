@@ -53,7 +53,9 @@ function ReceivedTransferProduceDetail({
             />
           </div>
           <div>
-            <TransferRenderButton id={transferDetail?.id as string} />
+            {transferDetail?.transfer_status === 'in_progress' && (
+              <TransferRenderButton id={transferDetail?.id as string} />
+            )}{' '}
           </div>
         </div>
 
