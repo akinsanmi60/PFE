@@ -24,7 +24,7 @@ export const blogData = [
     ],
     author: 'Mona Kone',
     authorImg: author,
-    authorPosition: 'CTO, Pentar',
+    authorPosition: 'CFO, Pentar',
 
     introParagraph:
       'In this article, we delve into enhancing Agricultural Supply Chains for Sustainable Export',
@@ -95,7 +95,7 @@ export const blogData = [
     ],
     author: 'Mona Kone',
     authorImg: author,
-    authorPosition: 'CTO, Pentar',
+    authorPosition: 'CFO, Pentar',
 
     introParagraph:
       'In this article, we delve into enhancing Agricultural Supply Chains for Sustainable Export',
@@ -166,7 +166,7 @@ export const blogData = [
     ],
     author: 'Mona Kone',
     authorImg: author,
-    authorPosition: 'CTO, Pentar',
+    authorPosition: 'CFO, Pentar',
 
     introParagraph:
       'In this article, we delve into enhancing Agricultural Supply Chains for Sustainable Export',
@@ -237,7 +237,7 @@ export const blogData = [
     ],
     author: 'Mona Kone',
     authorImg: author,
-    authorPosition: 'CTO, Pentar',
+    authorPosition: 'CFO, Pentar',
 
     introParagraph:
       'In this article, we delve into enhancing Agricultural Supply Chains for Sustainable Export',
@@ -308,7 +308,7 @@ export const blogData = [
     ],
     author: 'Mona Kone',
     authorImg: author,
-    authorPosition: 'CTO, Pentar',
+    authorPosition: 'CFO, Pentar',
 
     introParagraph:
       'In this article, we delve into enhancing Agricultural Supply Chains for Sustainable Export',
@@ -379,7 +379,7 @@ export const blogData = [
     ],
     author: 'Mona Kone',
     authorImg: author,
-    authorPosition: 'CTO, Pentar',
+    authorPosition: 'CFO, Pentar',
 
     introParagraph:
       'In this article, we delve into enhancing Agricultural Supply Chains for Sustainable Export',
