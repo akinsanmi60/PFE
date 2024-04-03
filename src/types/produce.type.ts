@@ -79,6 +79,8 @@ export type IMyProduceData = {
   status: string;
   transfer_handler: IProduceHandlerType[];
   submitted_quantity: number;
+  quantity_transfered: number;
+  unit_transfered: string;
   submitted_unit: string;
   storage: string;
   nearest_landmark: string;

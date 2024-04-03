@@ -101,6 +101,16 @@ function ProduceCard({
             : submitted_unit
         }`,
     },
+    {
+      label: 'Transferred Qty',
+      accessor: 'quantity_transfered',
+      render: ({ quantity_transfered, unit_transfered }) =>
+        `${quantity_transfered === null ? 0 : quantity_transfered} / ${
+          unit_transfered === null || unit_transfered === ''
+            ? 'KG'
+            : unit_transfered
+        }`,
+    },
   ];
 
   const renderActionBtn = () => {

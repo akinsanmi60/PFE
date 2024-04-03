@@ -103,7 +103,7 @@ function ApproveProduceByAdmin({
           <p
             className="text-tertiary-light-3 text-[10px] font-[500] cursor-pointer mt-1"
             onClick={() => {
-              setValue('quantity', String(produceData?.quantity));
+              setValue('quantity', String(produceData?.submitted_quantity));
             }}
           >
             Use the initial produce quantity
