@@ -78,14 +78,15 @@ export const EDIT_PRODUCE_URL = (
 export const DELETE_PRODUCE_URL = (id: string) =>
   `produce/${id}/delete-produce`;
 
-export const TRANSFER_PRODUCE_URL = (id: string) =>
-  `produce/${id}/partial-transfer`;
+export const TRANSFER_PRODUCE_URL = (id: string, userId: string) =>
+  `produce/${id}/transfer/${userId}`;
 export const GET_USER_PRODUCE_URL = (id: string, type: string) =>
   `produce/${id}/get-produce-by/${type}`;
 export const GET_PRODUCE_BY_ID_URL = (id: string) =>
   `produce/${id}/get-produce`;
 export const APPROVE_PRODUCE = (produceID: string, adminID: string) =>
   `produce/${produceID}/approved-produce-by/${adminID}`;
+export const TRANSFER_PROODUCE = `produce/transfered-produces`;
 
 // Admin urls
 export const ADD_ADMIN_URL = 'admin/create-admin';

@@ -59,7 +59,7 @@ function Insight() {
                   {item?.textBlockA?.paragraphs
                     ?.slice(0, 1)
                     ?.map((item: any) => (
-                      <p key={item}>{item?.paragraph}</p>
+                      <span key={item}>{item?.paragraph}</span>
                     ))}
                 </p>
                 <CustomButton

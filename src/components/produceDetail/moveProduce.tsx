@@ -29,12 +29,11 @@ function MoveProduceTo({ produceId }: { produceId: string }) {
   });
 
   const { mutate, isLoading } = useTransferProduce({
-    id: produceId,
     resetForm: reset,
   });
 
   const submitHandler = (val: ITransferProducePayload) => {
-    mutate({ payload: val });
+    mutate({ payload: val, id: produceId });
   };
 
   return (

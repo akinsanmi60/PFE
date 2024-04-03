@@ -1,7 +1,10 @@
-import { IBaseResponse } from './auth.type';
+import { IBaseResponse, IDataCount } from './auth.type';
 import { IBaseQueryProps } from './pentrarHub.type';
 
 export type IUserQueryProps = IBaseQueryProps;
+export type ITransferProp = IBaseQueryProps & {
+  to_id?: string;
+};
 
 export type IAddProducePayload = {
   name: string;
@@ -81,6 +84,28 @@ export type IMyProduceData = {
   nearest_landmark: string;
 };
 
+export type ITransferedProduceData = {
+  id: string;
+  created_at: string;
+  from_address: string;
+  from_location: string;
+  from_owner: string;
+  from_phone: string;
+  from_pentrar_id: string;
+  from_user_type: string;
+  produce_name: string;
+  qty_in_transefer: number;
+  harvest_date: string;
+  description: string;
+  unit: string;
+  transfer_status: string;
+  to_location: string;
+  to_owner: string;
+  to_phone: string;
+  to_pentrar_id: string;
+  to_user_type: string;
+};
+
 export type IMyProduceResponse = IBaseResponse & {
   data: {
     total: number;
@@ -93,4 +118,11 @@ export type IMyProduceResponse = IBaseResponse & {
 
 export type IGetSingleProduce = IBaseResponse & {
   data: IMyProduceData;
+};
+
+export type DataTransferedObject = IDataCount & {
+  transfered_produce: ITransferedProduceData[];
+};
+export type IGEtAllTransferedProduce = IBaseResponse & {
+  data: DataTransferedObject;
 };

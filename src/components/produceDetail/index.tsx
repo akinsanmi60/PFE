@@ -43,11 +43,23 @@ function ProduceCard({
           unit === null || unit === '' ? 'KG' : unit
         }`,
     },
+
     {
       label: 'Harvest Date',
       accessor: 'harvest_date',
       render: ({ harvest_date }) => {
         return formatDate({ date: harvest_date });
+      },
+    },
+    {
+      label: 'Farm Address',
+      accessor: 'farm_address',
+      render: ({ farm_address }) => {
+        return (
+          <p className="text-ellipsis line-clamp-2" title={farm_address}>
+            {farm_address}
+          </p>
+        );
       },
     },
     { label: 'Farm Location', accessor: 'farm_state' },
@@ -164,13 +176,17 @@ function ProduceCard({
               ? null
               : produceData?.status === 'not_approved' && (
                   <div className="flex gap-[20px]">
-                    <p onClick={handleEditProduce}>Edit</p>
-                    <p onClick={handleDeleteProduce}>Delete</p>
+                    <p onClick={handleEditProduce} className="cursor-pointer">
+                      Edit
+                    </p>
+                    <p onClick={handleDeleteProduce} className="cursor-pointer">
+                      Delete
+                    </p>
                   </div>
                 )}
           </div>
           <div
-            className="grid grid-cols-2 sixm:grid-cols-1
+            className="grid grid-cols-2 gap-x-[15px] sixm:grid-cols-1
          border-y-[1px] border-primary-light-1 py-[15px] "
           >
             <div>
@@ -194,9 +210,13 @@ function ProduceCard({
             <h1 className="text-primary-main mb-[10px] text-[20px] font-[600] tracking-normal">
               Ownership History
             </h1>
-            <ContributorsAccordionCard
-              itemData={produceData?.transfer_handler}
-            />
+            {produceData?.transfer_handler.length > 0 ? (
+              <ContributorsAccordionCard
+                itemData={produceData?.transfer_handler}
+              />
+            ) : (
+              <EmptyBar emptyStateSize="sm" componentType="Ownership History" />
+            )}
           </div>
         </div>
       ) : (

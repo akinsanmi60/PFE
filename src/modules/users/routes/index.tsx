@@ -25,11 +25,25 @@ const MyProduceDetailPage = React.lazy(
   () => import('../../../components/produceDetail/individualProduce'),
 );
 
+const MyTransferPage = React.lazy(
+  () => import('@modules/users/pages/userTransfers'),
+);
+
+const ToTransferPage = React.lazy(
+  () => import('@modules/users/pages/userTransfers/toTransfer'),
+);
+
+const FromTransferPage = React.lazy(
+  () => import('@modules/users/pages/userTransfers/fromTransfer'),
+);
+
 export const userPathsLinks = {
   basePath: 'pentrar/user',
   dashBoard: 'dashboard',
   pentrarHub: 'pentrar-hub',
   myProduces: 'my-produces',
+  myTransfers: 'my-transfers',
+  fromTransfer: 'from-transfer',
   myProduceDetails: 'my-produce/:id/details',
   settings: 'settings',
   reportProblem: 'report-problem',
@@ -64,6 +78,23 @@ const userRoutes = {
   ReportProblem: {
     element: ReportProblem,
     path: userPathsLinks.reportProblem,
+  },
+
+  MyTransfers: {
+    element: MyTransferPage,
+    path: userPathsLinks.myTransfers,
+    childrenRoutes: [
+      {
+        element: FromTransferPage,
+        path: '',
+        useIndex: true,
+      },
+
+      {
+        element: ToTransferPage,
+        path: userPathsLinks.fromTransfer,
+      },
+    ],
   },
 };
 

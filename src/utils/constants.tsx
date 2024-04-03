@@ -132,6 +132,7 @@ export const getClass = (text: string) => {
     case 'Active':
     case 'Verified':
     case 'Approved':
+    case 'Accepted':
     case 'Success':
       return 'bg-[#DAFBEC] py-[6px] px-[12px] text-statusText-success font-[500] rounded-lg';
     case 'Inactive':
@@ -145,6 +146,7 @@ export const getClass = (text: string) => {
     case 'Collected':
       return 'bg-[#FEF3C7] py-[5px] px-[12px] text-[#B45309] font-[500] rounded-lg';
     case 'Processing':
+    case 'Progress':
       return 'bg-[#D4F7F3] py-[5px] px-[12px] text-[#178275] font-[500] rounded-lg';
     default:
       return '';

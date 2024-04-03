@@ -4,6 +4,7 @@ import { BasePath } from 'routes/Routes';
 import { joinPath } from './navigation';
 import { RootLink } from 'routes/routeObject';
 import { agencyPathsLinks } from '@modules/agency/routes';
+import { userPathsLinks } from '@modules/users/routes';
 
 export const webPaths = {
   root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.WEB}` : ''}`,
@@ -75,18 +76,26 @@ export const AgencyUserPath = {
     `${joinPath(AgencyUserPath.certifications(fullPath), 'processing')}`,
 };
 
+export const UserFarmerAggregatorPath = {
+  root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.USER}/` : ''}`,
+};
+
 export type ISettingsTab =
   | 'personal-information'
   | 'change-password'
   | 'notifications'
   | 'business-information';
 export const FarmerAggregatorPath = {
-  root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.USER}` : ''}`,
+  root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.USER}/` : ''}`,
   settings: (
     linkdetail: string,
     tab: ISettingsTab | null,
     fullPath: boolean = true,
   ) => `${joinPath(FarmerAggregatorPath.root(fullPath), linkdetail, tab)}`,
+  myTransfers: (fullPath: boolean = true) =>
+    `${FarmerAggregatorPath.root(fullPath)}${userPathsLinks.myTransfers}`,
+  fromTransfer: (fullPath: boolean = true) =>
+    `${joinPath(FarmerAggregatorPath.myTransfers(fullPath), 'from-transfer')}`,
 };
 
 export const ExporterPath = {

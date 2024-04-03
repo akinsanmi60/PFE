@@ -16,6 +16,7 @@ import {
   GET_PRODUCE_BY_ID_URL,
   GET_USER_PRODUCE_URL,
   TRANSFER_PRODUCE_URL,
+  TRANSFER_PROODUCE,
 } from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
@@ -24,12 +25,15 @@ import { useNavigate } from 'react-router-dom';
 import { IBaseResponse } from 'types/auth.type';
 import { IBaseQueryProps } from 'types/pentrarHub.type';
 import {
+  DataTransferedObject,
   IAddProducePayload,
   IApproveProducePayload,
+  IGEtAllTransferedProduce,
   IGetSingleProduce,
   IMyProduceData,
   IMyProduceResponse,
   ITransferProducePayload,
+  ITransferProp,
 } from 'types/produce.type';
 
 const useProduceCreationMutation = ({
@@ -184,19 +188,18 @@ function useGetSingleProduce(id: string) {
 }
 
 function useTransferProduce({
-  id,
   resetForm,
 }: {
-  id: string;
   resetForm: UseFormReset<ITransferProducePayload>;
 }) {
   const queryClient = useQueryClient();
   const { handleModalClose } = useModalContext();
+  const { authUser } = useAuthContext();
 
   const { mutate, isLoading, ...rest } = useMutation(
-    ({ payload }: { payload: ITransferProducePayload }) =>
+    ({ payload, id }: { payload: ITransferProducePayload; id: string }) =>
       postRequest<ITransferProducePayload, IBaseResponse>({
-        url: TRANSFER_PRODUCE_URL(id),
+        url: TRANSFER_PRODUCE_URL(id, authUser?.id as string),
         payload,
       }),
     {
@@ -261,6 +264,24 @@ function useApproveProduce({
   return { mutate, isLoading, ...rest };
 }
 
+const useGetTransferProduces = (queryParams: ITransferProp) => {
+  const { data, ...rest } = useQuery<IGEtAllTransferedProduce>(
+    [queryKeys.getAllTransferProduces, [queryParams]],
+    () =>
+      getRequest({
+        url: `${TRANSFER_PROODUCE}${queryParamsHelper(queryParams)}`,
+      }),
+
+    {
+      refetchOnWindowFocus: false,
+    },
+  );
+  return {
+    ...rest,
+    data: data?.data as DataTransferedObject,
+  };
+};
+
 export {
   useProduceCreationMutation,
   useGetMyProduce,
@@ -269,4 +290,5 @@ export {
   useApproveProduce,
   useProduceUpdateMutation,
   useProduceDeleteMutation,
+  useGetTransferProduces,
 };

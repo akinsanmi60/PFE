@@ -15,7 +15,9 @@ export type IStatusType =
   | 'Incoming'
   | 'Collected'
   | 'Testing'
-  | 'Processing';
+  | 'Processing'
+  | 'Progess'
+  | 'Accepted';
 const StatusBadge = ({
   status,
   className,

@@ -15,4 +15,5 @@ export const queryKeys = {
   getIndividualAggregator: 'getIndividualAggregator',
   getAllAgencies: 'getAllAgencies',
   getIndividualAgency: 'getIndividualAgency',
+  getAllTransferProduces: 'getAllTransferProduces',
 };

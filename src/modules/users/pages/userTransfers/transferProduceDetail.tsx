@@ -1,27 +1,37 @@
-import CustomButton from '@shared/Button';
 import ModalBaseWrapper from '@shared/ModalBase';
-import { IProduceItemList } from 'types/pentrarHub.type';
-import { ReactComponent as CallingPhone } from '@assets/svg/callingPhoneWhite.svg';
 import ModalHeader from 'components/appNav/modalHeader';
+import { ITransferedProduceData } from 'types/produce.type';
 import defaultImage from '@assets/png/hubImgDefault.png';
+import CustomButton from '@shared/Button';
+import { ReactComponent as CallingPhone } from '@assets/svg/callingPhoneWhite.svg';
+import { formatDate } from '@utils/constants';
 
-const detailKeys = ['Quantity', 'Unit', 'Harvest Date', 'Farm Location'];
+const detailKeys = [
+  'Quantity',
+  'Unit',
+  'Harvest Date',
+  'Farm Location',
+  'Sent on',
+];
 
-function OnHubProduceDetail({
-  modalProduceDetail,
+function TransferProduceDetail({
+  transferDetail,
 }: {
-  modalProduceDetail: IProduceItemList | null;
+  transferDetail: ITransferedProduceData | null;
 }) {
-  const returnString = (): string =>
-    modalProduceDetail?.unit === null || modalProduceDetail?.unit === ''
-      ? 'KG'
-      : (modalProduceDetail?.unit as string);
+  const returnString = () => {
+    return (
+      transferDetail?.created_at &&
+      formatDate({ date: transferDetail?.created_at as string })
+    );
+  };
 
   const detailValue = [
-    modalProduceDetail?.quantity,
+    transferDetail?.qty_in_transefer,
+    transferDetail?.unit,
+    transferDetail?.harvest_date,
+    transferDetail?.from_location,
     returnString(),
-    modalProduceDetail?.harvest_date,
-    modalProduceDetail?.farm_state,
   ];
 
   return (
@@ -34,40 +44,23 @@ function OnHubProduceDetail({
       <div className="p-[6px]">
         <ModalHeader
           modalHeaderProp={{
-            title: 'Produce Detail',
-            actionText: 'hubProduceDetail',
+            title: 'Transfer Detail',
+            actionText: 'transferDetailProduce',
           }}
         />
-        <div className="border border-background-borderlight-1 rounded-[16px] px-[20px] mb-[-40px]">
-          <p className="font-[400] text-[12px] leading-[17px] text-primary-main mt-[15px] mb-[8px]">
-            ID:{' '}
-            <span className="font-[500] ">
-              {modalProduceDetail?.pentrar_produce_id}
-            </span>
-          </p>
 
+        <div className="border border-background-borderlight-1 rounded-[16px] p-[20px] mb-[-40px]">
           <div className="grid grid-cols-3 gap-x-[20px] w-full">
-            {modalProduceDetail?.images?.length
-              ? modalProduceDetail?.images?.map((image, i) => {
-                  return (
-                    <img
-                      key={`image-${i}`}
-                      src={image}
-                      alt="image"
-                      className="h-[150px] w-[100%]"
-                    />
-                  );
-                })
-              : Array(3)
-                  .fill(defaultImage)
-                  .map((image, i) => (
-                    <img
-                      key={`image-${i}`}
-                      src={image}
-                      alt="image"
-                      className="h-[150px] w-[100%]"
-                    />
-                  ))}
+            {Array(3)
+              .fill(defaultImage)
+              .map((image, i) => (
+                <img
+                  key={`image-${i}`}
+                  src={image}
+                  alt="image"
+                  className="h-[150px] w-[100%]"
+                />
+              ))}
           </div>
 
           <div className="flex gap-x-[20px] w-full mt-[24px]">
@@ -78,18 +71,17 @@ function OnHubProduceDetail({
                     Produce Name
                   </p>
                   <p className="font-[400] text-[14px] leading-[20px] text-primary-lighter">
-                    {modalProduceDetail?.name}
+                    {transferDetail?.produce_name}
                   </p>
                 </div>
                 <div className="mt-[14px]">
                   <p className="font-[500] text-[17px] leading-[25px] text-primary-main">
                     Produce Description
                   </p>
-                  <p
-                    className="text-ellipsis line-clamp-4 font-[400] text-[14px] leading-[20px] text-primary-lighter"
-                    title={modalProduceDetail?.description}
-                  >
-                    {modalProduceDetail?.description}
+                  <p className="text-ellipsis line-clamp-4 font-[400] text-[14px] leading-[20px] text-primary-lighter">
+                    {transferDetail?.description
+                      ? transferDetail?.description
+                      : 'No Description'}
                   </p>
                 </div>
               </div>
@@ -120,13 +112,13 @@ function OnHubProduceDetail({
             <div className="w-full">
               <div className="rounded-[16px] bg-primary-white p-[20px] shadow-lg h-[180px] flex flex-col justify-between">
                 <p className="bg-[#DAFBEC] py-[2px] px-[12px] text-statusText-success font-[500] text-center rounded-lg w-[50%]">
-                  {modalProduceDetail?.owner_type}
+                  {transferDetail?.from_user_type}
                 </p>
                 <h1 className="font-[500] text-[20px] leading-[28px] tracking-normal">
-                  {modalProduceDetail?.owner_name}
+                  {transferDetail?.from_owner}
                 </h1>
                 <CustomButton className="w-full flex items-center gap-[4px] text-primary-white">
-                  <a href={`tel:${modalProduceDetail?.owner_phone}`}>
+                  <a href={`tel:${transferDetail?.from_phone}}`}>
                     <span className="text-[15px] font-[500]">Call Me</span>
                   </a>
                   <span className="h-[20px] w-[20px]">
@@ -142,4 +134,4 @@ function OnHubProduceDetail({
   );
 }
 
-export default OnHubProduceDetail;
+export default TransferProduceDetail;
