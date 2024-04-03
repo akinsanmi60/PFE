@@ -129,9 +129,11 @@ export const useRegisterMutation = () => {
           multiFormValues.user_type === 'farmer' ||
           multiFormValues.user_type === 'aggregator'
         ) {
-          navigate(`/login/${multiFormValues.user_type}`);
+          navigate(`/login/${multiFormValues.user_type.toLowerCase()}`);
         } else {
-          navigate(`/${multiFormValues.user_type}/login`);
+          if (multiFormValues.user_type === 'exporter') {
+            navigate(`/${multiFormValues.user_type?.toLowerCase()}/login`);
+          }
         }
       },
       onError(error) {
