@@ -8,11 +8,17 @@ import {
 import CircularProgress from '@shared/CircularProgress';
 import { IDashboardHeroFOrFarmerAggregator } from 'types/farmerAggregatorDash.type';
 import { GetDasboardOfFarmerAggregator } from 'services/farmerAggregatorDashboard.service';
+import {
+  useGetIndividualAggregatorDependent,
+  useGetIndividualFarmerDependent,
+} from 'services/individualFarmerAggregator.service';
+import { useAuthContext } from '@contexts/authContext';
 
 function DashboardHeroFOrFarmerAggregator({
   dashboardProp,
 }: IDashboardHeroFOrFarmerAggregator) {
-  const { id, role, userStatus } = dashboardProp;
+  const { id, role } = dashboardProp;
+  const { authUser } = useAuthContext();
 
   const urlForCount =
     role === 'farmer'
@@ -23,6 +29,18 @@ function DashboardHeroFOrFarmerAggregator({
     queryParamsId: id as string,
     url: urlForCount,
   });
+
+  const { data: individualAggregator } = useGetIndividualAggregatorDependent();
+  const { data: individualFarmer } = useGetIndividualFarmerDependent();
+
+  const currentUserStatus = () => {
+    switch (authUser?.role) {
+      case 'farmer':
+        return individualFarmer?.status;
+      case 'aggregator':
+        return individualAggregator?.status;
+    }
+  };
 
   return (
     <PageContainer>
@@ -62,7 +80,7 @@ function DashboardHeroFOrFarmerAggregator({
             }}
           />{' '}
         </div>
-        {userStatus === 'pending' && (
+        {currentUserStatus() === 'pending' && (
           <div>
             <h3 className="text-primary-main mb-[4px] text-[14px] font-[600]">
               To Do{' '}
