@@ -11,8 +11,8 @@ const detailKeys = [
   'Quantity',
   'Unit',
   'Harvest Date',
-  'Farm Location',
   'Sent on',
+  'Farm Location',
 ];
 
 function ReceivedTransferProduceDetail({
@@ -31,8 +31,8 @@ function ReceivedTransferProduceDetail({
     transferDetail?.qty_in_transefer,
     transferDetail?.unit,
     transferDetail?.harvest_date ? transferDetail?.harvest_date : 'N/A',
-    transferDetail?.from_location,
     returnString(),
+    transferDetail?.from_location,
   ];
 
   return (
@@ -111,7 +111,7 @@ function ReceivedTransferProduceDetail({
                   {detailValue.map(itemVal => (
                     <p
                       key={itemVal}
-                      className="font-[600] text-[14px] leading-[20px] text-primary-main"
+                      className="font-[600] text-[14px] leading-[20px] text-primary-main text-ellipsis line-clamp-3"
                     >
                       {itemVal}
                     </p>
