@@ -11,7 +11,7 @@ function ExporterOfftakerLoginPage() {
   return (
     <div className="max-content">
       <div className="container">
-        <GeneralLoginPage url={urlSwitch} pageTitle="ExporterOfftaker" />;
+        <GeneralLoginPage url={urlSwitch} pageTitle={type as string} />;
       </div>
     </div>
   );

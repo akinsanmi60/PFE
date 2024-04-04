@@ -48,7 +48,6 @@ export const RootLink = {
   adminLogin: 'admin-login',
   agencyLogin: 'agency-login/:type',
   exporterLogin: 'login/:type',
-  registerExporterOfftaker: 'register',
   unauthourized: 'unauthourized',
   error: '*',
 };

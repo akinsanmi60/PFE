@@ -102,6 +102,7 @@ function Register() {
                 <CreatePassword
                   currentStep={currentStep}
                   previous={moveToPrevForm}
+                  currentTab={type}
                 />
               )}
             </FormWithStepperWrapper>

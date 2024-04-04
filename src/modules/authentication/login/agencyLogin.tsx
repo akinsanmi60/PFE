@@ -5,7 +5,7 @@ function AgencyLoginPage() {
   return (
     <div className="max-content">
       <div className="container">
-        <GeneralLoginPage url={AGENCY_LOGIN_URL} pageTitle="Agency" />;
+        <GeneralLoginPage url={AGENCY_LOGIN_URL} pageTitle="agency" />;
       </div>
     </div>
   );
