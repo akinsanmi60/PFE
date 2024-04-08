@@ -60,5 +60,8 @@ export type IUserCTXType = {
   reg_number: string;
   tin_id: string;
   coy_address: string;
+  coy_state: string;
+  farm_location: string;
+  farm_state: string;
   is_active: boolean;
 } & IAgencyContextValue;

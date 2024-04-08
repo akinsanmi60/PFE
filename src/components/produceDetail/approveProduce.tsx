@@ -98,6 +98,7 @@ function ApproveProduceByAdmin({
               label="Unit"
               name="unit"
               type="text"
+              readonly
             />
           </div>
           <p

@@ -33,7 +33,8 @@ type IAddProduce = {
   produceAddProps: {
     formTitle: string;
     actionText: string;
-    produceData?: IMyProduceData;
+    userAddress?: string;
+    userState?: string;
   };
 
   produceData?: IMyProduceData;
@@ -71,8 +72,14 @@ function AddProduceComponent({ produceAddProps, produceData }: IAddProduce) {
     setValue('unit', produceData?.unit || 'KG');
     setValue('storage', produceData?.storage || '');
     setValue('nearest_landmark', produceData?.nearest_landmark || '');
-    setValue('farm_address', produceData?.farm_address || '');
-    setValue('farm_state', produceData?.farm_state || '');
+    setValue(
+      'farm_address',
+      produceData?.farm_address || produceAddProps?.userAddress || '',
+    );
+    setValue(
+      'farm_state',
+      produceData?.farm_state || produceAddProps?.userState || '',
+    );
     setValue('harvest_date', '');
     setValue('planting_date', '');
     setValue(
@@ -87,7 +94,12 @@ function AddProduceComponent({ produceAddProps, produceData }: IAddProduce) {
         : '',
     );
     setValue('name', produceData?.name || '');
-  }, [produceData, setValue]);
+  }, [
+    produceAddProps?.userAddress,
+    produceAddProps?.userState,
+    produceData,
+    setValue,
+  ]);
 
   const { mutate, isLoading, isSuccess } = useProduceCreationMutation({
     id: authUser?.id as string,
@@ -224,7 +236,12 @@ function AddProduceComponent({ produceAddProps, produceData }: IAddProduce) {
               label="Farm Storage"
               control={control}
             />
-            <ControlledInput name="unit" label="Unit" control={control} />
+            <ControlledInput
+              name="unit"
+              label="Unit"
+              readonly
+              control={control}
+            />
           </div>
 
           <ControlledTextArea

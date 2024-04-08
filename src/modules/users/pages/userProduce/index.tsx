@@ -46,6 +46,19 @@ function UserProduce() {
     }
   };
 
+  const userState =
+    (individualFarmer &&
+      (individualFarmer?.farm_state || individualFarmer?.coy_state)) ||
+    (individualAggregator &&
+      (individualAggregator?.farm_state || individualAggregator?.coy_state));
+
+  const userAddress =
+    (individualFarmer &&
+      (individualFarmer?.farm_location || individualFarmer?.coy_address)) ||
+    (individualAggregator &&
+      (individualAggregator?.farm_location ||
+        individualAggregator?.coy_address));
+
   const updateQueryParams = (params: IUserQueryProps) => {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
@@ -171,6 +184,8 @@ function UserProduce() {
           produceAddProps={{
             formTitle: 'Add Produce',
             actionText: 'addProduce',
+            userAddress: userAddress as string,
+            userState: userState as string,
           }}
         />
       )}
