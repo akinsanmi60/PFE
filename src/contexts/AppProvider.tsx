@@ -14,7 +14,6 @@ type ProviderProps = {
 const theme = extendTheme({
   styles: {
     global: {
-      // styles for the `body`
       body: {
         height: '100vh',
         fontFamily: 'Inter',
