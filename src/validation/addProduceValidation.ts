@@ -1,9 +1,15 @@
+import { REGEX_CODE } from '@utils/constants';
 import * as yup from 'yup';
 
 export const AddProduceValidationSchema = yup
   .object({
     name: yup.string().required('Enter product name'),
-    quantity: yup.string().required('Enter the quantity'),
+    quantity: yup
+      .string()
+      .required('Enter the quantity')
+      .matches(REGEX_CODE, 'Please enter a valid number')
+      .min(1, 'Quantity must be greater than 0'),
+
     unit: yup.string().required('Enter the unit'),
     description: yup.string().required('Enter the decsription'),
     farm_address: yup.string().required('Enter farm address'),
@@ -21,7 +27,11 @@ export const AddProduceValidationSchema = yup
 export const MoveToValidationSchema = yup
   .object({
     email: yup.string().required('Enter your email'),
-    quantity: yup.string().required('Enter the quantity'),
+    quantity: yup
+      .string()
+      .required('Enter the quantity')
+      .matches(REGEX_CODE, 'Please enter a valid number')
+      .min(1, 'Quantity must be greater than 0'),
     unit: yup.string().required('Enter the unit'),
     user_type: yup.string().required('Enter user type'),
   })
@@ -30,7 +40,11 @@ export const MoveToValidationSchema = yup
 export const ApproveProduceValidationSchema = yup
   .object({
     package_location: yup.string().required('Enter package location'),
-    quantity: yup.string().required('Enter the quantity'),
+    quantity: yup
+      .string()
+      .required('Enter the quantity')
+      .matches(REGEX_CODE, 'Please enter a valid number')
+      .min(1, 'Quantity must be greater than 0'),
     unit: yup.string().required('Enter the unit'),
     package_state: yup.string().required('Enter packaging state'),
   })

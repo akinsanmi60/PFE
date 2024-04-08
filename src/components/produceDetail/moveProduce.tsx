@@ -83,6 +83,7 @@ function MoveProduceTo({ produceId }: { produceId: string }) {
               label="Unit"
               name="unit"
               type="text"
+              readonly
             />
           </div>
         </div>
