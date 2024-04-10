@@ -88,7 +88,7 @@ function ApproveProduceByAdmin({
           <div className="w-full flex justify-between gap-x-[15px]">
             <ControlledInput
               control={control}
-              label="Quantity"
+              label="Quantity Available"
               name="quantity"
               placeholder="Enter quantity"
               type="text"

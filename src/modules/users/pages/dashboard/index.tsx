@@ -18,9 +18,11 @@ import TableLoading from '@shared/Table/tableLoading';
 import { ITableHead } from '@shared/Table/table.interface';
 import { IRecentProduceDetail } from 'types/farmerAggregatorDash.type';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
+import { useNavigate } from 'react-router-dom';
 
 function DashboardHome() {
   const { authUser } = useAuthContext();
+  const navigate = useNavigate();
 
   const recentUrl =
     authUser?.role === 'farmer'
@@ -82,7 +84,10 @@ function DashboardHome() {
           <p className="text-[14px] font-[600] leading-[20px] text-secondary-light-2">
             Recent Produces
           </p>
-          <p className="text-[14px] font-[600] leading-[20px] text-tertiary-light-3 cursor-pointer">
+          <p
+            onClick={() => navigate('/pentrar/user/my-produce')}
+            className="text-[14px] font-[600] leading-[20px] text-tertiary-light-3 cursor-pointer"
+          >
             see all
           </p>
         </div>

@@ -1,5 +1,6 @@
 import SearchFilterBox from '@shared/searchFilter';
 import { ReactComponent as SearchVector } from '@assets/svg/searchVector.svg';
+import { ReactComponent as CloseVector } from '@assets/svg/searchClose.svg';
 import { useMemo, useState } from 'react';
 import ProduceSort from './produceSort';
 import { IProduceItemList, IQueryHubProp } from 'types/pentrarHub.type';
@@ -64,6 +65,14 @@ function HubProduce() {
               });
             },
             term: searchTerm,
+            useEndAdornment: (
+              <CloseVector
+                onClick={() => {
+                  updateQueryParams({ search: '' });
+                  setSearchTerm('');
+                }}
+              />
+            ),
             borderColor: '#F2F2F2',
             className: 'w-full border-[1px]',
           }}

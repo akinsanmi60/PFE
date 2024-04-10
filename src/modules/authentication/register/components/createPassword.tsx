@@ -7,10 +7,15 @@ import { useForm } from 'react-hook-form';
 import { useRegisterMutation } from 'services/auth.service';
 import { IFormComponentType, IRegister } from 'types/auth.type';
 import { createPasswordSchema } from 'validation/registerValidation';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { InputRightElement } from '@chakra-ui/react';
+import { useState } from 'react';
 
 function CreatePassword({ previous, currentStep }: IFormComponentType) {
   const { multiFormValues } = useFormData();
   const { mutate, isLoading } = useRegisterMutation();
+  const [pshow, setPshow] = useState(false);
+  const handleClickP = () => setPshow(!pshow);
 
   const {
     handleSubmit,
@@ -54,7 +59,22 @@ function CreatePassword({ previous, currentStep }: IFormComponentType) {
               control={control}
               label="Enter Password"
               name="password"
-              type="password"
+              type={pshow ? 'text' : 'password'}
+              useEndAdornment={
+                <InputRightElement>
+                  <p
+                    className="btn-icon cursor-pointer"
+                    onClick={handleClickP}
+                    role="openAndCloseEye"
+                  >
+                    {pshow ? (
+                      <ViewIcon color="#072723" />
+                    ) : (
+                      <ViewOffIcon color="#072723" />
+                    )}
+                  </p>
+                </InputRightElement>
+              }
             />
           </div>
           <div className="">
@@ -62,7 +82,22 @@ function CreatePassword({ previous, currentStep }: IFormComponentType) {
               control={control}
               name="confirm_password"
               label="Re-enter Password"
-              type="password"
+              type={pshow ? 'text' : 'password'}
+              useEndAdornment={
+                <InputRightElement>
+                  <p
+                    className="btn-icon cursor-pointer"
+                    onClick={handleClickP}
+                    role="openAndCloseEye"
+                  >
+                    {pshow ? (
+                      <ViewIcon color="#072723" />
+                    ) : (
+                      <ViewOffIcon color="#072723" />
+                    )}
+                  </p>
+                </InputRightElement>
+              }
             />
           </div>
           <div>
