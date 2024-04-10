@@ -2,6 +2,7 @@ import SearchFilterBox from '@shared/searchFilter';
 import PageContainer from 'components/Layout/PageContainer';
 import AppHeader from 'components/appHeader/appHeader';
 import { ReactComponent as SearchVector } from '@assets/svg/searchVector.svg';
+import { ReactComponent as CloseVector } from '@assets/svg/searchClose.svg';
 import { useState } from 'react';
 import CustomTable from '@shared/Table';
 import EmptyBar from '@shared/Table/tableEmpty';
@@ -79,6 +80,14 @@ function SubAdmin() {
                 onSetTermChange: ({ target: { value } }) =>
                   setSearchTerm(value),
                 term: searchTerm,
+                useEndAdornment: (
+                  <CloseVector
+                    onClick={() => {
+                      updateQueryParams({ search: '' });
+                      setSearchTerm('');
+                    }}
+                  />
+                ),
               }}
             />
             <CustomButton

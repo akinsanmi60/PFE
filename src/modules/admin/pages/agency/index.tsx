@@ -4,6 +4,7 @@ import SearchFilterBox from '@shared/searchFilter';
 import PageContainer from 'components/Layout/PageContainer';
 import AppHeader from 'components/appHeader/appHeader';
 import { ReactComponent as SearchVector } from '@assets/svg/searchVector.svg';
+import { ReactComponent as CloseVector } from '@assets/svg/searchClose.svg';
 import { useState } from 'react';
 import CustomButton from '@shared/Button';
 import { useModalContext } from '@contexts/modalContext';
@@ -79,6 +80,14 @@ function AgencyList() {
                   updateQueryParams({ search: value });
                 },
                 term: searchTerm,
+                useEndAdornment: (
+                  <CloseVector
+                    onClick={() => {
+                      updateQueryParams({ search: '' });
+                      setSearchTerm('');
+                    }}
+                  />
+                ),
               }}
             />
             <CustomButton

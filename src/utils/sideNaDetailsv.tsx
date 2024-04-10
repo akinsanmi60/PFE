@@ -35,6 +35,7 @@ export type NavLInk = {
   path: string;
   Icon: ReactNode;
   IconBlue?: ReactNode;
+  disabled?: boolean;
 };
 
 export type SettingNavLink = Omit<NavLInk, 'path'>;
@@ -104,6 +105,7 @@ const SETTINGS_SIDENAV: NavLInk[] = [
     name: 'Report a problem',
     path: 'report-problem',
     Icon: <Caution />,
+    disabled: true,
     // IconBlue: <HomeWhite />,
   },
   {
