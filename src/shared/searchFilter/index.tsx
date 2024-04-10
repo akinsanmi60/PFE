@@ -36,6 +36,7 @@ export const InputSearchBox = (props: InputSearchboxProp) => {
           paddingLeft: '10px',
           paddingRight: '10px',
         }}
+        className="cursor-pointer"
       >
         {useStartAdornment && useStartAdornment}
         <Input

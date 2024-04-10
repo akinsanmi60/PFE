@@ -36,9 +36,9 @@ function DashboardHeroFOrFarmerAggregator({
   const currentUserStatus = () => {
     switch (authUser?.role) {
       case 'farmer':
-        return individualFarmer?.status;
+        return individualFarmer?.user_update_submited;
       case 'aggregator':
-        return individualAggregator?.status;
+        return individualAggregator?.user_update_submited;
     }
   };
 
@@ -80,7 +80,7 @@ function DashboardHeroFOrFarmerAggregator({
             }}
           />{' '}
         </div>
-        {currentUserStatus() === 'pending' && (
+        {currentUserStatus() === false && (
           <div>
             <h3 className="text-primary-main mb-[4px] text-[14px] font-[600]">
               To Do{' '}

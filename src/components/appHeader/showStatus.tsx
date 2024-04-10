@@ -13,9 +13,9 @@ function ShowStatus() {
   const currentUserStatus = () => {
     switch (authUser?.role) {
       case 'farmer':
-        return individualFarmer?.status;
+        return individualFarmer?.is_active;
       case 'aggregator':
-        return individualAggregator?.status;
+        return individualAggregator?.is_active;
     }
   };
 
@@ -24,16 +24,14 @@ function ShowStatus() {
       {authUser?.role === Account.Admin ? null : (
         <div
           className={`border-[1px] px-[16px] py-[5px] font-[600] rounded-tr-[16px] rounded-br-[16px] rounded-tl-[16px] rounded-bl-[16px] ${getClass(
-            currentUserStatus() as string,
+            currentUserStatus() === false ? 'pending' : 'active',
           )}`}
         >
           <p>
-            {currentUserStatus() === 'pending'
+            {currentUserStatus() === false
               ? 'Pending Verification'
-              : currentUserStatus() === 'active'
+              : currentUserStatus()
               ? 'Active Account'
-              : currentUserStatus() === 'inactive'
-              ? 'Inactive Account'
               : 'No Status'}
           </p>
         </div>

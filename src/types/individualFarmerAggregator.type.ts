@@ -27,6 +27,7 @@ export type IIndividualFarmer = IFormComleteType & {
   status: string;
   gender: string;
   list_of_produce: IListOfProduce[];
+  user_update_submited: boolean;
 };
 
 export type IIndividualResponse = IBaseResponse & {

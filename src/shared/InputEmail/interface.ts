@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { FieldValues } from 'react-hook-form';
 import { IInputProps } from 'shared/Input/interface';
 import { IBaseControlledField } from 'shared/interface';

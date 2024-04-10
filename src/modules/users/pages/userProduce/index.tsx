@@ -41,9 +41,9 @@ function UserProduce() {
   const currentUserStatus = () => {
     switch (authUser?.role) {
       case 'farmer':
-        return individualFarmer?.status;
+        return individualFarmer?.is_active;
       case 'aggregator':
-        return individualAggregator?.status;
+        return individualAggregator?.is_active;
     }
   };
 
@@ -151,9 +151,9 @@ function UserProduce() {
             <CustomButton
               className="text-primary-white w-[180px]"
               onClick={() => {
-                if (currentUserStatus() === 'pending') {
+                if (currentUserStatus() === false) {
                   return toast.error(
-                    'Account not approved, please contact admin',
+                    'Account need to be activated, please contact admin',
                     toastOptions,
                   );
                 } else {

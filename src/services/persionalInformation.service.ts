@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { displayError, displaySuccess } from '@shared/Toast/Toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postRequest } from '@utils/apiCaller';

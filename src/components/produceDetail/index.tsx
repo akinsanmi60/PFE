@@ -16,6 +16,10 @@ import { toastOptions } from '@shared/Toast/Toast';
 import { toast } from 'react-toastify';
 import AddProduceComponent from 'components/addProduce';
 import DeleteProduce from './deleteProduce';
+import {
+  useGetIndividualAggregatorDependent,
+  useGetIndividualFarmerDependent,
+} from 'services/individualFarmerAggregator.service';
 
 const userArray = ['farmer', 'exporter', 'aggregator'];
 function ProduceCard({
@@ -28,6 +32,17 @@ function ProduceCard({
   const navigate = useNavigate();
   const { modalState, handleModalOpen } = useModalContext();
   const { authUser } = useAuthContext();
+  const { data: individualAggregator } = useGetIndividualAggregatorDependent();
+  const { data: individualFarmer } = useGetIndividualFarmerDependent();
+
+  const currentUserStatus = () => {
+    switch (authUser?.role) {
+      case 'farmer':
+        return individualFarmer?.is_active;
+      case 'aggregator':
+        return individualAggregator?.is_active;
+    }
+  };
 
   const detailColumnsHeadTitleA: {
     label: string;
@@ -123,6 +138,12 @@ function ProduceCard({
             if (produceData?.can_transfer === false) {
               return toast.error(
                 'Produce needs approval by admin',
+                toastOptions,
+              );
+            }
+            if (currentUserStatus() === false) {
+              return toast.error(
+                'Account need to be activated, please contact admin',
                 toastOptions,
               );
             }

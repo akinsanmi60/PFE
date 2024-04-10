@@ -1,26 +1,20 @@
 import { useAuthContext } from '@contexts/authContext';
 import { capitalize, getFirstSwordBeforeSpace } from '@utils/constants';
-
 import { logOut } from '@hooks/auth';
-// import { getToken } from '@hooks/localStorageHook';
 import { useNavigate } from 'react-router-dom';
 import { webPaths } from '@utils/paths';
 import ProfileHead from './profileHead';
 import NotificationHead from './notificationHead';
-import ShowStatus from './showStatus';
 
 const ProfileBox = ({ first_name }: { first_name: string }) => {
   const { setAuthUser } = useAuthContext();
   const navigate = useNavigate();
-  // const token = getToken();
 
   const handleLogout = () => {
     logOut();
-    // if (token) {
     setAuthUser(null);
     localStorage.removeItem('presentUrl');
     navigate(`${webPaths.home()}`);
-    // }
   };
 
   const availableNotification = true;
@@ -57,7 +51,9 @@ function AppHeader({ children }: { children?: React.ReactNode }) {
       <div className="bg-primary-white shadow-sm px-[20px] py-[10px]">
         <div className="flex items-center justify-end">
           <div className="flex gap-[30px] items-center">
-            <ShowStatus />
+            <p className="bg-[#DAFBEC] py-[6px] px-[12px] text-statusText-success font-[500] rounded-lg">
+              {capitalize(authUser?.role)}
+            </p>
 
             <ProfileBox first_name={first_name as string} />
           </div>
