@@ -60,7 +60,7 @@ export const InputSearchBox = (props: InputSearchboxProp) => {
             },
           }}
         />
-        {useEndAdornment && useEndAdornment}
+        {debouncedTerm && useEndAdornment && useEndAdornment}
       </InputGroup>
     </div>
   );

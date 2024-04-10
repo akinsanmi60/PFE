@@ -1,6 +1,7 @@
 import SearchFilterBox from '@shared/searchFilter';
 import { useState } from 'react';
 import { ReactComponent as SearchVector } from '@assets/svg/searchVector.svg';
+import { ReactComponent as CloseVector } from '@assets/svg/searchClose.svg';
 import { ITransferedProduceData, ITransferProp } from 'types/produce.type';
 import CustomTable from '@shared/Table';
 import EmptyBar from '@shared/Table/tableEmpty';
@@ -101,6 +102,14 @@ function FromTransfers() {
                 updateQueryParams({ search: value });
               },
               term: searchTerm,
+              useEndAdornment: (
+                <CloseVector
+                  onClick={() => {
+                    updateQueryParams({ search: '' });
+                    setSearchTerm('');
+                  }}
+                />
+              ),
             }}
           />
         </div>

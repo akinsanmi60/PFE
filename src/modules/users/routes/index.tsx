@@ -41,11 +41,11 @@ export const userPathsLinks = {
   basePath: 'pentrar/user',
   dashBoard: 'dashboard',
   pentrarHub: 'pentrar-hub',
-  myProduces: 'my-produces',
+  myProduces: 'my-produce',
   myTransfers: 'my-transfers',
   fromTransfer: 'from-transfer',
   myProduceDetails: 'my-produce/:id/details',
-  settings: 'settings',
+  settings: 'profile-settings',
   reportProblem: 'report-problem',
 };
 

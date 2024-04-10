@@ -92,7 +92,7 @@ function ProduceCard({
       render: ({ on_pentrar_hub }) => (on_pentrar_hub ? 'Yes' : 'No'),
     },
     {
-      label: 'Submitted Qty',
+      label: 'Submitted Quantity',
       accessor: 'submitted_quantity',
       render: ({ submitted_quantity, submitted_unit }) =>
         `${submitted_quantity === null ? 0 : submitted_quantity} / ${
@@ -102,7 +102,7 @@ function ProduceCard({
         }`,
     },
     {
-      label: 'Transferred Qty',
+      label: 'Transferred Quantity',
       accessor: 'quantity_transfered',
       render: ({ quantity_transfered, unit_transfered }) =>
         `${quantity_transfered === null ? 0 : quantity_transfered} / ${

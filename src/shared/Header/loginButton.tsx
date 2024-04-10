@@ -59,16 +59,18 @@ function LoginButton() {
       </CustomButton>
 
       {open && (
-        <div className="absolute top-[70px] h-[80px] w-[110px] overflow-hidden scrollbar-none overflow-y-auto rounded-[8px] shadow-md bg-primary-white py-[4px] px-[10px]">
-          {loginPaths.map((link, index) => (
-            <p
-              key={index}
-              onClick={() => navigate(`${link.path}`)}
-              className="text-primary-main text-[12px] leading-[21px] font-[300] cursor-pointer hover:text-secondary-light-1 hover:font-[500]"
-            >
-              {link?.title}
-            </p>
-          ))}
+        <div className="absolute top-[70px] h-[180px] w-[150px] flex flex-col gap-[10px] odd:text-cancel-red-main rounded-[8px] shadow-md bg-primary-white  p-[10px]">
+          <div className="flex flex-col gap-[10px]">
+            {loginPaths.map((link, index) => (
+              <p
+                key={index}
+                onClick={() => navigate(`${link.path}`)}
+                className="text-primary-main text-[14px] leading-[21px] font-[400] cursor-pointer hover:text-secondary-light-1 hover:font-[500] "
+              >
+                {link?.title}
+              </p>
+            ))}
+          </div>
         </div>
       )}
     </div>
