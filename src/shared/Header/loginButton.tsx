@@ -52,7 +52,6 @@ function LoginButton() {
     <div className="" ref={divRef}>
       <CustomButton
         onClick={handleOpen}
-        // onClick={() => navigate(`${authPaths.login()}`)}
         className="py-[12px] w-[110px] px-[40px] text-[16px] relative leading-[22px] font-[600] text-[#ffffff]"
       >
         Login
@@ -65,7 +64,7 @@ function LoginButton() {
               <p
                 key={index}
                 onClick={() => navigate(`${link.path}`)}
-                className="text-primary-main text-[14px] leading-[21px] font-[400] cursor-pointer hover:text-secondary-light-1 hover:font-[500] "
+                className="text-primary-main text-[14px] leading-[21px] font-[400] cursor-pointer hover:text-secondary-light-1 hover:font-[500]"
               >
                 {link?.title}
               </p>

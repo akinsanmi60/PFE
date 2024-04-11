@@ -30,7 +30,7 @@ function DeleteProduce({ id }: { id: string }) {
         Are you sure you want to delete? This action cannot be undone, please be
         sure of what you are doing.
       </p>
-      <div className="flex justify-end gap-[10px] mt-[40px] -mb-[40px]">
+      <div className="flex justify-end gap-[10px] mt-[40px]">
         <CustomButton
           onClick={() => handleModalClose('deleteProduce')}
           className="bg-transparent border-[1px] border-secondary-light-1 text-secondary-light-1"

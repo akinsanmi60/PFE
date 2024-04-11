@@ -18,6 +18,7 @@ import {
 } from 'services/produce.service';
 import { IAddProducePayload, IMyProduceData } from 'types/produce.type';
 import { AddProduceValidationSchema } from 'validation/addProduceValidation';
+import { storageCapacity } from '../../db/produceData';
 
 const produceClassification = [
   'Cereal',
@@ -65,6 +66,7 @@ function AddProduceComponent({ produceAddProps, produceData }: IAddProduce) {
       planting_date: '',
       produce_classification: '',
       storage: '',
+      storage_capacity: '',
     } as IAddProducePayload,
   });
 
@@ -214,11 +216,19 @@ function AddProduceComponent({ produceAddProps, produceData }: IAddProduce) {
               control={control}
             />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="">
             <ControlledInput
               name="farm_address"
               label="Farm Address"
               placeholder="Enter Farm Address"
+              control={control}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <ControlledInput
+              name="unit"
+              label="Qunatity in Unit"
+              readonly
               control={control}
             />
 
@@ -230,17 +240,20 @@ function AddProduceComponent({ produceAddProps, produceData }: IAddProduce) {
               optionArray={givenState()}
             />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="">
             <ControlledInput
               name="storage"
-              label="Farm Storage"
+              label="Farm Storage Address"
               control={control}
             />
-            <ControlledInput
-              name="unit"
-              label="Unit"
-              readonly
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <ControlledSelect
+              name="storage_capacity"
+              label="Farm Storage"
               control={control}
+              placeholder="Select capacity"
+              optionArray={storageCapacity}
             />
           </div>
 
@@ -251,7 +264,7 @@ function AddProduceComponent({ produceAddProps, produceData }: IAddProduce) {
             control={control}
           />
 
-          <div className="flex justify-end mt-[8px] mb-[-50px]">
+          <div className="flex justify-end mt-[8px]">
             <CustomButton
               onClick={handleSubmit(onAddProduce)}
               disabled={!isDirty || !isValid || isLoading || updateIsLoading}

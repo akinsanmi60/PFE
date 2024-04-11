@@ -87,7 +87,7 @@ function MoveProduceTo({ produceId }: { produceId: string }) {
             />
           </div>
         </div>
-        <div className="w-full flex justify-end mb-[-40px]">
+        <div className="w-full flex justify-end">
           <CustomButton
             className='"w-full text-primary-white'
             onClick={handleSubmit(submitHandler)}

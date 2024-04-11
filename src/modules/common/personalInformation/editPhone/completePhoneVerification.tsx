@@ -83,7 +83,7 @@ function CompletePhoneVerification() {
             type="text"
           />
         </div>
-        <div className="flex justify-end gap-x-4 mt-[30px] mb-[-40px] w-[100%]">
+        <div className="flex justify-end gap-x-4 mt-[30px] w-[100%]">
           <div className="flex items-center gap-[15px]">
             <CustomButton
               variant={'outline'}

@@ -11,13 +11,8 @@ import {
   Td,
   TableContainer,
 } from '@chakra-ui/react';
-import { useMemo, useState } from 'react';
 import CustomPagination from '@shared/customPagination';
 
-type ISortData = {
-  key: string | null;
-  direction: string;
-};
 const CustomTable = <TData extends ITableBody>({
   tableHeads,
   dataTableSource,
@@ -42,11 +37,6 @@ const CustomTable = <TData extends ITableBody>({
   containerClassName,
   paginationArray,
 }: ITableProp<TData>) => {
-  const [sortConfig, setSortConfig] = useState<ISortData>({
-    key: '' || null,
-    direction: 'ascending',
-  });
-
   const navigate = useNavigate();
   const dataLength = total as number;
 
@@ -77,42 +67,7 @@ const CustomTable = <TData extends ITableBody>({
     }
   };
 
-  const sortedData = useMemo(() => {
-    if (!dataTableSource) return [];
-    const sortableData = [...dataTableSource];
-    if (sortConfig.key !== null && sortConfig.key !== undefined) {
-      sortableData.sort((a, b) => {
-        if (
-          a[sortConfig.key as unknown as keyof TData] <
-          b[sortConfig.key as unknown as keyof TData]
-        ) {
-          return sortConfig.direction === 'ascending' ? -1 : 1;
-        }
-        if (
-          a[sortConfig.key as unknown as keyof TData] >
-          b[sortConfig.key as unknown as keyof TData]
-        ) {
-          return sortConfig.direction === 'ascending' ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-    return sortableData;
-  }, [dataTableSource, sortConfig]);
-
-  const requestSort = (key: string | null) => {
-    let direction = 'ascending';
-    if (
-      key !== null &&
-      sortConfig.key === key &&
-      sortConfig.direction === 'ascending'
-    ) {
-      direction = 'descending';
-    }
-    setSortConfig({ key, direction });
-  };
-
-  const dataTableSourceLength = sortedData?.length as number;
+  const dataTableSourceLength = dataTableSource?.length as number;
   const borderValue = showDivider ? '1px' : '0px';
 
   return (
@@ -136,20 +91,13 @@ const CustomTable = <TData extends ITableBody>({
                     {tableHeads?.map((heads, index) => {
                       return (
                         <Th
-                          onClick={() => {
-                            requestSort(heads.accessor as string | null);
+                          sx={{
+                            cursor: 'pointer',
                           }}
                           key={index}
                           className={`text-left px-[10px] py-[80px] font-[500] bg-white capitalize text-sm text-[#64748B] border-b-[${borderValue}]`}
                         >
                           {heads.label}
-                          {sortConfig.key === heads.accessor && (
-                            <span>
-                              {sortConfig.direction === 'ascending'
-                                ? ' ▲'
-                                : ' ▼'}
-                            </span>
-                          )}
                         </Th>
                       );
                     })}
@@ -157,7 +105,7 @@ const CustomTable = <TData extends ITableBody>({
                 </Thead>
 
                 <Tbody className={showDivider ? 'divide-y' : ''}>
-                  {sortedData?.map((rowData, indexKey) => {
+                  {dataTableSource?.map((rowData, indexKey) => {
                     return (
                       <Tr
                         className={`w-full bg-white cursor-pointer capitalize`}

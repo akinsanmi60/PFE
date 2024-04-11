@@ -25,11 +25,11 @@ import { queryParamsHelper } from 'config/query-params';
 import { UseFormReset } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { IBaseResponse } from 'types/auth.type';
-import { IBaseQueryProps } from 'types/pentrarHub.type';
 import {
   DataTransferedObject,
   IAddProducePayload,
   IApproveProducePayload,
+  IFilterProduceQuery,
   IGEtAllTransferedProduce,
   IGetSingleProduce,
   IMyProduceData,
@@ -144,7 +144,7 @@ const useProduceDeleteMutation = () => {
   return { mutate, isLoading, ...rest };
 };
 
-function useGetMyProduce(queryParams: IBaseQueryProps) {
+function useGetMyProduce(queryParams: IFilterProduceQuery) {
   const { authUser } = useAuthContext();
   const { isLoading, isRefetching, isError, data } =
     useQuery<IMyProduceResponse>(

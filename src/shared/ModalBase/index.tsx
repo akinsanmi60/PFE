@@ -56,21 +56,23 @@ function ModalBaseWrapper({ children, modalBaseProp }: IModalBaseProps) {
         >
           {children}
 
-          <div className="flex justify-end gap-4 mt-[40px] w-[100%]">
-            {useModalActionBtn && (
-              <div className="flex gap-[15px]">
-                <CustomButton
-                  variant={'outline'}
-                  className="border-primary-main border-[1px]  bg-transparent text-primary-main w-[120px]"
-                >
-                  {cancelText}
-                </CustomButton>
-                <CustomButton className="bg-primary-main text-primary-white w-[180px]">
-                  {actionText}
-                </CustomButton>
+          {useModalActionBtn && (
+            <div className="flex justify-end gap-4 mt-[40px] w-[100%]">
+              <div className="">
+                <div className="flex gap-[15px]">
+                  <CustomButton
+                    variant={'outline'}
+                    className="border-primary-main border-[1px]  bg-transparent text-primary-main w-[120px]"
+                  >
+                    {cancelText}
+                  </CustomButton>
+                  <CustomButton className="bg-primary-main text-primary-white w-[180px]">
+                    {actionText}
+                  </CustomButton>
+                </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </ModalBoxLayout>

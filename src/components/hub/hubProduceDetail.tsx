@@ -38,7 +38,7 @@ function OnHubProduceDetail({
             actionText: 'hubProduceDetail',
           }}
         />
-        <div className="border border-background-borderlight-1 rounded-[16px] px-[20px] mb-[-40px]">
+        <div className="border border-background-borderlight-1 rounded-[16px] px-[20px]">
           <p className="font-[400] text-[12px] leading-[17px] text-primary-main mt-[15px] mb-[8px]">
             ID:{' '}
             <span className="font-[500] ">

@@ -74,7 +74,7 @@ function AddAdminComponent() {
             options={[{ value: 'subAdmin', label: 'Sub Admin' }]}
           />
 
-          <div className="flex justify-end mt-[8px] mb-[-50px]">
+          <div className="flex justify-end mt-[8px]">
             <CustomButton
               onClick={handleSubmit(onAddSubAdmin)}
               className="text-primary-white w-[180px]"

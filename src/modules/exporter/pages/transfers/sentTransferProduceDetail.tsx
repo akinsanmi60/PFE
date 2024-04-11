@@ -49,7 +49,7 @@ function SentTransferProduceDetail({
           }}
         />
 
-        <div className="border border-background-borderlight-1 rounded-[16px] p-[20px] mb-[-40px]">
+        <div className="border border-background-borderlight-1 rounded-[16px] p-[20px]">
           <div className="grid grid-cols-3 gap-x-[20px] w-full">
             {Array(3)
               .fill(defaultImage)

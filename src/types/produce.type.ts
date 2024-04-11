@@ -1,3 +1,4 @@
+import { produceStatuses } from '@db/produceData';
 import { IBaseResponse, IDataCount } from './auth.type';
 import { IBaseQueryProps } from './pentrarHub.type';
 
@@ -18,6 +19,7 @@ export type IAddProducePayload = {
   produce_classification: string;
   storage: string;
   nearest_landmark: string;
+  storage_capacity: string;
 };
 
 export type ITransferProducePayload = Pick<
@@ -127,4 +129,14 @@ export type DataTransferedObject = IDataCount & {
 };
 export type IGEtAllTransferedProduce = IBaseResponse & {
   data: DataTransferedObject;
+};
+
+export type IFilterProduceQuery = {
+  created_at?: string;
+  updated_at?: string;
+  search?: string;
+  status?: typeof produceStatuses[number];
+  page?: number;
+  pageSize?: number;
+  limit?: number;
 };

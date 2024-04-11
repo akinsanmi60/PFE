@@ -11,11 +11,18 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { InputRightElement } from '@chakra-ui/react';
 import { useState } from 'react';
 
+type IStateObject = {
+  passwordView: boolean;
+  confirmPasswordView: boolean;
+};
+
 function CreatePassword({ previous, currentStep }: IFormComponentType) {
   const { multiFormValues } = useFormData();
   const { mutate, isLoading } = useRegisterMutation();
-  const [pshow, setPshow] = useState(false);
-  const handleClickP = () => setPshow(!pshow);
+  const [passwordViews, setPasswordViews] = useState<IStateObject>({
+    passwordView: false,
+    confirmPasswordView: false,
+  });
 
   const {
     handleSubmit,
@@ -30,6 +37,13 @@ function CreatePassword({ previous, currentStep }: IFormComponentType) {
     },
     resolver: yupResolver(createPasswordSchema),
   });
+
+  const handleClickPasswordVisibility = (passwordKey: keyof IStateObject) => {
+    setPasswordViews(prev => ({
+      ...prev,
+      [passwordKey]: !prev[passwordKey],
+    }));
+  };
 
   const onSubmit = (values: Partial<IRegister>) => {
     const payload = {
@@ -59,15 +73,17 @@ function CreatePassword({ previous, currentStep }: IFormComponentType) {
               control={control}
               label="Enter Password"
               name="password"
-              type={pshow ? 'text' : 'password'}
+              type={passwordViews.passwordView ? 'text' : 'password'}
               useEndAdornment={
                 <InputRightElement>
                   <p
                     className="btn-icon cursor-pointer"
-                    onClick={handleClickP}
+                    onClick={() =>
+                      handleClickPasswordVisibility('passwordView')
+                    }
                     role="openAndCloseEye"
                   >
-                    {pshow ? (
+                    {passwordViews.passwordView ? (
                       <ViewIcon color="#072723" />
                     ) : (
                       <ViewOffIcon color="#072723" />
@@ -82,15 +98,17 @@ function CreatePassword({ previous, currentStep }: IFormComponentType) {
               control={control}
               name="confirm_password"
               label="Re-enter Password"
-              type={pshow ? 'text' : 'password'}
+              type={passwordViews.confirmPasswordView ? 'text' : 'password'}
               useEndAdornment={
                 <InputRightElement>
                   <p
                     className="btn-icon cursor-pointer"
-                    onClick={handleClickP}
+                    onClick={() =>
+                      handleClickPasswordVisibility('confirmPasswordView')
+                    }
                     role="openAndCloseEye"
                   >
-                    {pshow ? (
+                    {passwordViews.confirmPasswordView ? (
                       <ViewIcon color="#072723" />
                     ) : (
                       <ViewOffIcon color="#072723" />

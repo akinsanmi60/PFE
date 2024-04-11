@@ -11,7 +11,7 @@ import { useModalContext } from '@contexts/modalContext';
 import AddProduceComponent from 'components/addProduce';
 import { useGetMyProduce } from 'services/produce.service';
 import { ITableHead } from '@shared/Table/table.interface';
-import { IMyProduceData, IUserQueryProps } from 'types/produce.type';
+import { IFilterProduceQuery, IMyProduceData } from 'types/produce.type';
 import { formatDate } from '@utils/constants';
 import TableLoading from '@shared/Table/tableLoading';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
@@ -23,17 +23,27 @@ import {
   useGetIndividualAggregatorDependent,
   useGetIndividualFarmerDependent,
 } from 'services/individualFarmerAggregator.service';
+import { IFilterValues } from '../../../../types/modal.type';
+import { useForm } from 'react-hook-form';
+import UserProduceFilterForm from './filterForm';
 
 function UserProduce() {
   const [searchTerm, setSearchTerm] = useState('');
   const { authUser } = useAuthContext();
-  const { modalState, handleModalOpen } = useModalContext();
+  const { modalState, handleModalOpen, handleModalClose } = useModalContext();
   const [queryParams, setQueryParams] = useState({
     search: '',
     page: 1,
     limit: 10,
   });
   const navigate = useNavigate();
+  const produceForm = useForm<IFilterValues>({
+    defaultValues: {
+      status: [],
+      created_at: '',
+      updated_at: '',
+    },
+  });
 
   const { data: individualAggregator } = useGetIndividualAggregatorDependent();
   const { data: individualFarmer } = useGetIndividualFarmerDependent();
@@ -60,7 +70,7 @@ function UserProduce() {
       (individualAggregator?.farm_location ||
         individualAggregator?.coy_address));
 
-  const updateQueryParams = (params: IUserQueryProps) => {
+  const updateQueryParams = (params: IFilterProduceQuery) => {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
 
@@ -110,6 +120,28 @@ function UserProduce() {
       },
     },
   ];
+
+  const openFilterBox = () => handleModalOpen('filterUserProduce');
+
+  const closeFilterBox = () => {
+    handleModalClose('filterUserProduce');
+  };
+
+  const submitFilter = () => {
+    const startDate = produceForm.getValues('created_at') || undefined;
+    const endDate = produceForm.getValues('updated_at') || undefined;
+
+    updateQueryParams({
+      page: 1,
+      status:
+        produceForm.getValues('status')!.length > 0
+          ? (produceForm.getValues('status') as IFilterProduceQuery['status'])
+          : undefined,
+      created_at: startDate,
+      updated_at: endDate,
+    });
+    closeFilterBox();
+  };
 
   const renderText = () => {
     return (
@@ -163,6 +195,12 @@ function UserProduce() {
             >
               Add Produce
             </CustomButton>
+            <CustomButton
+              className="text-primary-white w-[100px]"
+              onClick={openFilterBox}
+            >
+              Filter
+            </CustomButton>
           </div>
         </div>
       </AppHeader>
@@ -196,6 +234,22 @@ function UserProduce() {
             userAddress: userAddress as string,
             userState: userState as string,
           }}
+        />
+      )}
+
+      {modalState?.modalType === 'filterUserProduce' && (
+        <UserProduceFilterForm
+          closeModalBox={closeFilterBox}
+          filterForm={produceForm}
+          onSubmitForm={submitFilter}
+          clearFunction={() =>
+            updateQueryParams({
+              page: 1,
+              limit: 10,
+              created_at: '',
+              updated_at: '',
+            })
+          }
         />
       )}
     </div>
