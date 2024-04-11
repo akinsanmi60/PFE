@@ -19,7 +19,7 @@ export const produceStatuses = ['approved', 'not_approved'] as const;
 
 export const produceStatusOptions: {
   label: string;
-  value: typeof produceStatuses[number];
+  value: string;
 }[] = [
   {
     label: 'Approved',

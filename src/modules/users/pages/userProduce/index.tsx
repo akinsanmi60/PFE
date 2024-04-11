@@ -39,7 +39,7 @@ function UserProduce() {
   const navigate = useNavigate();
   const produceForm = useForm<IFilterValues>({
     defaultValues: {
-      status: [],
+      status: '',
       created_at: '',
       updated_at: '',
     },

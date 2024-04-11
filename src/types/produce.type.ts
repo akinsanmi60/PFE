@@ -1,4 +1,3 @@
-import { produceStatuses } from '@db/produceData';
 import { IBaseResponse, IDataCount } from './auth.type';
 import { IBaseQueryProps } from './pentrarHub.type';
 
@@ -135,7 +134,7 @@ export type IFilterProduceQuery = {
   created_at?: string;
   updated_at?: string;
   search?: string;
-  status?: typeof produceStatuses[number];
+  status?: string;
   page?: number;
   pageSize?: number;
   limit?: number;

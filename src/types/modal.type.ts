@@ -16,7 +16,7 @@ export type IRenderIfProps = {
 };
 
 export type IFilterValues = {
-  status?: [];
+  status?: string;
   created_at?: string;
   updated_at?: string;
 };
