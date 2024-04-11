@@ -37,7 +37,7 @@ const UserProduceFilterForm = ({
 
       <FormStartEndDate
         control={control}
-        label="Last Active"
+        label="Created On"
         name={{
           start: 'created_at',
           end: 'updated_at',

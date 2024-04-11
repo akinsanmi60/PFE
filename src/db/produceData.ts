@@ -15,7 +15,7 @@ export const storageCapacity = [
   'Above 20 Hectares',
 ];
 
-export const produceStatuses = ['approved', 'pending'] as const;
+export const produceStatuses = ['approved', 'not_approved'] as const;
 
 export const produceStatusOptions: {
   label: string;
@@ -26,7 +26,7 @@ export const produceStatusOptions: {
     value: 'approved',
   },
   {
-    label: 'Pending',
-    value: 'pending',
+    label: 'Not Approved',
+    value: 'not_approved',
   },
 ];
