@@ -3,13 +3,21 @@ export type IQueryParams = {
 };
 export const queryParamsHelper = (queryParams: IQueryParams): string => {
   const validParams: string[] = [];
-
   for (const [key, value] of Object.entries(queryParams || {})) {
     if (key && value !== undefined && value !== null && value !== '') {
-      if (key === 'page' && value === 0) {
-        validParams.push('page=1');
+      if (Array.isArray(value)) {
+        // If value is an array, iterate over its elements
+        value.forEach(element => {
+          if (element !== undefined && element !== null && element !== '') {
+            validParams.push(`${key}=${encodeURIComponent(element)}`);
+          }
+        });
       } else {
-        validParams.push(`${key}=${value}`);
+        if (key === 'page' && value === 0) {
+          validParams.push('page=1');
+        } else {
+          validParams.push(`${key}=${encodeURIComponent(value)}`);
+        }
       }
     }
   }
