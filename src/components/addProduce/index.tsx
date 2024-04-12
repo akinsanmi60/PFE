@@ -18,17 +18,8 @@ import {
 } from 'services/produce.service';
 import { IAddProducePayload, IMyProduceData } from 'types/produce.type';
 import { AddProduceValidationSchema } from 'validation/addProduceValidation';
-import { storageCapacity } from '../../db/produceData';
-
-const produceClassification = [
-  'Cereal',
-  'Fruit',
-  'Vegetable',
-  'Root',
-  'Leaf',
-  'Fiber',
-  'Other',
-];
+import { produceClassification, storageCapacity } from '../../db/produceData';
+import { capitalize } from '@utils/constants';
 
 type IAddProduce = {
   produceAddProps: {
@@ -74,14 +65,8 @@ function AddProduceComponent({ produceAddProps, produceData }: IAddProduce) {
     setValue('unit', produceData?.unit || 'KG');
     setValue('storage', produceData?.storage || '');
     setValue('nearest_landmark', produceData?.nearest_landmark || '');
-    setValue(
-      'farm_address',
-      produceData?.farm_address || produceAddProps?.userAddress || '',
-    );
-    setValue(
-      'farm_state',
-      produceData?.farm_state || produceAddProps?.userState || '',
-    );
+    setValue('farm_address', (produceData?.farm_address as string) || '');
+    setValue('farm_state', produceData?.farm_state || '');
     setValue('harvest_date', '');
     setValue('planting_date', '');
     setValue(
@@ -223,11 +208,26 @@ function AddProduceComponent({ produceAddProps, produceData }: IAddProduce) {
               placeholder="Enter Farm Address"
               control={control}
             />
+            <p
+              className="text-tertiary-light-3 text-[10px] font-[500] cursor-pointer mt-1"
+              onClick={() => {
+                setValue(
+                  'farm_address',
+                  capitalize(produceAddProps?.userAddress) || '',
+                );
+                setValue(
+                  'farm_state',
+                  capitalize(produceAddProps?.userState) || '',
+                );
+              }}
+            >
+              Use my address details
+            </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <ControlledInput
               name="unit"
-              label="Qunatity in Unit"
+              label="Quantity in Unit"
               readonly
               control={control}
             />

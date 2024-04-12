@@ -50,7 +50,6 @@ function CreatePassword({ previous, currentStep }: IFormComponentType) {
       ...multiFormValues,
       password: values.password,
       terms_condition: values.terms_condition !== '' && true,
-      user_type: String(multiFormValues.user_type).toLowerCase(),
     };
     mutate({ payload });
   };

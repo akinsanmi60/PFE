@@ -6,12 +6,16 @@ import { useGetSingleProduce } from 'services/produce.service';
 
 function IndividualProduce() {
   const { id } = useParams();
-  const { data, isLoading } = useGetSingleProduce(id as string);
+  const { data, isLoading, isRefetching } = useGetSingleProduce(id as string);
   return (
     <div>
       <AppHeader />
       <PageContainer className="">
-        <ProduceCard produceData={data} loading={isLoading} />
+        <ProduceCard
+          produceData={data}
+          loading={isLoading}
+          refetching={isRefetching}
+        />
       </PageContainer>
     </div>
   );

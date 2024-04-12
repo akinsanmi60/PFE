@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { usePartialUserCreationMutation } from 'services/auth.service';
 import { IFormComponentType, IRegister } from 'types/auth.type';
 import { personalInfoSchema } from 'validation/registerValidation';
-import { capitalize } from '../../../../utils/constants';
+import { capitalize, fullNameRegex } from '../../../../utils/constants';
 
 function PersonalinfoForm({
   currentStep,
@@ -26,7 +26,7 @@ function PersonalinfoForm({
     defaultValues: {
       email: '',
       full_name: '',
-      user_type: capitalize(currentTab) || '',
+      user_type: capitalize(currentTab?.toLocaleLowerCase()) || '',
       gender: '',
       phone_number: '',
     },
@@ -37,9 +37,11 @@ function PersonalinfoForm({
   const onSubmit = (values: Partial<IRegister>) => {
     let phone_number;
     let payload;
+    const user_type = currentTab as string;
+    console.log(fullNameRegex.test(values.full_name as string));
     if (values.phone_number?.startsWith('0')) {
       phone_number = values.phone_number.replace('0', '+234');
-      payload = { ...values, phone_number };
+      payload = { ...values, phone_number, user_type };
     } else {
       payload = values;
     }
@@ -71,6 +73,7 @@ function PersonalinfoForm({
               control={control}
               label="Full Name"
               name="full_name"
+              placeholder="Enter your full name"
             />
           </div>
           <div className="">
@@ -79,6 +82,7 @@ function PersonalinfoForm({
               label="Email Address"
               name="email"
               type="email"
+              placeholder="Enter your email address"
             />
           </div>
           <div className="">
@@ -86,6 +90,7 @@ function PersonalinfoForm({
               control={control}
               name="phone_number"
               label="Phone Number"
+              placeholder="Enter your phone number"
             />
           </div>
 

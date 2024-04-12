@@ -81,7 +81,7 @@ function Dropdown({
 
       {showMenu && (
         <div
-          className={`top-[${top}] absolute shadow-primary-lighter rounded-[8px] z-50 max-h-[100px] w-full translate-y-1 overflow-auto border  border-solid border-[#DFE2E2] bg-primary-white text-[#131515] scrollbar-thin scrollbar-none`}
+          className={`top-[${top}] absolute shadow-primary-lighter rounded-[8px] z-10 max-h-[100px] w-full translate-y-1 overflow-auto border  border-solid border-[#DFE2E2] bg-primary-white text-[#131515] scrollbar-thin scrollbar-none`}
         >
           {dropDownArray.map((value, index) => (
             <div

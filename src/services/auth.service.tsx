@@ -114,6 +114,7 @@ export const usePartialUserCreationMutation = ({
 };
 export const useRegisterMutation = () => {
   const { multiFormValues } = useFormData();
+
   const navigate = useNavigate();
 
   const { mutate, isLoading, ...rest } = useMutation(

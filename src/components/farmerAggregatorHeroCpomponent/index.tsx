@@ -71,7 +71,7 @@ function DashboardHeroFOrFarmerAggregator({
         </div>
         <div>
           <h3 className="text-primary-main mb-[4px] text-[14px] font-[600]">
-            Pending Produces
+            Pending Produce
           </h3>
           <PendingProduce
             produceValue={{

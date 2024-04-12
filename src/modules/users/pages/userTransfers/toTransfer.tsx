@@ -30,7 +30,7 @@ function ToTransfers() {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
 
-  const { data, isLoading } = useGetTransferProduces(queryParams);
+  const { data, isLoading, isRefetching } = useGetTransferProduces(queryParams);
 
   const tableHead: ITableHead<ITransferedProduceData>[] = [
     {
@@ -116,7 +116,7 @@ function ToTransfers() {
       <CustomTable<ITransferedProduceData>
         // children={renderText()}
         tableHeads={tableHead}
-        loading={isLoading}
+        loading={isLoading || isRefetching}
         dataTableSource={data?.transfered_produce}
         page_size={data?.page_size}
         total={data?.total}
@@ -126,7 +126,7 @@ function ToTransfers() {
         tableEmptyState={
           <EmptyBar emptyStateSize="lg" componentType="Transfer" />
         }
-        tableLoader={<TableLoading title="Loading Produces" />}
+        tableLoader={<TableLoading title="Loading Received Produce List" />}
         showPagination
         onRowClick={rowData => viewProduce(rowData)}
       />

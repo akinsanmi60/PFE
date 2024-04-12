@@ -23,6 +23,7 @@ export const ALPHANUM_REGEX = /^[a-zA-Z0-9\s]*$/;
 export const ALPHAREGEX_CODE = /^[A-Za-z]+$/;
 export const FULLNAME_REGEX = /^[A-Z][a-z]*\s[A-Z][a-z]*$/;
 export const PHONE_REGEX = /[^\d]/g;
+export const fullNameRegex = /^[a-zA-Z]+(?:\s+[a-zA-Z]+)+$/;
 
 export const capitalize = (text: string | undefined) => {
   if (text === null || typeof text !== 'string') return;

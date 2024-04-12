@@ -1,11 +1,14 @@
-import { REGEX_CODE } from '@utils/constants';
+import { fullNameRegex, REGEX_CODE } from '@utils/constants';
 import * as yup from 'yup';
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
 export const personalInfoSchema = yup
   .object({
-    full_name: yup.string().required('Enter first name'),
+    full_name: yup
+      .string()
+      .required('Enter first name')
+      .matches(fullNameRegex, 'Please enter a valid full name'),
     phone_number: yup
       .string()
       .required('Enter phone number')

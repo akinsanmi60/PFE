@@ -91,7 +91,7 @@ function HubProduce() {
             <EmptyBar emptyStateSize="lg" componentType="Hub Produce" />
           }
           onRowClick={rowData => viewProduce(rowData)}
-          tableLoader={<TableLoading title="Loading Hub Produces" />}
+          tableLoader={<TableLoading title="Loading Hub Produce" />}
           page_size={data?.page_size}
         />
       </div>

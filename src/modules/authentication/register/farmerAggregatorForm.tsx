@@ -69,7 +69,7 @@ function Register() {
     <div className="max-content">
       <div className="container">
         <div
-          className={`flex flex-col  justify-between gap-y-[60px]  xlsm:h-full xlsm:gap-y-[30px]  h-screen py-[10px]`}
+          className={`flex flex-col items-center  gap-y-[60px]  xlsm:h-full xlsm:gap-y-[30px]  h-screen py-[10px]`}
         >
           <div className="flex justify-center">
             <img

@@ -82,7 +82,7 @@ function DashboardHome() {
       <>
         <div className="flex justify-between mb-5">
           <p className="text-[14px] font-[600] leading-[20px] text-secondary-light-2">
-            Recent Produces
+            Recent Produce
           </p>
           <p
             onClick={() => navigate('/pentrar/user/my-produce')}

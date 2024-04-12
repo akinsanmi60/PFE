@@ -9,9 +9,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { MoveToValidationSchema } from 'validation/addProduceValidation';
 import ControlledInput from '@shared/Input/ControlledInput';
 import { useTransferProduce } from 'services/produce.service';
-import { ITransferProducePayload } from 'types/produce.type';
+import { IMyProduceData, ITransferProducePayload } from 'types/produce.type';
 
-function MoveProduceTo({ produceId }: { produceId: string }) {
+function MoveProduceTo({ produce }: { produce: IMyProduceData }) {
   const {
     control,
     handleSubmit,
@@ -33,7 +33,7 @@ function MoveProduceTo({ produceId }: { produceId: string }) {
   });
 
   const submitHandler = (val: ITransferProducePayload) => {
-    mutate({ payload: val, id: produceId });
+    mutate({ payload: val, id: produce?.id });
   };
 
   return (
@@ -75,7 +75,7 @@ function MoveProduceTo({ produceId }: { produceId: string }) {
               control={control}
               label="Quantity"
               name="quantity"
-              placeholder="Enter quantity"
+              placeholder="Enter quantity to be transfer"
               type="text"
             />
             <ControlledInput

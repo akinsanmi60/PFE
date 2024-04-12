@@ -74,7 +74,7 @@ function UserProduce() {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
 
-  const { data, isLoading } = useGetMyProduce(queryParams);
+  const { data, isLoading, isRefetching } = useGetMyProduce(queryParams);
 
   const tableHead: ITableHead<IMyProduceData>[] = [
     {
@@ -157,7 +157,7 @@ function UserProduce() {
         <div className="flex justify-between items-center mt-[20px] px-[24px] pb-[14px] sixm:flex-col sixm:gap-y-[20px]">
           <div className="w-full">
             <h2 className="text-primary-main leading-6 font-[500] text-[18px]">
-              Manage your produces{' '}
+              Manage your produce{' '}
             </h2>
           </div>
           <div className="w-full flex justify-between items-center gap-x-[15px] ">
@@ -208,7 +208,7 @@ function UserProduce() {
         <CustomTable<IMyProduceData>
           children={renderText()}
           tableHeads={tableHead}
-          loading={isLoading}
+          loading={isLoading || isRefetching}
           dataTableSource={data?.data?.produces_list || []}
           page_size={data?.data?.page_size}
           total={data?.data?.total}
@@ -216,9 +216,9 @@ function UserProduce() {
           setCurrentPage={(val: number) => updateQueryParams({ page: val })}
           setLimit={(val: number) => updateQueryParams({ limit: val })}
           tableEmptyState={
-            <EmptyBar emptyStateSize="lg" componentType="produces" />
+            <EmptyBar emptyStateSize="lg" componentType="produce" />
           }
-          tableLoader={<TableLoading title="Loading Produces" />}
+          tableLoader={<TableLoading title="Loading Produce" />}
           showPagination
           onRowClick={(row: IMyProduceData) => {
             navigate(`/pentrar/user/my-produce/${row.id}/details`);

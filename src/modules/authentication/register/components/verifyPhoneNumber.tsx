@@ -6,6 +6,7 @@ import { useFormData } from '@contexts/formContext';
 import CustomButton from '@shared/Button';
 import { IFormComponentType, IVerifyProp } from 'types/auth.type';
 import { useVerifyMutation } from 'services/auth.service';
+import VerifyCountDown from './verifyCountDown';
 
 function GetVerifyCode({ currentStep, action, previous }: IFormComponentType) {
   const { setFormValues, multiFormValues } = useFormData();
@@ -36,7 +37,9 @@ function GetVerifyCode({ currentStep, action, previous }: IFormComponentType) {
   };
 
   return (
-    <div className={currentStep === 2 ? 'block h-[400px]' : 'hidden'}>
+    <div
+      className={currentStep === 2 ? 'block h-[400px] xlsm:h-full' : 'hidden'}
+    >
       <div>
         <h2 className="mb-[10px] text-[20px] tracking-normal font-[700]">
           Verify Phone Number
@@ -57,9 +60,7 @@ function GetVerifyCode({ currentStep, action, previous }: IFormComponentType) {
           />
 
           <div>
-            <p className="text-[14px] leading-[22px] tracking-normal mt-[40px]  text-center font-[500]">
-              Resend code in 0:59
-            </p>
+            <VerifyCountDown />
           </div>
         </div>
 

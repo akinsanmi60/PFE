@@ -1,7 +1,7 @@
 import { ReactComponent as LeftChevron } from '@assets/svg/leftChevron.svg';
 import CustomButton from '@shared/Button';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
-import { formatDate } from '@utils/constants';
+import { capitalize, formatDate } from '@utils/constants';
 import DetailCard from 'components/produceDetail/detailCard';
 import { useNavigate } from 'react-router-dom';
 import { IMyProduceData } from 'types/produce.type';
@@ -25,9 +25,11 @@ const userArray = ['farmer', 'exporter', 'aggregator'];
 function ProduceCard({
   produceData,
   loading,
+  refetching,
 }: {
   produceData: IMyProduceData;
   loading?: boolean;
+  refetching?: boolean;
 }) {
   const navigate = useNavigate();
   const { modalState, handleModalOpen } = useModalContext();
@@ -51,7 +53,7 @@ function ProduceCard({
   }[] = [
     { label: 'Product ID', accessor: 'pentrar_produce_id' },
     {
-      label: 'Quantity',
+      label: 'Available Quantity',
       accessor: 'quantity',
       render: ({ quantity, unit }) =>
         `${quantity === null ? 0 : quantity} / ${
@@ -102,7 +104,7 @@ function ProduceCard({
       },
     },
     {
-      label: 'Avail. on Pentrar Hub',
+      label: 'Available on Pentrar Hub',
       accessor: 'on_pentrar_hub',
       render: ({ on_pentrar_hub }) => (on_pentrar_hub ? 'Yes' : 'No'),
     },
@@ -195,13 +197,13 @@ function ProduceCard({
         </div>
         <div>{renderActionBtn()}</div>
       </div>
-      {loading ? (
+      {loading || refetching ? (
         <TableLoading title="Loading Produce Detail" />
       ) : produceData && Object.keys(produceData).length > 0 ? (
         <div className="border-[1px] border-primary-light-1 rounded-[16px] p-[24px] xlsm:p-0">
           <div className="flex justify-between items-center">
             <h1 className="text-primary-main pb-[13px] text-[20px] font-[600] tracking-normal  ">
-              {produceData?.name}
+              {capitalize(produceData?.name)}
             </h1>
             {authUser?.role === 'admin' || authUser?.role === 'subadmin'
               ? null
@@ -257,7 +259,7 @@ function ProduceCard({
         />
       )}
       {modalState?.modalType === 'MoveTo' && (
-        <MoveProduceTo produceId={produceData?.id} />
+        <MoveProduceTo produce={produceData} />
       )}
       {modalState?.modalType === 'ApproveProduce' && (
         <ApproveProduceByAdmin produceData={produceData} />

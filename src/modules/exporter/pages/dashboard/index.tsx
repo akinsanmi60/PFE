@@ -20,7 +20,7 @@ function ExporterDashboard() {
       <>
         <div className="flex justify-between mb-5">
           <p className="text-[14px] font-[600] leading-[20px] text-secondary-light-2">
-            Recent Produces
+            Recent Produce
           </p>
           <p className="text-[14px] font-[600] leading-[20px] text-tertiary-light-3 cursor-pointer">
             see all
@@ -47,9 +47,9 @@ function ExporterDashboard() {
           dataTableSource={[]}
           loading={false}
           tableEmptyState={
-            <EmptyBar emptyStateSize="lg" componentType="produces" />
+            <EmptyBar emptyStateSize="lg" componentType="produce" />
           }
-          tableLoader={<TableLoading title="Loading Recent Produces" />}
+          tableLoader={<TableLoading title="Loading Recent Produce" />}
         />
       </PageContainer>
     </>

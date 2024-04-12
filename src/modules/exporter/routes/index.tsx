@@ -42,11 +42,11 @@ export const exporterPathsLinks = {
   basePath: 'pentrar/exporter',
   dashBoard: 'dashboard',
   orders: 'myorder-list',
-  produces: 'my-produces',
+  produce: 'my-produce',
   pentraHub: 'pentrar-hub',
   myTransfers: 'my-transfers',
   fromTransfer: 'from-transfer',
-  settings: 'settings',
+  settings: 'profile-settings',
   reportProblem: 'report-problem',
 };
 
@@ -63,7 +63,7 @@ const ExporterRoutes = {
 
   ExporterProduce: {
     element: ExporterProduce,
-    path: exporterPathsLinks.produces,
+    path: exporterPathsLinks.produce,
   },
 
   ExporterPentrarHub: {

@@ -15,7 +15,7 @@ function ApproveProduceByAdmin({
   produceData: IMyProduceData;
 }) {
   const { authUser } = useAuthContext();
-
+  console.log(produceData);
   const {
     control,
     handleSubmit,
@@ -92,6 +92,7 @@ function ApproveProduceByAdmin({
               name="quantity"
               placeholder="Enter quantity"
               type="text"
+              readonly
             />
             <ControlledInput
               control={control}

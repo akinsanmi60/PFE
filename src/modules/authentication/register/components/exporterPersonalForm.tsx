@@ -35,9 +35,12 @@ function ExporterInfoForm({
   const onSubmit = (values: Partial<IRegister>) => {
     let phone_number;
     let payload;
+    const user_type = currentTab as string;
+
     if (values.phone_number?.startsWith('0')) {
       phone_number = values.phone_number.replace('0', '+234');
-      payload = { ...values, phone_number };
+
+      payload = { ...values, phone_number, user_type };
     } else {
       payload = values;
     }
