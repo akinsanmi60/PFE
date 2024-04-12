@@ -160,7 +160,7 @@ function UserProduce() {
               Manage your produce{' '}
             </h2>
           </div>
-          <div className="w-full flex justify-between items-center gap-x-[15px] ">
+          <div className="w-full">
             <SearchFilterBox
               searchBarProps={{
                 placeholder: 'Search produce by name or ID',
@@ -179,28 +179,28 @@ function UserProduce() {
                   />
                 ),
               }}
-            />
-            <CustomButton
-              className="text-primary-white w-[180px]"
-              onClick={() => {
-                if (currentUserStatus() === false) {
-                  return toast.error(
-                    'Account need to be activated, please contact admin',
-                    toastOptions,
-                  );
-                } else {
-                  handleModalOpen('addProduce');
-                }
+              filterBtnsProps={{
+                useFilterBtn: true,
+                onClick: openFilterBox,
               }}
-            >
-              Add Produce
-            </CustomButton>
-            <CustomButton
-              className="text-primary-white w-[100px]"
-              onClick={openFilterBox}
-            >
-              Filter
-            </CustomButton>
+              action={
+                <CustomButton
+                  className="text-primary-white"
+                  onClick={() => {
+                    if (currentUserStatus() === false) {
+                      return toast.error(
+                        'Account need to be activated, please contact admin',
+                        toastOptions,
+                      );
+                    } else {
+                      handleModalOpen('addProduce');
+                    }
+                  }}
+                >
+                  Add Produce
+                </CustomButton>
+              }
+            />
           </div>
         </div>
       </AppHeader>

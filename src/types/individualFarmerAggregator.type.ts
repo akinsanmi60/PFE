@@ -30,10 +30,17 @@ export type IIndividualFarmer = IFormComleteType & {
   user_update_submited: boolean;
 };
 
+export type IIndividualAggregator = IIndividualFarmer & {
+  farmers: IIndividualFarmer[];
+};
+
 export type IIndividualResponse = IBaseResponse & {
   data: IIndividualFarmer;
 };
 
+export type IIndividualAggregatorResponse = IBaseResponse & {
+  data: IIndividualAggregator;
+};
 export type IIndividualUrlParams = {
   queryParamsId: string;
   url: (_id: string) => string;

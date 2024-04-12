@@ -261,7 +261,9 @@ export const useCompleteProfile = ({
   url,
   resetForm,
   setRevealForm,
+  queryText,
 }: {
+  queryText: string;
   url: string;
   resetForm: UseFormReset<Partial<IFormComleteType>>;
   setRevealForm: React.Dispatch<
@@ -288,7 +290,7 @@ export const useCompleteProfile = ({
 
         handleModalClose('completeProfile');
         displaySuccess(res?.message);
-        queryClient.invalidateQueries(['getIndividualFarmer']);
+        queryClient.invalidateQueries([queryText]);
         if (setRevealForm) {
           setRevealForm({ formType: '', showForm: false });
         }

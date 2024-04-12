@@ -64,4 +64,5 @@ export type IUserCTXType = {
   farm_location: string;
   farm_state: string;
   is_active: boolean;
+  user_update_submited: boolean;
 } & IAgencyContextValue;

@@ -2,7 +2,11 @@ import { useModalContext } from '@contexts/modalContext';
 import CompleteProfile from '@modules/authentication/completeProfile';
 import CustomButton from '@shared/Button';
 
-function TodoComponent() {
+function TodoComponent({
+  modalText = 'completeProfile',
+}: {
+  modalText?: string;
+}) {
   const { handleModalOpen, modalState } = useModalContext();
   return (
     <>
@@ -18,13 +22,14 @@ function TodoComponent() {
           <CustomButton
             className="bg-[#E03137] text-primary-white text-[8px] font-[600]"
             sx={{ borderRadius: '40px', px: 4, py: 0 }}
-            onClick={() => handleModalOpen('completeProfile')}
+            onClick={() => handleModalOpen(modalText)}
           >
             Complete Profile
           </CustomButton>
         </div>
       </div>
       {modalState?.modalType === 'completeProfile' && <CompleteProfile />}
+      {modalState?.modalType === 'exporterProfile' && <CompleteProfile />}
     </>
   );
 }

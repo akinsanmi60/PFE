@@ -2,6 +2,7 @@ import { SetStateAction } from 'react';
 import { InputSearchboxProp, IsearchFilterBox } from './searchFilter.type';
 import { useDebouncedValue } from '@hooks/useDebounce';
 import { Input, InputGroup } from '@chakra-ui/react';
+import CustomButton from '@shared/Button';
 
 export const InputSearchBox = (props: InputSearchboxProp) => {
   const {
@@ -67,10 +68,27 @@ export const InputSearchBox = (props: InputSearchboxProp) => {
   );
 };
 
-const SearchFilterBox = ({ searchBarProps }: IsearchFilterBox) => {
+const SearchFilterBox = ({
+  searchBarProps,
+  filterBtnsProps,
+  action,
+}: IsearchFilterBox) => {
   return (
-    <div className="w-full">
-      <InputSearchBox {...searchBarProps} />
+    <div className="flex justify-between items-center gap-x-[20px] xlsm:flex-col xlsm:gap-y-[15px] xlsm:items-start">
+      <div className="w-full">
+        <InputSearchBox {...searchBarProps} />
+      </div>
+      <div className="flex gap-x-[10px]">
+        {filterBtnsProps?.useFilterBtn && (
+          <CustomButton
+            className="text-primary-white"
+            onClick={filterBtnsProps?.onClick}
+          >
+            Filter
+          </CustomButton>
+        )}
+        {action}
+      </div>
     </div>
   );
 };

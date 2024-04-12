@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { usePartialUserCreationMutation } from 'services/auth.service';
 import { IFormComponentType, IRegister } from 'types/auth.type';
 import { personalInfoSchema } from 'validation/registerValidation';
-import { capitalize, fullNameRegex } from '../../../../utils/constants';
+import { capitalize } from '../../../../utils/constants';
 
 function PersonalinfoForm({
   currentStep,
@@ -38,7 +38,7 @@ function PersonalinfoForm({
     let phone_number;
     let payload;
     const user_type = currentTab as string;
-    console.log(fullNameRegex.test(values.full_name as string));
+
     if (values.phone_number?.startsWith('0')) {
       phone_number = values.phone_number.replace('0', '+234');
       payload = { ...values, phone_number, user_type };

@@ -19,5 +19,48 @@ export const CompleteProfileBusinessSchema = yup
     coy_state: yup.string().required('Enter your business address'),
     reg_number: yup.string().required('Enter your registration number'),
     tin_id: yup.string().required('Enter your TIN ID'),
+    coy_establishment: yup
+      .string()
+      .required('Enter your business establishment')
+      .matches(/^[0-9]+$/, 'Only numbers are allowed')
+      .test({
+        name: 'establishmentYear',
+        message: 'Year must be between 1960 and current year',
+        test: function (value) {
+          const currentYear = new Date().getFullYear();
+          return (
+            Number(value) > 0 &&
+            Number(value) >= 1960 &&
+            Number(value) <= currentYear
+          );
+        },
+      }),
+    coy_scale: yup.string().required('Enter your business scale'),
+  })
+  .required();
+
+export const CompleteExporterProfileSchema = yup
+  .object({
+    coy_address: yup.string().required('Enter your business address'),
+    coy_state: yup.string().required('Enter your business address'),
+    reg_number: yup.string().required('Enter your registration number'),
+    tin_id: yup.string().required('Enter your TIN ID'),
+    coy_establishment: yup
+      .string()
+      .required('Enter your business establishment')
+      .matches(/^[0-9]+$/, 'Only numbers are allowed')
+      .test({
+        name: 'establishmentYear',
+        message: 'Year must be between 1960 and current year',
+        test: function (value) {
+          const currentYear = new Date().getFullYear();
+          return (
+            Number(value) > 0 &&
+            Number(value) >= 1960 &&
+            Number(value) <= currentYear
+          );
+        },
+      }),
+    coy_scale: yup.string().required('Enter your business scale'),
   })
   .required();

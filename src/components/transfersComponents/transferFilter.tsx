@@ -1,10 +1,10 @@
 import FormStartEndDate from 'shared/Filter/FilterStartEndDate';
-import { IFilterForm } from '../../../../types/modal.type';
-import { produceStatusOptions } from '../../../../db/produceData';
 import FilterModal from '@shared/ModalBase/FilterModal';
 import SingleCheckFilter from '@shared/Filter/singleCheckFilter';
+import { IFilterForm } from 'types/modal.type';
+import { transferStatusOptions } from '@db/produceData';
 
-const UserProduceFilterForm = ({
+const TransferFilterForm = ({
   closeModalBox,
   filterForm,
   onSubmitForm,
@@ -31,11 +31,11 @@ const UserProduceFilterForm = ({
       <div>
         <div className="flex justify-between w-full mb-[8px] px-[16px]">
           <p className="text-[13px] text-[#475569] font-[500]">
-            Produce Status
+            Transfer Status
           </p>
         </div>{' '}
         <SingleCheckFilter
-          optionProp={produceStatusOptions}
+          optionProp={transferStatusOptions}
           filterForm={filterForm}
         />
       </div>
@@ -53,4 +53,4 @@ const UserProduceFilterForm = ({
   );
 };
 
-export default UserProduceFilterForm;
+export default TransferFilterForm;

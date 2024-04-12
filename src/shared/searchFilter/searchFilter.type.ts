@@ -17,6 +17,11 @@ export type IsearchFilterBox = {
     className?: string;
     borderColor?: string;
   };
+  filterBtnsProps?: {
+    useFilterBtn?: boolean;
+    onClick?: () => void;
+  };
+  action?: React.ReactNode;
 };
 
 export type InputSearchboxProp = IInputProps & {

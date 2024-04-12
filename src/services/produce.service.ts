@@ -35,7 +35,6 @@ import {
   IMyProduceData,
   IMyProduceResponse,
   ITransferProducePayload,
-  ITransferProp,
 } from 'types/produce.type';
 
 const useProduceCreationMutation = ({
@@ -266,7 +265,7 @@ function useApproveProduce({
   return { mutate, isLoading, ...rest };
 }
 
-const useGetTransferProduces = (queryParams: ITransferProp) => {
+const useGetTransferProduces = (queryParams: IFilterProduceQuery) => {
   const { data, ...rest } = useQuery<IGEtAllTransferedProduce>(
     [queryKeys.getAllTransferProduces, [queryParams]],
     () =>

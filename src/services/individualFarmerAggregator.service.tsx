@@ -9,6 +9,8 @@ import {
 import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
 import {
+  IIndividualAggregator,
+  IIndividualAggregatorResponse,
   IIndividualFarmer,
   IIndividualResponse,
   IIndividualUrlParams,
@@ -56,7 +58,6 @@ function useGetIndividualFarmerDependent() {
   };
 }
 
-//TODO: type this response for useQuery IndividualAggregator
 function useGetIndividualAggregator({
   queryParamsId,
   url,
@@ -74,16 +75,15 @@ function useGetIndividualAggregator({
     isLoading,
     isRefetching,
     isError,
-    data: data?.data as IIndividualFarmer,
+    data: data?.data as IIndividualAggregator,
   };
 }
 
-//TODO: type this response for useQuery IndividualAggregator
 function useGetIndividualAggregatorDependent() {
   const { authUser } = useAuthContext();
 
   const { isLoading, isRefetching, isError, data } =
-    useQuery<IIndividualResponse>(
+    useQuery<IIndividualAggregatorResponse>(
       [queryKeys.getIndividualAggregator],
       () =>
         getRequest({
@@ -99,7 +99,7 @@ function useGetIndividualAggregatorDependent() {
     isLoading,
     isRefetching,
     isError,
-    data: data?.data as IIndividualFarmer,
+    data: data?.data as IIndividualAggregator,
   };
 }
 

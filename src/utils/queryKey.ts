@@ -17,4 +17,6 @@ export const queryKeys = {
   getAllAgencies: 'getAllAgencies',
   getIndividualAgency: 'getIndividualAgency',
   getAllTransferProduces: 'getAllTransferProduces',
+  getIndividualExporter: 'getIndividualExporter',
+  getAllExporters: 'getAllExporters',
 };

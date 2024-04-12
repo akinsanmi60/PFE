@@ -5,7 +5,7 @@ import defaultImage from '@assets/png/hubImgDefault.png';
 import CustomButton from '@shared/Button';
 import { ReactComponent as CallingPhone } from '@assets/svg/callingPhoneWhite.svg';
 import { formatDate } from '@utils/constants';
-import TransferRenderButton from '../../../../components/transferProduce/transferRenderButton';
+import TransferRenderButton from 'components/transferProduce/transferRenderButton';
 
 const detailKeys = [
   'Quantity',

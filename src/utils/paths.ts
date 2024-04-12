@@ -108,6 +108,9 @@ export const ExporterPath = {
     `${joinPath(ExporterPath.myTransfers(fullPath), 'from-transfer')}`,
   myProduce: (fullPath: boolean = true) =>
     `${ExporterPath.root(fullPath)}${exporterPathsLinks.produce}`,
+
+  myProduceDetail: (produceId: string, fullPath: boolean = true) =>
+    `${joinPath(ExporterPath.myProduce(fullPath), produceId, 'details')}`,
   myOrder: (fullPath: boolean = true) =>
     `${ExporterPath.root(fullPath)}${exporterPathsLinks.orders}`,
 };

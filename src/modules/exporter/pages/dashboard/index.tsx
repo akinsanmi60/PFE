@@ -1,5 +1,5 @@
 import { useAuthContext } from '@contexts/authContext';
-import { getFirstSwordBeforeSpace } from '@utils/constants';
+import { formatDate, getFirstSwordBeforeSpace } from '@utils/constants';
 import AppHeader from 'components/appHeader/appHeader';
 import { capitalize } from 'lodash';
 import DashBboardCounterView from './dashBboardCounterView';
@@ -7,13 +7,63 @@ import EmptyBar from '@shared/Table/tableEmpty';
 import TableLoading from '@shared/Table/tableLoading';
 import CustomTable from '@shared/Table';
 import PageContainer from 'components/Layout/PageContainer';
+import { GetDasboardOfExporter } from 'services/exporter.service';
+import {
+  IExporterDashBoardCount,
+  IRecentProduceDetail,
+} from 'types/farmerAggregatorDash.type';
+import StatusBadge, { IStatusType } from '@shared/StatusBadge';
+import { ITableHead } from '@shared/Table/table.interface';
 
 function ExporterDashboard() {
   const { authUser } = useAuthContext();
+  const { data, isLoading } = GetDasboardOfExporter({
+    queryParamsId: authUser?.id as string,
+  });
 
   const first_name = capitalize(
     getFirstSwordBeforeSpace(authUser?.coy_name as unknown as string),
   );
+
+  const tableHead: ITableHead<IRecentProduceDetail>[] = [
+    {
+      label: 'id',
+      accessor: '',
+      render: ({ pentrar_produce_id }) => pentrar_produce_id,
+    },
+    {
+      label: 'Produce Name',
+      accessor: 'name',
+      render: ({ name }) => name,
+    },
+    {
+      label: 'Location',
+      accessor: 'farm_state',
+      render: ({ farm_state }) => farm_state,
+    },
+    {
+      label: 'Quantity',
+      accessor: 'quantity',
+      render: ({ quantity, unit }) =>
+        `${quantity === null ? 0 : quantity}/${
+          unit === null || unit === '' ? 'KG' : unit
+        }`,
+    },
+    {
+      label: 'Last Updated',
+      accessor: '',
+      render: ({ updated_at }) => {
+        return formatDate({ date: updated_at });
+      },
+    },
+    {
+      label: 'Status',
+      accessor: 'status',
+      render: ({ status }) => {
+        return <StatusBadge status={status as IStatusType} />;
+      },
+    },
+  ];
 
   const renderActionView = () => {
     return (
@@ -38,13 +88,16 @@ function ExporterDashboard() {
         </p>
       </AppHeader>
 
-      <DashBboardCounterView />
+      <DashBboardCounterView
+        data={data as IExporterDashBoardCount}
+        isLoading={isLoading}
+      />
 
       <PageContainer>
         <CustomTable
           children={renderActionView()}
-          tableHeads={[]}
-          dataTableSource={[]}
+          tableHeads={tableHead}
+          dataTableSource={data?.data?.recent_produce as IRecentProduceDetail[]}
           loading={false}
           tableEmptyState={
             <EmptyBar emptyStateSize="lg" componentType="produce" />

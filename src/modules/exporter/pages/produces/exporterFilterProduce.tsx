@@ -1,10 +1,8 @@
 import FormStartEndDate from 'shared/Filter/FilterStartEndDate';
 import { IFilterForm } from '../../../../types/modal.type';
-import { produceStatusOptions } from '../../../../db/produceData';
 import FilterModal from '@shared/ModalBase/FilterModal';
-import SingleCheckFilter from '@shared/Filter/singleCheckFilter';
 
-const UserProduceFilterForm = ({
+const ExporterProduceFilterForm = ({
   closeModalBox,
   filterForm,
   onSubmitForm,
@@ -28,17 +26,6 @@ const UserProduceFilterForm = ({
         className: 'text-primary-white',
       }}
     >
-      <div>
-        <div className="flex justify-between w-full mb-[8px] px-[16px]">
-          <p className="text-[13px] text-[#475569] font-[500]">
-            Produce Status
-          </p>
-        </div>{' '}
-        <SingleCheckFilter
-          optionProp={produceStatusOptions}
-          filterForm={filterForm}
-        />
-      </div>
       <FormStartEndDate
         control={control}
         label="Created On"
@@ -53,4 +40,4 @@ const UserProduceFilterForm = ({
   );
 };
 
-export default UserProduceFilterForm;
+export default ExporterProduceFilterForm;

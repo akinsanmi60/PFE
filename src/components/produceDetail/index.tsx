@@ -21,7 +21,8 @@ import {
   useGetIndividualFarmerDependent,
 } from 'services/individualFarmerAggregator.service';
 
-const userArray = ['farmer', 'exporter', 'aggregator'];
+const userArray = ['farmer', 'aggregator'];
+const adminUser = ['admin', 'superAdmin'];
 function ProduceCard({
   produceData,
   loading,
@@ -155,7 +156,7 @@ function ProduceCard({
           Transfer Produce
         </CustomButton>
       );
-    } else {
+    } else if (adminUser.includes(authUser?.role as string)) {
       return (
         <CustomButton
           sx={{ borderRadius: '8px', px: 4, py: 0 }}
@@ -172,6 +173,12 @@ function ProduceCard({
             : produceData?.status === 'approved'
             ? 'Approved'
             : 'Approve Produce'}
+        </CustomButton>
+      );
+    } else if (authUser?.role === 'exporter') {
+      return (
+        <CustomButton className='"w-full text-primary-white py-[2px] bg-secondary-light-1'>
+          Submit for certification
         </CustomButton>
       );
     }

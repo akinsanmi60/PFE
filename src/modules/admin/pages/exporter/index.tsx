@@ -38,10 +38,6 @@ function ExporterList() {
       accessor: 'phone_number',
     },
     {
-      label: 'Category',
-      accessor: 'category_type',
-    },
-    {
       label: 'Last Updated',
       accessor: 'updated_at',
       render: ({ updated_at }) => {

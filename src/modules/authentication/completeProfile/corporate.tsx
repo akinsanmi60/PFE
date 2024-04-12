@@ -7,6 +7,7 @@ import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
 import ControlledSelect from '@shared/Select/ControlledSelect';
 import { UPDATE_FARMER_URL, UPDATE_AGGREGATOR_URL } from '@utils/apiUrl';
+import { queryKeys } from '@utils/queryKey';
 import { Resolver, useForm } from 'react-hook-form';
 import { useCompleteProfile } from 'services/auth.service';
 import { IFormComleteType, IFormType } from 'types/auth.type';
@@ -18,6 +19,10 @@ function CorporateFormProfile({ setRevealForm }: IFormType) {
 
   const urlSwitch =
     authUser?.role === 'farmer' ? UPDATE_FARMER_URL : UPDATE_AGGREGATOR_URL;
+  const textQuery =
+    authUser?.role === 'farmer'
+      ? queryKeys.getIndividualFarmer
+      : queryKeys.getIndividualAggregator;
 
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -38,6 +43,7 @@ function CorporateFormProfile({ setRevealForm }: IFormType) {
     url: urlSwitch(authUser?.id as string),
     resetForm: reset,
     setRevealForm: setRevealForm,
+    queryText: textQuery,
   });
 
   const onSubmit = (data: Partial<IFormComleteType>) => {

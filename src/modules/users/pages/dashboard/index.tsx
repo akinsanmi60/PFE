@@ -37,6 +37,7 @@ function DashboardHome() {
   const first_name = capitalize(
     getFirstSwordBeforeSpace(authUser?.full_name as unknown as string),
   );
+
   const tableHead: ITableHead<IRecentProduceDetail>[] = [
     {
       label: 'id',

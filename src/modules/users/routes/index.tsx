@@ -30,11 +30,11 @@ const MyTransferPage = React.lazy(
 );
 
 const ToTransferPage = React.lazy(
-  () => import('@modules/users/pages/userTransfers/toTransfer'),
+  () => import('../../../components/transfersComponents/toTransfer'),
 );
 
 const FromTransferPage = React.lazy(
-  () => import('@modules/users/pages/userTransfers/fromTransfer'),
+  () => import('../../../components/transfersComponents/fromTransfer'),
 );
 
 export const userPathsLinks = {
@@ -85,13 +85,13 @@ const userRoutes = {
     path: userPathsLinks.myTransfers,
     childrenRoutes: [
       {
-        element: FromTransferPage,
+        element: ToTransferPage,
         path: '',
         useIndex: true,
       },
 
       {
-        element: ToTransferPage,
+        element: FromTransferPage,
         path: userPathsLinks.fromTransfer,
       },
     ],

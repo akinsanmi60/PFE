@@ -138,4 +138,6 @@ export type IFilterProduceQuery = {
   page?: number;
   pageSize?: number;
   limit?: number;
+  from_id?: string;
+  to_id?: string;
 };

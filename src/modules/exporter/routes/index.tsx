@@ -31,11 +31,15 @@ const MyTransferPage = React.lazy(
 );
 
 const ToTransferPage = React.lazy(
-  () => import('@modules/exporter/pages/transfers/toTransfer'),
+  () => import('../../../components/transfersComponents/toTransfer'),
 );
 
 const FromTransferPage = React.lazy(
-  () => import('@modules/exporter/pages/transfers/fromTransfer'),
+  () => import('../../../components/transfersComponents/fromTransfer'),
+);
+
+const MyProduceDetailPage = React.lazy(
+  () => import('../../../components/produceDetail/individualProduce'),
 );
 
 export const exporterPathsLinks = {
@@ -43,6 +47,7 @@ export const exporterPathsLinks = {
   dashBoard: 'dashboard',
   orders: 'myorder-list',
   produce: 'my-produce',
+  myProduceDetails: 'my-produce/:id/details',
   pentraHub: 'pentrar-hub',
   myTransfers: 'my-transfers',
   fromTransfer: 'from-transfer',
@@ -76,6 +81,11 @@ const ExporterRoutes = {
     path: exporterPathsLinks.settings,
   },
 
+  MyProduceDetails: {
+    element: MyProduceDetailPage,
+    path: exporterPathsLinks.myProduceDetails,
+  },
+
   ReportProblem: {
     element: ReportProblem,
     path: exporterPathsLinks.reportProblem,
@@ -86,13 +96,13 @@ const ExporterRoutes = {
     path: exporterPathsLinks.myTransfers,
     childrenRoutes: [
       {
-        element: FromTransferPage,
+        element: ToTransferPage,
         path: '',
         useIndex: true,
       },
 
       {
-        element: ToTransferPage,
+        element: FromTransferPage,
         path: exporterPathsLinks.fromTransfer,
       },
     ],

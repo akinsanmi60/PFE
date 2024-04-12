@@ -2,7 +2,10 @@ import SearchFilterBox from '@shared/searchFilter';
 import { useState } from 'react';
 import { ReactComponent as SearchVector } from '@assets/svg/searchVector.svg';
 import { ReactComponent as CloseVector } from '@assets/svg/searchClose.svg';
-import { ITransferedProduceData, ITransferProp } from 'types/produce.type';
+import {
+  IFilterProduceQuery,
+  ITransferedProduceData,
+} from 'types/produce.type';
 import CustomTable from '@shared/Table';
 import EmptyBar from '@shared/Table/tableEmpty';
 import TableLoading from '@shared/Table/tableLoading';
@@ -13,9 +16,12 @@ import { formatDate } from '@utils/constants';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 import { useModalContext } from '@contexts/modalContext';
 import SentTransferProduceDetail from './sentTransferProduceDetail';
+import { useForm } from 'react-hook-form';
+import { IFilterValues } from 'types/modal.type';
+import TransferFilterForm from './transferFilter';
 
-function FromTransfers() {
-  const { modalState, handleModalOpen } = useModalContext();
+function ToTransfers() {
+  const { modalState, handleModalOpen, handleModalClose } = useModalContext();
 
   const { authUser } = useAuthContext();
   const [searchTerm, setSearchTerm] = useState('');
@@ -25,9 +31,17 @@ function FromTransfers() {
     limit: 10,
     from_id: authUser?.id,
   });
+  const transferedToForm = useForm<IFilterValues>({
+    defaultValues: {
+      status: '',
+      created_at: '',
+      updated_at: '',
+    },
+  });
+
   const [transferDetail, setTransferDetail] =
     useState<ITransferedProduceData | null>(null);
-  const updateQueryParams = (params: ITransferProp) => {
+  const updateQueryParams = (params: IFilterProduceQuery) => {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
 
@@ -78,21 +92,39 @@ function FromTransfers() {
   ];
 
   const viewProduce = (produceData: ITransferedProduceData) => {
-    handleModalOpen('fromTransferDetailProduce');
+    handleModalOpen('toTransferDetailProduce');
 
     setTransferDetail(produceData);
   };
 
+  const openFilterBox = () => handleModalOpen('toFilterForm');
+
+  const closeFilterBox = () => {
+    handleModalClose('toFilterForm');
+  };
+
+  const submitFilter = () => {
+    const startDate = transferedToForm.getValues('created_at') || undefined;
+    const endDate = transferedToForm.getValues('updated_at') || undefined;
+
+    updateQueryParams({
+      page: 1,
+      status:
+        transferedToForm.getValues('status')!.length > 0
+          ? (transferedToForm.getValues(
+              'status',
+            ) as IFilterProduceQuery['status'])
+          : undefined,
+      created_at: startDate,
+      updated_at: endDate,
+    });
+    closeFilterBox();
+  };
+
   return (
     <div>
-      {' '}
-      <div className="flex justify-between items-center mt-[20px] px-[24px] pb-[14px] sixm:flex-col sixm:gap-y-[20px]">
-        <div className="w-full">
-          <h2 className="text-primary-main leading-6 font-[500] text-[18px]">
-            {/* Transfer Produces{' '} */}
-          </h2>
-        </div>
-        <div className="w-full flex justify-between items-center gap-x-[15px] ">
+      <div className="flex justify-end mt-[20px] pb-[14px] xlsm:justify-normal">
+        <div className="w-1/2 xlsm:w-full">
           <SearchFilterBox
             searchBarProps={{
               placeholder: 'Search produce by name or ID',
@@ -110,6 +142,10 @@ function FromTransfers() {
                   }}
                 />
               ),
+            }}
+            filterBtnsProps={{
+              useFilterBtn: true,
+              onClick: openFilterBox,
             }}
           />
         </div>
@@ -131,11 +167,27 @@ function FromTransfers() {
         showPagination
         onRowClick={rowData => viewProduce(rowData)}
       />
-      {modalState.modalType === 'fromTransferDetailProduce' && (
+      {modalState.modalType === 'toTransferDetailProduce' && (
         <SentTransferProduceDetail transferDetail={transferDetail} />
+      )}
+
+      {modalState.modalType === 'toFilterForm' && (
+        <TransferFilterForm
+          filterForm={transferedToForm}
+          onSubmitForm={submitFilter}
+          closeModalBox={closeFilterBox}
+          clearFunction={() =>
+            updateQueryParams({
+              page: 1,
+              limit: 10,
+              created_at: '',
+              updated_at: '',
+            })
+          }
+        />
       )}
     </div>
   );
 }
 
-export default FromTransfers;
+export default ToTransfers;

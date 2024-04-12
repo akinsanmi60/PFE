@@ -25,7 +25,7 @@ function GeneralLoginPage({
   const {
     handleSubmit,
     control,
-    formState: { isValid },
+    formState: { isValid, isDirty },
   } = useForm({
     defaultValues: {
       email: '',
@@ -128,9 +128,9 @@ function GeneralLoginPage({
             loading={isLoading}
             loadingText="Loading..."
             type="submit"
-            disabled={!isValid}
+            disabled={!isValid || !isDirty || isLoading}
             onClick={handleSubmit(onSubmitForm)}
-            variant={!isValid || isLoading ? 'solid' : ''}
+            variant={!isValid || !isDirty || isLoading ? 'solid' : ''}
           >
             Login
           </CustomButton>

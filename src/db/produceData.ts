@@ -30,6 +30,29 @@ export const produceStatusOptions: {
   },
 ];
 
+export const transferStatuses = [
+  'transfer_done',
+  'in_progress',
+  'declined',
+] as const;
+export const transferStatusOptions: {
+  label: string;
+  value: string;
+}[] = [
+  {
+    label: 'Accepted',
+    value: 'transfer_done',
+  },
+  {
+    label: 'In Progress',
+    value: 'in_progress',
+  },
+  {
+    label: 'Rejected',
+    value: 'decline',
+  },
+];
+
 export const produceClassification = [
   'Fruit',
   'Vegetable',
