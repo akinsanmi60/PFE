@@ -69,7 +69,10 @@ function AggregatorList() {
     },
     {
       label: 'Status',
-      accessor: 'status',
+      accessor: 'is_active',
+      render: ({ is_active }) => {
+        return is_active ? 'Active' : 'Inactive';
+      },
     },
   ];
 
