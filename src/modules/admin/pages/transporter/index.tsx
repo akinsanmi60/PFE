@@ -6,9 +6,62 @@ import AppHeader from 'components/appHeader/appHeader';
 import { ReactComponent as SearchVector } from '@assets/svg/searchVector.svg';
 import { ReactComponent as CloseVector } from '@assets/svg/searchClose.svg';
 import { useState } from 'react';
+import { useModalContext } from '@contexts/modalContext';
+import { IFilterValues } from 'types/modal.type';
+import { IFilterProduceQuery } from 'types/produce.type';
+import { useForm } from 'react-hook-form';
+import CommonAdminFilterForm from '../commonFilter';
 
 function TransporterList() {
   const [searchTerm, setSearchTerm] = useState('');
+
+  const [queryParams, setQueryParams] = useState({
+    search: '',
+    page: 1,
+    limit: 10,
+  });
+
+  const { modalState, handleModalOpen, handleModalClose } = useModalContext();
+
+  const transporterForm = useForm<IFilterValues>({
+    defaultValues: {
+      is_active: '',
+      created_at: '',
+      updated_at: '',
+    },
+  });
+
+  const updateQueryParams = (params: IFilterProduceQuery) => {
+    setQueryParams(prev => ({ ...prev, ...params }));
+    return queryParams;
+  };
+
+  const openFilterBox = () => handleModalOpen('filterTransporter');
+
+  const closeFilterBox = () => {
+    handleModalClose('filterTransporter');
+  };
+
+  const submitFilter = () => {
+    const startDate = transporterForm.getValues('created_at') || undefined;
+    const endDate = transporterForm.getValues('updated_at') || undefined;
+    const transporterActiveStatus =
+      transporterForm.getValues('is_active') || undefined;
+
+    updateQueryParams({
+      page: 1,
+      is_active:
+        transporterActiveStatus === 'active'
+          ? true
+          : transporterActiveStatus === 'inactive'
+          ? false
+          : undefined,
+
+      created_at: startDate,
+      updated_at: endDate,
+    });
+    closeFilterBox();
+  };
 
   return (
     <div className="">
@@ -19,7 +72,7 @@ function TransporterList() {
               All Transporters
             </h2>
           </div>
-          <div className="w-full flex justify-between items-center gap-x-[15px] ">
+          <div className="w-full">
             <SearchFilterBox
               searchBarProps={{
                 placeholder: 'Search transporter by name or ID',
@@ -36,6 +89,10 @@ function TransporterList() {
                   />
                 ),
               }}
+              filterBtnsProps={{
+                useFilterBtn: true,
+                onClick: openFilterBox,
+              }}
             />
           </div>
         </div>
@@ -51,6 +108,24 @@ function TransporterList() {
           />
         </div>
       </PageContainer>
+
+      {modalState?.modalType === 'filterTransporter' && (
+        <CommonAdminFilterForm
+          closeModalBox={closeFilterBox}
+          filterForm={transporterForm}
+          onSubmitForm={submitFilter}
+          clearFunction={() =>
+            updateQueryParams({
+              page: 1,
+              limit: 10,
+              created_at: '',
+              updated_at: '',
+            })
+          }
+          filterTitle="Transporter"
+          watchValue="is_active"
+        />
+      )}
     </div>
   );
 }

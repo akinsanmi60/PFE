@@ -20,7 +20,7 @@ function OfftakerList() {
               All Offtakers
             </h2>
           </div>
-          <div className="w-full flex justify-between items-center gap-x-[15px] ">
+          <div className="w-full">
             <SearchFilterBox
               searchBarProps={{
                 placeholder: 'Search offtaker by name or ID',
@@ -36,6 +36,9 @@ function OfftakerList() {
                     }}
                   />
                 ),
+              }}
+              filterBtnsProps={{
+                useFilterBtn: true,
               }}
             />
           </div>

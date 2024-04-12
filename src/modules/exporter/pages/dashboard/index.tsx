@@ -14,12 +14,15 @@ import {
 } from 'types/farmerAggregatorDash.type';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 import { ITableHead } from '@shared/Table/table.interface';
+import { ExporterPath } from '@utils/paths';
+import { useNavigate } from 'react-router-dom';
 
 function ExporterDashboard() {
   const { authUser } = useAuthContext();
   const { data, isLoading } = GetDasboardOfExporter({
     queryParamsId: authUser?.id as string,
   });
+  const navigate = useNavigate();
 
   const first_name = capitalize(
     getFirstSwordBeforeSpace(authUser?.coy_name as unknown as string),
@@ -72,7 +75,10 @@ function ExporterDashboard() {
           <p className="text-[14px] font-[600] leading-[20px] text-secondary-light-2">
             Recent Produce
           </p>
-          <p className="text-[14px] font-[600] leading-[20px] text-tertiary-light-3 cursor-pointer">
+          <p
+            className="text-[14px] font-[600] leading-[20px] text-tertiary-light-3 cursor-pointer"
+            onClick={() => navigate(`/${ExporterPath.myProduce()}`)}
+          >
             see all
           </p>
         </div>

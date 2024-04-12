@@ -15,7 +15,6 @@ function ApproveProduceByAdmin({
   produceData: IMyProduceData;
 }) {
   const { authUser } = useAuthContext();
-  console.log(produceData);
   const {
     control,
     handleSubmit,

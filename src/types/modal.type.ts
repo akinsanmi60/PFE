@@ -19,6 +19,8 @@ export type IFilterValues = {
   status?: string;
   created_at?: string;
   updated_at?: string;
+  on_pentrar_hub?: string;
+  is_active?: string;
 };
 
 export type IFilterForm = {
@@ -28,4 +30,6 @@ export type IFilterForm = {
   filterForm: UseFormReturn<IFilterValues>;
   onSubmitForm: (_data: IFilterValues) => void;
   clearFunction?: () => void;
+  filterTitle?: string;
+  watchValue?: string;
 };

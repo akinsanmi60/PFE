@@ -35,8 +35,6 @@ function ExporterProduce() {
 
   const navigate = useNavigate();
 
-  console.log(ExporterPath.myProduceDetail('iiii'));
-
   const updateQueryParams = (params: IFilterProduceQuery) => {
     setQueryParams(prev => ({ ...prev, ...params }));
   };

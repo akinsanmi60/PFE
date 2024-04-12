@@ -70,7 +70,7 @@ function AgencyList() {
               All Agencies
             </h2>
           </div>
-          <div className="w-full flex justify-between items-center gap-x-[15px] ">
+          <div className="w-full">
             <SearchFilterBox
               searchBarProps={{
                 placeholder: 'Search agency by name or ID',
@@ -89,14 +89,18 @@ function AgencyList() {
                   />
                 ),
               }}
+              filterBtnsProps={{
+                useFilterBtn: true,
+              }}
+              action={
+                <CustomButton
+                  className="text-primary-white bg-secondary-light-1"
+                  onClick={() => handleModalOpen('createAgency')}
+                >
+                  Add Agency
+                </CustomButton>
+              }
             />
-            <CustomButton
-              className="text-primary-white w-[180px] bg-secondary-light-1"
-              sx={{ borderRadius: '8px', px: 4, py: 0 }}
-              onClick={() => handleModalOpen('createAgency')}
-            >
-              Add Agency
-            </CustomButton>
           </div>
         </div>
       </AppHeader>

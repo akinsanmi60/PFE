@@ -1,3 +1,4 @@
+import { useAuthContext } from '@contexts/authContext';
 import { useQuery } from '@tanstack/react-query';
 import { getRequest } from '@utils/apiCaller';
 import {
@@ -79,4 +80,33 @@ const useGetIndividualExporter = ({
   };
 };
 
-export { GetDasboardOfExporter, useGetAllExporters, useGetIndividualExporter };
+function useGetIndividualExporterDependent() {
+  const { authUser } = useAuthContext();
+
+  const { isLoading, isRefetching, isError, data } =
+    useQuery<IIndividualExporterDataResponse>(
+      [queryKeys.getIndividualAggregator],
+      () =>
+        getRequest({
+          url: GET_INDIVIDUAL_EXPORTER_URL(authUser?.id as string),
+        }),
+      {
+        refetchOnWindowFocus: false,
+        enabled: authUser?.role === 'exporter' && !!authUser?.id,
+      },
+    );
+
+  return {
+    isLoading,
+    isRefetching,
+    isError,
+    data: data?.data,
+  };
+}
+
+export {
+  GetDasboardOfExporter,
+  useGetAllExporters,
+  useGetIndividualExporter,
+  useGetIndividualExporterDependent,
+};

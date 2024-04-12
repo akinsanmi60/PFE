@@ -140,4 +140,6 @@ export type IFilterProduceQuery = {
   limit?: number;
   from_id?: string;
   to_id?: string;
+  on_pentrar_hub?: boolean;
+  is_active?: boolean;
 };

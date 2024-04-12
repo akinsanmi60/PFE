@@ -27,7 +27,7 @@ const CheckboxComponent = ({
         // inputRef={ref}
         value={value}
         className={twMerge(
-          ' rounded border border-gray-300 w-[16px] h-[16px] border-[#2AA232] accent-[#2AA232] cursor-pointer',
+          ' rounded border border-gray-300 w-[13px] h-[13px] border-[#2AA232] accent-[#2AA232] cursor-pointer',
           checkboxClassName,
         )}
         onChange={e => onChange?.(e.target.checked)}

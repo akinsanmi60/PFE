@@ -10,10 +10,14 @@ import { useGetAllFarmers } from 'services/admin.service';
 import TableLoading from '@shared/Table/tableLoading';
 import { ITableHead } from '@shared/Table/table.interface';
 import { formatDate } from '@utils/constants';
-import { IFarmerQueryProp } from 'types/admin.type';
 import { useNavigate } from 'react-router-dom';
 import { FarmersPath } from '@utils/paths';
 import { IIndividualFarmer } from 'types/individualFarmerAggregator.type';
+import { useModalContext } from '@contexts/modalContext';
+import { useForm } from 'react-hook-form';
+import { IFilterValues } from 'types/modal.type';
+import { IFilterProduceQuery } from 'types/produce.type';
+import CommonAdminFilterForm from '../commonFilter';
 
 function FarmerList() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,8 +27,16 @@ function FarmerList() {
     limit: 10,
   });
   const navigate = useNavigate();
+  const { modalState, handleModalOpen, handleModalClose } = useModalContext();
 
-  const updateQueryParams = (params: IFarmerQueryProp) => {
+  const farmerForm = useForm<IFilterValues>({
+    defaultValues: {
+      is_active: '',
+      created_at: '',
+      updated_at: '',
+    },
+  });
+  const updateQueryParams = (params: IFilterProduceQuery) => {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
 
@@ -56,9 +68,38 @@ function FarmerList() {
     },
     {
       label: 'Status',
-      accessor: 'status',
+      accessor: 'is_active',
+      render: ({ is_active }) => {
+        return is_active ? 'Active' : 'Inactive';
+      },
     },
   ];
+
+  const openFilterBox = () => handleModalOpen('filterFarmer');
+
+  const closeFilterBox = () => {
+    handleModalClose('filterFarmer');
+  };
+
+  const submitFilter = () => {
+    const startDate = farmerForm.getValues('created_at') || undefined;
+    const endDate = farmerForm.getValues('updated_at') || undefined;
+    const farmerActiveStatus = farmerForm.getValues('is_active') || undefined;
+
+    updateQueryParams({
+      page: 1,
+      is_active:
+        farmerActiveStatus === 'active'
+          ? true
+          : farmerActiveStatus === 'inactive'
+          ? false
+          : undefined,
+
+      created_at: startDate,
+      updated_at: endDate,
+    });
+    closeFilterBox();
+  };
 
   return (
     <div className="">
@@ -69,7 +110,7 @@ function FarmerList() {
               All Farmers
             </h2>
           </div>
-          <div className="w-full flex justify-between items-center gap-x-[15px] ">
+          <div className="w-full">
             <SearchFilterBox
               searchBarProps={{
                 placeholder: 'Search farmer by name or ID',
@@ -87,6 +128,10 @@ function FarmerList() {
                     }}
                   />
                 ),
+              }}
+              filterBtnsProps={{
+                useFilterBtn: true,
+                onClick: openFilterBox,
               }}
             />
           </div>
@@ -118,6 +163,24 @@ function FarmerList() {
           }}
         />
       </PageContainer>
+
+      {modalState?.modalType === 'filterFarmer' && (
+        <CommonAdminFilterForm
+          closeModalBox={closeFilterBox}
+          filterForm={farmerForm}
+          onSubmitForm={submitFilter}
+          clearFunction={() =>
+            updateQueryParams({
+              page: 1,
+              limit: 10,
+              created_at: '',
+              updated_at: '',
+            })
+          }
+          filterTitle="Farmers"
+          watchValue="is_active"
+        />
+      )}
     </div>
   );
 }

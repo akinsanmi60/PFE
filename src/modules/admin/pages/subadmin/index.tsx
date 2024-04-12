@@ -72,7 +72,7 @@ function SubAdmin() {
               All Admins
             </h2>
           </div>
-          <div className="w-full flex justify-between items-center gap-x-[15px] ">
+          <div className="w-full">
             <SearchFilterBox
               searchBarProps={{
                 placeholder: 'Search subadmin by name or ID',
@@ -89,13 +89,18 @@ function SubAdmin() {
                   />
                 ),
               }}
+              filterBtnsProps={{
+                useFilterBtn: true,
+              }}
+              action={
+                <CustomButton
+                  className="text-primary-white"
+                  onClick={() => handleModalOpen('addSubAdmin')}
+                >
+                  Add Admin
+                </CustomButton>
+              }
             />
-            <CustomButton
-              className="text-primary-white w-[180px]"
-              onClick={() => handleModalOpen('addSubAdmin')}
-            >
-              Add Admin
-            </CustomButton>
           </div>
         </div>
       </AppHeader>

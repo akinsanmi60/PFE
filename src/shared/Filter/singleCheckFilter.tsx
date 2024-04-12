@@ -14,13 +14,11 @@ type ISingleFilterProp = {
 function SingleCheckFilter({
   filterForm,
   optionProp,
-  watchValue,
+  watchValue = 'status',
 }: ISingleFilterProp) {
   const { control, watch } = filterForm;
 
-  const passValue = watchValue ? watchValue : 'status';
-
-  const formValue = watch(passValue as keyof IFilterValues);
+  const formValue = watch(watchValue as keyof IFilterValues);
 
   return (
     <div className="border-[1px] px-[16px] rounded-[8px] cursor-pointer">
@@ -42,7 +40,7 @@ function SingleCheckFilter({
               <div>
                 <ControlledCheckbox
                   control={control}
-                  name="status"
+                  name={watchValue}
                   checkboxValue={type.value}
                   id={type.value}
                   checked={type.value === formValue}

@@ -1,7 +1,6 @@
 import { ReactComponent as LeftChevron } from '@assets/svg/leftChevron.svg';
 import CustomButton from '@shared/Button';
-import StatusBadge, { IStatusType } from '@shared/StatusBadge';
-import { capitalize, formatDate } from '@utils/constants';
+import { capitalize } from '@utils/constants';
 import DetailCard from 'components/produceDetail/detailCard';
 import { useNavigate } from 'react-router-dom';
 import { IMyProduceData } from 'types/produce.type';
@@ -20,9 +19,11 @@ import {
   useGetIndividualAggregatorDependent,
   useGetIndividualFarmerDependent,
 } from 'services/individualFarmerAggregator.service';
+import { useGetIndividualExporterDependent } from 'services/exporter.service';
+import DetailColumnHead from './detailColumnHead';
 
 const userArray = ['farmer', 'aggregator'];
-const adminUser = ['admin', 'superAdmin'];
+const adminUser = ['admin', 'subAdmin'];
 function ProduceCard({
   produceData,
   loading,
@@ -37,6 +38,7 @@ function ProduceCard({
   const { authUser } = useAuthContext();
   const { data: individualAggregator } = useGetIndividualAggregatorDependent();
   const { data: individualFarmer } = useGetIndividualFarmerDependent();
+  const { data: individualExporter } = useGetIndividualExporterDependent();
 
   const currentUserStatus = () => {
     switch (authUser?.role) {
@@ -44,92 +46,16 @@ function ProduceCard({
         return individualFarmer?.is_active;
       case 'aggregator':
         return individualAggregator?.is_active;
+      case 'exporter':
+        return individualExporter?.is_active;
     }
   };
 
-  const detailColumnsHeadTitleA: {
-    label: string;
-    accessor: keyof IMyProduceData | null;
-    render?: (_object: IMyProduceData) => React.ReactNode;
-  }[] = [
-    { label: 'Product ID', accessor: 'pentrar_produce_id' },
-    {
-      label: 'Available Quantity',
-      accessor: 'quantity',
-      render: ({ quantity, unit }) =>
-        `${quantity === null ? 0 : quantity} / ${
-          unit === null || unit === '' ? 'KG' : unit
-        }`,
-    },
-
-    {
-      label: 'Harvest Date',
-      accessor: 'harvest_date',
-      render: ({ harvest_date }) => {
-        return formatDate({ date: harvest_date });
-      },
-    },
-    {
-      label: 'Farm Address',
-      accessor: 'farm_address',
-      render: ({ farm_address }) => {
-        return (
-          <p className="text-ellipsis line-clamp-2" title={farm_address}>
-            {farm_address}
-          </p>
-        );
-      },
-    },
-    { label: 'Farm Location', accessor: 'farm_state' },
-    {
-      label: 'Status',
-      accessor: 'status',
-      render: ({ status }) => {
-        return <StatusBadge status={status as IStatusType} />;
-      },
-    },
-  ];
-
-  const detailColumnsHeadTitleB: {
-    label: string;
-    accessor: keyof IMyProduceData | null;
-    render?: (_object: IMyProduceData) => React.ReactNode;
-  }[] = [
-    { label: 'Classification', accessor: 'produce_classification' },
-
-    {
-      label: 'Planting Date',
-      accessor: 'planting_date',
-      render: ({ planting_date }) => {
-        return formatDate({ date: planting_date });
-      },
-    },
-    {
-      label: 'Available on Pentrar Hub',
-      accessor: 'on_pentrar_hub',
-      render: ({ on_pentrar_hub }) => (on_pentrar_hub ? 'Yes' : 'No'),
-    },
-    {
-      label: 'Submitted Quantity',
-      accessor: 'submitted_quantity',
-      render: ({ submitted_quantity, submitted_unit }) =>
-        `${submitted_quantity === null ? 0 : submitted_quantity} / ${
-          submitted_unit === null || submitted_unit === ''
-            ? 'KG'
-            : submitted_unit
-        }`,
-    },
-    {
-      label: 'Transferred Quantity',
-      accessor: 'quantity_transfered',
-      render: ({ quantity_transfered, unit_transfered }) =>
-        `${quantity_transfered === null ? 0 : quantity_transfered} / ${
-          unit_transfered === null || unit_transfered === ''
-            ? 'KG'
-            : unit_transfered
-        }`,
-    },
-  ];
+  const {
+    detailColumnsHeadTitleA,
+    detailColumnsHeadTitleB,
+    detailColumnsHeadTitleC,
+  } = DetailColumnHead();
 
   const renderActionBtn = () => {
     if (userArray.includes(authUser?.role as string)) {
@@ -240,7 +166,10 @@ function ProduceCard({
             <div className="sixm:mt-[10px]">
               <DetailCard<IMyProduceData>
                 detailProps={{
-                  detailKeys: detailColumnsHeadTitleB,
+                  detailKeys:
+                    authUser?.role === 'exporter'
+                      ? detailColumnsHeadTitleC
+                      : detailColumnsHeadTitleB,
                   produceData: produceData,
                 }}
               />

@@ -30,11 +30,54 @@ export const produceStatusOptions: {
   },
 ];
 
+export const adminProduceStatusOptions: {
+  label: string;
+  value: string;
+}[] = [
+  {
+    label: 'Approved',
+    value: 'approved',
+  },
+  {
+    label: 'Not Approved',
+    value: 'not_approved',
+  },
+];
+
+export const adminProduceHubOptions: {
+  label: string;
+  value: string;
+}[] = [
+  {
+    label: 'On Pentrar Hub',
+    value: 'on_hub',
+  },
+  {
+    label: 'Not On Pentrar Hub',
+    value: 'not_on_hub',
+  },
+];
+
+export const adminIndividualOptions: {
+  label: string;
+  value: string;
+}[] = [
+  {
+    label: 'Active',
+    value: 'active',
+  },
+  {
+    label: 'Inactive',
+    value: 'inactive',
+  },
+];
+
 export const transferStatuses = [
   'transfer_done',
   'in_progress',
   'declined',
 ] as const;
+
 export const transferStatusOptions: {
   label: string;
   value: string;

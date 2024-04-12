@@ -141,6 +141,7 @@ export const getClass = (text: string) => {
     case 'Rejected':
       return 'bg-[#FCD9DC] py-[5px] px-[12px] text-[#720B18] font-[500] rounded-lg';
     case 'Not Approved':
+    case 'Not Certified':
     case 'Pending':
       return 'bg-[#FFE5E6] py-[5px] px-[12px] text-statusText-error font-[500] rounded-lg';
     case 'Incoming':

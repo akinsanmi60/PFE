@@ -52,7 +52,7 @@ function FromTransfers() {
       render: ({ produce_name }) => produce_name,
     },
     {
-      label: 'Qty Approved',
+      label: 'Quantity in Transfer',
       accessor: '',
       render: ({ qty_in_transefer, unit }) =>
         `${qty_in_transefer === null ? 0 : qty_in_transefer}/${

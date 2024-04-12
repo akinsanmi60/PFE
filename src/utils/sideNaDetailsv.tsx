@@ -139,8 +139,8 @@ const SUPER_ADMIN_SIDENAV: NavLInk[] = [
     IconBlue: <HomeWhite />,
   },
   {
-    name: 'Produces',
-    path: 'all-produces',
+    name: 'Produce',
+    path: 'all-produce',
     Icon: <ProduceIcon />,
   },
   {

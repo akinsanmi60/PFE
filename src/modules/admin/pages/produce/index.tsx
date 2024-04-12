@@ -7,17 +7,20 @@ import CustomTable from '@shared/Table';
 import EmptyBar from '@shared/Table/tableEmpty';
 import PageContainer from 'components/Layout/PageContainer';
 import { useGetAllProduce } from 'services/admin.service';
-import { IProduceQueryProp } from 'types/admin.type';
 import { ITableHead } from '@shared/Table/table.interface';
-import { IMyProduceData } from 'types/produce.type';
+import { IFilterProduceQuery, IMyProduceData } from 'types/produce.type';
 import { formatDate } from '@utils/constants';
 import TableLoading from '@shared/Table/tableLoading';
 import { useNavigate } from 'react-router-dom';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
+import { useForm } from 'react-hook-form';
+import { IFilterValues } from 'types/modal.type';
+import { useModalContext } from '@contexts/modalContext';
+import AdminProduceFilterForm from './filterForm';
 
 function ProduceList() {
   const navigate = useNavigate();
-
+  const { modalState, handleModalOpen, handleModalClose } = useModalContext();
   const [searchTerm, setSearchTerm] = useState('');
   const [queryParams, setQueryParams] = useState({
     search: '',
@@ -25,7 +28,16 @@ function ProduceList() {
     limit: 10,
   });
 
-  const updateQueryParams = (params: IProduceQueryProp) => {
+  const produceForm = useForm<IFilterValues>({
+    defaultValues: {
+      status: '',
+      created_at: '',
+      updated_at: '',
+      on_pentrar_hub: '',
+    },
+  });
+
+  const updateQueryParams = (params: IFilterProduceQuery) => {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
 
@@ -71,6 +83,35 @@ function ProduceList() {
     },
   ];
 
+  const openFilterBox = () => handleModalOpen('filterAdminProduce');
+
+  const closeFilterBox = () => {
+    handleModalClose('filterAdminProduce');
+  };
+
+  const submitFilter = () => {
+    const startDate = produceForm.getValues('created_at') || undefined;
+    const endDate = produceForm.getValues('updated_at') || undefined;
+    const hubValue = produceForm.getValues('on_pentrar_hub');
+
+    updateQueryParams({
+      page: 1,
+      status:
+        produceForm.getValues('status')!.length > 0
+          ? (produceForm.getValues('status') as IFilterProduceQuery['status'])
+          : undefined,
+      created_at: startDate,
+      updated_at: endDate,
+      on_pentrar_hub:
+        hubValue === 'on_hub'
+          ? true
+          : hubValue === 'not_on_hub'
+          ? false
+          : undefined,
+    });
+    closeFilterBox();
+  };
+
   return (
     <div className="">
       <AppHeader>
@@ -80,7 +121,7 @@ function ProduceList() {
               All Produce
             </h2>
           </div>
-          <div className="w-full flex justify-between items-center gap-x-[15px] ">
+          <div className="w-full">
             <SearchFilterBox
               searchBarProps={{
                 placeholder: 'Search produce by name or ID',
@@ -98,6 +139,10 @@ function ProduceList() {
                     }}
                   />
                 ),
+              }}
+              filterBtnsProps={{
+                useFilterBtn: true,
+                onClick: openFilterBox,
               }}
             />
           </div>
@@ -119,10 +164,25 @@ function ProduceList() {
           setCurrentPage={(val: number) => updateQueryParams({ page: val })}
           setLimit={(val: number) => updateQueryParams({ limit: val })}
           onRowClick={(row: IMyProduceData) => {
-            navigate(`/pentrar/admin/all-produces/${row.id}/produce-detail`);
+            navigate(`/pentrar/admin/all-produce/${row.id}/produce-detail`);
           }}
         />
       </PageContainer>
+      {modalState?.modalType === 'filterAdminProduce' && (
+        <AdminProduceFilterForm
+          closeModalBox={closeFilterBox}
+          filterForm={produceForm}
+          onSubmitForm={submitFilter}
+          clearFunction={() =>
+            updateQueryParams({
+              page: 1,
+              limit: 10,
+              created_at: '',
+              updated_at: '',
+            })
+          }
+        />
+      )}
     </div>
   );
 }

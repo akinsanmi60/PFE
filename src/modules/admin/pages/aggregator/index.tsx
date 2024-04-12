@@ -9,10 +9,14 @@ import { useState } from 'react';
 import TableLoading from '@shared/Table/tableLoading';
 import { formatDate } from '@utils/constants';
 import { ITableHead } from '@shared/Table/table.interface';
-import { IAggregatorQueryProp } from 'types/admin.type';
 import { useGetAllAggregators } from 'services/admin.service';
 import { useNavigate } from 'react-router-dom';
 import { AggregatorsPath } from '@utils/paths';
+import { useModalContext } from '@contexts/modalContext';
+import { useForm } from 'react-hook-form';
+import { IFilterValues } from 'types/modal.type';
+import { IFilterProduceQuery } from 'types/produce.type';
+import CommonAdminFilterForm from '../commonFilter';
 
 function AggregatorList() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,7 +27,17 @@ function AggregatorList() {
   });
   const navigate = useNavigate();
 
-  const updateQueryParams = (params: IAggregatorQueryProp) => {
+  const { modalState, handleModalOpen, handleModalClose } = useModalContext();
+
+  const aggregatorForm = useForm<IFilterValues>({
+    defaultValues: {
+      is_active: '',
+      created_at: '',
+      updated_at: '',
+    },
+  });
+
+  const updateQueryParams = (params: IFilterProduceQuery) => {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
 
@@ -59,6 +73,33 @@ function AggregatorList() {
     },
   ];
 
+  const openFilterBox = () => handleModalOpen('filterAggregator');
+
+  const closeFilterBox = () => {
+    handleModalClose('filterAggregator');
+  };
+
+  const submitFilter = () => {
+    const startDate = aggregatorForm.getValues('created_at') || undefined;
+    const endDate = aggregatorForm.getValues('updated_at') || undefined;
+    const exporterActiveStatus =
+      aggregatorForm.getValues('is_active') || undefined;
+
+    updateQueryParams({
+      page: 1,
+      is_active:
+        exporterActiveStatus === 'active'
+          ? true
+          : exporterActiveStatus === 'inactive'
+          ? false
+          : undefined,
+
+      created_at: startDate,
+      updated_at: endDate,
+    });
+    closeFilterBox();
+  };
+
   return (
     <div className="">
       <AppHeader>
@@ -68,7 +109,7 @@ function AggregatorList() {
               All Aggregators
             </h2>
           </div>
-          <div className="w-full flex justify-between items-center gap-x-[15px] ">
+          <div className="w-full">
             <SearchFilterBox
               searchBarProps={{
                 placeholder: 'Search aggregator by name or ID',
@@ -86,6 +127,10 @@ function AggregatorList() {
                     }}
                   />
                 ),
+              }}
+              filterBtnsProps={{
+                useFilterBtn: true,
+                onClick: openFilterBox,
               }}
             />
           </div>
@@ -117,6 +162,24 @@ function AggregatorList() {
           }}
         />
       </PageContainer>
+
+      {modalState?.modalType === 'filterAggregator' && (
+        <CommonAdminFilterForm
+          closeModalBox={closeFilterBox}
+          filterForm={aggregatorForm}
+          onSubmitForm={submitFilter}
+          clearFunction={() =>
+            updateQueryParams({
+              page: 1,
+              limit: 10,
+              created_at: '',
+              updated_at: '',
+            })
+          }
+          filterTitle="Aggregator"
+          watchValue="is_active"
+        />
+      )}
     </div>
   );
 }
