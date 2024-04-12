@@ -9,7 +9,7 @@ function AdminDashboardCard() {
 
   const dashObj = [
     {
-      name: 'Total Produces',
+      name: 'Total Produce',
       count: data?.data?.total_produces,
     },
     {
@@ -41,7 +41,7 @@ function AdminDashboardCard() {
             <p className="text-tertiary-light-2 text-[14px] font-[500]">
               {item?.name}
             </p>
-            <p className="text-secondary-light-1 text-[30px] font-[600] leading-[42px]">
+            <div className="text-secondary-light-1 text-[30px] font-[600] leading-[42px]">
               {isLoading ? (
                 <CircularProgress color="#072723" size={30} />
               ) : item?.count === undefined ? (
@@ -49,7 +49,7 @@ function AdminDashboardCard() {
               ) : (
                 item?.count
               )}
-            </p>
+            </div>
           </div>
         ))}
       </div>
