@@ -54,14 +54,10 @@ const useGetAllExporters = (queryParams: IBaseQueryProps) => {
     data: data,
   };
 };
-const useGetIndividualExporter = ({
-  queryParamsId,
-}: {
-  queryParamsId: string;
-}) => {
+const useGetIndividualExporter = (queryParamsId: string) => {
   const { isLoading, isRefetching, isError, data, ...rest } =
     useQuery<IIndividualExporterDataResponse>(
-      [queryKeys.getIndividualExporter, queryParamsId],
+      [queryKeys.getIndividualExporter],
       () =>
         getRequest({
           url: GET_INDIVIDUAL_EXPORTER_URL(queryParamsId),

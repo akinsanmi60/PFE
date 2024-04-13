@@ -8,6 +8,12 @@ export type IExporterData = {
   id: string;
   created_at: string;
   coy_name: string;
+  coy_address: string;
+  reg_number: string;
+  coy_scale: string;
+  tin_id: string;
+  coy_state: string;
+  coy_establishment: string;
   last_active: string;
   legal_entity_name: string;
   phone_number: string;

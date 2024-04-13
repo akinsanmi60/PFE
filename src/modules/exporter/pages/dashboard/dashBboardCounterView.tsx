@@ -17,9 +17,9 @@ function DashBboardCounterView({
   const { authUser } = useAuthContext();
   const navigate = useNavigate();
 
-  const { data: exporterData } = useGetIndividualExporter({
-    queryParamsId: authUser?.id as string,
-  });
+  const { data: exporterData } = useGetIndividualExporter(
+    authUser?.id as string,
+  );
 
   return (
     <PageContainer>

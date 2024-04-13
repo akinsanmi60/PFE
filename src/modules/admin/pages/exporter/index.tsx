@@ -15,8 +15,12 @@ import { IFilterValues } from 'types/modal.type';
 import { useForm } from 'react-hook-form';
 import { IFilterProduceQuery } from 'types/produce.type';
 import CommonAdminFilterForm from '../commonFilter';
+import { useNavigate } from 'react-router-dom';
+import { adminDashboardPaths } from '@utils/paths';
+import { IExporterData } from 'types/exporter.type';
 
 function ExporterList() {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [queryParams, setQueryParams] = useState({
     search: '',
@@ -39,7 +43,7 @@ function ExporterList() {
   };
   const { data, isLoading, isRefetching } = useGetAllExporters(queryParams);
 
-  const tableHead: ITableHead<any>[] = [
+  const tableHead: ITableHead<IExporterData>[] = [
     {
       label: 'id',
       accessor: 'pentrar_id',
@@ -133,7 +137,7 @@ function ExporterList() {
       </AppHeader>
       <PageContainer className="pt-0">
         <div className="w-full bg-primary-white rounded-lg mt-[30px]">
-          <CustomTable
+          <CustomTable<IExporterData>
             tableHeads={tableHead}
             loading={isLoading || isRefetching}
             total={data?.data?.total}
@@ -152,6 +156,15 @@ function ExporterList() {
                 className="xlsm:h-screen"
               />
             }
+            onRowClick={(row: IExporterData) => {
+              navigate(
+                `/${adminDashboardPaths.exportersDetails(
+                  row.id,
+                  row?.user_type,
+                  'produce',
+                )}`,
+              );
+            }}
           />
         </div>
       </PageContainer>

@@ -41,6 +41,10 @@ const AgencyDetailPage = React.lazy(
   () => import('@modules/admin/pages/agency/agencyDetailPage'),
 );
 
+const ExporterDetailPage = React.lazy(
+  () => import('@modules/admin/pages/exporter/exporterDetailPage'),
+);
+
 const AdminSetings = React.lazy(() => import('@modules/admin/pages/settings'));
 
 export const adminPathsLinks = {
@@ -54,6 +58,7 @@ export const adminPathsLinks = {
   allAggregators: 'all-aggregators',
   aggregatorDetail: 'all-aggregators/:id/:userType/:tab',
   allExporters: 'all-exporters',
+  exporterDetail: 'all-exporters/:id/:userType/:tab',
   allOfftakers: 'all-offtakers',
   allFarmers: 'all-farmers',
   farmerDetail: 'all-farmers/:id/:userType/:tab',
@@ -120,6 +125,11 @@ const AdminRoutes = {
   ExporterList: {
     element: ExporterList,
     path: adminPathsLinks.allExporters,
+  },
+
+  ExporterDetail: {
+    element: ExporterDetailPage,
+    path: adminPathsLinks.exporterDetail,
   },
 
   OfftakerList: {

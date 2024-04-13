@@ -31,7 +31,7 @@ function ShowAnalysis({ showAnalysisProp }: IShowAnalysis) {
 
   const tabs = [
     {
-      href: showAnalysisProp.tabsHref.produces,
+      href: showAnalysisProp.tabsHref.produce,
       name: 'Produces',
     },
     {

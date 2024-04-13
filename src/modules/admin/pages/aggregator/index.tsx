@@ -11,7 +11,7 @@ import { formatDate } from '@utils/constants';
 import { ITableHead } from '@shared/Table/table.interface';
 import { useGetAllAggregators } from 'services/admin.service';
 import { useNavigate } from 'react-router-dom';
-import { AggregatorsPath } from '@utils/paths';
+import { adminDashboardPaths } from '@utils/paths';
 import { useModalContext } from '@contexts/modalContext';
 import { useForm } from 'react-hook-form';
 import { IFilterValues } from 'types/modal.type';
@@ -161,10 +161,10 @@ function AggregatorList() {
           }
           onRowClick={row => {
             navigate(
-              `/${AggregatorsPath.aggregatorsDetails(
+              `/${adminDashboardPaths.aggregatorsDetails(
                 row?.id as string,
                 row?.user_type,
-                'produces',
+                'produce',
               )}`,
             );
           }}

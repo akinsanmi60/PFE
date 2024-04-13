@@ -11,7 +11,7 @@ import TableLoading from '@shared/Table/tableLoading';
 import { ITableHead } from '@shared/Table/table.interface';
 import { formatDate } from '@utils/constants';
 import { useNavigate } from 'react-router-dom';
-import { FarmersPath } from '@utils/paths';
+import { adminDashboardPaths } from '@utils/paths';
 import { IIndividualFarmer } from 'types/individualFarmerAggregator.type';
 import { useModalContext } from '@contexts/modalContext';
 import { useForm } from 'react-hook-form';
@@ -154,12 +154,12 @@ function FarmerList() {
           showPagination
           setCurrentPage={(val: number) => updateQueryParams({ page: val })}
           setLimit={(val: number) => updateQueryParams({ limit: val })}
-          onRowClick={row => {
+          onRowClick={(row: IIndividualFarmer) => {
             navigate(
-              `/${FarmersPath.farmersDetails(
+              `/${adminDashboardPaths.farmersDetails(
                 row?.id as string,
                 row?.user_type,
-                'produces',
+                'produce',
               )}`,
             );
           }}

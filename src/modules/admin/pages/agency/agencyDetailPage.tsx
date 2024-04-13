@@ -1,5 +1,5 @@
 import BreadCrumbs from '@shared/BreadCrumbs';
-import { AgencyPath, IAgencyTab } from '@utils/paths';
+import { adminDashboardPaths, IAgencyTab } from '@utils/paths';
 import AppHeader from 'components/appHeader/appHeader';
 import PageContainer from 'components/Layout/PageContainer';
 import { useParams } from 'react-router-dom';
@@ -22,7 +22,7 @@ function AgencyDetailPage() {
           <BreadCrumbs
             items={[
               {
-                href: `/${AgencyPath.root()}`,
+                href: `/${adminDashboardPaths.agencyRootPath()}`,
                 text: 'Agencies',
               },
               {
@@ -46,11 +46,11 @@ function AgencyDetailPage() {
               currentTab: currentTab,
               userData: data || {},
               tabsHref: {
-                members: `/${AgencyPath.agencyDetails(
+                members: `/${adminDashboardPaths.agencyDetails(
                   id as string,
                   'members',
                 )}`,
-                certification: `/${AgencyPath.agencyDetails(
+                certification: `/${adminDashboardPaths.agencyDetails(
                   id as string,
                   'certification',
                 )}`,

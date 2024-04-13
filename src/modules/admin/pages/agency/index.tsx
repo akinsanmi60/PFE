@@ -16,7 +16,7 @@ import { formatDate } from '@utils/constants';
 import { ITableHead } from '@shared/Table/table.interface';
 import TableLoading from '@shared/Table/tableLoading';
 import { useNavigate } from 'react-router-dom';
-import { AgencyPath } from '@utils/paths';
+import { adminDashboardPaths } from '@utils/paths';
 
 function AgencyList() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -126,7 +126,9 @@ function AgencyList() {
             setLimit={(val: number) => updateQueryParams({ limit: val })}
             current_page={data?.current_page}
             onRowClick={row =>
-              navigate(`/${AgencyPath.agencyDetails(row?.id, 'members')}`)
+              navigate(
+                `/${adminDashboardPaths.agencyDetails(row?.id, 'members')}`,
+              )
             }
           />
         </div>

@@ -1,4 +1,4 @@
-import { adminFarmersTabs, agencyTabs } from './enums';
+import { adminFarmersTabs, agencyTabs, exporterTabs } from './enums';
 import { adminPathsLinks } from '@modules/admin/routes';
 import { BasePath } from 'routes/Routes';
 import { joinPath } from './navigation';
@@ -34,38 +34,86 @@ export const authPaths = {
 };
 
 export type IFarmersAggregatorTab = typeof adminFarmersTabs[number];
-export const FarmersPath = {
-  root: (fullPath: boolean = true) =>
-    `${fullPath ? `${BasePath.ADMIN}/` : ''}${adminPathsLinks.allFarmers}`,
+export type IAgencyTab = typeof agencyTabs[number];
+
+export type IExporterTab = typeof exporterTabs[number];
+
+export const adminDashboardPaths = {
+  root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.ADMIN}` : ''}`,
+  farmerRootPath: (fullPath: boolean = true) =>
+    `${joinPath(
+      adminDashboardPaths.root(fullPath),
+      adminPathsLinks.allFarmers,
+    )}`,
+
   farmersDetails: (
     farmerId: string,
     detail: string,
     tab: IFarmersAggregatorTab | null,
     fullPath: boolean = true,
-  ) => `${joinPath(FarmersPath.root(fullPath), farmerId, detail, tab)}`,
-};
+  ) =>
+    `${joinPath(
+      adminDashboardPaths.root(fullPath),
+      adminPathsLinks.allFarmers,
+      farmerId,
+      detail,
+      tab,
+    )}`,
 
-export const AggregatorsPath = {
-  root: (fullPath: boolean = true) =>
-    `${fullPath ? `${BasePath.ADMIN}/` : ''}${adminPathsLinks.allAggregators}`,
+  aggregatorRootPath: (fullPath: boolean = true) =>
+    `${joinPath(
+      adminDashboardPaths.root(fullPath),
+      adminPathsLinks.allAggregators,
+    )}`,
   aggregatorsDetails: (
     aggregatorId: string,
     detail: string,
     tab: IFarmersAggregatorTab | null,
     fullPath: boolean = true,
-  ) => `${joinPath(AggregatorsPath.root(fullPath), aggregatorId, detail, tab)}`,
-};
+  ) =>
+    `${joinPath(
+      adminDashboardPaths.root(fullPath),
+      adminPathsLinks.allAggregators,
+      aggregatorId,
+      detail,
+      tab,
+    )}`,
 
-export type IAgencyTab = typeof agencyTabs[number];
-export const AgencyPath = {
-  root: (fullPath: boolean = true) =>
-    `${fullPath ? `${BasePath.ADMIN}/` : ''}${adminPathsLinks.allAgencies}`,
+  exporterRootPath: (fullPath: boolean = true) =>
+    `${joinPath(
+      adminDashboardPaths.root(fullPath),
+      adminPathsLinks.allExporters,
+    )}`,
+  exportersDetails: (
+    exporterId: string,
+    detail: string,
+    tab: IExporterTab | null,
+    fullPath: boolean = true,
+  ) =>
+    `${joinPath(
+      adminDashboardPaths.root(fullPath),
+      adminPathsLinks.allExporters,
+      exporterId,
+      detail,
+      tab,
+    )}`,
 
+  agencyRootPath: (fullPath: boolean = true) =>
+    `${joinPath(
+      adminDashboardPaths.root(fullPath),
+      adminPathsLinks.allAgencies,
+    )}`,
   agencyDetails: (
     agencyId: string,
     tab: IAgencyTab | null,
     fullPath: boolean = true,
-  ) => `${joinPath(AgencyPath.root(fullPath), agencyId, tab)}`,
+  ) =>
+    `${joinPath(
+      adminDashboardPaths.root(fullPath),
+      adminPathsLinks.allAgencies,
+      agencyId,
+      tab,
+    )}`,
 };
 
 export const AgencyUserPath = {

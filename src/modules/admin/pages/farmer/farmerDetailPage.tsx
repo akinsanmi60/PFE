@@ -1,6 +1,6 @@
 import TableLoading from '@shared/Table/tableLoading';
 import { GET_INDIVIDUAL_FARMER_URL } from '@utils/apiUrl';
-import { FarmersPath, IFarmersAggregatorTab } from '@utils/paths';
+import { adminDashboardPaths, IFarmersAggregatorTab } from '@utils/paths';
 import PageContainer from 'components/Layout/PageContainer';
 import AppHeader from 'components/appHeader/appHeader';
 import FarmerAggregatorUserDetailPpage from 'components/farmerAggregatorUserDetail';
@@ -27,7 +27,7 @@ function FarmerDetailPage() {
             status={data?.status}
             items={[
               {
-                href: `/${FarmersPath.root()}`,
+                href: `/${adminDashboardPaths.farmerRootPath()}`,
                 text: 'Farmers',
               },
               {
@@ -51,17 +51,17 @@ function FarmerDetailPage() {
               userType: userType as string,
               userData: data,
               tabsHref: {
-                produces: `/${FarmersPath.farmersDetails(
+                produce: `/${adminDashboardPaths.farmersDetails(
                   id as string,
                   userType as string,
-                  'produces',
+                  'produce',
                 )}`,
-                transactions: `/${FarmersPath.farmersDetails(
+                transactions: `/${adminDashboardPaths.farmersDetails(
                   id as string,
                   userType as string,
                   'transactions',
                 )}`,
-                users: `/${FarmersPath.farmersDetails(
+                users: `/${adminDashboardPaths.farmersDetails(
                   id as string,
                   userType as string,
                   `users`,
