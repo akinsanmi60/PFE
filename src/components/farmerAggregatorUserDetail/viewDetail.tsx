@@ -5,7 +5,7 @@ import {
 } from '@utils/constants';
 import { IRowBody } from '@shared/HubTable/type';
 import imagePlaceholder from '@assets/png/maleImagePlaceholder.png';
-import ChangeStatusButton from './changeStatusButton';
+import ChangeStatusButton from 'components/changeStatusButton/changeStatusButton';
 import UserCard from 'components/userCard';
 
 type ViewDetailProps<TData> = {

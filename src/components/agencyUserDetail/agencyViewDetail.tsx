@@ -2,8 +2,7 @@ import { capitalize, formatDate } from '@utils/constants';
 import { IRowBody } from '@shared/HubTable/type';
 import imagePlaceholder from '@assets/png/maleImagePlaceholder.png';
 import UserCard from 'components/userCard';
-import ChangeStatusButton from 'components/farmerAggregatorUserDetail/changeStatusButton';
-// import ChangeStatusButton from './changeStatusButton';
+import ChangeStatusButton from 'components/changeStatusButton/changeStatusButton';
 
 type ViewDetailProps<TData> = {
   userData: TData;
