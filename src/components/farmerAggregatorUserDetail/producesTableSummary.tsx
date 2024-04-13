@@ -16,7 +16,7 @@ type IProps = {
 function FarmerAggregatorProduce({ fetcherProp }: IProps) {
   const [queryParams, setQueryParams] = useState({
     page: 1,
-    limit: 5,
+    limit: 4,
   });
 
   const updateQueryParams = (params: IUserQueryProps) => {
@@ -80,7 +80,7 @@ function FarmerAggregatorProduce({ fetcherProp }: IProps) {
           />
         }
         showPagination
-        paginationArray={[5]}
+        paginationArray={[4]}
       />
     </div>
   );
