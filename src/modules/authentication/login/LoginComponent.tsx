@@ -142,7 +142,7 @@ function GeneralLoginPage({
               <p className="text-[15px] leading-[23px] tracking-normal text-[#999999]">
                 You’re new in here?{' '}
                 <a href={registerScreenLink()} className="">
-                  <b className="text-[#2AA232]">Request Acces</b>
+                  <b className="text-[#2AA232]">Request Access</b>
                 </a>{' '}
               </p>
             </div>

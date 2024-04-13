@@ -139,9 +139,9 @@ function ViewDetail<TData extends IRowBody>({
   ];
 
   return (
-    <div className="p-[20px] flex flex-col gap-y-[35px]">
-      <div className="flex gap-x-3 items-center">
-        <div className="w-[140px] h-[140px] border-[1px] border-[E2E8F0]">
+    <div className="p-[20px] flex flex-col gap-y-[35px] bg-primary-white">
+      <div className="flex gap-x-3 items-center xlsm:flex-col xlsm:items-start xlsm:gap-y-[15px]">
+        <div className="w-[140px] h-[140px] border-[1px] border-[E2E8F0] xlsm:flex xlsm:justify-center">
           <img src={imagePlaceholder} alt="imp" className="w-full h-full" />
         </div>
         <div>

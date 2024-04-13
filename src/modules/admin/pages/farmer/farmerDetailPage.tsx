@@ -41,7 +41,7 @@ function FarmerDetailPage() {
       <PageContainer className="pt-0">
         {isLoading || isRefetching ? (
           <div className="w-full bg-primary-white rounded-lg mt-[30px]">
-            <TableLoading title="Loading Farmers" />
+            <TableLoading title="Loading Farmers" className="h-screen" />
           </div>
         ) : (
           <FarmerAggregatorUserDetailPpage

@@ -45,6 +45,7 @@ export type IProduceHandlerType = Pick<
   handler_phone: string;
   handler_user_type: string;
   produce_created_from: string;
+  produce_pentrar_id: string;
 };
 
 export type IApproveProducePayload = Pick<
@@ -85,6 +86,8 @@ export type IMyProduceData = {
   submitted_unit: string;
   storage: string;
   nearest_landmark: string;
+  produce_origin: string;
+  produce_ownership: string;
 };
 
 export type ITransferedProduceData = {
@@ -142,4 +145,9 @@ export type IFilterProduceQuery = {
   to_id?: string;
   on_pentrar_hub?: boolean;
   is_active?: boolean;
+  produce_ownership?: string;
+};
+
+export type IProduceTransferHolder = IBaseResponse & {
+  data: IProduceHandlerType[];
 };

@@ -115,7 +115,12 @@ function AgencyList() {
             tableEmptyState={
               <EmptyBar emptyStateSize="lg" componentType="Agency" />
             }
-            tableLoader={<TableLoading title="Loading Agencies" />}
+            tableLoader={
+              <TableLoading
+                title="Loading Agencies"
+                className="xlsm:h-screen"
+              />
+            }
             showPagination
             setCurrentPage={(val: number) => updateQueryParams({ page: val })}
             setLimit={(val: number) => updateQueryParams({ limit: val })}

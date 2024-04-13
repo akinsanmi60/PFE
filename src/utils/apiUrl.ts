@@ -91,6 +91,8 @@ export const ACCEPT_TRANSFERED_PRODUCE = (id: string, userId: string) =>
   `/produce/${id}/accept-transfer/${userId}`;
 export const REJECT_TRANSFERED_PRODUCE = (id: string, userId: string) =>
   `/produce/${id}/reject-transfer/${userId}`;
+export const GET_PRODUCE_HANDLER_HISTORY = (id: string) =>
+  `produce/${id}/transfer-handler`;
 
 // Admin urls
 export const ADD_ADMIN_URL = 'admin/create-admin';

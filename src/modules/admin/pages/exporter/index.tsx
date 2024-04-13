@@ -146,7 +146,12 @@ function ExporterList() {
             showPagination
             setCurrentPage={(val: number) => updateQueryParams({ page: val })}
             setLimit={(val: number) => updateQueryParams({ limit: val })}
-            tableLoader={<TableLoading title="Loading Exporters" />}
+            tableLoader={
+              <TableLoading
+                title="Loading Exporters"
+                className="xlsm:h-screen"
+              />
+            }
           />
         </div>
       </PageContainer>

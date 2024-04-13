@@ -60,7 +60,7 @@ function FarmerAggregatorProduce({ fetcherProp }: IProps) {
   return (
     <div className="w-full">
       <CustomTable<IMyProduceData>
-        containerClassName="p-[0px]"
+        containerClassName={`px-0 -mt-[0px]`}
         tableHeads={tableHead}
         loading={isLoading || isRefetching}
         dataTableSource={data?.data?.produces_list || []}

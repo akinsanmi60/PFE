@@ -21,6 +21,7 @@ import {
 } from 'services/individualFarmerAggregator.service';
 import { useGetIndividualExporterDependent } from 'services/exporter.service';
 import DetailColumnHead from './detailColumnHead';
+import { useGetProduceHandlers } from 'services/produce.service';
 
 const userArray = ['farmer', 'aggregator'];
 const adminUser = ['admin', 'subAdmin'];
@@ -39,6 +40,13 @@ function ProduceCard({
   const { data: individualAggregator } = useGetIndividualAggregatorDependent();
   const { data: individualFarmer } = useGetIndividualFarmerDependent();
   const { data: individualExporter } = useGetIndividualExporterDependent();
+  const {
+    data: handlerData,
+    isLoading,
+    isRefetching,
+  } = useGetProduceHandlers({
+    produceID: produceData?.produce_origin as string,
+  });
 
   const currentUserStatus = () => {
     switch (authUser?.role) {
@@ -131,7 +139,10 @@ function ProduceCard({
         <div>{renderActionBtn()}</div>
       </div>
       {loading || refetching ? (
-        <TableLoading title="Loading Produce Detail" />
+        <TableLoading
+          title="Loading Produce Detail"
+          className="xlsm:h-screen"
+        />
       ) : produceData && Object.keys(produceData).length > 0 ? (
         <div className="border-[1px] border-primary-light-1 rounded-[16px] p-[24px] xlsm:p-0">
           <div className="flex justify-between items-center">
@@ -179,10 +190,10 @@ function ProduceCard({
             <h1 className="text-primary-main mb-[10px] text-[20px] font-[600] tracking-normal">
               Ownership History
             </h1>
-            {produceData?.transfer_handler.length > 0 ? (
-              <ContributorsAccordionCard
-                itemData={produceData?.transfer_handler}
-              />
+            {isLoading || isRefetching ? (
+              <TableLoading title="Loading Ownership History" />
+            ) : handlerData?.length > 0 ? (
+              <ContributorsAccordionCard itemData={handlerData} />
             ) : (
               <EmptyBar emptyStateSize="sm" componentType="Ownership History" />
             )}

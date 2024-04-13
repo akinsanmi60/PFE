@@ -1,6 +1,7 @@
 import FormStartEndDate from 'shared/Filter/FilterStartEndDate';
 import {
   adminProduceHubOptions,
+  adminProduceOwnershipOptions,
   produceStatusOptions,
 } from '../../../../db/produceData';
 import FilterModal from '@shared/ModalBase/FilterModal';
@@ -52,6 +53,16 @@ const AdminProduceFilterForm = ({
                 optionProp={adminProduceHubOptions}
                 filterForm={filterForm}
                 watchValue="on_pentrar_hub"
+              />
+            </div>
+            <div className="">
+              <p className="text-[13px] text-[#475569] font-[500]">
+                Ownership Type
+              </p>
+              <SingleCheckFilter
+                optionProp={adminProduceOwnershipOptions}
+                filterForm={filterForm}
+                watchValue="produce_ownership"
               />
             </div>
           </div>

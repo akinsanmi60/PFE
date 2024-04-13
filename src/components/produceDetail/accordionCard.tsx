@@ -22,7 +22,7 @@ const ContributorsAccordionCard: React.FC<AccordionProps> = ({ itemData }) => {
     accessor: keyof IProduceHandlerType | null;
     render?: (_object: IProduceHandlerType) => React.ReactNode;
   }[] = [
-    { label: 'Product ID', accessor: 'produce_id' },
+    { label: 'Product ID', accessor: 'produce_pentrar_id' },
     {
       label: 'Quantity',
       accessor: 'quantity',
@@ -30,13 +30,13 @@ const ContributorsAccordionCard: React.FC<AccordionProps> = ({ itemData }) => {
         `${quantity} / ${unit === null || unit === '' ? 'KG' : unit}`,
     },
     {
-      label: 'Transer Date',
+      label: 'Transfer / Created Date',
       accessor: 'created_at',
       render: ({ created_at }) => {
         return formatDate({ date: created_at, time: true });
       },
     },
-    { label: 'Farm Location', accessor: 'produce_location' },
+    { label: `Owner's Address`, accessor: 'produce_location' },
   ];
 
   return (

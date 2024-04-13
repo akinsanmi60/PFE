@@ -1,5 +1,5 @@
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
-import { formatDate } from '@utils/constants';
+import { capitalize, formatDate } from '@utils/constants';
 import { IMyProduceData } from 'types/produce.type';
 
 function DetailColumnHead() {
@@ -79,6 +79,13 @@ function DetailColumnHead() {
       accessor: 'planting_date',
       render: ({ planting_date }) => {
         return formatDate({ date: planting_date });
+      },
+    },
+    {
+      label: 'Ownership Type',
+      accessor: 'produce_ownership',
+      render: ({ produce_ownership }) => {
+        return capitalize(produce_ownership);
       },
     },
     {

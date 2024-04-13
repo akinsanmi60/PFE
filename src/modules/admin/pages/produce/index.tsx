@@ -34,6 +34,7 @@ function ProduceList() {
       created_at: '',
       updated_at: '',
       on_pentrar_hub: '',
+      produce_ownership: '',
     },
   });
 
@@ -93,6 +94,8 @@ function ProduceList() {
     const startDate = produceForm.getValues('created_at') || undefined;
     const endDate = produceForm.getValues('updated_at') || undefined;
     const hubValue = produceForm.getValues('on_pentrar_hub');
+    const ownershipValue =
+      produceForm.getValues('produce_ownership') || undefined;
 
     updateQueryParams({
       page: 1,
@@ -108,6 +111,7 @@ function ProduceList() {
           : hubValue === 'not_on_hub'
           ? false
           : undefined,
+      produce_ownership: ownershipValue,
     });
     closeFilterBox();
   };
@@ -159,7 +163,12 @@ function ProduceList() {
           tableEmptyState={
             <EmptyBar emptyStateSize="lg" componentType="produces" />
           }
-          tableLoader={<TableLoading title="Loading All Produces" />}
+          tableLoader={
+            <TableLoading
+              title="Loading All Produces"
+              className="xlsm:h-screen"
+            />
+          }
           showPagination
           setCurrentPage={(val: number) => updateQueryParams({ page: val })}
           setLimit={(val: number) => updateQueryParams({ limit: val })}
@@ -179,6 +188,9 @@ function ProduceList() {
               limit: 10,
               created_at: '',
               updated_at: '',
+              on_pentrar_hub: undefined,
+              produce_ownership: undefined,
+              status: undefined,
             })
           }
         />

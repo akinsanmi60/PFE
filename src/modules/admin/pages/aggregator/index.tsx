@@ -147,7 +147,12 @@ function AggregatorList() {
           page_size={data?.data?.page_size}
           dataTableSource={data?.data?.aggregators_list || []}
           current_page={data?.data?.current_page}
-          tableLoader={<TableLoading title="Loading Aggregators" />}
+          tableLoader={
+            <TableLoading
+              title="Loading Aggregators"
+              className="xlsm:h-screen"
+            />
+          }
           showPagination
           setCurrentPage={(val: number) => updateQueryParams({ page: val })}
           setLimit={(val: number) => updateQueryParams({ limit: val })}

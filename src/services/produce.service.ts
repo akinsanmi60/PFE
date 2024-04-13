@@ -15,6 +15,7 @@ import {
   DELETE_PRODUCE_URL,
   EDIT_PRODUCE_URL,
   GET_PRODUCE_BY_ID_URL,
+  GET_PRODUCE_HANDLER_HISTORY,
   GET_USER_PRODUCE_URL,
   REJECT_TRANSFERED_PRODUCE,
   TRANSFER_PRODUCE_URL,
@@ -34,6 +35,8 @@ import {
   IGetSingleProduce,
   IMyProduceData,
   IMyProduceResponse,
+  IProduceHandlerType,
+  IProduceTransferHolder,
   ITransferProducePayload,
 } from 'types/produce.type';
 
@@ -341,6 +344,25 @@ const useRejectTransferProduce = ({
   return { mutate, ...rest };
 };
 
+const useGetProduceHandlers = ({ produceID }: { produceID: string }) => {
+  const { data, ...rest } = useQuery<IProduceTransferHolder>(
+    [queryKeys.getAllProduceHandlers, produceID],
+    () =>
+      getRequest({
+        url: `${GET_PRODUCE_HANDLER_HISTORY(produceID)}`,
+      }),
+
+    {
+      refetchOnWindowFocus: false,
+      enabled: !!produceID,
+    },
+  );
+  return {
+    ...rest,
+    data: data?.data as IProduceHandlerType[],
+  };
+};
+
 export {
   useProduceCreationMutation,
   useGetMyProduce,
@@ -352,4 +374,5 @@ export {
   useGetTransferProduces,
   useAcceptTransferProduce,
   useRejectTransferProduce,
+  useGetProduceHandlers,
 };

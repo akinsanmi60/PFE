@@ -57,6 +57,19 @@ export const adminProduceHubOptions: {
     value: 'not_on_hub',
   },
 ];
+export const adminProduceOwnershipOptions: {
+  label: string;
+  value: string;
+}[] = [
+  {
+    label: 'Owned Produce',
+    value: 'owned',
+  },
+  {
+    label: 'Transferred Produce',
+    value: 'transferred',
+  },
+];
 
 export const adminIndividualOptions: {
   label: string;

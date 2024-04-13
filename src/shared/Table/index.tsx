@@ -84,9 +84,9 @@ const CustomTable = <TData extends ITableBody>({
           tableLoader
         ) : !loading && dataTableSourceLength > 0 ? (
           <div className="relative">
-            <TableContainer>
+            <TableContainer className="z-0">
               <Table size="sm">
-                <Thead className="w-full bg-primary-light-2 sticky top-0 z-10">
+                <Thead className="w-full bg-primary-light-2 sticky top-0 z-0">
                   <Tr>
                     {tableHeads?.map((heads, index) => {
                       return (

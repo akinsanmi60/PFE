@@ -148,7 +148,9 @@ function FarmerList() {
           tableEmptyState={
             <EmptyBar emptyStateSize="lg" componentType="Farmers" />
           }
-          tableLoader={<TableLoading title="Loading Farmers" />}
+          tableLoader={
+            <TableLoading title="Loading Farmers" className="xlsm:h-screen" />
+          }
           showPagination
           setCurrentPage={(val: number) => updateQueryParams({ page: val })}
           setLimit={(val: number) => updateQueryParams({ limit: val })}

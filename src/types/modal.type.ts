@@ -21,6 +21,7 @@ export type IFilterValues = {
   updated_at?: string;
   on_pentrar_hub?: string;
   is_active?: string;
+  produce_ownership?: string;
 };
 
 export type IFilterForm = {
