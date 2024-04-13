@@ -30,7 +30,7 @@ function ShowDashboard({ dashboardProp }: IshowDashboard) {
           className="bg-primary-white px-[24px] py-[15px] flex flex-col gap-y-[5px] rounded-[12px] h-[90px] border-[1px] border-secondary-light-3"
           key={item.title}
         >
-          <p className="text-primary-lighter text-[14px] font-[500]">
+          <p className="text-primary-lighter text-[12px] font-[500]">
             {item.title}
           </p>
           <div className="text-primary-main text-[20px] font-[600] leading-[42px]">

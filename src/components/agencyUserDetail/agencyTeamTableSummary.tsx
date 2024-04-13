@@ -53,7 +53,7 @@ function AgencyTeamTableSummary({ analysisProp }: IAgencyShowTableSummary) {
   return (
     <div className="w-full">
       <CustomTable<IAgencyTeamData>
-        containerClassName="p-[0px]"
+        containerClassName={`px-0 py-0 mt-[5px]`}
         tableHeads={tableHead}
         loading={isLoading || isRefetching}
         dataTableSource={data?.agency_member_list || []}

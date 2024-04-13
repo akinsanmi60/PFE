@@ -41,7 +41,7 @@ function FarmerAggregatorTransaction() {
   return (
     <div className="w-full">
       <CustomTable
-        containerClassName="p-0"
+        containerClassName={`px-0 py-0 mt-[5px]`}
         tableHeads={tableHead}
         loading={false}
         dataTableSource={[]}

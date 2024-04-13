@@ -16,7 +16,7 @@ type IProps = {
 function FarmerAggregatorProduce({ fetcherProp }: IProps) {
   const [queryParams, setQueryParams] = useState({
     page: 1,
-    limit: 4,
+    limit: 5,
   });
 
   const updateQueryParams = (params: IUserQueryProps) => {
@@ -60,7 +60,7 @@ function FarmerAggregatorProduce({ fetcherProp }: IProps) {
   return (
     <div className="w-full">
       <CustomTable<IMyProduceData>
-        containerClassName={`px-0 -mt-[0px]`}
+        containerClassName={`px-0 py-0 mt-[5px]`}
         tableHeads={tableHead}
         loading={isLoading || isRefetching}
         dataTableSource={data?.data?.produces_list || []}
@@ -80,7 +80,7 @@ function FarmerAggregatorProduce({ fetcherProp }: IProps) {
           />
         }
         showPagination
-        paginationArray={[4]}
+        paginationArray={[5]}
       />
     </div>
   );
