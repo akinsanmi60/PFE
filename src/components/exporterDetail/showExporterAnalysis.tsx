@@ -2,6 +2,10 @@ import PageNavTabs from '@shared/PageNavTabs';
 import { IExporterTab } from '@utils/paths';
 import ShowExporterDashboard from './showExportDashboard';
 import { GetDasboardOfExporter } from 'services/exporter.service';
+import ExporterProduce from './producesTableSummary';
+import ExporterTransaction from './transactionTableSummary';
+import ExporterCertificationTableSummary from './certificationTableSummary';
+import ExporterOrderTableSummary from './orderTableSummary';
 
 type IShowAnalysis = {
   showAnalysisProp: {
@@ -47,8 +51,8 @@ function ShowExporterAnalysis({ showAnalysisProp }: IShowAnalysis) {
       <PageNavTabs currentHref={showAnalysisProp.currentTab} tabs={tabs} />
       <div className="w-full bg-[#E2E8F0] border[1px] h-[1px]" />
 
-      {/* {showAnalysisProp.currentTab === 'produces' && (
-        <FarmerAggregatorProduce
+      {showAnalysisProp.currentTab === 'produce' && (
+        <ExporterProduce
           fetcherProp={{
             id: showAnalysisProp?.id,
             role: showAnalysisProp?.role,
@@ -57,8 +61,16 @@ function ShowExporterAnalysis({ showAnalysisProp }: IShowAnalysis) {
       )}
 
       {showAnalysisProp.currentTab === 'transactions' && (
-        <FarmerAggregatorTransaction />
-      )} */}
+        <ExporterTransaction />
+      )}
+
+      {showAnalysisProp.currentTab === 'certifications' && (
+        <ExporterCertificationTableSummary />
+      )}
+
+      {showAnalysisProp.currentTab === 'orders' && (
+        <ExporterOrderTableSummary />
+      )}
     </div>
   );
 }

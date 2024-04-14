@@ -63,7 +63,7 @@ export const adminPathsLinks = {
   allFarmers: 'all-farmers',
   farmerDetail: 'all-farmers/:id/:userType/:tab',
   allTeams: 'all-teams',
-  allSettings: 'settings',
+  allSettings: 'profile-settings',
 };
 
 const AdminRoutes = {

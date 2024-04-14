@@ -40,7 +40,11 @@ export type IExporterTab = typeof exporterTabs[number];
 
 export const adminDashboardPaths = {
   root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.ADMIN}` : ''}`,
-
+  produceRootPath: (fullPath: boolean = true) =>
+    `${joinPath(
+      adminDashboardPaths.root(fullPath),
+      adminPathsLinks.allProduce,
+    )}`,
   produceDetail: (id: string, fullPath: boolean = true) =>
     `${joinPath(
       adminDashboardPaths.root(fullPath),
@@ -53,7 +57,6 @@ export const adminDashboardPaths = {
       adminDashboardPaths.root(fullPath),
       adminPathsLinks.allFarmers,
     )}`,
-
   farmersDetails: (
     farmerId: string,
     detail: string,
@@ -67,7 +70,6 @@ export const adminDashboardPaths = {
       detail,
       tab,
     )}`,
-
   aggregatorRootPath: (fullPath: boolean = true) =>
     `${joinPath(
       adminDashboardPaths.root(fullPath),
@@ -86,7 +88,6 @@ export const adminDashboardPaths = {
       detail,
       tab,
     )}`,
-
   exporterRootPath: (fullPath: boolean = true) =>
     `${joinPath(
       adminDashboardPaths.root(fullPath),
@@ -105,7 +106,6 @@ export const adminDashboardPaths = {
       detail,
       tab,
     )}`,
-
   agencyRootPath: (fullPath: boolean = true) =>
     `${joinPath(
       adminDashboardPaths.root(fullPath),
@@ -121,6 +121,11 @@ export const adminDashboardPaths = {
       adminPathsLinks.allAgencies,
       agencyId,
       tab,
+    )}`,
+  offtakerRootPath: (fullPath: boolean = true) =>
+    `${joinPath(
+      adminDashboardPaths.root(fullPath),
+      adminPathsLinks.allOfftakers,
     )}`,
 };
 

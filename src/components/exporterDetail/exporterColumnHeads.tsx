@@ -1,5 +1,4 @@
-import { formatDate } from '@utils/constants';
-import { capitalize } from 'lodash';
+import { formatDate, capitalize } from '@utils/constants';
 import React from 'react';
 import { IExporterData } from 'types/exporter.type';
 
@@ -47,6 +46,13 @@ function ExporterColumnHeads() {
       accessor: 'coy_scale',
       render: ({ coy_scale }) => {
         return capitalize(coy_scale);
+      },
+    },
+    {
+      label: 'Tax ID',
+      accessor: null,
+      render: ({ tin_id }) => {
+        return tin_id.toLocaleUpperCase();
       },
     },
     {

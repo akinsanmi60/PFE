@@ -61,6 +61,11 @@ function ExporterDetailPage() {
                   userType as string,
                   'certifications',
                 )}`,
+                transactions: `/${adminDashboardPaths.exportersDetails(
+                  id as string,
+                  userType as string,
+                  'transactions',
+                )}`,
               },
             }}
           />
