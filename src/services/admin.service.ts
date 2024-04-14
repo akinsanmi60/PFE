@@ -4,12 +4,14 @@ import { getRequest, postRequest } from '@utils/apiCaller';
 import {
   ACTIVATE_AGENCY_URL,
   ACTIVATE_AGGREGATOR_URL,
+  ACTIVATE_EXPORTER_URL,
   ACTIVATE_FARMER_URL,
   ADD_ADMIN_URL,
   APPROVE_AGGREGATOR_URL,
   APPROVE_FARMER_URL,
   DEACTIVATE_AGENCY_URL,
   DEACTIVATE_AGGREGATOR_URL,
+  DEACTIVATE_EXPORTER_URL,
   DEACTIVATE_FARMER_URL,
   GET_ADMIN_DASHBOARD_COUNT_URL,
   GET_ALL_ADMIN_OFFICERS,
@@ -227,6 +229,50 @@ const useDeactivateAgency = () => {
   return { mutate, isLoading, ...rest };
 };
 
+const useActivateExporter = () => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, ...rest } = useMutation(
+    ({ id }: { id: string }) =>
+      postRequest<string, IBaseResponse>({
+        url: ACTIVATE_EXPORTER_URL(id),
+      }),
+
+    {
+      onSuccess(res) {
+        queryClient.invalidateQueries([queryKeys.getIndividualExporter]);
+        displaySuccess(res?.message);
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+
+const useDeactivateExporter = () => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, ...rest } = useMutation(
+    ({ id }: { id: string }) =>
+      postRequest<string, IBaseResponse>({
+        url: DEACTIVATE_EXPORTER_URL(id),
+      }),
+
+    {
+      onSuccess(res) {
+        queryClient.invalidateQueries([queryKeys.getIndividualExporter]);
+        displaySuccess(res?.message);
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+
 //TODO: type response for useQuery AllFarmers
 const useGetAllFarmers = (queryParams: IFarmerQueryProp) => {
   const { isLoading, isRefetching, isError, data } = useQuery<any>(
@@ -347,4 +393,6 @@ export {
   useActivateAggregator,
   useActivateAgency,
   useDeactivateAgency,
+  useActivateExporter,
+  useDeactivateExporter,
 };

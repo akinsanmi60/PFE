@@ -5,9 +5,11 @@ import { toast } from 'react-toastify';
 import {
   useActivateAgency,
   useActivateAggregator,
+  useActivateExporter,
   useActivateFarmer,
   useDeactivateAgency,
   useDeactivateAggregator,
+  useDeactivateExporter,
   useDeactivateFarmer,
 } from 'services/admin.service';
 
@@ -35,6 +37,10 @@ function ChangeStatusButton({
     useActivateAgency();
   const { mutate: deactivateAgency, isLoading: isLoadingDeactivateAgency } =
     useDeactivateAgency();
+  const { mutate: activateExporter, isLoading: isLoadingActivateExporter } =
+    useActivateExporter();
+  const { mutate: deactivateExporter, isLoading: isLoadingDeactivateExporter } =
+    useDeactivateExporter();
 
   const renderAggregatorStatusFunction = () => {
     switch (statusProp?.userType === 'aggregator') {
@@ -68,6 +74,17 @@ function ChangeStatusButton({
         break;
     }
   };
+
+  const renderExporterStatusFunction = () => {
+    switch (statusProp?.userType === 'exporter') {
+      case statusProp?.is_active === true:
+        return deactivateExporter({ id: statusProp?.id });
+      case statusProp?.is_active === false:
+        return activateExporter({ id: statusProp?.id });
+      default:
+        break;
+    }
+  };
   const toggleActiveStatus = () => {
     if (statusProp?.status !== 'active') {
       return toast.error(
@@ -80,6 +97,8 @@ function ChangeStatusButton({
       return renderAggregatorStatusFunction();
     } else if (statusProp?.userType === 'agency') {
       return renderAgencyStatusFunction();
+    } else if (statusProp?.userType === 'exporter') {
+      return renderExporterStatusFunction();
     }
   };
 
@@ -89,7 +108,9 @@ function ChangeStatusButton({
     isLoadingActivateAggregator ||
     isLoadingDeactivateAggregator ||
     isLoadingActivateAgency ||
-    isLoadingDeactivateAgency;
+    isLoadingDeactivateAgency ||
+    isLoadingActivateExporter ||
+    isLoadingDeactivateExporter;
 
   return (
     <div>

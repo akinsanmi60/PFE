@@ -127,3 +127,7 @@ export const GET_EXPORTER_RECENT_PRODUCE_URL = (id: string) =>
   `exporter/${id}/recentproduce`;
 export const UPDATE_EXPORTER_URL = (id: string) =>
   `exporter/${id}/update-exporter`;
+export const ACTIVATE_EXPORTER_URL = (exporterID: string) =>
+  `exporter/${exporterID}/activate-exporter`;
+export const DEACTIVATE_EXPORTER_URL = (exporterID: string) =>
+  `exporter/${exporterID}/deactivate-exporter`;
