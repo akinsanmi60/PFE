@@ -135,7 +135,7 @@ const useProduceDeleteMutation = () => {
         queryClient.invalidateQueries({
           queryKey: [queryKeys.getIMyProduce],
         });
-        navigate('/pentrar/user/my-produces');
+        navigate('/pentrar/user/my-produce');
       },
       onError(error) {
         displayError(error);
