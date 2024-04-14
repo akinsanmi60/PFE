@@ -40,6 +40,14 @@ export type IExporterTab = typeof exporterTabs[number];
 
 export const adminDashboardPaths = {
   root: (fullPath: boolean = true) => `${fullPath ? `${BasePath.ADMIN}` : ''}`,
+
+  produceDetail: (id: string, fullPath: boolean = true) =>
+    `${joinPath(
+      adminDashboardPaths.root(fullPath),
+      adminPathsLinks.allProduce,
+      id,
+      'produce-detail',
+    )}`,
   farmerRootPath: (fullPath: boolean = true) =>
     `${joinPath(
       adminDashboardPaths.root(fullPath),

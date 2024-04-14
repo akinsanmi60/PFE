@@ -17,6 +17,7 @@ import { useForm } from 'react-hook-form';
 import { IFilterValues } from 'types/modal.type';
 import { useModalContext } from '@contexts/modalContext';
 import AdminProduceFilterForm from './filterForm';
+import { adminDashboardPaths } from '@utils/paths';
 
 function ProduceList() {
   const navigate = useNavigate();
@@ -173,7 +174,7 @@ function ProduceList() {
           setCurrentPage={(val: number) => updateQueryParams({ page: val })}
           setLimit={(val: number) => updateQueryParams({ limit: val })}
           onRowClick={(row: IMyProduceData) => {
-            navigate(`/pentrar/admin/all-produce/${row.id}/produce-detail`);
+            navigate(`/${adminDashboardPaths.produceDetail(row.id)}`);
           }}
         />
       </PageContainer>

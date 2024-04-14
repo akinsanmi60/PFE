@@ -177,6 +177,7 @@ function FarmerList() {
               limit: 10,
               created_at: '',
               updated_at: '',
+              is_active: undefined,
             })
           }
           filterTitle="Farmers"

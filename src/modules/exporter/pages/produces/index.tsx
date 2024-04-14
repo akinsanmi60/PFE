@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useGetMyProduce } from 'services/produce.service';
 import { IFilterProduceQuery, IMyProduceData } from 'types/produce.type';
 import { ReactComponent as SearchVector } from '@assets/svg/searchVector.svg';
+import { ReactComponent as CloseVector } from '@assets/svg/searchClose.svg';
 import PageContainer from 'components/Layout/PageContainer';
 import { ITableHead } from '@shared/Table/table.interface';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
@@ -121,6 +122,14 @@ function ExporterProduce() {
                   updateQueryParams({ search: value });
                 },
                 term: searchTerm,
+                useEndAdornment: (
+                  <CloseVector
+                    onClick={() => {
+                      updateQueryParams({ search: '' });
+                      setSearchTerm('');
+                    }}
+                  />
+                ),
               }}
               filterBtnsProps={{
                 useFilterBtn: true,

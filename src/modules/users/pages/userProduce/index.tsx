@@ -248,6 +248,7 @@ function UserProduce() {
               limit: 10,
               created_at: '',
               updated_at: '',
+              status: '',
             })
           }
         />
