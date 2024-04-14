@@ -43,7 +43,7 @@ function AdminDashboardCard() {
       <div className="grid grid-cols-3 gap-4 sixm:grid-cols-1 font-primary mdxl:grid-cols-2">
         {dashObj.map(item => (
           <div
-            className="bg-primary-white px-[24px] py-[15px] flex flex-col gap-y-[15px] rounded-lg h-[112px]"
+            className="bg-primary-white px-[24px] py-[15px] flex flex-col gap-y-[15px] rounded-lg h-[112px] cursor-pointer"
             key={item.name}
             onClick={() => navigate(`/${item.action}`)}
           >
