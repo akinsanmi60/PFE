@@ -78,17 +78,19 @@ const SearchFilterBox = ({
       <div className="w-full">
         <InputSearchBox {...searchBarProps} />
       </div>
-      <div className="flex gap-x-[10px]">
-        {filterBtnsProps?.useFilterBtn && (
-          <CustomButton
-            className="text-primary-white"
-            onClick={filterBtnsProps?.onClick}
-          >
-            Filter
-          </CustomButton>
-        )}
-        {action}
-      </div>
+      {filterBtnsProps?.useFilterBtn && (
+        <div className="flex gap-x-[10px]">
+          {filterBtnsProps?.useFilterBtn && (
+            <CustomButton
+              className="text-primary-white"
+              onClick={filterBtnsProps?.onClick}
+            >
+              Filter
+            </CustomButton>
+          )}
+          {action}
+        </div>
+      )}
     </div>
   );
 };

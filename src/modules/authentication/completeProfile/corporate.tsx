@@ -24,7 +24,12 @@ function CorporateFormProfile({ setRevealForm }: IFormType) {
       ? queryKeys.getIndividualFarmer
       : queryKeys.getIndividualAggregator;
 
-  const { control, handleSubmit, reset } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { isDirty, isValid },
+  } = useForm({
     defaultValues: {
       coy_name: '',
       coy_address: '',
@@ -118,6 +123,8 @@ function CorporateFormProfile({ setRevealForm }: IFormType) {
           className="w-[150px] text-primary-white"
           isLoading={isLoading}
           loadingText="Submitting..."
+          variant={!isValid || !isDirty || isLoading ? 'solid' : ''}
+          disabled={!isValid || !isDirty || isLoading}
         >
           Submit
         </CustomButton>

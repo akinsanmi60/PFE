@@ -50,3 +50,12 @@ export const ApproveProduceValidationSchema = yup
     package_state: yup.string().required('Enter packaging state'),
   })
   .required();
+
+export const SubmitCertificationValidationSchema = yup
+  .object({
+    estimatedSendDate: yup
+      .string()
+      .required('Please select estimated send date'),
+    agencyID: yup.string().required('Please select agency'),
+  })
+  .required();

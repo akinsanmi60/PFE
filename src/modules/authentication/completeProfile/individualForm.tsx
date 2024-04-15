@@ -25,7 +25,12 @@ function IndividualFormProfile({ setRevealForm }: IFormType) {
       ? queryKeys.getIndividualFarmer
       : queryKeys.getIndividualAggregator;
 
-  const { control, handleSubmit, reset } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { isDirty, isValid },
+  } = useForm({
     defaultValues: {
       farm_name: '',
       farm_location: '',
@@ -101,6 +106,8 @@ function IndividualFormProfile({ setRevealForm }: IFormType) {
           className="w-[150px] text-primary-white"
           loading={isLoading}
           loadingText="Submitting..."
+          disabled={!isValid || !isDirty || isLoading}
+          variant={!isValid || !isDirty || isLoading ? 'solid' : ''}
         >
           Submit
         </CustomButton>

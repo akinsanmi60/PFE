@@ -22,6 +22,7 @@ import {
 import { useGetIndividualExporterDependent } from 'services/exporter.service';
 import DetailColumnHead from './detailColumnHead';
 import { useGetProduceHandlers } from 'services/produce.service';
+import SubmitCertification from './submitCertification';
 
 const userArray = ['farmer', 'aggregator'];
 const adminUser = ['admin', 'subAdmin'];
@@ -111,7 +112,18 @@ function ProduceCard({
       );
     } else if (authUser?.role === 'exporter') {
       return (
-        <CustomButton className='"w-full text-primary-white py-[2px] bg-secondary-light-1'>
+        <CustomButton
+          className='"w-full text-primary-white py-[2px] bg-secondary-light-1'
+          onClick={() => {
+            if (currentUserStatus() === false) {
+              return toast.error(
+                'Account need to be activated, please contact admin',
+                toastOptions,
+              );
+            }
+            handleModalOpen('submitCertification');
+          }}
+        >
           Submit for certification
         </CustomButton>
       );
@@ -223,6 +235,9 @@ function ProduceCard({
       )}
       {modalState?.modalType === 'deleteProduce' && (
         <DeleteProduce id={produceData?.id as string} />
+      )}
+      {modalState?.modalType === 'submitCertification' && (
+        <SubmitCertification />
       )}
     </div>
   );

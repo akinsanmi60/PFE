@@ -1,5 +1,7 @@
+import { UseFormReturn } from 'react-hook-form';
 import { IBaseResponse, IDataCount } from './auth.type';
 import { IBaseQueryProps } from './pentrarHub.type';
+import { IIndividualAgencyData } from './agency.type';
 
 export type IUserQueryProps = IBaseQueryProps;
 export type ITransferProp = IBaseQueryProps & {
@@ -150,4 +152,20 @@ export type IFilterProduceQuery = {
 
 export type IProduceTransferHolder = IBaseResponse & {
   data: IProduceHandlerType[];
+};
+
+export type ISubmitCertificationFieldValues = {
+  agencyID?: string;
+  estimatedSendDate?: string;
+};
+
+export type ISubmitCertification = {
+  certSubmitForm: UseFormReturn<ISubmitCertificationFieldValues>;
+};
+
+export type ISubmitCertificationAccordion = Pick<
+  ISubmitCertification,
+  'certSubmitForm'
+> & {
+  itemData: IIndividualAgencyData[];
 };

@@ -25,7 +25,7 @@ import {
 import { IBaseResponse } from 'types/auth.type';
 
 const useGetAllAgency = (queryParams: IAgencyQuery) => {
-  const { data, isLoading, isRefetching, isError } =
+  const { data, isLoading, isRefetching, isError, ...rest } =
     useQuery<IAgencyDataResponse>(
       [queryKeys.getAllAgencies, queryParams],
       () =>
@@ -38,6 +38,7 @@ const useGetAllAgency = (queryParams: IAgencyQuery) => {
     );
 
   return {
+    ...rest,
     isLoading,
     isRefetching,
     isError,
