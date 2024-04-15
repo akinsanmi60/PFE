@@ -344,13 +344,7 @@ const useRejectTransferProduce = ({
   return { mutate, ...rest };
 };
 
-const useGetProduceHandlers = ({
-  produceID,
-  produceStatus,
-}: {
-  produceID: string;
-  produceStatus: string;
-}) => {
+const useGetProduceHandlers = ({ produceID }: { produceID: string }) => {
   const { data, ...rest } = useQuery<IProduceTransferHolder>(
     [queryKeys.getAllProduceHandlers, produceID],
     () =>
@@ -360,7 +354,6 @@ const useGetProduceHandlers = ({
 
     {
       refetchOnWindowFocus: false,
-      enabled: produceStatus === 'approved' ? true : false,
     },
   );
   return {
