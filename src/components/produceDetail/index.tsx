@@ -46,6 +46,7 @@ function ProduceCard({
     isRefetching,
   } = useGetProduceHandlers({
     produceID: produceData?.produce_origin as string,
+    produceStatus: produceData?.status as string,
   });
 
   const currentUserStatus = () => {
