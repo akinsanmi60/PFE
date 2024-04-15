@@ -99,7 +99,7 @@ const AgencySearchAccordionCard: React.FC<ISubmitCertificationAccordion> = ({
               </div>
             </div>
             {activeIndex === index && (
-              <div className=" mt-[20px] ">
+              <div className="mt-[10px] ">
                 <UserCard
                   detailProps={{
                     detailKeys: detailAColumnsTitleA,
