@@ -156,7 +156,16 @@ export type IProduceTransferHolder = IBaseResponse & {
 
 export type ISubmitCertificationFieldValues = {
   agencyID?: string;
-  estimatedSendDate?: string;
+  send_date?: string;
+  is_treated?: string | boolean;
+  treatment_name?: string;
+};
+
+export type ISubmitCertificationPayload = Pick<
+  ISubmitCertificationFieldValues,
+  'send_date' | 'treatment_name'
+> & {
+  is_treated: boolean;
 };
 
 export type ISubmitCertification = {
@@ -168,4 +177,10 @@ export type ISubmitCertificationAccordion = Pick<
   'certSubmitForm'
 > & {
   itemData: IIndividualAgencyData[];
+};
+
+export type toSendId = {
+  agencyID: string;
+  produceID: string;
+  exporterID: string;
 };

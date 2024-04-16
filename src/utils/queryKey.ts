@@ -20,4 +20,5 @@ export const queryKeys = {
   getIndividualExporter: 'getIndividualExporter',
   getAllExporters: 'getAllExporters',
   getAllProduceHandlers: 'getAllProduceHandlers',
+  getExporterCertificate: 'getExporterCertificate',
 };

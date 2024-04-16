@@ -237,7 +237,7 @@ function ProduceCard({
         <DeleteProduce id={produceData?.id as string} />
       )}
       {modalState?.modalType === 'submitCertification' && (
-        <SubmitCertification />
+        <SubmitCertification id={produceData?.id as string} />
       )}
     </div>
   );

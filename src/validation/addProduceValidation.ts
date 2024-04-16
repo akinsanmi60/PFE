@@ -53,9 +53,9 @@ export const ApproveProduceValidationSchema = yup
 
 export const SubmitCertificationValidationSchema = yup
   .object({
-    estimatedSendDate: yup
-      .string()
-      .required('Please select estimated send date'),
+    send_date: yup.string().required('Please select estimated send date'),
     agencyID: yup.string().required('Please select agency'),
+    is_treated: yup.string().required('Please select if treated'),
+    treatment_name: yup.string().required('Please enter treatment name'),
   })
   .required();

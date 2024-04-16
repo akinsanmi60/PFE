@@ -131,3 +131,11 @@ export const ACTIVATE_EXPORTER_URL = (exporterID: string) =>
   `exporter/${exporterID}/activate-exporter`;
 export const DEACTIVATE_EXPORTER_URL = (exporterID: string) =>
   `exporter/${exporterID}/deactivate-exporter`;
+
+// Certification
+export const SUBMIT_CERTIFICATION_URL = (
+  agencyID: string,
+  produceID: string,
+  exporterID: string,
+) =>
+  `certification/create/${agencyID}/${produceID}/${exporterID}/certification-request`;

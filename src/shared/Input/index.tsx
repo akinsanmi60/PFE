@@ -13,6 +13,7 @@ const CustomInput = forwardRef(
       readonly,
       placeholder,
       className,
+      useDataMaxLength = true,
       ...rest
     } = props;
     const today = new Date().toISOString().split('T')[0];
@@ -30,7 +31,8 @@ const CustomInput = forwardRef(
               borderRadius: '10px',
               paddingY: '24px',
             }}
-            max={rest.type === 'date' ? today : undefined}
+            max={rest.type === 'date' && useDataMaxLength ? today : undefined}
+            min={rest.type === 'date' && !useDataMaxLength ? today : undefined}
           />
           {useEndAdornment && useEndAdornment}
         </InputGroup>

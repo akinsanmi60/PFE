@@ -1,19 +1,29 @@
 import { useAuthContext } from '@contexts/authContext';
-import { useQuery } from '@tanstack/react-query';
-import { getRequest } from '@utils/apiCaller';
+import { useModalContext } from '@contexts/modalContext';
+import { displayError, displaySuccess } from '@shared/Toast/Toast';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getRequest, postRequest } from '@utils/apiCaller';
 import {
   GET_ALL_EXPORTER_URL,
   GET_EXPORTER_DASHBOARD_COUNT_URL,
   GET_INDIVIDUAL_EXPORTER_URL,
+  SUBMIT_CERTIFICATION_URL,
 } from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
+import { UseFormReset } from 'react-hook-form';
+import { IBaseResponse } from 'types/auth.type';
 import {
   IGetExportersResponse,
   IIndividualExporterDataResponse,
 } from 'types/exporter.type';
 import { IExporterDashBoardCount } from 'types/farmerAggregatorDash.type';
 import { IBaseQueryProps } from 'types/pentrarHub.type';
+import {
+  ISubmitCertificationFieldValues,
+  ISubmitCertificationPayload,
+  toSendId,
+} from 'types/produce.type';
 
 function GetDasboardOfExporter({ queryParamsId }: { queryParamsId: string }) {
   const { isLoading, isRefetching, isError, data } =
@@ -100,9 +110,52 @@ function useGetIndividualExporterDependent() {
   };
 }
 
+function useSubmitCertification({
+  resetForm,
+}: {
+  resetForm: UseFormReset<ISubmitCertificationFieldValues>;
+}) {
+  const queryClient = useQueryClient();
+  const { handleModalClose } = useModalContext();
+
+  const { mutate, isLoading, ...rest } = useMutation({
+    mutationFn: ({
+      payload,
+      idData,
+    }: {
+      payload: ISubmitCertificationPayload;
+      idData: toSendId;
+    }) =>
+      postRequest<ISubmitCertificationPayload, IBaseResponse>({
+        url: SUBMIT_CERTIFICATION_URL(
+          idData.agencyID,
+          idData.produceID,
+          idData.exporterID,
+        ),
+        payload,
+      }),
+    onSuccess: res => {
+      resetForm();
+      displaySuccess(res?.message);
+      handleModalClose('submitCertification');
+      queryClient.invalidateQueries([queryKeys.getSingleProduce]);
+    },
+    onError(error) {
+      displayError(error);
+    },
+  });
+
+  return {
+    mutate,
+    isLoading,
+    ...rest,
+  };
+}
+
 export {
   GetDasboardOfExporter,
   useGetAllExporters,
   useGetIndividualExporter,
   useGetIndividualExporterDependent,
+  useSubmitCertification,
 };

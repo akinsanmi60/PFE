@@ -17,6 +17,7 @@ export type IInputProps = IFieldHelperTextProps & {
   id?: string;
   role?: string;
   className?: string;
+  useDataMaxLength?: boolean;
 };
 
 export type IControlledInput<TFieldValues extends FieldValues> =
