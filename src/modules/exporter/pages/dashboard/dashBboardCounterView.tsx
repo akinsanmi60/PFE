@@ -47,11 +47,7 @@ function DashBboardCounterView({
             My Orders
           </p>
           <div className="text-secondary-light-1 text-[30px] font-[600] leading-[42px]">
-            {isLoading ? (
-              <CircularProgress color="#072723" size={30} />
-            ) : (
-              data?.data?.counted_request || 0
-            )}
+            {isLoading ? <CircularProgress color="#072723" size={30} /> : 0}
           </div>
         </div>
         <div className="bg-primary-white px-[24px] py-[15px] flex flex-col gap-y-[15px] rounded-lg h-[112px]">
@@ -62,7 +58,7 @@ function DashBboardCounterView({
             {isLoading ? (
               <CircularProgress color="#072723" size={30} />
             ) : (
-              data?.data?.recent_request || 0
+              data?.data?.counted_request || 0
             )}
           </div>
         </div>

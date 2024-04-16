@@ -139,6 +139,12 @@ function SideNav() {
                       key={sidenav.name}
                       style={active}
                       role={sidenav.name}
+                      onClick={e => {
+                        if (sidenav.disabled) {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }
+                      }}
                     >
                       <span className={checkPath ? '-ml-[2px]' : 'ml-0'}>
                         {checkPath ? sidenav.IconBlue : sidenav.Icon}
