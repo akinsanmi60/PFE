@@ -66,6 +66,19 @@ function ProduceCard({
     detailColumnsHeadTitleC,
   } = DetailColumnHead();
 
+  const checkCertStatus = () => {
+    if (
+      produceData?.certification === 'collected' ||
+      produceData?.certification === 'pending' ||
+      produceData?.certification === 'processing' ||
+      produceData?.certification === 'certified'
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const renderActionBtn = () => {
     if (userArray.includes(authUser?.role as string)) {
       return (
@@ -115,6 +128,9 @@ function ProduceCard({
         <CustomButton
           className='"w-full text-primary-white py-[2px] bg-secondary-light-1'
           onClick={() => {
+            if (checkCertStatus()) {
+              return;
+            }
             if (currentUserStatus() === false) {
               return toast.error(
                 'Account need to be activated, please contact admin',
@@ -124,7 +140,7 @@ function ProduceCard({
             handleModalOpen('submitCertification');
           }}
         >
-          Submit for certification
+          {checkCertStatus() ? 'Produce Submitted' : 'Submit Certification'}
         </CustomButton>
       );
     }
