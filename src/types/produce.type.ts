@@ -159,6 +159,8 @@ export type ISubmitCertificationFieldValues = {
   send_date?: string;
   is_treated?: string | boolean;
   treatment_name?: string;
+  shipment_date?: string;
+  treatment_duration?: string;
 };
 
 export type ISubmitCertificationPayload = Pick<

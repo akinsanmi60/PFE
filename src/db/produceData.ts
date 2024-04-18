@@ -117,3 +117,33 @@ export const produceClassification = [
   'Fiber',
   'Other',
 ];
+
+export const certificationStatuses = [
+  'pending',
+  'collected',
+  'processing',
+  'not_certified',
+  'certified',
+];
+
+export const certificationtatusOptions: {
+  label: string;
+  value: string;
+}[] = [
+  {
+    label: 'Pending',
+    value: 'pending',
+  },
+  {
+    label: 'Collected',
+    value: 'collected',
+  },
+  {
+    label: 'Processing',
+    value: 'processing',
+  },
+  {
+    label: 'Certified',
+    value: 'certified',
+  },
+];

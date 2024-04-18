@@ -17,6 +17,13 @@ const option = [
   { label: 'Not Treated', value: 'notTreated' },
 ];
 
+const treatmentDuration = [
+  { label: '< 1 month', value: '< 1 month' },
+  { label: '2 months', value: '2 months' },
+  { label: '3 months', value: '3 months' },
+  { label: '> 3 months', value: '> 3 months' },
+];
+
 function SubmitCertification({ id }: { id: string }) {
   const { authUser } = useAuthContext();
   const certSubmitForm = useForm({
@@ -25,6 +32,8 @@ function SubmitCertification({ id }: { id: string }) {
       agencyID: '',
       is_treated: '',
       treatment_name: '',
+      shipment_date: '',
+      treatment_duration: '',
     } as ISubmitCertificationFieldValues,
     resolver: yupResolver(
       SubmitCertificationValidationSchema,
@@ -33,12 +42,15 @@ function SubmitCertification({ id }: { id: string }) {
 
   const {
     handleSubmit,
+    watch,
     formState: { isValid, isDirty },
   } = certSubmitForm;
 
   const { mutate, isLoading } = useSubmitCertification({
     resetForm: certSubmitForm.reset,
   });
+
+  const viewTextArea = watch('is_treated') === 'treated' ? true : false;
 
   const onFormSubmit = (data: ISubmitCertificationFieldValues) => {
     const toSend = {
@@ -88,13 +100,31 @@ function SubmitCertification({ id }: { id: string }) {
             placeholder="Please select"
           />
         </div>
+        <div className="flex  gap-x-4 xlsm:flex-col xlsm:gap-y-4">
+          <ControlledInput
+            control={certSubmitForm.control}
+            name="send_date"
+            label="Estimated Shipment Date"
+            type="date"
+            useDataMaxLength={false}
+          />
+          <ControlledSelect
+            control={certSubmitForm.control}
+            name="treatment_duration"
+            label="Treatment Duration:"
+            options={treatmentDuration}
+            placeholder="Please select"
+          />
+        </div>
 
-        <ControlledTextArea
-          name="treatment_name"
-          label="Treatment Names"
-          placeholder="Enter Treatment Names"
-          control={certSubmitForm.control}
-        />
+        {viewTextArea && (
+          <ControlledTextArea
+            name="treatment_name"
+            label="Treatment Names"
+            placeholder="Enter Treatment Names"
+            control={certSubmitForm.control}
+          />
+        )}
         <div className="flex justify-end">
           <CustomButton
             className="w-2/5 text-primary-white"

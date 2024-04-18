@@ -42,6 +42,10 @@ const MyProduceDetailPage = React.lazy(
   () => import('../../../components/produceDetail/individualProduce'),
 );
 
+const ExporterCertificationPage = React.lazy(
+  () => import('@modules/exporter/pages/certification'),
+);
+
 export const exporterPathsLinks = {
   basePath: 'pentrar/exporter',
   dashBoard: 'dashboard',
@@ -53,6 +57,7 @@ export const exporterPathsLinks = {
   fromTransfer: 'from-transfer',
   settings: 'profile-settings',
   reportProblem: 'report-problem',
+  certification: 'certifications',
 };
 
 const ExporterRoutes = {
@@ -64,6 +69,11 @@ const ExporterRoutes = {
   ExporterOrder: {
     element: ExporterOrder,
     path: exporterPathsLinks.orders,
+  },
+
+  ExportCertification: {
+    element: ExporterCertificationPage,
+    path: exporterPathsLinks.certification,
   },
 
   ExporterProduce: {

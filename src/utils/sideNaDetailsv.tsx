@@ -93,6 +93,12 @@ const EXPORTER_SIDENAV: NavLInk[] = [
     IconBlue: <FolderWhite />,
   },
   {
+    name: 'Certifications',
+    path: 'certifications',
+    Icon: <Badge />,
+    IconBlue: <BadgeWhite />,
+  },
+  {
     name: 'My Order',
     path: 'myorder-list',
     Icon: <OrderDark />,

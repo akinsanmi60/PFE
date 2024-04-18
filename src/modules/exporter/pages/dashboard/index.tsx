@@ -104,7 +104,7 @@ function ExporterDashboard() {
           children={renderActionView()}
           tableHeads={tableHead}
           dataTableSource={data?.data?.recent_produce as IRecentProduceDetail[]}
-          loading={false}
+          loading={isLoading}
           tableEmptyState={
             <EmptyBar emptyStateSize="lg" componentType="produce" />
           }
