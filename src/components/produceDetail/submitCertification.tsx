@@ -61,8 +61,6 @@ function SubmitCertification({ id }: { id: string }) {
       new Date(data.shipment_date as string),
     );
 
-    console.log(isWithinRange);
-
     if (isWithinRange) {
       return toast.error(
         'Your shipment date should be three weeks after your estimated send date',
