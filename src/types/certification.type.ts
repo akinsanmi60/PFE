@@ -10,6 +10,9 @@ export type ICertification = {
   created_by: string;
   is_treated: true;
   send_date: string;
+  certification_id: string;
+  treatment_duration: string;
+  shipment_date: string;
   treatment_name: string;
   report_uploaded: string;
   collecting_agent: {
@@ -40,6 +43,13 @@ export type ICertification = {
     owner_pentrar_id: string;
     farm_state: string;
     harvest_date: string;
+  };
+  agency: {
+    id: string;
+    agency_name: string;
+    phone_number: string;
+    email: string;
+    agency_address: string;
   };
 };
 

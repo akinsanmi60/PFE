@@ -68,15 +68,16 @@ function ExporterCertificationPage() {
     {
       label: 'id',
       accessor: '',
-      render: ({ id }) => id,
+      render: ({ certification_id }) => certification_id,
     },
     {
       label: 'Agency Name',
       accessor: '',
-      render: ({ agency_to }) => capitalize(agency_to as string),
+      render: ({ agency: { agency_name } }) =>
+        capitalize(agency_name as string),
     },
     {
-      label: 'Date Sent',
+      label: 'Date To Be Sent',
       accessor: '',
       render: ({ send_date }) => formatDate({ date: send_date }),
     },
@@ -146,10 +147,16 @@ function ExporterCertificationPage() {
             tableHeads={tableHead}
             loading={isLoading || isRefetching}
             dataTableSource={data?.certifications || []}
+            page_size={data?.page_size}
+            total={data?.total}
+            current_page={data?.current_page}
             tableEmptyState={
               <EmptyBar emptyStateSize="lg" componentType="Certification" />
             }
             tableLoader={<TableLoading title="Loading Certifications..." />}
+            showPagination
+            setCurrentPage={(val: number) => updateQueryParams({ page: val })}
+            setLimit={(val: number) => updateQueryParams({ limit: val })}
           />
         </div>
       </PageContainer>
