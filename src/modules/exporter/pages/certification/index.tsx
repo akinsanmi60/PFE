@@ -39,7 +39,6 @@ function ExporterCertificationPage() {
   });
 
   const { data, isLoading, isRefetching } = useGetAllCertification(queryParams);
-  console.log(data?.certifications);
 
   const updateQueryParams = (params: IFilterProduceQuery) => {
     setQueryParams(prev => ({ ...prev, ...params }));

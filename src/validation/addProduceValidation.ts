@@ -58,8 +58,6 @@ export const SubmitCertificationValidationSchema = yup
     is_treated: yup.string().required('Please select if treated'),
     treatment_name: yup.string().optional(),
     shipment_date: yup.string().required('Please select shipment date'),
-    treatment_duration: yup
-      .string()
-      .required('Please enter treatment duration'),
+    treatment_duration: yup.string().optional(),
   })
   .required();

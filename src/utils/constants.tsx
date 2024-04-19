@@ -208,3 +208,19 @@ export const renderParagraph = (paragraph: string) => {
     }
   });
 };
+
+export function checkDateRange(startDate: Date, endDate: Date) {
+  const millisecondsPerWeek = 7 * 24 * 60 * 60 * 1000;
+  const maxWeeksDifference = 3;
+
+  // Calculate the difference in milliseconds between endDate and startDate
+  const differenceInMilliseconds = endDate.getTime() - startDate.getTime();
+
+  // Convert the difference to weeks
+  const differenceInWeeks = differenceInMilliseconds / millisecondsPerWeek;
+
+  const isWithinRange = differenceInWeeks > maxWeeksDifference;
+  return {
+    isWithinRange,
+  };
+}

@@ -11,6 +11,9 @@ import ControlledSelect from '@shared/Select/ControlledSelect';
 import ControlledTextArea from '@shared/Textarea/ControlledInput';
 import { useSubmitCertification } from 'services/exporter.service';
 import { useAuthContext } from '@contexts/authContext';
+import { checkDateRange } from '@utils/constants';
+import { toast } from 'react-toastify';
+import { toastOptions } from '@shared/Toast/Toast';
 
 const option = [
   { label: 'Treated', value: 'treated' },
@@ -53,10 +56,24 @@ function SubmitCertification({ id }: { id: string }) {
   const viewTextArea = watch('is_treated') === 'treated' ? true : false;
 
   const onFormSubmit = (data: ISubmitCertificationFieldValues) => {
+    const { isWithinRange } = checkDateRange(
+      new Date(data.send_date as string),
+      new Date(data.shipment_date as string),
+    );
+
+    if (isWithinRange) {
+      return toast.error(
+        'Please select shipment date within send date',
+        toastOptions,
+      );
+    }
+
     const toSend = {
       send_date: data.send_date,
       is_treated: data.is_treated === 'treated' ? true : false,
-      treatment_name: data.treatment_name,
+      treatment_name: viewTextArea ? data.treatment_name : '',
+      shipment_date: data.shipment_date,
+      treatment_duration: viewTextArea ? data.treatment_duration : '',
     };
 
     const toSendId = {
@@ -103,18 +120,20 @@ function SubmitCertification({ id }: { id: string }) {
         <div className="flex  gap-x-4 xlsm:flex-col xlsm:gap-y-4">
           <ControlledInput
             control={certSubmitForm.control}
-            name="send_date"
+            name="shipment_date"
             label="Estimated Shipment Date"
             type="date"
             useDataMaxLength={false}
           />
-          <ControlledSelect
-            control={certSubmitForm.control}
-            name="treatment_duration"
-            label="Treatment Duration:"
-            options={treatmentDuration}
-            placeholder="Please select"
-          />
+          {viewTextArea && (
+            <ControlledSelect
+              control={certSubmitForm.control}
+              name="treatment_duration"
+              label="Treatment Duration:"
+              options={treatmentDuration}
+              placeholder="Please select"
+            />
+          )}
         </div>
 
         {viewTextArea && (
