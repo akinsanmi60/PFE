@@ -4,6 +4,7 @@ import { IProduceItemList } from 'types/pentrarHub.type';
 import { ReactComponent as CallingPhone } from '@assets/svg/callingPhoneWhite.svg';
 import ModalHeader from 'components/appNav/modalHeader';
 import defaultImage from '@assets/png/hubImgDefault.png';
+import { capitalize } from '@utils/constants';
 
 const detailKeys = ['Quantity', 'Unit', 'Harvest Date', 'Farm Location'];
 
@@ -21,7 +22,7 @@ function OnHubProduceDetail({
     modalProduceDetail?.quantity,
     returnString(),
     modalProduceDetail?.harvest_date,
-    modalProduceDetail?.farm_state,
+    capitalize(modalProduceDetail?.farm_state),
   ];
 
   return (
@@ -38,8 +39,8 @@ function OnHubProduceDetail({
             actionText: 'hubProduceDetail',
           }}
         />
-        <div className="border border-background-borderlight-1 rounded-[16px] px-[20px]">
-          <p className="font-[400] text-[12px] leading-[17px] text-primary-main mt-[15px] mb-[8px]">
+        <div className="border border-background-borderlight-1 rounded-[16px] p-[20px]">
+          <p className="font-[400] text-[12px] leading-[17px] text-primary-main mb-[8px]">
             ID:{' '}
             <span className="font-[500] ">
               {modalProduceDetail?.pentrar_produce_id}

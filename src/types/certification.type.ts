@@ -1,4 +1,13 @@
 import { IBaseResponse, IDataCount } from './auth.type';
+import { IExporterData } from './exporter.type';
+import { IMyProduceData } from './produce.type';
+
+type IAgentDetail = {
+  id: string;
+  email: string;
+  full_name: string;
+  phone_number: string;
+};
 
 export type ICertification = {
   id: string;
@@ -15,35 +24,9 @@ export type ICertification = {
   shipment_date: string;
   treatment_name: string;
   report_uploaded: string;
-  collecting_agent: {
-    id: string;
-    email: string;
-    full_name: string;
-    phone_number: string;
-  };
-  testing_agent: {
-    id: string;
-    email: string;
-    full_name: string;
-    phone_number: string;
-  };
-  produce: {
-    id: string;
-    pentrar_produce_id: string;
-    quantity: string;
-    images: string;
-    description: string;
-    certification: string;
-    unit: string;
-    created_at: string;
-    updated_at: string;
-    owner_name: string;
-    owner_phone: string;
-    owner_type: string;
-    owner_pentrar_id: string;
-    farm_state: string;
-    harvest_date: string;
-  };
+  collecting_agent: IAgentDetail;
+  testing_agent: IAgentDetail;
+  produce: Partial<IMyProduceData>;
   agency: {
     id: string;
     agency_name: string;
@@ -51,6 +34,7 @@ export type ICertification = {
     email: string;
     agency_address: string;
   };
+  exporter: Partial<IExporterData>;
 };
 
 export type ICertificationData = IDataCount & {
@@ -59,4 +43,14 @@ export type ICertificationData = IDataCount & {
 
 export type ICertificationRes = IBaseResponse & {
   data: ICertificationData;
+};
+
+export type ICertificationByIdRes = IBaseResponse & {
+  data: ICertification;
+};
+
+export type ICertDetail = {
+  certDetail: {
+    certData: ICertification;
+  };
 };

@@ -141,3 +141,8 @@ export const SUBMIT_CERTIFICATION_URL = (
   `certification/create/${agencyID}/${produceID}/${exporterID}/certification-request`;
 export const GET_ALL_CERTIFICATIONS_URL =
   'certification/get-all-certifications';
+export const GET_CERTIFICATION_URL = (
+  id: string,
+  userId: string,
+  userType: string,
+) => `certification/${id}/get-request/${userId}/${userType}`;

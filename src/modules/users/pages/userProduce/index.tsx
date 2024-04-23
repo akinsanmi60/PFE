@@ -187,6 +187,12 @@ function UserProduce() {
                 <CustomButton
                   className="text-primary-white"
                   onClick={() => {
+                    if (authUser?.user_update_submited === false) {
+                      return toast.error(
+                        'Please update your profile before adding produce',
+                        toastOptions,
+                      );
+                    }
                     if (currentUserStatus() === false) {
                       return toast.error(
                         'Account need to be activated, please contact admin',

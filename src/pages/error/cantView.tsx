@@ -1,5 +1,6 @@
 import { useAuthContext } from '@contexts/authContext';
 import { adminPathsLinks } from '@modules/admin/routes';
+import { exporterPathsLinks } from '@modules/exporter/routes';
 import { userPathsLinks } from '@modules/users/routes';
 import { webPaths } from '@utils/paths';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +18,8 @@ function CantView() {
         return `/${BasePath.ADMIN}/${adminPathsLinks.dashBoard}`;
       case 'farmer' || 'aggregator':
         return `/${BasePath.USER}/${userPathsLinks.dashBoard}`;
+      case 'exporter':
+        return `/${BasePath.EXPORTER}/${exporterPathsLinks.dashBoard}`;
       default:
         return `${webPaths.home()}`;
     }

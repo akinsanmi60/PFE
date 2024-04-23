@@ -23,6 +23,7 @@ import { useGetIndividualExporterDependent } from 'services/exporter.service';
 import DetailColumnHead from './detailColumnHead';
 import { useGetProduceHandlers } from 'services/produce.service';
 import SubmitCertification from './submitCertification';
+import defaultImage from '@assets/png/hubImgDefault.png';
 
 const userArray = ['farmer', 'aggregator'];
 const adminUser = ['admin', 'subAdmin'];
@@ -173,7 +174,32 @@ function ProduceCard({
         />
       ) : produceData && Object.keys(produceData).length > 0 ? (
         <div className="border-[1px] border-primary-light-1 rounded-[16px] p-[24px] xlsm:p-0">
-          <div className="flex justify-between items-center">
+          {/* Image */}
+          <div className="grid grid-cols-4 gap-x-[10px] w-full xlsm:grid-cols-1 xlsm:gap-y-4">
+            {produceData?.images?.length
+              ? produceData?.images?.map((image, i) => {
+                  return (
+                    <img
+                      key={`image-${i}`}
+                      src={image}
+                      alt="image"
+                      className="h-[150px] w-[100%]"
+                    />
+                  );
+                })
+              : Array(4)
+                  .fill(defaultImage)
+                  .map((image, i) => (
+                    <img
+                      key={`image-${i}`}
+                      src={image}
+                      alt="image"
+                      className="h-[190px] w-[100%]"
+                    />
+                  ))}
+          </div>
+          {/* Image */}
+          <div className="flex justify-between items-center mt-4">
             <h1 className="text-primary-main pb-[13px] text-[20px] font-[600] tracking-normal  ">
               {capitalize(produceData?.name)}
             </h1>

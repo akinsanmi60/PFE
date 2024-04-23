@@ -1,6 +1,6 @@
 import CustomPagination from '@shared/customPagination';
 import { IHubProp, IRowBody } from './type';
-import { formatDate } from '@utils/constants';
+import { capitalize, formatDate } from '@utils/constants';
 import defaultImage from '@assets/png/hubImgDefault.png';
 
 function CustomHubTable<TData extends IRowBody>({
@@ -94,7 +94,7 @@ function CustomHubTable<TData extends IRowBody>({
                         State:
                       </p>
                       <p className="mt-[4px] text-[14px] leading-[20px] font-[500] text-primary-main">
-                        {item?.farm_state}
+                        {capitalize(item?.farm_state)}
                       </p>
                     </div>
                   </div>

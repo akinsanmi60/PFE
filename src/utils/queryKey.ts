@@ -21,4 +21,5 @@ export const queryKeys = {
   getAllExporters: 'getAllExporters',
   getAllProduceHandlers: 'getAllProduceHandlers',
   getAllCertificate: 'getAllCertificate',
+  getIndividualCertificate: 'getIndividualCertificate',
 };

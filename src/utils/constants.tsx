@@ -142,10 +142,10 @@ export const getClass = (text: string) => {
       return 'bg-[#FCD9DC] py-[5px] px-[12px] text-[#720B18] font-[500] rounded-lg';
     case 'Not Approved':
     case 'Not Certified':
-    case 'Pending':
       return 'bg-[#FFE5E6] py-[5px] px-[12px] text-statusText-error font-[500] rounded-lg';
     case 'Incoming':
-      return 'bg-[#E1E8F1] py-[5px] px-[12px] text-[#E6BB20] font-[500] rounded-lg';
+    case 'Pending':
+      return 'bg-[#E1E8F1] py-[5px] px-[12px] text-[#E6BB20/80] font-[500] rounded-lg';
     case 'Collected':
       return 'bg-[#FEF3C7] py-[5px] px-[12px] text-[#B45309] font-[500] rounded-lg';
     case 'Processing':

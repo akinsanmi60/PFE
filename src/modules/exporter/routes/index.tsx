@@ -46,6 +46,10 @@ const ExporterCertificationPage = React.lazy(
   () => import('@modules/exporter/pages/certification'),
 );
 
+const ExporterCertificationDetail = React.lazy(
+  () => import('@modules/exporter/pages/certification/certificationDetailView'),
+);
+
 export const exporterPathsLinks = {
   basePath: 'pentrar/exporter',
   dashBoard: 'dashboard',
@@ -58,6 +62,7 @@ export const exporterPathsLinks = {
   settings: 'profile-settings',
   reportProblem: 'report-problem',
   certification: 'certifications',
+  certificationDetails: 'certifications/:id/detail',
 };
 
 const ExporterRoutes = {
@@ -74,6 +79,11 @@ const ExporterRoutes = {
   ExportCertification: {
     element: ExporterCertificationPage,
     path: exporterPathsLinks.certification,
+  },
+
+  ExportCertificationDetails: {
+    element: ExporterCertificationDetail,
+    path: exporterPathsLinks.certificationDetails,
   },
 
   ExporterProduce: {

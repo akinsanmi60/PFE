@@ -18,8 +18,11 @@ import { ICertification } from 'types/certification.type';
 import { ITableHead } from '@shared/Table/table.interface';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 import { capitalize, formatDate } from '@utils/constants';
+import { ExporterPath } from '@utils/paths';
+import { useNavigate } from 'react-router-dom';
 
 function ExporterCertificationPage() {
+  const navigate = useNavigate();
   const { authUser } = useAuthContext();
   const [searchTerm, setSearchTerm] = useState('');
   const { modalState, handleModalOpen, handleModalClose } = useModalContext();
@@ -157,6 +160,9 @@ function ExporterCertificationPage() {
             showPagination
             setCurrentPage={(val: number) => updateQueryParams({ page: val })}
             setLimit={(val: number) => updateQueryParams({ limit: val })}
+            onRowClick={(row: ICertification) => {
+              navigate(`/${ExporterPath.certificationRequestDetail(row.id)}`);
+            }}
           />
         </div>
       </PageContainer>
