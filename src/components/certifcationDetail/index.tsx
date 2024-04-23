@@ -47,7 +47,7 @@ function CertifcationDetail({ certDetail }: ICertDetail) {
       {/* Images */}
 
       {/*  */}
-      <div className="flex gap-x-[20px] w-full mt-[24px]">
+      <div className="flex gap-x-[20px] w-full mt-[24px] sixm:flex-col sixm:gap-y-7">
         <div className="w-full">
           <div className="h-[167px]">
             <div>

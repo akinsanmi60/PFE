@@ -106,7 +106,7 @@ function ExporterProduce() {
   return (
     <div>
       <AppHeader>
-        <div className="flex justify-between items-center mt-[20px] px-[24px] pb-[14px] sixm:flex-col sixm:gap-y-[20px]">
+        <div className="flex justify-between items-center mt-[20px] px-[24px] pb-[14px] sixm:flex-col sixm:gap-y-[20px] xlsm:px-3">
           <div className="w-full">
             <h2 className="text-primary-main leading-6 font-[500] text-[18px]">
               Manage your produce
@@ -139,7 +139,7 @@ function ExporterProduce() {
           </div>
         </div>
       </AppHeader>
-      <PageContainer className="pt-0">
+      <PageContainer className="pt-0 xlsm:px-3">
         <CustomTable<IMyProduceData>
           children={renderText()}
           tableHeads={tableHead}

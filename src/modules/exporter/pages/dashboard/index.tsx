@@ -99,7 +99,7 @@ function ExporterDashboard() {
         isLoading={isLoading}
       />
 
-      <PageContainer>
+      <PageContainer className="xlsm:px-3">
         <CustomTable
           children={renderActionView()}
           tableHeads={tableHead}

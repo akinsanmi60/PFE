@@ -111,7 +111,7 @@ function ExporterCertificationPage() {
   return (
     <div className="">
       <AppHeader>
-        <div className="flex justify-between items-center mt-[20px] px-[24px] pb-[14px] sixm:flex-col sixm:gap-y-[20px]">
+        <div className="flex justify-between items-center mt-[20px] px-[24px] pb-[14px] sixm:flex-col sixm:gap-y-[20px] xlsm:px-3">
           <div className="w-full">
             <h2 className="text-primary-main leading-6 font-[500] text-[18px]">
               Track your certifications
@@ -144,7 +144,7 @@ function ExporterCertificationPage() {
           </div>
         </div>
       </AppHeader>
-      <PageContainer className="pt-0">
+      <PageContainer className="pt-0 xlsm:px-3">
         <div className="w-full bg-primary-white rounded-lg mt-[30px]">
           <CustomTable
             tableHeads={tableHead}

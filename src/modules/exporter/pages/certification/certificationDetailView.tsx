@@ -20,7 +20,7 @@ function CertificationDetailView() {
   return (
     <div>
       <AppHeader />
-      <PageContainer>
+      <PageContainer className="xlsm:px-3">
         <div className="p-[20px] bg-primary-white">
           <div className="flex items-center gap-x-1 mb-[14px] justify-between">
             <div className="flex items-center gap-x-1">
