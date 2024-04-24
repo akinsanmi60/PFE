@@ -14,6 +14,8 @@ const roleToAccessBtn = ['agency', 'agencyAdmin', 'agentSubAdmin'];
 function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
   const [openOptions, setOpenOptions] = useState(false);
   const { authUser } = useAuthContext();
+  const exporterEmail = dataDetail?.export?.email;
+  const pentrarEmail = 'Pentrar@fe.com';
 
   const handleOpenOptions = () => {
     if (dataDetail?.status === 'certified') {
@@ -59,25 +61,30 @@ function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
       >
         <p>Current Status: {capitalize(dataDetail?.status)}</p>
         {roleToAccessBtn.includes(authUser?.role as string) && (
-          <div>
-            <CustomButton
-              className="w-full text-primary-white"
-              onClick={handleOpenOptions}
-              loading={btnLoading}
-              disabled={btnLoading}
-              loadingText="Updating Status..."
-              variant={btnLoading ? 'solid' : ''}
-            >
-              <span className="mr-3">
-                {dataDetail?.status === 'certified'
-                  ? 'Certified'
-                  : 'Update Status'}
-              </span>
-              <span>
-                <UpdateIcon />
-              </span>
-            </CustomButton>
-          </div>
+          <>
+            {dataDetail?.status !== 'certified' ? (
+              <CustomButton
+                className="w-full text-primary-white"
+                onClick={handleOpenOptions}
+                loading={btnLoading}
+                disabled={btnLoading}
+                loadingText="Updating Status..."
+                variant={btnLoading ? 'solid' : ''}
+              >
+                <span className="mr-3">Update Status </span>
+                <span>
+                  <UpdateIcon />
+                </span>
+              </CustomButton>
+            ) : (
+              <a
+                className="tracking-normal py-[10px] text-center text-primary-white w-full duration-300 ease-in-out px-[32px] outline-none text-base cursor-pointer font-medium  bg-secondary-light-1 text-white focus:outline-none xlsm:text-[1rem] rounded-[8px]"
+                href={`mailto:${exporterEmail}?cc=${pentrarEmail} &subject=Certification Report`}
+              >
+                Send Report
+              </a>
+            )}
+          </>
         )}
       </div>
       {openOptions && (

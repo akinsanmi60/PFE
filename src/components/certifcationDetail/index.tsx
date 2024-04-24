@@ -8,9 +8,7 @@ import StatusWithAction from './statusWithAction';
 
 function CertifcationDetail({ certDetail }: ICertDetail) {
   const { certData } = certDetail;
-  const exporterEmail = certData?.export?.email;
   const { detailColumnsHeadTitleA } = CertificatioDetailColumnHead();
-  const pentrarEmail = 'Pentrar@fe.com';
 
   return (
     <div className="border border-background-borderlight-1 rounded-[16px] p-[20px]">
@@ -83,15 +81,6 @@ function CertifcationDetail({ certDetail }: ICertDetail) {
         <div className="w-full flex flex-col gap-y-5">
           <StatusWithAction dataDetail={certData} />
           <ExporterContact certDetail={certData} />
-          {certData?.status === 'certified' && (
-            <a
-              className="font-[500] text-[14px] leading-[20px] text-primary-lighter"
-              href={`mailto:${exporterEmail}?cc=${pentrarEmail} &subject=Certification Report`}
-            >
-              Click here to send copy of certification report to both Exporter
-              and Pentrar Team
-            </a>
-          )}
         </div>
       </div>
     </div>
