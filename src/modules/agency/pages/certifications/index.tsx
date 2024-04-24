@@ -27,8 +27,8 @@ function CertificationPage() {
                 href: `/${AgencyUserPath.certificationsTab('processing')}`,
               },
               {
-                name: 'Completed',
-                href: `/${AgencyUserPath.certificationsTab('completed')}`,
+                name: 'Certified',
+                href: `/${AgencyUserPath.certificationsTab('certified')}`,
               },
             ]}
           />

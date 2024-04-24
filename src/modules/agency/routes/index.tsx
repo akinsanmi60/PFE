@@ -43,7 +43,7 @@ export const agencyPathsLinks = {
   dashBoard: 'dashboard',
   certifications: 'certifications',
   processingCertifications: 'processing',
-  completedCertifications: 'completed',
+  completedCertifications: 'certified',
   collectedCertifications: 'collected',
   teamMember: 'team-member',
   settings: 'settings',

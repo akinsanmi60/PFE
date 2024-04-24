@@ -129,7 +129,7 @@ export const adminDashboardPaths = {
     )}`,
 };
 
-export type cerTabs = 'pending' | 'collected' | 'processing' | 'completed';
+export type cerTabs = 'pending' | 'collected' | 'processing' | 'certified';
 
 export const AgencyUserPath = {
   root: (fullPath: boolean = true) =>

@@ -16,6 +16,9 @@ function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
   const { authUser } = useAuthContext();
 
   const handleOpenOptions = () => {
+    if (dataDetail?.status === 'certified') {
+      return;
+    }
     setOpenOptions(!openOptions);
   };
 
@@ -65,7 +68,11 @@ function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
               loadingText="Updating Status..."
               variant={btnLoading ? 'solid' : ''}
             >
-              <span className="mr-3">Update Status</span>
+              <span className="mr-3">
+                {dataDetail?.status === 'certified'
+                  ? 'Certified'
+                  : 'Update Status'}
+              </span>
               <span>
                 <UpdateIcon />
               </span>

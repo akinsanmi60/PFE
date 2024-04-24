@@ -45,12 +45,21 @@ function CertificatioDetailColumnHead() {
       },
     },
     {
-      label: 'Certified By',
+      label: 'Processed By',
       accessor: null,
       render: ({ testing_agent }) => {
         return testing_agent === null
           ? '--'
           : capitalize(testing_agent?.full_name as string);
+      },
+    },
+    {
+      label: 'Certified By',
+      accessor: null,
+      render: ({ certifying_agent }) => {
+        return certifying_agent === null
+          ? '--'
+          : capitalize(certifying_agent?.full_name as string);
       },
     },
     {

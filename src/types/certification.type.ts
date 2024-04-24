@@ -26,6 +26,7 @@ export type ICertification = {
   report_uploaded: string;
   collecting_agent: IAgentDetail;
   testing_agent: IAgentDetail;
+  certifying_agent: IAgentDetail;
   mail_received: boolean;
   produce: Partial<IMyProduceData>;
   agency: {
