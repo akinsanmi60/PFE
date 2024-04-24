@@ -8,10 +8,10 @@ import CustomTable from '@shared/Table';
 import EmptyBar from '@shared/Table/tableEmpty';
 import TableLoading from '@shared/Table/tableLoading';
 import { useNavigate } from 'react-router-dom';
-import { agencyPathsLinks } from '@modules/agency/routes';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 import { useGetAllCertification } from 'services/certification.service';
 import { ICertification } from 'types/certification.type';
+import { AgencyUserPath } from '@utils/paths';
 
 function AgencyDashoard() {
   const { authUser } = useAuthContext();
@@ -80,7 +80,7 @@ function AgencyDashoard() {
             Recent Produces
           </p>
           <p
-            onClick={() => navigate(agencyPathsLinks.certifications)}
+            onClick={() => navigate(`/${AgencyUserPath.certifications()}`)}
             className="text-[14px] font-[600] leading-[20px] text-tertiary-light-3 cursor-pointer"
           >
             see all
