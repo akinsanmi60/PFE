@@ -10,42 +10,64 @@ import TableLoading from '@shared/Table/tableLoading';
 import { useNavigate } from 'react-router-dom';
 import { agencyPathsLinks } from '@modules/agency/routes';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
+import { useGetAllCertification } from 'services/certification.service';
+import { ICertification } from 'types/certification.type';
 
 function AgencyDashoard() {
   const { authUser } = useAuthContext();
-  const navigate = useNavigate();
+  const idFOrFetch =
+    authUser?.agency_attached_to !== null
+      ? authUser?.agency_attached_to
+      : authUser?.id;
 
-  const tableHead: ITableHead<any>[] = [
+  const navigate = useNavigate();
+  const queryParams = {
+    page: 1,
+    limit: 10,
+    agency_to: idFOrFetch as string,
+  };
+
+  const { data, isLoading, isRefetching } = useGetAllCertification(queryParams);
+
+  const tableHead: ITableHead<ICertification>[] = [
     {
-      label: 'Business Name',
-      accessor: 'pentrar_id',
-    },
-    {
-      label: 'Product Name',
-      accessor: 'agency_name',
-    },
-    {
-      label: 'Location',
-      accessor: 'phone_number',
-    },
-    {
-      label: 'Last Updated',
+      label: 'Certification ID',
       accessor: '',
-      render: ({ last_active }) => {
-        return formatDate({ date: last_active, time: true });
+      render: ({ certification_id }) => certification_id,
+    },
+    {
+      label: 'Exporter Name',
+      accessor: '',
+      render: ({ exporter_name }) => capitalize(exporter_name as string),
+    },
+    {
+      label: 'Produce Name',
+      accessor: '',
+      render: ({ produce: { name } }) => {
+        return capitalize(name);
       },
     },
     {
-      label: 'Remarks',
+      label: 'Produce Location',
+      accessor: '',
+      render: ({ export: { coy_state } }) => {
+        return capitalize(coy_state as string);
+      },
+    },
+    {
+      label: 'Created Date',
+      accessor: '',
+      render: ({ created_at }) => {
+        return !created_at
+          ? '--'
+          : formatDate({ date: created_at as string, time: true });
+      },
+    },
+    {
+      label: 'Status',
       accessor: 'status',
       render: ({ status }) => {
-        const statusText =
-          status === 'pending'
-            ? 'Incoming'
-            : status === 'testing'
-            ? 'Processing'
-            : status;
-        return <StatusBadge status={statusText as IStatusType} />;
+        return <StatusBadge status={status as IStatusType} />;
       },
     },
   ];
@@ -68,11 +90,16 @@ function AgencyDashoard() {
     );
   };
 
+  const displayName =
+    authUser?.agency_name !== null
+      ? authUser?.agency_name
+      : authUser?.full_name;
+
   return (
     <div>
       <AppHeader>
         <p className="text-primary-main leading-6 font-[500] text-[18px] mt-[24px] px-[24px] pb-[14px]">
-          Welcome, {capitalize(authUser?.agency_name as unknown as string)}
+          Welcome, {capitalize(displayName as unknown as string)}
         </p>
       </AppHeader>
       <AgencyDashboardHero />
@@ -81,7 +108,8 @@ function AgencyDashoard() {
         <CustomTable
           children={renderActionView()}
           tableHeads={tableHead}
-          dataTableSource={[]}
+          loading={isLoading || isRefetching}
+          dataTableSource={data?.certifications || []}
           tableEmptyState={
             <EmptyBar emptyStateSize="lg" componentType="certifications" />
           }
