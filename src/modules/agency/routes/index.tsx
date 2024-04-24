@@ -10,11 +10,19 @@ const AgencyCertification = React.lazy(
 );
 
 const AgencyPendingCertification = React.lazy(
-  () => import('@modules/agency/pages/certifications/pendingCretification'),
+  () => import('@modules/agency/pages/certifications/pendingCertification'),
 );
 
 const AgencyProcessingCertification = React.lazy(
   () => import('@modules/agency/pages/certifications/processingCertification'),
+);
+
+const AgencyCompletedCertification = React.lazy(
+  () => import('@modules/agency/pages/certifications/completedCertification'),
+);
+
+const AgencyCollectedCertification = React.lazy(
+  () => import('@modules/agency/pages/certifications/collectedCertification'),
 );
 
 const AgencyTeamMember = React.lazy(
@@ -25,13 +33,21 @@ const AgencySettings = React.lazy(
   () => import('@modules/agency/pages/settings'),
 );
 
+const AgencyCertificationDetail = React.lazy(
+  () =>
+    import('../../../components/certifcationDetail/certificationDetailView'),
+);
+
 export const agencyPathsLinks = {
   basePath: 'pentrar/agency',
   dashBoard: 'dashboard',
   certifications: 'certifications',
   processingCertifications: 'processing',
+  completedCertifications: 'completed',
+  collectedCertifications: 'collected',
   teamMember: 'team-member',
   settings: 'settings',
+  certificationDetails: 'certifications/:id/:tab',
 };
 
 const agencyRoutes = {
@@ -50,10 +66,23 @@ const agencyRoutes = {
         useIndex: true,
       },
       {
+        element: AgencyCollectedCertification,
+        path: agencyPathsLinks.collectedCertifications,
+      },
+      {
         element: AgencyProcessingCertification,
         path: agencyPathsLinks.processingCertifications,
       },
+      {
+        element: AgencyCompletedCertification,
+        path: agencyPathsLinks.completedCertifications,
+      },
     ],
+  },
+
+  AgencyCertificationDetail: {
+    element: AgencyCertificationDetail,
+    path: agencyPathsLinks.certificationDetails,
   },
 
   AgencyTeamMember: {

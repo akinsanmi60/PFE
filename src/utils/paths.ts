@@ -129,13 +129,20 @@ export const adminDashboardPaths = {
     )}`,
 };
 
+export type cerTabs = 'pending' | 'collected' | 'processing' | 'completed';
+
 export const AgencyUserPath = {
   root: (fullPath: boolean = true) =>
     `${fullPath ? `${BasePath.AGENCY}/` : ''}`,
   certifications: (fullPath: boolean = true) =>
     `${AgencyUserPath.root(fullPath)}${agencyPathsLinks.certifications}`,
-  certificationsProcessing: (fullPath: boolean = true) =>
-    `${joinPath(AgencyUserPath.certifications(fullPath), 'processing')}`,
+  certificationsTab: (tab: cerTabs | null, fullPath: boolean = true) =>
+    `${joinPath(AgencyUserPath.certifications(fullPath), tab)}`,
+  certificationDetial: (
+    certId: string,
+    tab: cerTabs | null,
+    fullPath: boolean = true,
+  ) => `${joinPath(AgencyUserPath.certifications(fullPath), certId, tab)}`,
 };
 
 export const UserFarmerAggregatorPath = {

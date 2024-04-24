@@ -3,7 +3,10 @@ import { capitalize, getClass } from '@utils/constants';
 import { ICertification } from 'types/certification.type';
 import { ReactComponent as UpdateIcon } from '@assets/svg/updateIcon.svg';
 import { useState } from 'react';
-import { useUpdateCertificationMutation } from 'services/certification.service';
+import {
+  useUpdateCertificationMutation,
+  useAgencyUpdateCertificationMutation,
+} from 'services/certification.service';
 import { useAuthContext } from '@contexts/authContext';
 
 const certList = ['collected', 'processing', 'certified'];
@@ -16,29 +19,39 @@ function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
     setOpenOptions(!openOptions);
   };
 
-  const { mutate } = useUpdateCertificationMutation();
+  const { mutate: TeamMemberUpdate, isLoading: isteamMemberLoading } =
+    useUpdateCertificationMutation();
+  const { mutate, isLoading } = useAgencyUpdateCertificationMutation();
 
   const updateStatus = (value: string) => {
     setOpenOptions(false);
-    const agentId =
-      value === 'collected'
-        ? dataDetail?.collecting_agent?.id
-        : dataDetail?.testing_agent?.id;
-    mutate({
-      payload: { status: value },
-      idData: {
-        id: dataDetail.id,
-        agencyId: dataDetail.agency_to,
-        agentId: agentId,
-      },
-    });
+    if (authUser?.role === 'agency') {
+      mutate({
+        payload: { status: value },
+        idData: {
+          id: dataDetail.id,
+          agencyId: dataDetail.agency_to,
+        },
+      });
+    } else {
+      TeamMemberUpdate({
+        payload: { status: value },
+        idData: {
+          id: dataDetail.id,
+          agencyId: dataDetail.agency_to,
+          agentId: authUser?.id as string,
+        },
+      });
+    }
   };
+
+  const btnLoading = isteamMemberLoading || isLoading;
 
   return (
     <div className="relative">
       <div
         className={`${getClass(
-          'pending',
+          dataDetail.status,
         )} px-[24px] py-[23px] flex flex-col gap-y-4`}
       >
         <p>Current Status: {capitalize(dataDetail?.status)}</p>
@@ -47,6 +60,10 @@ function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
             <CustomButton
               className="w-full text-primary-white"
               onClick={handleOpenOptions}
+              loading={btnLoading}
+              disabled={btnLoading}
+              loadingText="Updating Status..."
+              variant={btnLoading ? 'solid' : ''}
             >
               <span className="mr-3">Update Status</span>
               <span>

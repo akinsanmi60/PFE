@@ -11,10 +11,14 @@ import CertifcationDetail from 'components/certifcationDetail';
 function CertificationDetailView() {
   const { id } = useParams();
   const { authUser } = useAuthContext();
+  const userId =
+    authUser?.role === 'agency' || authUser?.role === 'exporter'
+      ? authUser?.id
+      : authUser?.agency_attached_to;
   const navigate = useNavigate();
   const { data, isLoading, isRefetching } = useGetCertificationById(
     id as string,
-    authUser?.id as string,
+    userId as string,
     authUser?.role as string,
   );
   return (

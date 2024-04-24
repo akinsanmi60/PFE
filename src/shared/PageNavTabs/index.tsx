@@ -15,7 +15,7 @@ const PageNavTabs = ({ tabs, currentHref }: IPageNavTabsProps) => {
 
   return (
     <div className="pt-4 pb-2" id="tabWithNavigation">
-      <div className="flex items-center">
+      <div className="flex items-center xlsm:flex-wrap">
         {tabs?.map((item, i) => {
           return (
             <div

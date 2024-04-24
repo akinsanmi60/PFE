@@ -146,7 +146,7 @@ function ExporterCertificationPage() {
       </AppHeader>
       <PageContainer className="pt-0 xlsm:px-3">
         <div className="w-full bg-primary-white rounded-lg mt-[30px]">
-          <CustomTable
+          <CustomTable<ICertification>
             tableHeads={tableHead}
             loading={isLoading || isRefetching}
             dataTableSource={data?.certifications || []}

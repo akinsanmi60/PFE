@@ -35,7 +35,7 @@ export type ICertification = {
     email: string;
     agency_address: string;
   };
-  exporter: Partial<IExporterData>;
+  export: Partial<IExporterData>;
 };
 
 export type ICertificationData = IDataCount & {

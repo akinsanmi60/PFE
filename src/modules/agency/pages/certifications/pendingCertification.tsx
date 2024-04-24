@@ -9,7 +9,6 @@ import { IFilterValues } from 'types/modal.type';
 import { ICertification } from 'types/certification.type';
 import { capitalize, formatDate } from '@utils/constants';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
-import PageContainer from 'components/Layout/PageContainer';
 import CustomTable from '@shared/Table';
 import { useGetAllCertification } from 'services/certification.service';
 import { ITableHead } from '@shared/Table/table.interface';
@@ -18,20 +17,21 @@ import TableLoading from '@shared/Table/tableLoading';
 import AgencyCertificationFilterForm from './certificationFilterForm';
 import { AgencyUserPath } from '@utils/paths';
 import { useNavigate } from 'react-router-dom';
-function ProcessingCertification() {
+
+function PendingCertification() {
   const navigate = useNavigate();
+
   const { modalState, handleModalOpen, handleModalClose } = useModalContext();
   const [searchTerm, setSearchTerm] = useState('');
   const [queryParams, setQueryParams] = useState({
     search: '',
     page: 1,
     limit: 10,
-    status: 'processing',
+    status: 'pending',
   });
 
   const certificationForm = useForm<IFilterValues>({
     defaultValues: {
-      status: '',
       created_at: '',
       updated_at: '',
     },
@@ -43,10 +43,10 @@ function ProcessingCertification() {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
 
-  const openFilterBox = () => handleModalOpen('processingFilterForm');
+  const openFilterBox = () => handleModalOpen('pendingFilterForm');
 
   const closeFilterBox = () => {
-    handleModalClose('processingFilterForm');
+    handleModalClose('filterCertification');
   };
 
   const submitFilter = () => {
@@ -87,17 +87,12 @@ function ProcessingCertification() {
       },
     },
     {
-      label: 'Processing By',
+      label: 'Created Date',
       accessor: '',
-      render: ({ testing_agent: { full_name } }) => {
-        return full_name === null ? '--' : capitalize(full_name as string);
-      },
-    },
-    {
-      label: 'Processing Date',
-      accessor: '',
-      render: ({ updated_at }) => {
-        return !updated_at ? '--' : formatDate({ date: updated_at as string });
+      render: ({ created_at }) => {
+        return !created_at
+          ? '--'
+          : formatDate({ date: created_at as string, time: true });
       },
     },
     {
@@ -138,31 +133,29 @@ function ProcessingCertification() {
           />
         </div>
       </div>
-      <PageContainer className="pt-0 xlsm:px-3">
-        <div className="w-full bg-primary-white rounded-lg mt-[30px]">
-          <CustomTable<ICertification>
-            tableHeads={tableHead}
-            loading={isLoading || isRefetching}
-            dataTableSource={data?.certifications || []}
-            page_size={data?.page_size}
-            total={data?.total}
-            current_page={data?.current_page}
-            tableEmptyState={
-              <EmptyBar emptyStateSize="lg" componentType="Certification" />
-            }
-            tableLoader={<TableLoading title="Loading Certifications..." />}
-            showPagination
-            setCurrentPage={(val: number) => updateQueryParams({ page: val })}
-            setLimit={(val: number) => updateQueryParams({ limit: val })}
-            onRowClick={(row: ICertification) => {
-              navigate(
-                `/${AgencyUserPath.certificationDetial(row?.id, 'processing')}`,
-              );
-            }}
-          />
-        </div>
-      </PageContainer>
-      {modalState?.modalType === 'processingFilterForm' && (
+      <div className="w-full bg-primary-white rounded-lg mt-[30px]">
+        <CustomTable<ICertification>
+          tableHeads={tableHead}
+          loading={isLoading || isRefetching}
+          dataTableSource={data?.certifications || []}
+          page_size={data?.page_size}
+          total={data?.total}
+          current_page={data?.current_page}
+          tableEmptyState={
+            <EmptyBar emptyStateSize="lg" componentType="Certification" />
+          }
+          tableLoader={<TableLoading title="Loading Certifications..." />}
+          showPagination
+          setCurrentPage={(val: number) => updateQueryParams({ page: val })}
+          setLimit={(val: number) => updateQueryParams({ limit: val })}
+          onRowClick={(row: ICertification) => {
+            navigate(
+              `/${AgencyUserPath.certificationDetial(row?.id, 'pending')}`,
+            );
+          }}
+        />
+      </div>
+      {modalState?.modalType === 'pendingFilterForm' && (
         <AgencyCertificationFilterForm
           closeModalBox={closeFilterBox}
           filterForm={certificationForm}
@@ -173,7 +166,7 @@ function ProcessingCertification() {
               limit: 10,
               created_at: '',
               updated_at: '',
-              status: 'processing',
+              status: 'pending',
             })
           }
         />
@@ -182,4 +175,4 @@ function ProcessingCertification() {
   );
 }
 
-export default ProcessingCertification;
+export default PendingCertification;

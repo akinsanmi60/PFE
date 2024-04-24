@@ -11,13 +11,16 @@ import {
   AGGREGATOR_SIDENAV,
   EXPORTER_SIDENAV,
   SETTINGS_SIDENAV,
+  SUBADMIN_NAVLINK,
   SUBADMIN_SETTINGS,
   SUPER_ADMIN_SIDENAV,
+  SUBADGENCY_NAVLINK,
 } from '@utils/sideNaDetailsv';
 import pentrarLogo from '@assets/svg/LogoPentrar.svg';
 import { ReactComponent as ProfileICon } from '@assets/svg/profileIcon.svg';
 
 import { useMemo } from 'react';
+import { getUserRoleLabel } from '@utils/dataTransform';
 
 const active = ({ isActive }: { isActive: boolean }) => {
   return {
@@ -39,10 +42,15 @@ function SideNav() {
       ? AGGREGATOR_SIDENAV
       : authUser?.role === Account.Exporter
       ? EXPORTER_SIDENAV
-      : authUser?.role === Account.Admin || authUser?.role === Account.SubAdmin
+      : authUser?.role === Account.Admin
       ? SUPER_ADMIN_SIDENAV
-      : authUser?.role === Account.Agency
+      : authUser?.role === Account.SubAdmin
+      ? SUBADMIN_NAVLINK
+      : authUser?.role === Account.Agency ||
+        authUser?.role === Account['Agency Admin']
       ? AGENCY_SIDENAV
+      : authUser?.role === Account['Agency Staff']
+      ? SUBADGENCY_NAVLINK
       : null;
   }, [authUser?.role]);
 
@@ -168,7 +176,7 @@ function SideNav() {
               <p className="text-[12px] font-[600]">{capitalize(first_name)}</p>
             </div>
             <p className="text-[14px] font-[400] whitespace-nowrap">
-              {capitalize(authUser?.role)}
+              {capitalize(getUserRoleLabel(authUser?.role as string))}
             </p>
           </div>
         </div>

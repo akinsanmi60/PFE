@@ -47,7 +47,8 @@ const ExporterCertificationPage = React.lazy(
 );
 
 const ExporterCertificationDetail = React.lazy(
-  () => import('@modules/exporter/pages/certification/certificationDetailView'),
+  () =>
+    import('../../../components/certifcationDetail/certificationDetailView'),
 );
 
 export const exporterPathsLinks = {

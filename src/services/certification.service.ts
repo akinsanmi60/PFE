@@ -2,6 +2,7 @@ import { displayError, displaySuccess } from '@shared/Toast/Toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getRequest, patchRequest } from '@utils/apiCaller';
 import {
+  AGENCY_UPDATE_CERTIFICATION_URL,
   GET_ALL_CERTIFICATIONS_URL,
   GET_CERTIFICATION_URL,
   UPDATE_CERTIFICATION_URL,
@@ -94,9 +95,40 @@ const useUpdateCertificationMutation = () => {
 
   return { mutate, isLoading, ...rest };
 };
+const useAgencyUpdateCertificationMutation = () => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, ...rest } = useMutation(
+    ({
+      payload,
+      idData,
+    }: {
+      payload: { status: string };
+      idData: {
+        id: string;
+        agencyId: string;
+      };
+    }) =>
+      patchRequest<{ status: string }, IBaseResponse>({
+        url: AGENCY_UPDATE_CERTIFICATION_URL(idData.id, idData.agencyId),
+        payload,
+      }),
+    {
+      onSuccess(res) {
+        displaySuccess(res?.message);
+        queryClient.invalidateQueries([queryKeys.getIndividualCertificate]);
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
 
 export {
   useGetAllCertification,
   useGetCertificationById,
   useUpdateCertificationMutation,
+  useAgencyUpdateCertificationMutation,
 };

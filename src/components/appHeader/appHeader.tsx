@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { webPaths } from '@utils/paths';
 import ProfileHead from './profileHead';
 import NotificationHead from './notificationHead';
+import { getUserRoleLabel } from '@utils/dataTransform';
 
 const ProfileBox = ({ first_name }: { first_name: string }) => {
   const { setAuthUser } = useAuthContext();
@@ -52,7 +53,7 @@ function AppHeader({ children }: { children?: React.ReactNode }) {
         <div className="flex items-center justify-end">
           <div className="flex gap-[30px] items-center">
             <p className="bg-[#DAFBEC] py-[6px] px-[12px] text-statusText-success font-[500] rounded-lg">
-              {capitalize(authUser?.role)}
+              {capitalize(getUserRoleLabel(authUser?.role as string))}
             </p>
 
             <ProfileBox first_name={first_name as string} />

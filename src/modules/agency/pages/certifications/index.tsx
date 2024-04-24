@@ -19,14 +19,22 @@ function CertificationPage() {
                 href: `/${AgencyUserPath.certifications()}`,
               },
               {
+                name: 'Collected',
+                href: `/${AgencyUserPath.certificationsTab('collected')}`,
+              },
+              {
                 name: 'Processing',
-                href: `/${AgencyUserPath.certificationsProcessing()}`,
+                href: `/${AgencyUserPath.certificationsTab('processing')}`,
+              },
+              {
+                name: 'Completed',
+                href: `/${AgencyUserPath.certificationsTab('completed')}`,
               },
             ]}
           />
         </PageContainer>
       </AppHeader>
-      <PageContainer className="pt-0">
+      <PageContainer className="pt-0 xlsm:px-3">
         <Outlet />
       </PageContainer>
     </div>

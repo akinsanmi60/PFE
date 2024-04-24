@@ -151,3 +151,5 @@ export const UPDATE_CERTIFICATION_URL = (
   agencyId: string,
   agentId: string,
 ) => `certification/${id}/update-status/${agencyId}/${agentId}`;
+export const AGENCY_UPDATE_CERTIFICATION_URL = (id: string, agencyId: string) =>
+  `certification/${id}/update-status/${agencyId}`;
