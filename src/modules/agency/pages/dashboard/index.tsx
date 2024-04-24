@@ -90,10 +90,9 @@ function AgencyDashoard() {
     );
   };
 
-  const displayName =
-    authUser?.agency_name !== null
-      ? authUser?.agency_name
-      : authUser?.full_name;
+  const displayName = authUser?.agency_name
+    ? authUser?.agency_name
+    : authUser?.full_name;
 
   return (
     <div>
