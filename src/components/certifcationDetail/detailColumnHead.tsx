@@ -62,10 +62,48 @@ function CertificatioDetailColumnHead() {
           : '--';
       },
     },
-
     {
       label: 'Pentrar Confirmation',
       accessor: null,
+      render: ({ mail_received }) => {
+        return mail_received === null
+          ? '--'
+          : mail_received === false
+          ? 'No'
+          : 'Yes';
+      },
+    },
+    {
+      label: 'Produce Shipment Date',
+      accessor: null,
+      render: ({ shipment_date }) => {
+        return formatDate({ date: shipment_date as string });
+      },
+    },
+    {
+      label: 'Is Produce Treated',
+      accessor: null,
+      render: ({ is_treated }) => {
+        return is_treated === null ? '--' : is_treated === false ? 'No' : 'Yes';
+      },
+    },
+    {
+      label: 'Treatment Name',
+      accessor: null,
+      render: ({ treatment_name }) => {
+        return treatment_name === null
+          ? '--'
+          : capitalize(treatment_name as string);
+      },
+    },
+    {
+      label: 'Treatment Duration',
+      accessor: null,
+      render: ({ treatment_duration }) => {
+        return treatment_duration === null
+          ? '--'
+          : capitalize(treatment_duration as string);
+      },
     },
   ];
 

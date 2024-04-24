@@ -146,3 +146,8 @@ export const GET_CERTIFICATION_URL = (
   userId: string,
   userType: string,
 ) => `certification/${id}/get-request/${userId}/${userType}`;
+export const UPDATE_CERTIFICATION_URL = (
+  id: string,
+  agencyId: string,
+  agentId: string,
+) => `certification/${id}/update-status/${agencyId}/${agentId}`;

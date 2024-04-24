@@ -1,11 +1,14 @@
-import { useQuery } from '@tanstack/react-query';
-import { getRequest } from '@utils/apiCaller';
+import { displayError, displaySuccess } from '@shared/Toast/Toast';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getRequest, patchRequest } from '@utils/apiCaller';
 import {
   GET_ALL_CERTIFICATIONS_URL,
   GET_CERTIFICATION_URL,
+  UPDATE_CERTIFICATION_URL,
 } from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
+import { IBaseResponse } from 'types/auth.type';
 import {
   ICertification,
   ICertificationByIdRes,
@@ -56,4 +59,44 @@ const useGetCertificationById = (
   };
 };
 
-export { useGetAllCertification, useGetCertificationById };
+const useUpdateCertificationMutation = () => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, ...rest } = useMutation(
+    ({
+      payload,
+      idData,
+    }: {
+      payload: { status: string };
+      idData: {
+        id: string;
+        agencyId: string;
+        agentId: string;
+      };
+    }) =>
+      patchRequest<{ status: string }, IBaseResponse>({
+        url: UPDATE_CERTIFICATION_URL(
+          idData.id,
+          idData.agencyId,
+          idData.agentId,
+        ),
+        payload,
+      }),
+    {
+      onSuccess(res) {
+        displaySuccess(res?.message);
+        queryClient.invalidateQueries([queryKeys.getIndividualCertificate]);
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+
+export {
+  useGetAllCertification,
+  useGetCertificationById,
+  useUpdateCertificationMutation,
+};

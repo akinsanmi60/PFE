@@ -17,7 +17,7 @@ export type ICertification = {
   status: string;
   agency_to: string;
   created_by: string;
-  is_treated: true;
+  is_treated: boolean;
   send_date: string;
   certification_id: string;
   treatment_duration: string;
@@ -26,6 +26,7 @@ export type ICertification = {
   report_uploaded: string;
   collecting_agent: IAgentDetail;
   testing_agent: IAgentDetail;
+  mail_received: boolean;
   produce: Partial<IMyProduceData>;
   agency: {
     id: string;
