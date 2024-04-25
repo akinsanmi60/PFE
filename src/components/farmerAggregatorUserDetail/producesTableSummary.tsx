@@ -70,11 +70,11 @@ function FarmerAggregatorProduce({ fetcherProp }: IProps) {
         setCurrentPage={(val: number) => updateQueryParams({ page: val })}
         setLimit={(val: number) => updateQueryParams({ limit: val })}
         tableEmptyState={
-          <EmptyBar emptyStateSize="sm" componentType="produces" />
+          <EmptyBar emptyStateSize="sm" componentType="produce" />
         }
         tableLoader={
           <TableLoading
-            title="Loading Produces"
+            title="Loading Produce"
             size={80}
             loadingStateSize="sm"
           />

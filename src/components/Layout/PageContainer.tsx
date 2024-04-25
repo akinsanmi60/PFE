@@ -9,5 +9,7 @@ export default function PageContainer({
   children,
   className,
 }: IPageContainerProps) {
-  return <div className={twMerge('px-6 py-5', className)}>{children}</div>;
+  return (
+    <div className={twMerge('px-6 py-5 xlsm:px-3', className)}>{children}</div>
+  );
 }

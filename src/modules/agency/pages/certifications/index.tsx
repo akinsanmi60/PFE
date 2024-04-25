@@ -34,7 +34,7 @@ function CertificationPage() {
           />
         </PageContainer>
       </AppHeader>
-      <PageContainer className="pt-0 xlsm:px-3">
+      <PageContainer className="pt-0">
         <Outlet />
       </PageContainer>
     </div>

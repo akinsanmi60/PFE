@@ -39,7 +39,7 @@
 
   /* width */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 4px;
     min-height: 6px;
   }
 
@@ -51,14 +51,14 @@
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #072723;
+    background: #1a1a1a;
     border-radius: 8px;
     min-height: 6px;
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #072723;
+    background: #1a1a1a;
   }
 
   input:-webkit-autofill,

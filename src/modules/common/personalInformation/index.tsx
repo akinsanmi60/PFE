@@ -67,7 +67,7 @@ function PersonalInformation({ data }: { data: IIndividualFarmer }) {
       <div className="p-[24px] font-primary">
         <PageTile actionArray={actionArray} title="Personal Information" />
 
-        <div className="grid grid-cols-[170px_1fr] gap-x-5 my-[30px]">
+        <div className="grid grid-cols-[170px_1fr] gap-x-5 my-[30px] xlsm:grid-cols-1 xlsm:gap-y-5">
           <div>
             <ImageUpload successWatcher={false} acceptType="image/*" />
           </div>

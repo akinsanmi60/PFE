@@ -139,7 +139,7 @@ function ExporterProduce() {
           </div>
         </div>
       </AppHeader>
-      <PageContainer className="pt-0 xlsm:px-3">
+      <PageContainer className="pt-0">
         <CustomTable<IMyProduceData>
           children={renderText()}
           tableHeads={tableHead}

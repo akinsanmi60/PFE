@@ -14,7 +14,7 @@ function CustomPagination({
   paginationArray,
 }: ICustomPagination) {
   return (
-    <div className="w-full mt-[24px] flex items-center justify-between relative xlsm:flex-col">
+    <div className="w-full mt-[24px] flex items-center justify-between relative xlsm:flex-col xlsm:gap-y-4">
       <div className="flex items-center gap-[24px]">
         <button
           className="w-[32px] h-[32px] flex justify-center items-center rounded-[8px]  border-[1px] border-gray-100 cursor-pointer"

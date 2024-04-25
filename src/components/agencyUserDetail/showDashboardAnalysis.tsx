@@ -20,7 +20,11 @@ function ShowDashboardAnalysis({
   return (
     <div className="p-[20px]">
       <div className="mb-4">
-        <ShowDashboardOfAgency dashboardProp={{ isLoading: false, data: 0 }} />
+        <ShowDashboardOfAgency
+          analysisProp={{
+            id: showAgencyAnalysisProp.id,
+          }}
+        />
       </div>
 
       <PageNavTabs
@@ -38,7 +42,11 @@ function ShowDashboardAnalysis({
       )}
 
       {showAgencyAnalysisProp.currentTab === 'certification' && (
-        <AgencyCertificationSummary />
+        <AgencyCertificationSummary
+          analysisProp={{
+            id: showAgencyAnalysisProp.id,
+          }}
+        />
       )}
     </div>
   );

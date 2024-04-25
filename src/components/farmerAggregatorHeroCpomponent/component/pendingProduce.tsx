@@ -17,7 +17,7 @@ function PendingProduce({ produceValue }: IPendingProducePprop) {
           <p className="text-[14px] font-[600] text-tertiary-light-3 my-2">
             {produceDetail?.name || '----'}
           </p>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4 xlsm:grid-cols-2">
             <div className="text-[14px] font-[600] text-tertiary-light-3">
               <p className="text-[14px] text-tertiary-light-3">
                 Quantity:{' '}
@@ -35,7 +35,7 @@ function PendingProduce({ produceValue }: IPendingProducePprop) {
               </p>
             </div>
             {produceDetail?.status && (
-              <div className="flex justify-end">
+              <div className="flex justify-end xlsm:hidden">
                 <StatusBadge
                   status={produceDetail?.status as IStatusType}
                   className="py-[2px] mdxl:text-[10px]"

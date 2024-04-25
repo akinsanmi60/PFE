@@ -56,7 +56,7 @@ function Header() {
                   <LoginButton />
                 </div>
               )}
-              <div className=" hidden mdxl:block">
+              <div className="hidden mdxl:block">
                 {open ? (
                   <img
                     onClick={() => setOpen(false)}
@@ -94,7 +94,7 @@ function Header() {
             <div className="flex gap-[20px] mt-[50px] items-center xlsm:flex-col xlsm:items-start">
               <CustomButton
                 onClick={() =>
-                  navigate(`${authPaths.login(false, 'login', 'farmer')}`)
+                  navigate(`${authPaths.login(false, 'farmer', 'login')}`)
                 }
                 className="rounded-[40px] xlsm:w-full py-[12px] px-[40px] text-[16px] leading-[22px] font-[600] text-primary-white border-[1px] border-background-main"
               >

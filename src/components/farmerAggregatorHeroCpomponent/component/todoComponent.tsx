@@ -18,7 +18,7 @@ function TodoComponent({
           Please complete your profile
         </p>
 
-        <div className="flex justify-end">
+        <div className="flex justify-end xlsm:mt-4">
           <CustomButton
             className="bg-[#E03137] text-primary-white text-[8px] font-[600]"
             sx={{ borderRadius: '40px', px: 4, py: 0 }}

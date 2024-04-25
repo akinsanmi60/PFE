@@ -11,7 +11,7 @@ function ExporterPentrarHub() {
           Pentrar Hub
         </p>
       </AppHeader>
-      <PageContainer className="pt-0 xlsm:px-3">
+      <PageContainer className="pt-0">
         <HubAnimation />
         <HubProduce />
       </PageContainer>

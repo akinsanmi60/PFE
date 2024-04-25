@@ -138,7 +138,7 @@ function ProcessingCertification() {
           />
         </div>
       </div>
-      <PageContainer className="pt-0 xlsm:px-3">
+      <PageContainer className="pt-0">
         <div className="w-full bg-primary-white rounded-lg mt-[30px]">
           <CustomTable<ICertification>
             tableHeads={tableHead}

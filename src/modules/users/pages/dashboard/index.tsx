@@ -112,7 +112,7 @@ function DashboardHome() {
         }}
       />
 
-      <PageContainer>
+      <PageContainer className="xlsm:px-3">
         <CustomTable<IRecentProduceDetail>
           children={renderActionView()}
           tableHeads={tableHead}

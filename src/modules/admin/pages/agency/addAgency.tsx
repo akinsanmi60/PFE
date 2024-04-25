@@ -29,6 +29,7 @@ function AddAgency() {
       head_name: '',
       head_of_agency_phone: '',
       head_of_agency_email: '',
+      agency_type: '',
     },
     resolver: yupResolver(AddNewAgencySchema),
   });
@@ -144,6 +145,18 @@ function AddAgency() {
             name="head_of_agency_email"
             label="Head of Agency Email"
             placeholder="Enter head of agency email"
+          />
+        </div>
+        <div>
+          <ControlledSelect
+            control={control}
+            name="agency_type"
+            label="Agency Team Type"
+            placeholder="Please select agency team type"
+            options={[
+              { label: 'Lab Agent', value: 'labAgent' },
+              { label: 'Field Agent', value: 'fieldAgent' },
+            ]}
           />
         </div>
 

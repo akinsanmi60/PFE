@@ -48,4 +48,5 @@ export type ICreateAgency = {
   head_name: string;
   head_of_agency_phone: string;
   head_of_agency_email: string;
+  agency_type: string;
 };

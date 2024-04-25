@@ -1,24 +1,22 @@
 import CircularProgress from '@shared/CircularProgress';
+import { useGetAgencyDashboard } from 'services/agency.service';
+import { IAgencyShowTableSummary } from 'types/agency.type';
 
-type IshowDashboard = {
-  dashboardProp: {
-    isLoading: boolean;
-    data: any;
-  };
-};
-function ShowDashboardOfAgency({ dashboardProp }: IshowDashboard) {
+function ShowDashboardOfAgency({ analysisProp }: IAgencyShowTableSummary) {
+  const { data, isLoading } = useGetAgencyDashboard(analysisProp?.id as string);
+
   const incomingData = [
     {
       title: 'Total Certs',
-      count: dashboardProp?.data || 0,
+      count: data?.data?.total_certification,
     },
     {
       title: 'Approved Certs',
-      count: dashboardProp?.data || 0,
+      count: data?.data?.total_certified,
     },
     {
       title: 'Pending Certs',
-      count: dashboardProp?.data || 0,
+      count: data?.data?.total_pending,
     },
   ];
 
@@ -33,10 +31,12 @@ function ShowDashboardOfAgency({ dashboardProp }: IshowDashboard) {
             {item.title}
           </p>
           <p className="text-primary-main text-[20px] font-[600] leading-[42px]">
-            {dashboardProp?.isLoading ? (
+            {isLoading ? (
               <CircularProgress color="#2AA232" size={30} />
+            ) : item?.count === undefined ? (
+              0
             ) : (
-              item.count
+              item?.count
             )}
           </p>
         </div>

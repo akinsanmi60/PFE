@@ -34,5 +34,6 @@ export const AddNewAgencySchema = yup
       .string()
       .required('Enter your agency head email')
       .matches(EMAIL_REGEX, 'Please enter a valid email address'),
+    agency_type: yup.string().required('Select your agency type'),
   })
   .required();

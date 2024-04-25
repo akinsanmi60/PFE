@@ -43,7 +43,7 @@ function DashboardHeroFOrFarmerAggregator({
   };
 
   return (
-    <PageContainer>
+    <PageContainer className="xlsm:px-3">
       <div className="grid grid-cols-2 gap-4 sixm:grid-cols-1 font-primary">
         <div className="bg-primary-white px-[24px] py-[15px] flex flex-col gap-y-[15px] rounded-lg h-[112px]">
           <p className="text-tertiary-light-2 text-[14px] font-[500]">

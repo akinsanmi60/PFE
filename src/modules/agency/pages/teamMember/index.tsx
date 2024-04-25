@@ -1,5 +1,6 @@
 import AppHeader from 'components/appHeader/appHeader';
 import PageContainer from 'components/Layout/PageContainer';
+import TeamMemberDashboard from './components/teamMemberDashboard';
 
 function TeamMember() {
   return (
@@ -9,6 +10,7 @@ function TeamMember() {
           Team Member
         </p>
       </AppHeader>
+      <TeamMemberDashboard />
       <PageContainer className="pt-0"></PageContainer>
     </div>
   );

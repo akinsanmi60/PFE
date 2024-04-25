@@ -32,7 +32,7 @@ function ShowAnalysis({ showAnalysisProp }: IShowAnalysis) {
   const tabs = [
     {
       href: showAnalysisProp.tabsHref.produce,
-      name: 'Produces',
+      name: 'Produce',
     },
     {
       href: showAnalysisProp.tabsHref.transactions,
@@ -49,7 +49,7 @@ function ShowAnalysis({ showAnalysisProp }: IShowAnalysis) {
       <PageNavTabs currentHref={showAnalysisProp.currentTab} tabs={tabs} />
       <div className="w-full bg-[#E2E8F0] border[1px] h-[1px]" />
 
-      {showAnalysisProp.currentTab === 'produces' && (
+      {showAnalysisProp.currentTab === 'produce' && (
         <FarmerAggregatorProduce
           fetcherProp={{
             id: showAnalysisProp?.id,
