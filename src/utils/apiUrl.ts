@@ -115,6 +115,8 @@ export const ACTIVATE_AGENCY_URL = (agencyID: string) =>
   `agency/${agencyID}/activate-agency`;
 export const DEACTIVATE_AGENCY_URL = (agencyID: string) =>
   `agency/${agencyID}/deactivate-agency`;
+export const TEAMMEMBER_COUNT_URL = (agencyId: string) =>
+  `agency/${agencyId}/team-count`;
 
 // Exporter urls
 export const ADD_EXPORTER_URL = 'exporter/create-exporter';

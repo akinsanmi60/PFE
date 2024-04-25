@@ -9,6 +9,7 @@ import {
   GET_AGENCYTEAM_MEMBER_URL,
   GET_ALL_AGENCY_URL,
   GET_INDIVIDUAL_AGENCY_URL,
+  TEAMMEMBER_COUNT_URL,
 } from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
@@ -21,6 +22,7 @@ import {
   IAgencyTeamMemberQuery,
   IGetAgencyTeamResponse,
   IGetAgencyTeamData,
+  IGetAgencyTeamCountResponse,
 } from 'types/agency.type';
 import { IBaseResponse } from 'types/auth.type';
 
@@ -146,10 +148,32 @@ const useGetAgencyDashboard = (id: string) => {
   };
 };
 
+const useGetAgencyTeamCount = (id: string) => {
+  const { isLoading, isRefetching, data, ...rest } =
+    useQuery<IGetAgencyTeamCountResponse>(
+      [queryKeys.getTeamMemberCount],
+      () =>
+        getRequest({
+          url: TEAMMEMBER_COUNT_URL(id),
+        }),
+      {
+        refetchOnWindowFocus: false,
+      },
+    );
+
+  return {
+    isLoading,
+    isRefetching,
+    data: data?.data,
+    ...rest,
+  };
+};
+
 export {
   useGetAllAgency,
   useAgencyCreationMutation,
   useGetIndividualAgency,
   useGetAgencyTeamMember,
   useGetAgencyDashboard,
+  useGetAgencyTeamCount,
 };

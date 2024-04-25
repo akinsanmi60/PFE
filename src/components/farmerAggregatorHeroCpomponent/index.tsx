@@ -51,7 +51,7 @@ function DashboardHeroFOrFarmerAggregator({
           </p>
           <p className="text-secondary-light-1 text-[30px] font-[600] leading-[42px]">
             {isLoading ? (
-              <CircularProgress color="#072723" size={30} />
+              <CircularProgress color="#2AA232" size={30} />
             ) : (
               data?.data?.counted_produce || 0
             )}
@@ -63,7 +63,7 @@ function DashboardHeroFOrFarmerAggregator({
           </p>
           <p className="text-secondary-light-1 text-[30px] font-[600] leading-[42px]">
             {isLoading ? (
-              <CircularProgress color="#072723" size={30} />
+              <CircularProgress color="#2AA232" size={30} />
             ) : (
               data?.data?.pending_produce || 0
             )}

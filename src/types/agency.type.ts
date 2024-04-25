@@ -62,6 +62,12 @@ export type IIndividualAgencyData = {
   agency_team_members: IAgencyTeamData[];
 };
 
+export type IAgencyTeamCount = {
+  total_team_member: number;
+  total_field_agent: number;
+  total_lab_agent: number;
+};
+
 export type IAgencyDataRes = IDataCount & {
   agency_list: IIndividualAgencyData[];
 };
@@ -80,4 +86,8 @@ export type IGetAgencyTeamData = IDataCount & {
 
 export type IGetAgencyTeamResponse = IBaseResponse & {
   data: IGetAgencyTeamData;
+};
+
+export type IGetAgencyTeamCountResponse = IBaseResponse & {
+  data: IAgencyTeamCount;
 };

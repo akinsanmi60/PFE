@@ -52,7 +52,7 @@ function AdminDashboardCard() {
             </p>
             <div className="text-secondary-light-1 text-[30px] font-[600] leading-[42px]">
               {isLoading ? (
-                <CircularProgress color="#072723" size={30} />
+                <CircularProgress color="#2AA232" size={30} />
               ) : item?.count === undefined ? (
                 0
               ) : (

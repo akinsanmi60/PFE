@@ -11,7 +11,7 @@ function PendingProduce({ produceValue }: IPendingProducePprop) {
         Produce Name
       </p>
       {loading ? (
-        <CircularProgress color="#072723" size={30} />
+        <CircularProgress color="#2AA232" size={30} />
       ) : (
         <>
           <p className="text-[14px] font-[600] text-tertiary-light-3 my-2">

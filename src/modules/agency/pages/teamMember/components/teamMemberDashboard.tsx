@@ -3,6 +3,7 @@ import CustomButton from '@shared/Button';
 import CircularProgress from '@shared/CircularProgress';
 import PageContainer from 'components/Layout/PageContainer';
 import { ReactComponent as PlusSVG } from '@assets/svg/plusSvg.svg';
+import { useGetAgencyTeamCount } from 'services/agency.service';
 
 function TeamMemberDashboard() {
   const { authUser } = useAuthContext();
@@ -10,24 +11,25 @@ function TeamMemberDashboard() {
     authUser?.agency_attached_to !== null
       ? authUser?.agency_attached_to
       : authUser?.id;
-  console.log(idFOrFetch);
+
+  const { data, isLoading, isRefetching } = useGetAgencyTeamCount(
+    idFOrFetch as string,
+  );
 
   const dashObj = [
     {
       name: 'Total Agents',
-      count: 0,
+      count: data?.total_team_member,
     },
     {
       name: 'Field Agents',
-      count: 0,
+      count: data?.total_field_agent,
     },
     {
       name: 'Lab Agents',
-      count: 0,
+      count: data?.total_lab_agent,
     },
   ];
-
-  const isLoading = false;
 
   return (
     <PageContainer>
@@ -42,8 +44,8 @@ function TeamMemberDashboard() {
                 {item?.name}
               </p>
               <p className="text-secondary-light-1 text-[30px] font-[600] leading-[42px]">
-                {isLoading ? (
-                  <CircularProgress color="#072723" size={30} />
+                {isLoading || isRefetching ? (
+                  <CircularProgress color="#2AA232" size={30} />
                 ) : item?.count === undefined ? (
                   0
                 ) : (
