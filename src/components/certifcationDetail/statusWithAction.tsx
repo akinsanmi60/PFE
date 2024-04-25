@@ -10,7 +10,7 @@ import {
 import { useAuthContext } from '@contexts/authContext';
 
 const certList = ['collected', 'processing', 'certified'];
-const roleToAccessBtn = ['agency', 'agencyAdmin', 'agentSubAdmin'];
+const roleToAccessBtn = ['agencyAdmin', 'agentSubAdmin'];
 function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
   const [openOptions, setOpenOptions] = useState(false);
   const { authUser } = useAuthContext();
@@ -57,7 +57,7 @@ function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
       <div
         className={`${getClass(
           dataDetail.status,
-        )} px-[24px] py-[23px] flex flex-col gap-y-4`}
+        )} px-[24px] py-[26px] flex flex-col gap-y-[10px]`}
       >
         <p>Current Status: {capitalize(dataDetail?.status)}</p>
         {roleToAccessBtn.includes(authUser?.role as string) && (
