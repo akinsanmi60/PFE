@@ -50,3 +50,11 @@ export type ICreateAgency = {
   head_of_agency_email: string;
   agency_type: string;
 };
+
+export type ITeamCreateType = {
+  agent_email: string;
+  agent_full_name: string;
+  agent_phone_number: string;
+  agent_role: string;
+  agency_type: string;
+};

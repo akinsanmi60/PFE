@@ -19,6 +19,7 @@ import { IFilterProduceQuery } from 'types/produce.type';
 import { useForm } from 'react-hook-form';
 import { IFilterValues } from 'types/modal.type';
 import TeamFilterForm from './teamFilter';
+import AddTeamMember from './addTeamMember';
 
 function TeamMember() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -199,7 +200,9 @@ function TeamMember() {
         </div>
       </PageContainer>
 
-      {modalState?.modalType === 'addTeamMember' && <>Add</>}
+      {modalState?.modalType === 'addTeamMember' && (
+        <AddTeamMember id={idFOrFetch as string} />
+      )}
       {modalState?.modalType === 'filterTeamMember' && (
         <TeamFilterForm
           closeModalBox={() => closeTeamMemberModal('filterTeamMember')}

@@ -1,4 +1,9 @@
-import { ALPHANUM_REGEX, EMAIL_REGEX, REGEX_CODE } from '@utils/constants';
+import {
+  ALPHANUM_REGEX,
+  EMAIL_REGEX,
+  REGEX_CODE,
+  fullNameRegex,
+} from '@utils/constants';
 import * as yup from 'yup';
 
 export const AddNewAgencySchema = yup
@@ -34,6 +39,24 @@ export const AddNewAgencySchema = yup
       .string()
       .required('Enter your agency head email')
       .matches(EMAIL_REGEX, 'Please enter a valid email address'),
+    agency_type: yup.string().required('Select your agency type'),
+  })
+  .required();
+
+export const AddNewTeamSchema = yup
+  .object({
+    agent_email: yup.string().required('Enter your email'),
+    agent_full_name: yup
+      .string()
+      .required('Enter your agency name')
+      .matches(fullNameRegex, 'Please enter a valid full name'),
+
+    agent_role: yup.string().required('Enter your agency address'),
+    agent_phone_number: yup
+      .string()
+      .required('Enter your phone number')
+      .matches(REGEX_CODE, 'Special characters and alphabet are not accepted')
+      .max(11, 'Phone number must not be greater than 14 characters'),
     agency_type: yup.string().required('Select your agency type'),
   })
   .required();

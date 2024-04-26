@@ -10,10 +10,11 @@ import {
   GET_ALL_AGENCY_URL,
   GET_INDIVIDUAL_AGENCY_URL,
   TEAMMEMBER_COUNT_URL,
+  CREATE_AGENCY_TEAMMEMBER,
 } from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
-import { IAgencyQuery, ICreateAgency } from 'types/admin.type';
+import { IAgencyQuery, ICreateAgency, ITeamCreateType } from 'types/admin.type';
 import {
   IAgencyDataResponse,
   IAgencyDataRes,
@@ -108,7 +109,7 @@ const useGetAgencyTeamMember = (
 ) => {
   const { data, isLoading, isRefetching, isError } =
     useQuery<IGetAgencyTeamResponse>(
-      [queryKeys.getIndividualAgency, queryParams],
+      [queryKeys.getAgencyTeamMembers, queryParams],
       () =>
         getRequest({
           url: `${GET_AGENCYTEAM_MEMBER_URL(id)}${queryParamsHelper(
@@ -169,6 +170,39 @@ const useGetAgencyTeamCount = (id: string) => {
   };
 };
 
+const useTeamCreationMutation = ({
+  resetForm,
+}: {
+  resetForm: UseFormReset<ITeamCreateType>;
+}) => {
+  const { handleModalClose } = useModalContext();
+
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, ...rest } = useMutation(
+    ({ payload, id }: { payload: ITeamCreateType; id: string }) =>
+      postRequest<ITeamCreateType, IBaseResponse>({
+        url: CREATE_AGENCY_TEAMMEMBER(id),
+        payload,
+      }),
+
+    {
+      onSuccess(res) {
+        displaySuccess(res?.message);
+        queryClient.invalidateQueries([queryKeys.getAgencyTeamMembers]);
+        if (handleModalClose) {
+          resetForm();
+          handleModalClose('addTeamMember');
+        }
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+
 export {
   useGetAllAgency,
   useAgencyCreationMutation,
@@ -176,4 +210,5 @@ export {
   useGetAgencyTeamMember,
   useGetAgencyDashboard,
   useGetAgencyTeamCount,
+  useTeamCreationMutation,
 };

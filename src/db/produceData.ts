@@ -84,6 +84,7 @@ export const adminIndividualOptions: {
     value: 'inactive',
   },
 ];
+
 export const teamAgentOptions: {
   label: string;
   value: string;
@@ -95,6 +96,20 @@ export const teamAgentOptions: {
   {
     label: 'Field Agent',
     value: 'fieldAgent',
+  },
+];
+
+export const teamRoleOptions: {
+  label: string;
+  value: string;
+}[] = [
+  {
+    label: 'Agency Admin',
+    value: 'agencyAdmin',
+  },
+  {
+    label: 'Agency Sub Admin',
+    value: 'agencySubAdmin',
   },
 ];
 
