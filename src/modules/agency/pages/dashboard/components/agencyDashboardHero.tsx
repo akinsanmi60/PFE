@@ -7,10 +7,12 @@ import { useGetAgencyDashboard } from 'services/agency.service';
 
 function AgencyDashboardHero() {
   const { authUser } = useAuthContext();
+
   const idFOrFetch =
     authUser?.agency_attached_to !== null
       ? authUser?.agency_attached_to
       : authUser?.id;
+
   const { data, isLoading } = useGetAgencyDashboard(idFOrFetch as string);
   const navigate = useNavigate();
 

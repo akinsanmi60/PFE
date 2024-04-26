@@ -22,6 +22,7 @@ export type IFilterValues = {
   on_pentrar_hub?: string;
   is_active?: string;
   produce_ownership?: string;
+  agency_type?: string;
 };
 
 export type IFilterForm = {

@@ -84,6 +84,19 @@ export const adminIndividualOptions: {
     value: 'inactive',
   },
 ];
+export const teamAgentOptions: {
+  label: string;
+  value: string;
+}[] = [
+  {
+    label: 'Lab Agent',
+    value: 'labAgent',
+  },
+  {
+    label: 'Field Agent',
+    value: 'fieldAgent',
+  },
+];
 
 export const transferStatuses = [
   'transfer_done',

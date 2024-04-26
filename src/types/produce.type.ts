@@ -148,6 +148,7 @@ export type IFilterProduceQuery = {
   on_pentrar_hub?: boolean;
   is_active?: boolean;
   produce_ownership?: string;
+  agency_type?: string;
 };
 
 export type IProduceTransferHolder = IBaseResponse & {

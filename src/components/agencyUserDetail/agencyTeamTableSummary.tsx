@@ -6,11 +6,8 @@ import TableLoading from '@shared/Table/tableLoading';
 import { capitalize } from '@utils/constants';
 import { useState } from 'react';
 import { useGetAgencyTeamMember } from 'services/agency.service';
-import {
-  IAgencyShowTableSummary,
-  IAgencyTeamData,
-  IAgencyTeamMemberQuery,
-} from 'types/agency.type';
+import { IAgencyShowTableSummary, IAgencyTeamData } from 'types/agency.type';
+import { IFilterProduceQuery } from 'types/produce.type';
 
 function AgencyTeamTableSummary({ analysisProp }: IAgencyShowTableSummary) {
   const [queryParams, setQueryParams] = useState({
@@ -18,7 +15,7 @@ function AgencyTeamTableSummary({ analysisProp }: IAgencyShowTableSummary) {
     limit: 5,
   });
 
-  const updateQueryParams = (params: IAgencyTeamMemberQuery) => {
+  const updateQueryParams = (params: IFilterProduceQuery) => {
     setQueryParams(prev => ({ ...prev, ...params }));
   };
 

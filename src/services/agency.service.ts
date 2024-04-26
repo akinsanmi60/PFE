@@ -19,12 +19,12 @@ import {
   IAgencyDataRes,
   IIndividualAgencyResponse,
   IIndividualAgencyData,
-  IAgencyTeamMemberQuery,
   IGetAgencyTeamResponse,
   IGetAgencyTeamData,
   IGetAgencyTeamCountResponse,
 } from 'types/agency.type';
 import { IBaseResponse } from 'types/auth.type';
+import { IFilterProduceQuery } from 'types/produce.type';
 
 const useGetAllAgency = (queryParams: IAgencyQuery) => {
   const { data, isLoading, isRefetching, isError, ...rest } =
@@ -103,7 +103,7 @@ const useGetIndividualAgency = (id: string) => {
 };
 
 const useGetAgencyTeamMember = (
-  queryParams: IAgencyTeamMemberQuery,
+  queryParams: IFilterProduceQuery,
   id: string,
 ) => {
   const { data, isLoading, isRefetching, isError } =

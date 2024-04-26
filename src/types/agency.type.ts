@@ -1,8 +1,5 @@
 import { IBaseResponse, IDataCount } from 'types/auth.type';
-import { IBaseQueryProps } from './pentrarHub.type';
 import { IAgencyTab } from '@utils/paths';
-
-export type IAgencyTeamMemberQuery = IBaseQueryProps;
 
 export type IBaseAnalysisProps = {
   id: string;
@@ -39,6 +36,7 @@ export type IAgencyTeamData = {
   agency_team_id: string;
   status: string;
   last_active: string;
+  agency_type: string;
 };
 
 export type IIndividualAgencyData = {

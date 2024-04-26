@@ -5,7 +5,7 @@ import PageContainer from 'components/Layout/PageContainer';
 import { ReactComponent as PlusSVG } from '@assets/svg/plusSvg.svg';
 import { useGetAgencyTeamCount } from 'services/agency.service';
 
-function TeamMemberDashboard() {
+function TeamMemberDashboard({ onClick }: { onClick?: () => void }) {
   const { authUser } = useAuthContext();
   const idFOrFetch =
     authUser?.agency_attached_to !== null
@@ -33,8 +33,8 @@ function TeamMemberDashboard() {
 
   return (
     <PageContainer>
-      <div className="flex items-end gap-x-4">
-        <div className="grid grid-cols-3 gap-x-4 sixm:grid-cols-1 font-primary mdxl:grid-cols-2 w-[70%]">
+      <div className="flex items-end gap-x-4 mdxl:items-start mdxl:gap-y-4 mdxl:flex-col-reverse">
+        <div className="grid grid-cols-3 gap-x-4 sixm:grid-cols-1 font-primary mdxl:grid-cols-2 mdxl:w-full mdxl:gap-y-4 w-[70%]">
           {dashObj.map(item => (
             <div
               className="bg-primary-white px-[24px] py-[15px] flex flex-col gap-y-[15px] rounded-lg h-[112px]"
@@ -56,7 +56,10 @@ function TeamMemberDashboard() {
           ))}
         </div>
         <div className="w-[30%]">
-          <CustomButton className="w-full text-primary-white">
+          <CustomButton
+            className="w-full text-primary-white xlsm:w-[150px]"
+            onClick={onClick}
+          >
             <span className="mr-2">Add Agent</span>
             <span>
               <PlusSVG />
