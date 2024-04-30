@@ -5,7 +5,7 @@ import AppHeader from 'components/appHeader/appHeader';
 import PageContainer from 'components/Layout/PageContainer';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ICertification } from 'types/certification.type';
 import { IFilterValues } from 'types/modal.type';
 import { IFilterProduceQuery } from 'types/produce.type';
@@ -13,7 +13,7 @@ import { ReactComponent as SearchVector } from '@assets/svg/searchVector.svg';
 import { ReactComponent as CloseVector } from '@assets/svg/searchClose.svg';
 import SearchFilterBox from '@shared/searchFilter';
 import BreadCrumbs from '@shared/BreadCrumbs';
-import { AgencyUserPath } from '@utils/paths';
+import { AgencyUserPath, cerTabs } from '@utils/paths';
 import TeamMemberDetailView from './components/teamMemberDetailView';
 import { useGetIndividualTeamTask } from 'services/agency.service';
 import { useGetIdForFetch } from 'services/auth.service';
@@ -27,7 +27,7 @@ function TeamMemberDetail() {
   const { id } = useParams();
   const { modalState, handleModalOpen, handleModalClose } = useModalContext();
   const [userType, setUserType] = useState('');
-
+  const navigate = useNavigate();
   const { idFOrFetch } = useGetIdForFetch();
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -191,6 +191,14 @@ function TeamMemberDetail() {
             showPagination
             setCurrentPage={(val: number) => updateQueryParams({ page: val })}
             setLimit={(val: number) => updateQueryParams({ limit: val })}
+            onRowClick={(row: ICertification) => {
+              navigate(
+                `/${AgencyUserPath.certificationDetial(
+                  row?.id,
+                  row?.status as cerTabs,
+                )}`,
+              );
+            }}
           />
         </div>
       </PageContainer>
