@@ -119,6 +119,14 @@ export const TEAMMEMBER_COUNT_URL = (agencyId: string) =>
   `agency/${agencyId}/team-count`;
 export const CREATE_AGENCY_TEAMMEMBER = (agencyId: string) =>
   `agency/${agencyId}/create-agency-team-member`;
+export const TEAMMEMBER_TASKS_COUNT_URL = (agentId: string, agencyId: string) =>
+  `agency/${agentId}/task-count/${agencyId}`;
+export const TEAMMEMBER_TASKS_URL = (agentId: string, agencyId: string) =>
+  `agency/${agentId}/team-tasks/${agencyId}`;
+export const GET_INDIVIDUAL_TEAM_MEMBER_URL = (
+  agentId: string,
+  agencyId: string,
+) => `agency/${agentId}/agent-details/${agencyId}`;
 
 // Exporter urls
 export const ADD_EXPORTER_URL = 'exporter/create-exporter';

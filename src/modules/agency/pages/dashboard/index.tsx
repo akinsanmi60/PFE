@@ -12,13 +12,11 @@ import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 import { useGetAllCertification } from 'services/certification.service';
 import { ICertification } from 'types/certification.type';
 import { AgencyUserPath } from '@utils/paths';
+import { useGetIdForFetch } from 'services/auth.service';
 
 function AgencyDashoard() {
   const { authUser } = useAuthContext();
-  const idFOrFetch =
-    authUser?.agency_attached_to !== null
-      ? authUser?.agency_attached_to
-      : authUser?.id;
+  const { idFOrFetch } = useGetIdForFetch();
 
   const navigate = useNavigate();
   const queryParams = {

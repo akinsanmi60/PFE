@@ -34,4 +34,5 @@ export type IFilterForm = {
   clearFunction?: () => void;
   filterTitle?: string;
   watchValue?: string;
+  userType?: string;
 };

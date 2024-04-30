@@ -1,14 +1,15 @@
-import SingleCheckFilter from '@shared/Filter/singleCheckFilter';
 import FilterModal from '@shared/ModalBase/FilterModal';
 import { IFilterForm } from 'types/modal.type';
 import FormStartEndDate from 'shared/Filter/FilterStartEndDate';
 import { certificationStatusOptions } from '@db/produceData';
+import SingleCheckFilter from '@shared/Filter/singleCheckFilter';
 
-function CertificationFilterForm({
+function AgentTaskFilterForm({
   closeModalBox,
   filterForm,
   onSubmitForm,
   clearFunction,
+  userType,
 }: IFilterForm) {
   const { control } = filterForm;
 
@@ -28,17 +29,18 @@ function CertificationFilterForm({
         className: 'text-primary-white',
       }}
     >
-      <div>
-        <div className="flex justify-between w-full mb-[8px] px-[16px]">
-          <p className="text-[13px] text-[#475569] font-[500]">
+      {userType === 'labAgent' && (
+        <div className="">
+          <p className="text-[13px] text-[#475569] font-[500] px-4">
             Certification Status
           </p>
-        </div>{' '}
-        <SingleCheckFilter
-          optionProp={certificationStatusOptions}
-          filterForm={filterForm}
-        />
-      </div>
+
+          <SingleCheckFilter
+            optionProp={certificationStatusOptions.slice(2)}
+            filterForm={filterForm}
+          />
+        </div>
+      )}
       <FormStartEndDate
         control={control}
         label="Created On"
@@ -53,4 +55,4 @@ function CertificationFilterForm({
   );
 }
 
-export default CertificationFilterForm;
+export default AgentTaskFilterForm;

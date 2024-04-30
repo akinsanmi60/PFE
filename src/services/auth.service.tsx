@@ -303,3 +303,13 @@ export const useCompleteProfile = ({
 
   return { mutate, isLoading, ...rest };
 };
+
+export const useGetIdForFetch = () => {
+  const { authUser } = useAuthContext();
+  const idFOrFetch =
+    authUser?.agency_attached_to !== null
+      ? authUser?.agency_attached_to
+      : authUser?.id;
+
+  return { idFOrFetch };
+};

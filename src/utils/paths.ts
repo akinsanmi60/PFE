@@ -143,6 +143,10 @@ export const AgencyUserPath = {
     tab: cerTabs | null,
     fullPath: boolean = true,
   ) => `${joinPath(AgencyUserPath.certifications(fullPath), certId, tab)}`,
+  team: (fullPath: boolean = true) =>
+    `${AgencyUserPath.root(fullPath)}${agencyPathsLinks.teamMember}`,
+  teamMemberDetail: (teamId: string, fullPath: boolean = true) =>
+    `${joinPath(AgencyUserPath.team(fullPath), teamId, 'detail')}`,
 };
 
 export const UserFarmerAggregatorPath = {

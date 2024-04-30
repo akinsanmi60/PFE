@@ -6,7 +6,6 @@ import { useGetAgencyTeamMember } from 'services/agency.service';
 import { capitalize, formatDate } from '@utils/constants';
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 import { ITableHead } from '@shared/Table/table.interface';
-import { useAuthContext } from '@contexts/authContext';
 import { IAgencyTeamData } from 'types/agency.type';
 import EmptyBar from '@shared/Table/tableEmpty';
 import TableLoading from '@shared/Table/tableLoading';
@@ -20,17 +19,15 @@ import { useForm } from 'react-hook-form';
 import { IFilterValues } from 'types/modal.type';
 import TeamFilterForm from './teamFilter';
 import AddTeamMember from './addTeamMember';
+import { useNavigate } from 'react-router-dom';
+import { AgencyUserPath } from '@utils/paths';
+import { useGetIdForFetch } from 'services/auth.service';
 
 function TeamMember() {
   const [searchTerm, setSearchTerm] = useState('');
   const { modalState, handleModalOpen, handleModalClose } = useModalContext();
-
-  const { authUser } = useAuthContext();
-
-  const idFOrFetch =
-    authUser?.agency_attached_to !== null
-      ? authUser?.agency_attached_to
-      : authUser?.id;
+  const navigate = useNavigate();
+  const { idFOrFetch } = useGetIdForFetch();
 
   const [queryParams, setQueryParams] = useState({
     search: '',
@@ -71,14 +68,14 @@ function TeamMember() {
       accessor: 'phone_number',
     },
     {
-      label: 'Agent Classification',
+      label: 'Team Classification',
       accessor: null,
       render: ({ agency_type }) => {
         return agency_type === null
           ? '--'
           : agency_type === 'labAgent'
-          ? 'Lab Agent'
-          : 'Field Agent';
+          ? 'Lab Team Member'
+          : 'Field Team Member';
       },
     },
     {
@@ -196,6 +193,9 @@ function TeamMember() {
             }
             showPagination
             paginationArray={[5]}
+            onRowClick={({ id }) =>
+              navigate(`/${AgencyUserPath.teamMemberDetail(id)}`)
+            }
           />
         </div>
       </PageContainer>

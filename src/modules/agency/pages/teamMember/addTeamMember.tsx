@@ -54,7 +54,7 @@ function AddTeamMember({ id }: { id: string }) {
         <div className="p-[6px]">
           <ModalHeader
             modalHeaderProp={{
-              title: 'Add Agent',
+              title: 'Add Team Member',
               actionText: 'addTeamMember',
             }}
           />

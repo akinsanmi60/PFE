@@ -18,15 +18,15 @@ function TeamMemberDashboard({ onClick }: { onClick?: () => void }) {
 
   const dashObj = [
     {
-      name: 'Total Agents',
+      name: 'Total Team Members',
       count: data?.total_team_member,
     },
     {
-      name: 'Field Agents',
+      name: 'Field Team Members',
       count: data?.total_field_agent,
     },
     {
-      name: 'Lab Agents',
+      name: 'Lab Team Members',
       count: data?.total_lab_agent,
     },
   ];
@@ -60,7 +60,7 @@ function TeamMemberDashboard({ onClick }: { onClick?: () => void }) {
             className="w-full text-primary-white xlsm:w-[150px]"
             onClick={onClick}
           >
-            <span className="mr-2">Add Agent</span>
+            <span className="mr-2">Add Team</span>
             <span>
               <PlusSVG />
             </span>

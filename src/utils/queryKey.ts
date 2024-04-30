@@ -24,4 +24,8 @@ export const queryKeys = {
   getIndividualCertificate: 'getIndividualCertificate',
   getTeamMemberCount: 'getTeamMemberCount',
   getAgencyTeamMembers: 'getAgencyTeamMembers',
+  getAgencyTeamTaskCount: 'getAgencyTeamTaskCount',
+  getAgencyTeamTask: 'getAgencyTeamTask',
+  getIndividualTeamMember: 'getIndividualTeamMember',
+  getIndividualTasks: 'getIndividualTasks',
 };

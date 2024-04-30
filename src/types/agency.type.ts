@@ -1,5 +1,6 @@
 import { IBaseResponse, IDataCount } from 'types/auth.type';
 import { IAgencyTab } from '@utils/paths';
+import { ICertification } from './certification.type';
 
 export type IBaseAnalysisProps = {
   id: string;
@@ -88,4 +89,22 @@ export type IGetAgencyTeamResponse = IBaseResponse & {
 
 export type IGetAgencyTeamCountResponse = IBaseResponse & {
   data: IAgencyTeamCount;
+};
+
+export type IGetTeamMemberTaskCountRes = IBaseResponse & {
+  data: {
+    total_task: number;
+  };
+};
+
+export type IGetIndividualTeamMember = IBaseResponse & {
+  data: IAgencyTeamData;
+};
+
+export type IGetIndividualTasks = IDataCount & {
+  tasks: Partial<ICertification>[];
+};
+
+export type IGetIndividualTasksResponse = IBaseResponse & {
+  data: IGetIndividualTasks;
 };

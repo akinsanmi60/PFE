@@ -11,6 +11,9 @@ import {
   GET_INDIVIDUAL_AGENCY_URL,
   TEAMMEMBER_COUNT_URL,
   CREATE_AGENCY_TEAMMEMBER,
+  TEAMMEMBER_TASKS_COUNT_URL,
+  GET_INDIVIDUAL_TEAM_MEMBER_URL,
+  TEAMMEMBER_TASKS_URL,
 } from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
 import { queryParamsHelper } from 'config/query-params';
@@ -23,6 +26,10 @@ import {
   IGetAgencyTeamResponse,
   IGetAgencyTeamData,
   IGetAgencyTeamCountResponse,
+  IGetTeamMemberTaskCountRes,
+  IGetIndividualTeamMember,
+  IAgencyTeamData,
+  IGetIndividualTasksResponse,
 } from 'types/agency.type';
 import { IBaseResponse } from 'types/auth.type';
 import { IFilterProduceQuery } from 'types/produce.type';
@@ -203,6 +210,76 @@ const useTeamCreationMutation = ({
   return { mutate, isLoading, ...rest };
 };
 
+const useGetAgencyTeamTaskCount = (id: string, agencyId: string) => {
+  const { isLoading, isRefetching, data, ...rest } =
+    useQuery<IGetTeamMemberTaskCountRes>(
+      [queryKeys.getAgencyTeamTaskCount],
+      () =>
+        getRequest({
+          url: TEAMMEMBER_TASKS_COUNT_URL(id, agencyId),
+        }),
+      {
+        refetchOnWindowFocus: false,
+      },
+    );
+
+  return {
+    isLoading,
+    isRefetching,
+    data: data?.data,
+    ...rest,
+  };
+};
+
+const useGetIndividualTeamMember = (id: string, agencyId: string) => {
+  const { data, isLoading, isRefetching, isError, ...rest } =
+    useQuery<IGetIndividualTeamMember>(
+      [queryKeys.getIndividualTeamMember],
+      () =>
+        getRequest({
+          url: GET_INDIVIDUAL_TEAM_MEMBER_URL(id, agencyId),
+        }),
+      {
+        refetchOnWindowFocus: false,
+      },
+    );
+
+  return {
+    ...rest,
+    isLoading,
+    isRefetching,
+    isError,
+    data: data?.data as IAgencyTeamData,
+  };
+};
+
+const useGetIndividualTeamTask = (
+  id: string,
+  agencyId: string,
+  queryParams: IFilterProduceQuery,
+) => {
+  const { isLoading, isRefetching, data, ...rest } =
+    useQuery<IGetIndividualTasksResponse>(
+      [queryKeys.getIndividualTasks, queryParams],
+      () =>
+        getRequest({
+          url: `${TEAMMEMBER_TASKS_URL(id, agencyId)}${queryParamsHelper(
+            queryParams,
+          )}`,
+        }),
+      {
+        refetchOnWindowFocus: false,
+      },
+    );
+
+  return {
+    isLoading,
+    isRefetching,
+    data: data?.data,
+    ...rest,
+  };
+};
+
 export {
   useGetAllAgency,
   useAgencyCreationMutation,
@@ -211,4 +288,7 @@ export {
   useGetAgencyDashboard,
   useGetAgencyTeamCount,
   useTeamCreationMutation,
+  useGetAgencyTeamTaskCount,
+  useGetIndividualTeamMember,
+  useGetIndividualTeamTask,
 };

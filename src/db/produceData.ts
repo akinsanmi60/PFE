@@ -154,7 +154,7 @@ export const certificationStatuses = [
   'certified',
 ];
 
-export const certificationtatusOptions: {
+export const certificationStatusOptions: {
   label: string;
   value: string;
 }[] = [

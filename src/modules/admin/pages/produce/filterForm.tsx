@@ -36,7 +36,7 @@ const AdminProduceFilterForm = ({
         <div className="flex justify-between w-full mb-[8px]">
           <div className="flex flex-col gap-y-[15px] w-full">
             <div className="">
-              <p className="text-[13px] text-[#475569] font-[500]">
+              <p className="text-[13px] text-[#475569] font-[500] px-4">
                 Produce Status
               </p>
 
@@ -46,7 +46,7 @@ const AdminProduceFilterForm = ({
               />
             </div>
             <div className="">
-              <p className="text-[13px] text-[#475569] font-[500]">
+              <p className="text-[13px] text-[#475569] font-[500] px-4">
                 Hub Status
               </p>
               <SingleCheckFilter
@@ -56,7 +56,7 @@ const AdminProduceFilterForm = ({
               />
             </div>
             <div className="">
-              <p className="text-[13px] text-[#475569] font-[500]">
+              <p className="text-[13px] text-[#475569] font-[500] px-4">
                 Ownership Type
               </p>
               <SingleCheckFilter

@@ -1,3 +1,4 @@
+import EmptyBar from '@shared/Table/tableEmpty';
 import TableLoading from '@shared/Table/tableLoading';
 import { GET_INDIVIDUAL_FARMER_URL } from '@utils/apiUrl';
 import { adminDashboardPaths, IFarmersAggregatorTab } from '@utils/paths';
@@ -43,7 +44,7 @@ function FarmerDetailPage() {
           <div className="w-full bg-primary-white rounded-lg mt-[30px]">
             <TableLoading title="Loading Farmers" className="h-screen" />
           </div>
-        ) : (
+        ) : data ? (
           <FarmerAggregatorUserDetailPpage
             userDetailProps={{
               id: id as string,
@@ -69,7 +70,11 @@ function FarmerDetailPage() {
               },
             }}
           />
-        )}
+        ) : !data && !isLoading && !isRefetching ? (
+          <div className="w-full bg-primary-white rounded-lg mt-[30px]">
+            <EmptyBar />
+          </div>
+        ) : null}
       </PageContainer>
     </div>
   );

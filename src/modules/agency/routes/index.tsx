@@ -29,6 +29,10 @@ const AgencyTeamMember = React.lazy(
   () => import('@modules/agency/pages/teamMember'),
 );
 
+const AgencyTeamMemberDetail = React.lazy(
+  () => import('@modules/agency/pages/teamMember/teamMemberDetail'),
+);
+
 const AgencySettings = React.lazy(
   () => import('@modules/agency/pages/settings'),
 );
@@ -46,6 +50,7 @@ export const agencyPathsLinks = {
   completedCertifications: 'certified',
   collectedCertifications: 'collected',
   teamMember: 'team-member',
+  teamMemberDetail: 'team-member/:id/detail',
   settings: 'settings',
   certificationDetails: 'certifications/:id/:tab',
 };
@@ -88,6 +93,11 @@ const agencyRoutes = {
   AgencyTeamMember: {
     element: AgencyTeamMember,
     path: agencyPathsLinks.teamMember,
+  },
+
+  AgencyTeamMemberDetail: {
+    element: AgencyTeamMemberDetail,
+    path: agencyPathsLinks.teamMemberDetail,
   },
 
   AgencySettings: {
