@@ -127,6 +127,14 @@ export const GET_INDIVIDUAL_TEAM_MEMBER_URL = (
   agentId: string,
   agencyId: string,
 ) => `agency/${agentId}/agent-details/${agencyId}`;
+export const START_TEAM_PHONE_VERIFICATION_URL = (id: string) =>
+  `agency/${id}/team-update-phonenumber`;
+export const COMPLETE_TEAM_PHONE_VERIFICATION_URL = (id: string) =>
+  `agency/${id}/team-complete-phonenumber-reset`;
+export const START_TEAM_EMAIL_VERIFICATION_URL = (id: string) =>
+  `agency/${id}/team-update-email`;
+export const COMPLETE_TEAM_EMAIL_VERIFICATION_URL = (id: string) =>
+  `agency/${id}/team-complete-email-reset`;
 
 // Exporter urls
 export const ADD_EXPORTER_URL = 'exporter/create-exporter';

@@ -26,7 +26,7 @@ function EditEmail({ email }: { email: string }) {
       modalBaseProp={{
         closingText: 'email',
         formWidth: '490px',
-        closeBtnwidth: '520px',
+        closeBtnwidth: '490px',
       }}
     >
       {renderComponent()}

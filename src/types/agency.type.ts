@@ -36,6 +36,7 @@ export type IAgencyTeamData = {
   passport_img: string;
   agency_team_id: string;
   status: string;
+  gender: string;
   last_active: string;
   agency_type: string;
 };

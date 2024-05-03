@@ -7,6 +7,7 @@ import ControlledInput from '@shared/Input/ControlledInput';
 import {
   START_AGGREGATOR_EMAIL_VERIFICATION_URL,
   START_FARMER_EMAIL_VERIFICATION_URL,
+  START_TEAM_EMAIL_VERIFICATION_URL,
 } from '@utils/apiUrl';
 import { useForm } from 'react-hook-form';
 import { useStartEmailVerification } from 'services/persionalInformation.service';
@@ -44,6 +45,10 @@ function StartEmailVerification({
 
       case 'aggregator':
         return START_AGGREGATOR_EMAIL_VERIFICATION_URL(authUser?.id as string);
+
+      case 'agencyAdmin':
+      case 'agencySubAdmin':
+        return START_TEAM_EMAIL_VERIFICATION_URL(authUser?.id as string);
 
       default:
         return START_FARMER_EMAIL_VERIFICATION_URL(authUser?.id as string);
@@ -91,7 +96,7 @@ function StartEmailVerification({
             type="text"
           />
         </div>
-        <div className="flex justify-end gap-x-4 mt-[30px] mb-[-40px] w-[100%]">
+        <div className="flex justify-end gap-x-4 mt-[30px] w-[100%]">
           <div className="flex items-center gap-[15px]">
             <CustomButton
               variant={'outline'}

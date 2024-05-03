@@ -2,16 +2,24 @@ function PageTile({
   useTextBtn = true,
   actionArray,
   title,
+  useBorder = true,
 }: {
   useTextBtn?: boolean;
   actionArray?: {
     name: string;
     action: () => void;
   }[];
-  title: string;
+  title?: string;
+  useBorder?: boolean;
 }) {
   return (
-    <div className="flex justify-between items-center border-b-[1px] border-background-borderlight-1 pb-[18px]">
+    <div
+      className={`flex justify-between items-center ${
+        useBorder
+          ? 'border-b-[1px] border-background-borderlight-1 pb-[18px]'
+          : ''
+      }`}
+    >
       <div>
         <p className="text-[20px] font-[600] leading-[28px]">{title}</p>
       </div>
@@ -22,7 +30,7 @@ function PageTile({
             <p
               key={action.name}
               onClick={action.action}
-              className="hover:cursor-pointer hover:font-[600] hover:underline hover:text-statusText-success"
+              className="hover:cursor-pointer hover:font-[400] hover:underline hover:text-statusText-success"
             >
               {action.name}
             </p>

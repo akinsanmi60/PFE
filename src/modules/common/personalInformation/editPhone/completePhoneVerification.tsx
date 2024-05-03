@@ -7,6 +7,7 @@ import ControlledInput from '@shared/Input/ControlledInput';
 import {
   COMPLETE_AGGREGATOR_PHONE_VERIFICATION_URL,
   COMPLETE_FARMER_PHONE_VERIFICATION_URL,
+  COMPLETE_TEAM_PHONE_VERIFICATION_URL,
 } from '@utils/apiUrl';
 import { useForm } from 'react-hook-form';
 import { useCompletePhoneVerification } from 'services/persionalInformation.service';
@@ -40,6 +41,10 @@ function CompletePhoneVerification() {
         return COMPLETE_AGGREGATOR_PHONE_VERIFICATION_URL(
           authUser?.id as string,
         );
+
+      case 'agencyAdmin':
+      case 'agencySubAdmin':
+        return COMPLETE_TEAM_PHONE_VERIFICATION_URL(authUser?.id as string);
 
       default:
         return COMPLETE_FARMER_PHONE_VERIFICATION_URL(authUser?.id as string);

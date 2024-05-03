@@ -26,7 +26,7 @@ function EditPhone({ phone }: { phone: string }) {
       modalBaseProp={{
         closingText: 'phone',
         formWidth: '490px',
-        closeBtnwidth: '520px',
+        closeBtnwidth: '490px',
       }}
     >
       {renderComponent()}
