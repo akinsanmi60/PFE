@@ -49,7 +49,7 @@ function AgencyPersonalInfo({ data }: { data: IAgencyTeamData }) {
     {
       label: 'Gender',
       inputName: 'gender',
-      disable: false,
+      disable: true,
     },
   ];
 
