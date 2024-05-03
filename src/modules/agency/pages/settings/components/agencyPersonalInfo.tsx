@@ -14,7 +14,6 @@ type IPersonalInputNames = 'full_name' | 'email' | 'phone_number' | 'gender';
 function AgencyPersonalInfo({ data }: { data: IAgencyTeamData }) {
   const { modalState, handleModalOpen } = useModalContext();
 
-  console.log(data);
   const { control, setValue } = useForm({
     defaultValues: {
       full_name: '',
