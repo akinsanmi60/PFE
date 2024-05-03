@@ -51,7 +51,7 @@ export const agencyPathsLinks = {
   collectedCertifications: 'collected',
   teamMember: 'team-member',
   teamMemberDetail: 'team-member/:id/detail',
-  settings: 'settings',
+  settings: 'profile-settings',
   certificationDetails: 'certifications/:id/:tab',
 };
 
