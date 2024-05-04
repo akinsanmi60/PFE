@@ -37,6 +37,10 @@ export type IAdminDataResponse = IBaseResponse & {
   data: IDataRes;
 };
 
+export type IGetAdminData = IBaseResponse & {
+  data: IAdminData;
+};
+
 export type ICreateAgency = {
   agency_name: string;
   email: string;

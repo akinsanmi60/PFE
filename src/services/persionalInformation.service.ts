@@ -37,6 +37,7 @@ export const useStartPhoneVerification = (props: any) => {
 export const useCompletePhoneVerification = ({
   url,
   closeModal,
+  queryText,
 }: IUseCompletePhoneVerification) => {
   const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
@@ -51,7 +52,7 @@ export const useCompletePhoneVerification = ({
         if (closeModal) {
           closeModal('phone');
         }
-        queryClient.invalidateQueries(['getIndividualFarmer']);
+        queryClient.invalidateQueries([queryText]);
       },
       onError(error) {
         displayError(error);
@@ -89,6 +90,7 @@ export const useStartEmailVerification = (props: any) => {
 export const useCompleteEmailVerification = ({
   url,
   closeModal,
+  queryText,
 }: IUseCompleteEmailVerification) => {
   const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
@@ -103,7 +105,7 @@ export const useCompleteEmailVerification = ({
         if (closeModal) {
           closeModal('email');
         }
-        queryClient.invalidateQueries(['getIndividualFarmer']);
+        queryClient.invalidateQueries([queryText]);
       },
       onError(error) {
         displayError(error);

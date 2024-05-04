@@ -12,6 +12,7 @@ import { IChangePassword } from 'types/auth.type';
 import {
   USER_CHANGE_PASSWORD_URL,
   AGENCY_UPDATE_PASSWORD_URL,
+  ADMIN_UPDATE_PASSWORD_URL,
 } from '@utils/apiUrl';
 import { useAuthContext } from '@contexts/authContext';
 
@@ -23,12 +24,15 @@ type IStateObject = {
 
 type InputNames = 'old_password' | 'new_password' | 'confirm_password';
 const agencyRoles = ['agency', 'agencyAdmin', 'agencySubAdmin'];
+const adminRoles = ['admin', 'subAdmin'];
 
 function ChangePassword({ useTitle = true }: { useTitle?: boolean }) {
   const { authUser } = useAuthContext();
 
   const urlSwitch = agencyRoles.includes(authUser?.role as string)
     ? AGENCY_UPDATE_PASSWORD_URL(authUser?.id as string)
+    : adminRoles.includes(authUser?.role as string)
+    ? ADMIN_UPDATE_PASSWORD_URL(authUser?.id as string)
     : USER_CHANGE_PASSWORD_URL(authUser?.id as string);
 
   const [passwordViews, setPasswordViews] = useState<IStateObject>({

@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import AgencySettingsLayout from '../../../../../components/settingsLayout';
 import ControlledInput from '@shared/Input/ControlledInput';
-import { IAgencyTeamData } from 'types/agency.type';
+import { IAdminData } from 'types/admin.type';
 import { useEffect } from 'react';
 import { capitalize } from '@utils/constants';
 import { useModalContext } from '@contexts/modalContext';
@@ -11,7 +11,7 @@ import EditEmail from '@modules/common/personalInformation/editEmail/editEmail';
 
 type IPersonalInputNames = 'full_name' | 'email' | 'phone_number' | 'gender';
 
-function AgencyPersonalInfo({ data }: { data: IAgencyTeamData }) {
+function AgencyPersonalInfo({ data }: { data: IAdminData }) {
   const { modalState, handleModalOpen } = useModalContext();
 
   const { control, setValue } = useForm({
@@ -53,6 +53,27 @@ function AgencyPersonalInfo({ data }: { data: IAgencyTeamData }) {
     },
   ];
 
+  const AdminInfoArray = [
+    {
+      label: 'Full Name',
+      inputName: 'full_name',
+      disable: true,
+    },
+    {
+      label: 'Email',
+      inputName: 'email',
+      disable: true,
+    },
+    {
+      label: 'Phone Number',
+      inputName: 'phone_number',
+      disable: true,
+    },
+  ];
+
+  const toUserInfoArray =
+    data?.role === 'admin' ? AdminInfoArray : personalInfoArray;
+
   const renderTitle = () => {
     return (
       <div>
@@ -86,7 +107,7 @@ function AgencyPersonalInfo({ data }: { data: IAgencyTeamData }) {
       <>
         <PageTile actionArray={actionArray} useBorder={false} />
         <div className="flex flex-col gap-y-[20px]">
-          {personalInfoArray.map(info => {
+          {toUserInfoArray.map(info => {
             return (
               <div key={info.label}>
                 <ControlledInput

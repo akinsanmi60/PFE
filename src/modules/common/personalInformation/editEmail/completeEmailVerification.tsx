@@ -8,11 +8,13 @@ import {
   COMPLETE_AGGREGATOR_EMAIL_VERIFICATION_URL,
   COMPLETE_FARMER_EMAIL_VERIFICATION_URL,
   COMPLETE_TEAM_EMAIL_VERIFICATION_URL,
+  COMPLETE_ADMIN_EMAIL_VERIFICATION_URL,
 } from '@utils/apiUrl';
 import { useForm } from 'react-hook-form';
 import { useCompleteEmailVerification } from 'services/persionalInformation.service';
 import { ICompleteChangeEmailFormData } from 'types/personalSetting.type';
 import { completeEmailVerificationSchema } from 'validation/changeEmailValidation';
+import { queryKeys } from '@utils/queryKey';
 
 function CompleteEmailVerification() {
   const { authUser } = useAuthContext();
@@ -43,14 +45,40 @@ function CompleteEmailVerification() {
       case 'agencySubAdmin':
         return COMPLETE_TEAM_EMAIL_VERIFICATION_URL(authUser?.id as string);
 
+      case 'admin':
+      case 'subAdmin':
+        return COMPLETE_ADMIN_EMAIL_VERIFICATION_URL(authUser?.id as string);
+
       default:
         return COMPLETE_FARMER_EMAIL_VERIFICATION_URL(authUser?.id as string);
+    }
+  };
+
+  const queryKeyText = () => {
+    switch (authUser?.role) {
+      case 'farmer':
+        return queryKeys.getIndividualFarmer;
+
+      case 'aggregator':
+        return queryKeys.getIndividualAggregator;
+
+      case 'agencyAdmin':
+      case 'agencySubAdmin':
+        return queryKeys.getIndividualTeamMember;
+
+      case 'admin':
+      case 'subAdmin':
+        return queryKeys.getIndividualSubAdmin;
+
+      default:
+        return '';
     }
   };
 
   const { mutate, isLoading } = useCompleteEmailVerification({
     url: urlLink(),
     closeModal: handleModalClose,
+    queryText: queryKeyText(),
   });
 
   const onSubmit = (values: ICompleteChangeEmailFormData) => {

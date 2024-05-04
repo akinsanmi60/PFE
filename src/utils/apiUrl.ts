@@ -100,6 +100,17 @@ export const ADD_ADMIN_URL = 'admin/create-admin';
 export const GET_ADMIN_DASHBOARD_COUNT_URL = (id: string) =>
   `admin/${id}/dashboard-count`;
 export const GET_ALL_ADMIN_OFFICERS = 'admin/all-admins';
+export const START_ADMIN_PHONE_VERIFICATION_URL = (id: string) =>
+  `admin/${id}/team-update-phonenumber`;
+export const COMPLETE_ADMIN_PHONE_VERIFICATION_URL = (id: string) =>
+  `admin/${id}/team-complete-phonenumber-reset`;
+export const START_ADMIN_EMAIL_VERIFICATION_URL = (id: string) =>
+  `admin/${id}/team-update-email`;
+export const COMPLETE_ADMIN_EMAIL_VERIFICATION_URL = (id: string) =>
+  `admin/${id}/team-complete-email-reset`;
+export const ADMIN_UPDATE_PASSWORD_URL = (id: string) =>
+  `admin/${id}/change-password`;
+export const GET_INDIVIDUAL_ADMIN_URL = (id: string) => `admin/${id}/admin`;
 
 // Check email
 export const CHECK_EMAIL_URL = 'auth/check-email-validity';

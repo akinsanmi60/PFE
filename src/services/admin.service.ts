@@ -18,6 +18,7 @@ import {
   GET_ALL_AGGREGATOR_URL,
   GET_ALL_FARMER_URL,
   GET_ALL_PRODUCE_URL,
+  GET_INDIVIDUAL_ADMIN_URL,
 } from '@utils/apiUrl';
 import { queryKeys } from '@utils/queryKey';
 import { IBaseResponse } from 'types/auth.type';
@@ -28,6 +29,8 @@ import {
   IDataRes,
   IFarmerQueryProp,
   ISubAdminQuery,
+  IGetAdminData,
+  IAdminData,
 } from 'types/admin.type';
 
 const useAdminCreationMutation = () => {
@@ -378,6 +381,26 @@ const useGetAllSubAdmin = (queryParams: ISubAdminQuery) => {
   };
 };
 
+const useGetIndividualSubAdmin = (id: string) => {
+  const { data, isLoading, isRefetching, isError } = useQuery<IGetAdminData>(
+    [queryKeys.getIndividualSubAdmin],
+    () =>
+      getRequest({
+        url: GET_INDIVIDUAL_ADMIN_URL(id),
+      }),
+    {
+      refetchOnWindowFocus: false,
+    },
+  );
+
+  return {
+    isLoading,
+    isRefetching,
+    isError,
+    data: data?.data as IAdminData,
+  };
+};
+
 export {
   useAdminCreationMutation,
   useGetAllFarmers,
@@ -385,6 +408,7 @@ export {
   useGetAllProduce,
   useGetAdminDashboard,
   useGetAllSubAdmin,
+  useGetIndividualSubAdmin,
   useApproveFarmer,
   useApproveAggregator,
   useDeactivateFarmer,

@@ -36,9 +36,11 @@ export type ICompleteEmailFormData = Omit<
 export type IUseCompletePhoneVerification = {
   url: string;
   closeModal: (_type: string) => void;
+  queryText: string;
 };
 
 export type IUseCompleteEmailVerification = {
   url: string;
   closeModal: (_type: string) => void;
+  queryText: string;
 };

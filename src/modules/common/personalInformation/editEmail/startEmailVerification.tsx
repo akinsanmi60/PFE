@@ -8,6 +8,7 @@ import {
   START_AGGREGATOR_EMAIL_VERIFICATION_URL,
   START_FARMER_EMAIL_VERIFICATION_URL,
   START_TEAM_EMAIL_VERIFICATION_URL,
+  START_ADMIN_EMAIL_VERIFICATION_URL,
 } from '@utils/apiUrl';
 import { useForm } from 'react-hook-form';
 import { useStartEmailVerification } from 'services/persionalInformation.service';
@@ -49,6 +50,10 @@ function StartEmailVerification({
       case 'agencyAdmin':
       case 'agencySubAdmin':
         return START_TEAM_EMAIL_VERIFICATION_URL(authUser?.id as string);
+
+      case 'admin':
+      case 'subAdmin':
+        return START_ADMIN_EMAIL_VERIFICATION_URL(authUser?.id as string);
 
       default:
         return START_FARMER_EMAIL_VERIFICATION_URL(authUser?.id as string);

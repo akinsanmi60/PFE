@@ -8,6 +8,7 @@ import {
   COMPLETE_AGGREGATOR_PHONE_VERIFICATION_URL,
   COMPLETE_FARMER_PHONE_VERIFICATION_URL,
   COMPLETE_TEAM_PHONE_VERIFICATION_URL,
+  COMPLETE_ADMIN_PHONE_VERIFICATION_URL,
 } from '@utils/apiUrl';
 import { useForm } from 'react-hook-form';
 import { useCompletePhoneVerification } from 'services/persionalInformation.service';
@@ -16,6 +17,7 @@ import {
   ICompleteFormData,
 } from 'types/personalSetting.type';
 import { completePhoneVerificationSchema } from 'validation/changePhoneValidation';
+import { queryKeys } from '@utils/queryKey';
 
 function CompletePhoneVerification() {
   const { authUser } = useAuthContext();
@@ -46,14 +48,40 @@ function CompletePhoneVerification() {
       case 'agencySubAdmin':
         return COMPLETE_TEAM_PHONE_VERIFICATION_URL(authUser?.id as string);
 
+      case 'admin':
+      case 'subAdmin':
+        return COMPLETE_ADMIN_PHONE_VERIFICATION_URL(authUser?.id as string);
+
       default:
         return COMPLETE_FARMER_PHONE_VERIFICATION_URL(authUser?.id as string);
+    }
+  };
+
+  const queryKeyText = () => {
+    switch (authUser?.role) {
+      case 'farmer':
+        return queryKeys.getIndividualFarmer;
+
+      case 'aggregator':
+        return queryKeys.getIndividualAggregator;
+
+      case 'agencyAdmin':
+      case 'agencySubAdmin':
+        return queryKeys.getIndividualTeamMember;
+
+      case 'admin':
+      case 'subAdmin':
+        return queryKeys.getIndividualSubAdmin;
+
+      default:
+        return '';
     }
   };
 
   const { mutate, isLoading } = useCompletePhoneVerification({
     url: urlLink(),
     closeModal: handleModalClose,
+    queryText: queryKeyText(),
   });
 
   const onSubmit = (values: ICompleteChangeFormData) => {
