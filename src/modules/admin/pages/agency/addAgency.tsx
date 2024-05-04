@@ -1,5 +1,6 @@
 import { useModalContext } from '@contexts/modalContext';
 import { givenState } from '@db/general';
+import { genderOptions } from '@db/produceData';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '@shared/Button';
 import Drawer from '@shared/Drawer';
@@ -30,6 +31,7 @@ function AddAgency() {
       head_of_agency_phone: '',
       head_of_agency_email: '',
       agency_type: '',
+      gender: '',
     },
     resolver: yupResolver(AddNewAgencySchema),
   });
@@ -56,11 +58,6 @@ function AddAgency() {
   return (
     <Drawer
       onClose={() => handleModalClose('createAgency')}
-      //   icon={
-      //     <div className="bg-[#E6F2FF] p-3 rounded-[40px]">
-      //       <AddNewGroupIcon />
-      //     </div>
-      //   }
       header={'Add New Agency'}
       openDrawerBox={modalState?.openModal}
     >
@@ -147,6 +144,16 @@ function AddAgency() {
             placeholder="Enter head of agency email"
           />
         </div>
+        <div>
+          <ControlledSelect
+            control={control}
+            name="gender"
+            label="Head of Agency Gender"
+            placeholder="Please select gender"
+            options={genderOptions}
+          />
+        </div>
+
         <div>
           <ControlledSelect
             control={control}

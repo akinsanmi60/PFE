@@ -98,6 +98,19 @@ export const teamAgentOptions: {
     value: 'fieldAgent',
   },
 ];
+export const genderOptions: {
+  label: string;
+  value: string;
+}[] = [
+  {
+    label: 'Male',
+    value: 'male',
+  },
+  {
+    label: 'Female',
+    value: 'female',
+  },
+];
 
 export const teamRoleOptions: {
   label: string;

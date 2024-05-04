@@ -40,6 +40,7 @@ export const AddNewAgencySchema = yup
       .required('Enter your agency head email')
       .matches(EMAIL_REGEX, 'Please enter a valid email address'),
     agency_type: yup.string().required('Select your agency type'),
+    gender: yup.string().required('Select your gender'),
   })
   .required();
 
@@ -58,5 +59,6 @@ export const AddNewTeamSchema = yup
       .matches(REGEX_CODE, 'Special characters and alphabet are not accepted')
       .max(11, 'Phone number must not be greater than 14 characters'),
     agency_type: yup.string().required('Select your agency type'),
+    gender: yup.string().required('Select your gender'),
   })
   .required();

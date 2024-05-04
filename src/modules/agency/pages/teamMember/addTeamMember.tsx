@@ -1,4 +1,8 @@
-import { teamAgentOptions, teamRoleOptions } from '@db/produceData';
+import {
+  teamAgentOptions,
+  teamRoleOptions,
+  genderOptions,
+} from '@db/produceData';
 import CustomButton from '@shared/Button';
 import ControlledInput from '@shared/Input/ControlledInput';
 import ModalBaseWrapper from '@shared/ModalBase';
@@ -23,6 +27,7 @@ function AddTeamMember({ id }: { id: string }) {
       agent_phone_number: '',
       agent_role: '',
       agency_type: '',
+      gender: '',
     },
     resolver: yupResolver(AddNewTeamSchema),
   });
@@ -100,6 +105,15 @@ function AddTeamMember({ id }: { id: string }) {
                 label="Agency State"
                 placeholder="Please select agency address"
                 options={teamAgentOptions}
+              />
+            </div>
+            <div>
+              <ControlledSelect
+                control={control}
+                name="gender"
+                label="Agent Gender"
+                placeholder="Please select agent gender"
+                options={genderOptions}
               />
             </div>
 

@@ -49,6 +49,7 @@ export type ICreateAgency = {
   head_of_agency_phone: string;
   head_of_agency_email: string;
   agency_type: string;
+  gender: string;
 };
 
 export type ITeamCreateType = {
@@ -57,4 +58,5 @@ export type ITeamCreateType = {
   agent_phone_number: string;
   agent_role: string;
   agency_type: string;
+  gender: string;
 };
