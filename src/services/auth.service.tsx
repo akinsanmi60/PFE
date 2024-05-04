@@ -16,11 +16,15 @@ import jwt_decode from 'jwt-decode';
 import { IUserCTXType } from 'types/contextProvider.type';
 import { saveDetailToLocalStorage, setToken } from '@hooks/localStorageHook';
 import { useAuthContext } from '@contexts/authContext';
-import { getRequest, postRequest, putRequest } from '@utils/apiCaller';
+import {
+  getRequest,
+  patchRequest,
+  postRequest,
+  putRequest,
+} from '@utils/apiCaller';
 import {
   CHECK_EMAIL_URL,
   PARTIAL_USER_CREATION_URL,
-  USER_CHANGE_PASSWORD_URL,
   USER_FORGET_URL,
   USER_RESET_URL,
   USER_SIGNUP_URL,
@@ -192,16 +196,29 @@ export const useResetPasswordMutation = () => {
   return { mutate, isLoading, ...rest };
 };
 
-export const useChangePasswordMutation = () => {
+export const useChangePasswordMutation = ({
+  url,
+  reset,
+}: {
+  url: string;
+  reset: UseFormReset<{
+    old_password: string;
+    new_password: string;
+    confirm_password: string;
+  }>;
+}) => {
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: IchangePasswordPayload }) =>
-      postRequest<IchangePasswordPayload, IBaseResponse>({
-        url: USER_CHANGE_PASSWORD_URL,
+      patchRequest<IchangePasswordPayload, IBaseResponse>({
+        url: url,
         payload,
       }),
     {
       onSuccess(res) {
         displaySuccess(res?.message);
+        if (reset) {
+          reset();
+        }
       },
       onError(error) {
         displayError(error);

@@ -9,6 +9,11 @@ import { InputRightElement } from '@chakra-ui/react'; // Assuming you are using 
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'; // Assuming you are using Chakra UI for icons
 import PageTile from 'components/pageTile';
 import { IChangePassword } from 'types/auth.type';
+import {
+  USER_CHANGE_PASSWORD_URL,
+  AGENCY_UPDATE_PASSWORD_URL,
+} from '@utils/apiUrl';
+import { useAuthContext } from '@contexts/authContext';
 
 type IStateObject = {
   oldPasswordView: boolean;
@@ -17,15 +22,22 @@ type IStateObject = {
 };
 
 type InputNames = 'old_password' | 'new_password' | 'confirm_password';
+const agencyRoles = ['agency', 'agencyAdmin', 'agencySubAdmin'];
 
-function ChangePassword() {
+function ChangePassword({ useTitle = true }: { useTitle?: boolean }) {
+  const { authUser } = useAuthContext();
+
+  const urlSwitch = agencyRoles.includes(authUser?.role as string)
+    ? AGENCY_UPDATE_PASSWORD_URL(authUser?.id as string)
+    : USER_CHANGE_PASSWORD_URL(authUser?.id as string);
+
   const [passwordViews, setPasswordViews] = useState<IStateObject>({
     oldPasswordView: false,
     newPasswordView: false,
     confirmPasswordView: false,
   });
 
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       old_password: '',
       new_password: '',
@@ -34,7 +46,10 @@ function ChangePassword() {
     resolver: yupResolver(changePasswordSchema),
   });
 
-  const { isLoading, mutate } = useChangePasswordMutation();
+  const { isLoading, mutate } = useChangePasswordMutation({
+    url: urlSwitch,
+    reset,
+  });
 
   const handleClickPasswordVisibility = (passwordKey: keyof IStateObject) => {
     setPasswordViews(prev => ({
@@ -73,10 +88,14 @@ function ChangePassword() {
   ];
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="p-[24px]">
-      <PageTile title="Change Password" />
-
-      <div className="flex flex-col gap-[12px] mt-[30px]">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={`${useTitle ? 'p-[24px]' : ''}`}
+    >
+      {useTitle && <PageTile title="Change Password" />}
+      <div
+        className={`flex flex-col gap-[12px] ${useTitle ? 'mt-[30px]' : ''}`}
+      >
         {inputObject.map(item => (
           <div key={item.inputName}>
             <ControlledInput

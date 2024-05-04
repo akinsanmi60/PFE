@@ -10,7 +10,8 @@ export const PARTIAL_USER_CREATION_URL = 'auth/create-partialuser';
 export const USER_VERIFY_URL = 'auth/verify';
 export const USER_FORGET_URL = 'auth/forgot-password';
 export const USER_RESET_URL = 'auth/reset-password';
-export const USER_CHANGE_PASSWORD_URL = 'auth/change-password';
+export const USER_CHANGE_PASSWORD_URL = (id: string) =>
+  `auth/${id}/change-password`;
 
 // farmer urls
 export const GET_FARMER_DASHBOARD_COUNT_URL = (id: string) =>
@@ -135,6 +136,8 @@ export const START_TEAM_EMAIL_VERIFICATION_URL = (id: string) =>
   `agency/${id}/team-update-email`;
 export const COMPLETE_TEAM_EMAIL_VERIFICATION_URL = (id: string) =>
   `agency/${id}/team-complete-email-reset`;
+export const AGENCY_UPDATE_PASSWORD_URL = (id: string) =>
+  `agency/${id}/change-password`;
 
 // Exporter urls
 export const ADD_EXPORTER_URL = 'exporter/create-exporter';
