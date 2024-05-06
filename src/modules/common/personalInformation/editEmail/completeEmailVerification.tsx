@@ -7,7 +7,7 @@ import ControlledInput from '@shared/Input/ControlledInput';
 import {
   COMPLETE_AGGREGATOR_EMAIL_VERIFICATION_URL,
   COMPLETE_FARMER_EMAIL_VERIFICATION_URL,
-  COMPLETE_TEAM_EMAIL_VERIFICATION_URL,
+  COMPLETE_AGENCY_EMAIL_VERIFICATION_URL,
   COMPLETE_ADMIN_EMAIL_VERIFICATION_URL,
 } from '@utils/apiUrl';
 import { useForm } from 'react-hook-form';
@@ -43,7 +43,8 @@ function CompleteEmailVerification() {
 
       case 'agencyAdmin':
       case 'agencySubAdmin':
-        return COMPLETE_TEAM_EMAIL_VERIFICATION_URL(authUser?.id as string);
+      case 'agency':
+        return COMPLETE_AGENCY_EMAIL_VERIFICATION_URL(authUser?.id as string);
 
       case 'admin':
       case 'subAdmin':

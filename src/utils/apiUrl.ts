@@ -139,14 +139,14 @@ export const GET_INDIVIDUAL_TEAM_MEMBER_URL = (
   agentId: string,
   agencyId: string,
 ) => `agency/${agentId}/agent-details/${agencyId}`;
-export const START_TEAM_PHONE_VERIFICATION_URL = (id: string) =>
-  `agency/${id}/team-update-phonenumber`;
-export const COMPLETE_TEAM_PHONE_VERIFICATION_URL = (id: string) =>
-  `agency/${id}/team-complete-phonenumber-reset`;
-export const START_TEAM_EMAIL_VERIFICATION_URL = (id: string) =>
-  `agency/${id}/team-update-email`;
-export const COMPLETE_TEAM_EMAIL_VERIFICATION_URL = (id: string) =>
-  `agency/${id}/team-complete-email-reset`;
+export const START_AGENCY_PHONE_VERIFICATION_URL = (id: string) =>
+  `agency/${id}/update-phonenumber`;
+export const COMPLETE_AGENCY_PHONE_VERIFICATION_URL = (id: string) =>
+  `agency/${id}/complete-phonenumber-reset`;
+export const START_AGENCY_EMAIL_VERIFICATION_URL = (id: string) =>
+  `agency/${id}/update-email`;
+export const COMPLETE_AGENCY_EMAIL_VERIFICATION_URL = (id: string) =>
+  `agency/${id}/complete-email-reset`;
 export const AGENCY_UPDATE_PASSWORD_URL = (id: string) =>
   `agency/${id}/change-password`;
 

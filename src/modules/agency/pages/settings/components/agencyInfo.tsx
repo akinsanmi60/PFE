@@ -1,39 +1,49 @@
 import { useForm } from 'react-hook-form';
 import AgencySettingsLayout from '../../../../../components/settingsLayout';
 import ControlledInput from '@shared/Input/ControlledInput';
-import { IAgencyTeamData } from 'types/agency.type';
 import { useEffect } from 'react';
 import { capitalize } from '@utils/constants';
 import { useModalContext } from '@contexts/modalContext';
 import PageTile from 'components/pageTile';
 import EditPhone from '@modules/common/personalInformation/editPhone/editPhone';
 import EditEmail from '@modules/common/personalInformation/editEmail/editEmail';
+import { useAuthContext } from '@contexts/authContext';
+import { useGetIndividualAgency } from 'services/agency.service';
 
-type IPersonalInputNames = 'full_name' | 'email' | 'phone_number' | 'gender';
+type IPersonalInputNames =
+  | 'agency_name'
+  | 'email'
+  | 'phone_number'
+  | 'agency_address';
 
-function AgencyPersonalInfo({ data }: { data: IAgencyTeamData }) {
+function AgencyPersonalInfo() {
+  const { authUser } = useAuthContext();
+  const { data } = useGetIndividualAgency(authUser?.id as string);
   const { modalState, handleModalOpen } = useModalContext();
 
   const { control, setValue } = useForm({
     defaultValues: {
-      full_name: '',
+      agency_name: '',
       email: '',
       phone_number: '',
-      gender: '',
+      agency_address: '',
     },
   });
 
   useEffect(() => {
     setValue('email', data?.email);
-    setValue('full_name', capitalize(data?.full_name) as string);
+    setValue('agency_name', capitalize(data?.agency_name) as string);
     setValue('phone_number', data?.phone_number);
-    setValue('gender', (capitalize(data?.gender) as string) || 'N/A');
+    setValue(
+      'agency_address',
+      (capitalize(data?.agency_address) as string) || 'N/A',
+    );
   }, [data, setValue]);
 
   const personalInfoArray = [
     {
-      label: 'Full Name',
-      inputName: 'full_name',
+      label: 'Agency Name',
+      inputName: 'agency_name',
       disable: true,
     },
     {
@@ -47,8 +57,8 @@ function AgencyPersonalInfo({ data }: { data: IAgencyTeamData }) {
       disable: true,
     },
     {
-      label: 'Gender',
-      inputName: 'gender',
+      label: 'Address',
+      inputName: 'agency_address',
       disable: true,
     },
   ];

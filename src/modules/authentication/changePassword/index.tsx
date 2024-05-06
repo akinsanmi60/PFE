@@ -15,6 +15,7 @@ import {
   ADMIN_UPDATE_PASSWORD_URL,
 } from '@utils/apiUrl';
 import { useAuthContext } from '@contexts/authContext';
+import { Account } from '@utils/constants';
 
 type IStateObject = {
   oldPasswordView: boolean;
@@ -23,8 +24,12 @@ type IStateObject = {
 };
 
 type InputNames = 'old_password' | 'new_password' | 'confirm_password';
-const agencyRoles = ['agency', 'agencyAdmin', 'agencySubAdmin'];
-const adminRoles = ['admin', 'subAdmin'];
+const agencyRoles = [
+  Account.Agency,
+  Account['Agency Admin'],
+  Account['Agency Staff'],
+];
+const adminRoles = [Account.SubAdmin, Account.Admin];
 
 function ChangePassword({ useTitle = true }: { useTitle?: boolean }) {
   const { authUser } = useAuthContext();

@@ -1,19 +1,15 @@
 import AppHeader from 'components/appHeader/appHeader';
 import PageContainer from 'components/Layout/PageContainer';
 import ImageUpdate from './components/imageUpdate';
-import AgencyPersonalInfo from './components/agencyPersonalInfo';
-import { useGetIndividualTeamMember } from 'services/agency.service';
-import { useGetIdForFetch } from 'services/auth.service';
+import AgentPersonalInfo from './components/agentPersonalInfo';
 import { useAuthContext } from '@contexts/authContext';
 import AgencyChangePassword from './components/changePassword';
+import { Account } from '@utils/constants';
+import AgencyPersonalInfo from './components/agencyInfo';
 
 function Settings() {
   const { authUser } = useAuthContext();
-  const { idFOrFetch } = useGetIdForFetch();
-  const { data } = useGetIndividualTeamMember(
-    authUser?.id as string,
-    idFOrFetch as string,
-  );
+
   return (
     <div>
       <AppHeader />
@@ -21,7 +17,11 @@ function Settings() {
       <PageContainer className="pt-0 mt-6 ">
         <div className="bg-primary-white rounded-lg p-[24px] ">
           <ImageUpdate />
-          <AgencyPersonalInfo data={data} />
+          {authUser?.role === Account['Agency Admin'] ||
+            (authUser?.role === Account['Agency Staff'] && (
+              <AgentPersonalInfo />
+            ))}
+          {authUser?.role === Account.Agency && <AgencyPersonalInfo />}
           <AgencyChangePassword />
         </div>
       </PageContainer>

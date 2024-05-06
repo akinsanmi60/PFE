@@ -1,17 +1,12 @@
-import { useAuthContext } from '@contexts/authContext';
 import CircularProgress from '@shared/CircularProgress';
 import { AgencyUserPath } from '@utils/paths';
 import PageContainer from 'components/Layout/PageContainer';
 import { useNavigate } from 'react-router-dom';
 import { useGetAgencyDashboard } from 'services/agency.service';
+import { useGetIdForFetch } from 'services/auth.service';
 
 function AgencyDashboardHero() {
-  const { authUser } = useAuthContext();
-
-  const idFOrFetch =
-    authUser?.agency_attached_to !== null
-      ? authUser?.agency_attached_to
-      : authUser?.id;
+  const { idFOrFetch } = useGetIdForFetch();
 
   const { data, isLoading } = useGetAgencyDashboard(idFOrFetch as string);
   const navigate = useNavigate();

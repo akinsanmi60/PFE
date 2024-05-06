@@ -7,7 +7,7 @@ import ControlledInput from '@shared/Input/ControlledInput';
 import {
   START_AGGREGATOR_EMAIL_VERIFICATION_URL,
   START_FARMER_EMAIL_VERIFICATION_URL,
-  START_TEAM_EMAIL_VERIFICATION_URL,
+  START_AGENCY_EMAIL_VERIFICATION_URL,
   START_ADMIN_EMAIL_VERIFICATION_URL,
 } from '@utils/apiUrl';
 import { useForm } from 'react-hook-form';
@@ -49,7 +49,8 @@ function StartEmailVerification({
 
       case 'agencyAdmin':
       case 'agencySubAdmin':
-        return START_TEAM_EMAIL_VERIFICATION_URL(authUser?.id as string);
+      case 'agency':
+        return START_AGENCY_EMAIL_VERIFICATION_URL(authUser?.id as string);
 
       case 'admin':
       case 'subAdmin':

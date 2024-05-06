@@ -1,6 +1,6 @@
 import { displayError, displaySuccess } from '@shared/Toast/Toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { postRequest } from '@utils/apiCaller';
+import { patchRequest } from '@utils/apiCaller';
 import {
   ICompleteChangeEmailFormData,
   ICompleteFormData,
@@ -15,7 +15,7 @@ export const useStartPhoneVerification = (props: any) => {
   const { switchView, url } = props;
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: IStartFormData }) =>
-      postRequest<IStartFormData, IStartResponse>({
+      patchRequest<IStartFormData, IStartResponse>({
         url: url,
         payload,
       }),
@@ -42,7 +42,7 @@ export const useCompletePhoneVerification = ({
   const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: ICompleteFormData }) =>
-      postRequest<ICompleteFormData, IStartResponse>({
+      patchRequest<ICompleteFormData, IStartResponse>({
         url: url,
         payload,
       }),
@@ -67,7 +67,7 @@ export const useStartEmailVerification = (props: any) => {
   const { switchView, url } = props;
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: IStartEmailFormData }) =>
-      postRequest<IStartEmailFormData, IStartResponse>({
+      patchRequest<IStartEmailFormData, IStartResponse>({
         url: url,
         payload,
       }),
@@ -95,7 +95,7 @@ export const useCompleteEmailVerification = ({
   const queryClient = useQueryClient();
   const { mutate, isLoading, ...rest } = useMutation(
     ({ payload }: { payload: ICompleteChangeEmailFormData }) =>
-      postRequest<ICompleteChangeEmailFormData, IStartResponse>({
+      patchRequest<ICompleteChangeEmailFormData, IStartResponse>({
         url: url,
         payload,
       }),

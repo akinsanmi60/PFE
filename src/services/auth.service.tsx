@@ -42,6 +42,7 @@ import { BasePath } from 'routes/Routes';
 import { agencyPathsLinks } from '@modules/agency/routes';
 import { exporterPathsLinks } from '@modules/exporter/routes';
 import { useFormData } from '@contexts/formContext';
+import { Account } from '@utils/constants';
 
 const dashboardPaths: Record<string, string> = {
   farmer: `/${BasePath.USER}/${userPathsLinks.dashBoard}`,
@@ -324,7 +325,8 @@ export const useCompleteProfile = ({
 export const useGetIdForFetch = () => {
   const { authUser } = useAuthContext();
   const idFOrFetch =
-    authUser?.agency_attached_to !== null
+    authUser?.role === Account['Agency Admin'] ||
+    authUser?.role === Account['Agency Staff']
       ? authUser?.agency_attached_to
       : authUser?.id;
 

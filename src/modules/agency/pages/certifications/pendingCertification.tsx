@@ -17,9 +17,11 @@ import TableLoading from '@shared/Table/tableLoading';
 import AgencyCertificationFilterForm from './certificationFilterForm';
 import { AgencyUserPath } from '@utils/paths';
 import { useNavigate } from 'react-router-dom';
+import { useGetIdForFetch } from 'services/auth.service';
 
 function PendingCertification() {
   const navigate = useNavigate();
+  const { idFOrFetch } = useGetIdForFetch();
 
   const { modalState, handleModalOpen, handleModalClose } = useModalContext();
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,6 +30,7 @@ function PendingCertification() {
     page: 1,
     limit: 10,
     status: 'pending',
+    agency_to: idFOrFetch as string,
   });
 
   const certificationForm = useForm<IFilterValues>({

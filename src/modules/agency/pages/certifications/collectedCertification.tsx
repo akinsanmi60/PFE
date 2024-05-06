@@ -17,9 +17,11 @@ import TableLoading from '@shared/Table/tableLoading';
 import AgencyCertificationFilterForm from './certificationFilterForm';
 import { useNavigate } from 'react-router-dom';
 import { AgencyUserPath } from '@utils/paths';
+import { useGetIdForFetch } from 'services/auth.service';
 
 function CollectedCertification() {
   const navigate = useNavigate();
+  const { idFOrFetch } = useGetIdForFetch();
 
   const { modalState, handleModalOpen, handleModalClose } = useModalContext();
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,6 +30,8 @@ function CollectedCertification() {
     page: 1,
     limit: 10,
     status: 'collected',
+
+    agency_to: idFOrFetch as string,
   });
 
   const certificationForm = useForm<IFilterValues>({
