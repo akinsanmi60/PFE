@@ -56,9 +56,12 @@ function SideNav() {
 
   let first_name: string | undefined;
 
-  if (authUser?.full_name) {
+  if (authUser?.full_name || authUser?.coy_name) {
     first_name = capitalize(
-      getFirstSwordBeforeSpace(authUser?.full_name as unknown as string),
+      getFirstSwordBeforeSpace(
+        (authUser?.full_name as unknown as string) ||
+          (authUser?.coy_name as unknown as string),
+      ),
     );
   }
 

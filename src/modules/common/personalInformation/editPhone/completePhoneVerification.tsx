@@ -9,6 +9,7 @@ import {
   COMPLETE_FARMER_PHONE_VERIFICATION_URL,
   COMPLETE_AGENCY_PHONE_VERIFICATION_URL,
   COMPLETE_ADMIN_PHONE_VERIFICATION_URL,
+  COMPLETE_EXPORTER_PHONE_VERIFICATION_URL,
 } from '@utils/apiUrl';
 import { useForm } from 'react-hook-form';
 import { useCompletePhoneVerification } from 'services/persionalInformation.service';
@@ -52,6 +53,9 @@ function CompletePhoneVerification() {
       case 'admin':
       case 'subAdmin':
         return COMPLETE_ADMIN_PHONE_VERIFICATION_URL(authUser?.id as string);
+
+      case 'exporter':
+        return COMPLETE_EXPORTER_PHONE_VERIFICATION_URL(authUser?.id as string);
 
       default:
         return COMPLETE_FARMER_PHONE_VERIFICATION_URL(authUser?.id as string);

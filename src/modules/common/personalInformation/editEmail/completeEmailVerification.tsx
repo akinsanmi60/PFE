@@ -9,6 +9,7 @@ import {
   COMPLETE_FARMER_EMAIL_VERIFICATION_URL,
   COMPLETE_AGENCY_EMAIL_VERIFICATION_URL,
   COMPLETE_ADMIN_EMAIL_VERIFICATION_URL,
+  COMPLETE_EXPORTER_EMAIL_VERIFICATION_URL,
 } from '@utils/apiUrl';
 import { useForm } from 'react-hook-form';
 import { useCompleteEmailVerification } from 'services/persionalInformation.service';
@@ -49,6 +50,9 @@ function CompleteEmailVerification() {
       case 'admin':
       case 'subAdmin':
         return COMPLETE_ADMIN_EMAIL_VERIFICATION_URL(authUser?.id as string);
+
+      case 'exporter':
+        return COMPLETE_EXPORTER_EMAIL_VERIFICATION_URL(authUser?.id as string);
 
       default:
         return COMPLETE_FARMER_EMAIL_VERIFICATION_URL(authUser?.id as string);

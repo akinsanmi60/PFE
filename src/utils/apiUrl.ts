@@ -165,7 +165,14 @@ export const ACTIVATE_EXPORTER_URL = (exporterID: string) =>
   `exporter/${exporterID}/activate-exporter`;
 export const DEACTIVATE_EXPORTER_URL = (exporterID: string) =>
   `exporter/${exporterID}/deactivate-exporter`;
-
+export const START_EXPORTER_PHONE_VERIFICATION_URL = (id: string) =>
+  `exporter/${id}/update-phonenumber`;
+export const COMPLETE_EXPORTER_PHONE_VERIFICATION_URL = (id: string) =>
+  `exporter/${id}/complete-phonenumber-reset`;
+export const START_EXPORTER_EMAIL_VERIFICATION_URL = (id: string) =>
+  `exporter/${id}/update-email`;
+export const COMPLETE_EXPORTER_EMAIL_VERIFICATION_URL = (id: string) =>
+  `exporter/${id}/complete-email-reset`;
 // Certification
 export const SUBMIT_CERTIFICATION_URL = (
   agencyID: string,
