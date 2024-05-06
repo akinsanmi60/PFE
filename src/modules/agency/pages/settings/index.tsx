@@ -9,7 +9,6 @@ import AgencyPersonalInfo from './components/agencyInfo';
 
 function Settings() {
   const { authUser } = useAuthContext();
-
   return (
     <div>
       <AppHeader />
@@ -17,10 +16,10 @@ function Settings() {
       <PageContainer className="pt-0 mt-6 ">
         <div className="bg-primary-white rounded-lg p-[24px] ">
           <ImageUpdate />
-          {authUser?.role === Account['Agency Admin'] ||
-            (authUser?.role === Account['Agency Staff'] && (
-              <AgentPersonalInfo />
-            ))}
+          {(authUser?.role === Account['Agency Admin'] ||
+            authUser?.role === Account['Agency Staff']) && (
+            <AgentPersonalInfo />
+          )}
           {authUser?.role === Account.Agency && <AgencyPersonalInfo />}
           <AgencyChangePassword />
         </div>
