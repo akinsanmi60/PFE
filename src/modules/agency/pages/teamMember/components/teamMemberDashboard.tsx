@@ -1,16 +1,12 @@
-import { useAuthContext } from '@contexts/authContext';
 import CustomButton from '@shared/Button';
 import CircularProgress from '@shared/CircularProgress';
 import PageContainer from 'components/Layout/PageContainer';
 import { ReactComponent as PlusSVG } from '@assets/svg/plusSvg.svg';
 import { useGetAgencyTeamCount } from 'services/agency.service';
+import { useGetIdForFetch } from 'services/auth.service';
 
 function TeamMemberDashboard({ onClick }: { onClick?: () => void }) {
-  const { authUser } = useAuthContext();
-  const idFOrFetch =
-    authUser?.agency_attached_to !== null
-      ? authUser?.agency_attached_to
-      : authUser?.id;
+  const { idFOrFetch } = useGetIdForFetch();
 
   const { data, isLoading, isRefetching } = useGetAgencyTeamCount(
     idFOrFetch as string,
