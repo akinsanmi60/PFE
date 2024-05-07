@@ -10,13 +10,12 @@ import {
 import { useAuthContext } from '@contexts/authContext';
 
 const certList = ['collected', 'processing', 'certified'];
-const roleToAccessBtn = ['agencyAdmin', 'agentSubAdmin'];
+const roleToAccessBtn = ['agencyAdmin', 'agencySubAdmin'];
 function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
   const [openOptions, setOpenOptions] = useState(false);
   const { authUser } = useAuthContext();
   const exporterEmail = dataDetail?.export?.email;
   const pentrarEmail = 'Pentrar@fe.com';
-
   const handleOpenOptions = () => {
     if (dataDetail?.status === 'certified') {
       return;
