@@ -65,6 +65,14 @@ function DetailColumnHead() {
         return <StatusBadge status={status as IStatusType} />;
       },
     },
+    {
+      label: 'Certification Agency',
+      accessor: 'certification_request',
+      render: ({ certification_request }) => {
+        const name = certification_request[0]?.agency?.agency_name;
+        return capitalize(name);
+      },
+    },
   ];
 
   const detailColumnsHeadTitleB: {
@@ -112,6 +120,13 @@ function DetailColumnHead() {
             ? 'KG'
             : unit_transfered
         }`,
+    },
+    {
+      label: 'Certification Status',
+      accessor: 'certification',
+      render: ({ certification }) => {
+        return renderCertificationStatus(certification);
+      },
     },
   ];
 

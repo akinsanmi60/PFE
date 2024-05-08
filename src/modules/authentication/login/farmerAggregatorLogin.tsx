@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 function FarmerAggregatorLoginPage() {
   const { type } = useParams();
+
   return (
     <div className="max-content">
       <div className="container">
