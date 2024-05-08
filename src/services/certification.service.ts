@@ -2,6 +2,7 @@ import { displayError, displaySuccess } from '@shared/Toast/Toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getRequest, patchRequest } from '@utils/apiCaller';
 import {
+  ADMIN_UPDATE_CONSENT_CERTIFICATION_URL,
   AGENCY_UPDATE_CERTIFICATION_URL,
   GET_ALL_CERTIFICATIONS_URL,
   GET_CERTIFICATION_URL,
@@ -126,9 +127,39 @@ const useAgencyUpdateCertificationMutation = () => {
   return { mutate, isLoading, ...rest };
 };
 
+const useAdminUpdateConsentMutation = () => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, ...rest } = useMutation(
+    ({
+      idData,
+    }: {
+      idData: {
+        id: string;
+        adminId: string;
+      };
+    }) =>
+      patchRequest({
+        url: ADMIN_UPDATE_CONSENT_CERTIFICATION_URL(idData.id, idData.adminId),
+      }),
+    {
+      onSuccess(res) {
+        const response = res as IBaseResponse;
+        displaySuccess(response?.message);
+        queryClient.invalidateQueries([queryKeys.getSingleProduce]);
+      },
+      onError(error) {
+        displayError(error);
+      },
+    },
+  );
+
+  return { mutate, isLoading, ...rest };
+};
+
 export {
   useGetAllCertification,
   useGetCertificationById,
   useUpdateCertificationMutation,
   useAgencyUpdateCertificationMutation,
+  useAdminUpdateConsentMutation,
 };

@@ -24,6 +24,7 @@ import DetailColumnHead from './detailColumnHead';
 import { useGetProduceHandlers } from 'services/produce.service';
 import SubmitCertification from './submitCertification';
 import defaultImage from '@assets/png/hubImgDefault.png';
+import { useAdminUpdateConsentMutation } from 'services/certification.service';
 
 const userArray = ['farmer', 'aggregator'];
 const adminUser = ['admin', 'subAdmin'];
@@ -155,6 +156,13 @@ function ProduceCard({
     handleModalOpen('deleteProduce');
   };
 
+  const mailReceievedValue =
+    produceData?.certification_request[0]?.mail_received;
+
+  const certId = produceData?.certification_request[0]?.id;
+
+  const consentUpdate = useAdminUpdateConsentMutation();
+
   return (
     <div className="p-[20px] bg-primary-white">
       <div className="flex items-center gap-x-1 mb-[14px] justify-between">
@@ -200,9 +208,32 @@ function ProduceCard({
           </div>
           {/* Image */}
           <div className="flex justify-between items-center mt-4">
-            <h1 className="text-primary-main pb-[13px] text-[20px] font-[600] tracking-normal  ">
-              {capitalize(produceData?.name)}
-            </h1>
+            <div className="w-full flex items-center justify-between pb-4 xlsm:flex-col-reverse xlsm:items-start xlsm:gap-[10px] xlsm:pb-[0px] ">
+              <h1 className="text-primary-main pb-[13px] text-[20px] font-[600] tracking-normal  ">
+                {capitalize(produceData?.name)}
+              </h1>
+              {!mailReceievedValue ? (
+                produceData?.certification === 'certified' &&
+                (authUser?.role === 'admin' ||
+                  authUser?.role === 'subadmin') ? (
+                  <CustomButton
+                    onClick={() =>
+                      consentUpdate.mutate({
+                        idData: {
+                          id: certId as string,
+                          adminId: authUser?.id as string,
+                        },
+                      })
+                    }
+                    className="bg-transparent border-[1px] border-secondary-light-1 text-secondary-light-1"
+                    loading={consentUpdate.isLoading}
+                    loadingText="Loading..."
+                  >
+                    Confirm Certification
+                  </CustomButton>
+                ) : null
+              ) : null}
+            </div>
             {authUser?.role === 'admin' || authUser?.role === 'subadmin'
               ? null
               : produceData?.status === 'not_approved' && (

@@ -90,7 +90,13 @@ export type IMyProduceData = {
   nearest_landmark: string;
   produce_origin: string;
   produce_ownership: string;
-  certification_request: [{ agency: { agency_name: string } }];
+  certification_request: [
+    {
+      agency: { agency_name: string };
+      mail_received: boolean | null;
+      id: string;
+    },
+  ];
 };
 
 export type ITransferedProduceData = {
