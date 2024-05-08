@@ -128,6 +128,14 @@ function DetailColumnHead() {
         return renderCertificationStatus(certification);
       },
     },
+    {
+      label: 'Certification Confirmed',
+      accessor: 'certification_request',
+      render: ({ certification_request }) => {
+        const mail_received = certification_request[0]?.mail_received;
+        return mail_received ? 'Yes' : 'No';
+      },
+    },
   ];
 
   const detailColumnsHeadTitleC: {

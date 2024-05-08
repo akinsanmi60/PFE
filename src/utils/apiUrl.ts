@@ -194,3 +194,7 @@ export const UPDATE_CERTIFICATION_URL = (
 ) => `certification/${id}/update-status/${agencyId}/${agentId}`;
 export const AGENCY_UPDATE_CERTIFICATION_URL = (id: string, agencyId: string) =>
   `certification/${id}/update-status/${agencyId}`;
+export const ADMIN_UPDATE_CONSENT_CERTIFICATION_URL = (
+  id: string,
+  adminId: string,
+) => `/certification/${id}/consent-certification/${adminId}`;
