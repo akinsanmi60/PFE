@@ -29,6 +29,12 @@ import { ReactComponent as BadgeWhite } from '@assets/svg/badgeWhite.svg';
 import { ReactComponent as Badge } from '@assets/svg/badge.svg';
 import { ReactComponent as OrderWhite } from '@assets/svg/orderWhite.svg';
 import { ReactComponent as OrderDark } from '@assets/svg/orderDark.svg';
+import { ReactComponent as ProduceWhite } from '@assets/svg/produceWhite.svg';
+import { ReactComponent as FarmerWhite } from '@assets/svg/farmerWhite.svg';
+import { ReactComponent as AggregatorWhite } from '@assets/svg/aggregatorWhite.svg';
+import { ReactComponent as ExporterWhite } from '@assets/svg/exporterWhite.svg';
+import { ReactComponent as OfftakerWhite } from '@assets/svg/offtakerWhite.svg';
+import { ReactComponent as AgencyWhite } from '@assets/svg/agencyWhite.svg';
 
 export type NavLInk = {
   name: string;
@@ -148,37 +154,43 @@ const SUPER_ADMIN_SIDENAV: NavLInk[] = [
     name: 'Produce',
     path: 'all-produce',
     Icon: <ProduceIcon />,
+    IconBlue: <ProduceWhite />,
   },
   {
     name: 'Farmers',
     path: 'all-farmers',
     Icon: <FarmerIcon />,
+    IconBlue: <FarmerWhite />,
   },
-  {
-    name: 'Transporters',
-    path: 'all-transporters',
-    Icon: <ExporterIcon />,
-  },
+  // {
+  //   name: 'Transporters',
+  //   path: 'all-transporters',
+  //   Icon: <ExporterIcon />,
+  // },
 
   {
     name: 'Aggregators',
     path: 'all-aggregators',
     Icon: <AggregatorIcon />,
+    IconBlue: <AggregatorWhite />,
   },
   {
     name: 'Exporters',
     path: 'all-exporters',
     Icon: <ExporterIcon />,
+    IconBlue: <ExporterWhite />,
   },
   {
     name: 'Offtakers',
     path: 'all-offtakers',
     Icon: <OfftakerIcon />,
+    IconBlue: <OfftakerWhite />,
   },
   {
     name: 'Agencies',
     path: 'all-agencies',
     Icon: <AgencyIcon />,
+    IconBlue: <AgencyWhite />,
   },
 ];
 
