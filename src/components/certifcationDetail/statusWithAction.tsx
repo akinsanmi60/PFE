@@ -9,15 +9,23 @@ import {
 } from 'services/certification.service';
 import { useAuthContext } from '@contexts/authContext';
 
-const certList = ['collected', 'processing', 'certified'];
+const certList = [
+  'pending',
+  'collected',
+  'processing',
+  'certified',
+  'inspected',
+];
 const roleToAccessBtn = ['agencyAdmin', 'agencySubAdmin'];
+const statusForReportBtn = certList.slice(-2);
+const statusForUpdateBtn = certList.slice(0, 4);
 function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
   const [openOptions, setOpenOptions] = useState(false);
   const { authUser } = useAuthContext();
   const exporterEmail = dataDetail?.export?.email;
   const pentrarEmail = 'Pentrar@fe.com';
   const handleOpenOptions = () => {
-    if (dataDetail?.status === 'certified') {
+    if (dataDetail?.status === 'inspected') {
       return;
     }
     setOpenOptions(!openOptions);
@@ -60,8 +68,8 @@ function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
       >
         <p>Current Status: {capitalize(dataDetail?.status)}</p>
         {roleToAccessBtn.includes(authUser?.role as string) && (
-          <>
-            {dataDetail?.status !== 'certified' ? (
+          <div className="flex gap-x-3">
+            {statusForUpdateBtn.includes(dataDetail?.status as string) && (
               <CustomButton
                 className="w-full text-primary-white"
                 onClick={handleOpenOptions}
@@ -75,7 +83,8 @@ function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
                   <UpdateIcon />
                 </span>
               </CustomButton>
-            ) : (
+            )}
+            {statusForReportBtn.includes(dataDetail?.status as string) && (
               <a
                 className="tracking-normal py-[10px] text-center text-primary-white w-full duration-300 ease-in-out px-[32px] outline-none text-base cursor-pointer font-medium  bg-secondary-light-1 text-white focus:outline-none xlsm:text-[1rem] rounded-[8px]"
                 href={`mailto:${exporterEmail}?cc=${pentrarEmail} &subject=Certification Report`}
@@ -83,7 +92,7 @@ function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
                 Send Report
               </a>
             )}
-          </>
+          </div>
         )}
       </div>
       {openOptions && (
