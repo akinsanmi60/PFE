@@ -4,12 +4,16 @@ import EmptyBar from '@shared/Table/tableEmpty';
 import { ITableHead } from '@shared/Table/table.interface';
 import { IUserQueryProps } from 'types/produce.type';
 import TableLoading from '@shared/Table/tableLoading';
-// import StatusBadge, { IStatusType } from '@shared/StatusBadge';
+import StatusBadge, { IStatusType } from '@shared/StatusBadge';
+import { formatDate, capitalize } from '@utils/constants';
+import { ICertification } from 'types/certification.type';
+import { useGetAllCertification } from 'services/certification.service';
 
-function ExporterCertificationTableSummary() {
+function ExporterCertificationTableSummary({ userId }: { userId: string }) {
   const [queryParams, setQueryParams] = useState({
     page: 1,
     limit: 5,
+    created_by: userId as string,
   });
 
   const updateQueryParams = (params: IUserQueryProps) => {
@@ -17,24 +21,31 @@ function ExporterCertificationTableSummary() {
     return queryParams;
   };
 
-  const tableHead: ITableHead<any>[] = [
+  const { data, isLoading, isRefetching } = useGetAllCertification(queryParams);
+
+  const tableHead: ITableHead<ICertification>[] = [
     {
       label: 'id',
       accessor: '',
-      //   render: ({ pentrar_produce_id }) => pentrar_produce_id,
+      render: ({ certification_id }) => certification_id,
     },
     {
-      label: 'Produce Name',
-      accessor: 'name',
-      //   render: ({ name }) => name,
+      label: 'Agency Name',
+      accessor: '',
+      render: ({ agency: { agency_name } }) =>
+        capitalize(agency_name as string),
     },
     {
-      label: 'Qty',
-      accessor: 'quantity',
-      //   render: ({ quantity, unit }) =>
-      //     `${quantity === null ? 0 : quantity}/${
-      //       unit === null || unit === '' ? 'KG' : unit
-      //     }`,
+      label: 'Date Sent',
+      accessor: '',
+      render: ({ send_date }) => formatDate({ date: send_date }),
+    },
+    {
+      label: 'Status',
+      accessor: 'status',
+      render: ({ status }) => {
+        return <StatusBadge status={status as IStatusType} />;
+      },
     },
   ];
 
@@ -43,11 +54,11 @@ function ExporterCertificationTableSummary() {
       <CustomTable
         containerClassName={`px-0 py-0 mt-[5px]`}
         tableHeads={tableHead}
-        loading={false}
-        dataTableSource={[]}
-        page_size={0}
-        total={0}
-        current_page={0}
+        loading={isLoading || isRefetching}
+        dataTableSource={data?.certifications || []}
+        page_size={data?.page_size}
+        total={data?.total}
+        current_page={data?.current_page}
         setCurrentPage={(val: number) => updateQueryParams({ page: val })}
         setLimit={(val: number) => updateQueryParams({ limit: val })}
         tableEmptyState={

@@ -65,7 +65,7 @@ function ShowExporterAnalysis({ showAnalysisProp }: IShowAnalysis) {
       )}
 
       {showAnalysisProp.currentTab === 'certifications' && (
-        <ExporterCertificationTableSummary />
+        <ExporterCertificationTableSummary userId={showAnalysisProp.id} />
       )}
 
       {showAnalysisProp.currentTab === 'orders' && (
