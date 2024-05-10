@@ -68,7 +68,7 @@ function StatusWithAction({ dataDetail }: { dataDetail: ICertification }) {
       >
         <p>Current Status: {capitalize(dataDetail?.status)}</p>
         {roleToAccessBtn.includes(authUser?.role as string) && (
-          <div className="flex gap-x-3">
+          <div className="flex gap-x-3 xlsm:flex-col xlsm:gap-y-3">
             {statusForUpdateBtn.includes(dataDetail?.status as string) && (
               <CustomButton
                 className="w-full text-primary-white"
