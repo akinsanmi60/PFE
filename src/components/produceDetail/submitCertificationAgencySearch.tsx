@@ -48,7 +48,7 @@ function SubmitCertificationAgencySearch({
           <div className="h-full flex flex-col gap-y-[15px]  justify-center items-center">
             <FcCancel className="text-5xl" />
             <p>
-              Agency wiith name <span className="font-bold">{searchTerm}</span>{' '}
+              Agency with name <span className="font-bold">{searchTerm}</span>{' '}
               not found
             </p>
           </div>

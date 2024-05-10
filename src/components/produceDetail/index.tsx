@@ -24,7 +24,7 @@ import DetailColumnHead from './detailColumnHead';
 import { useGetProduceHandlers } from 'services/produce.service';
 import SubmitCertification from './submitCertification';
 import defaultImage from '@assets/png/hubImgDefault.png';
-import { useAdminUpdateConsentMutation } from 'services/certification.service';
+import CertificationAccordionCard from './certificationAccordion';
 
 const userArray = ['farmer', 'aggregator'];
 const adminUser = ['admin', 'subAdmin'];
@@ -80,8 +80,6 @@ function ProduceCard({
       return false;
     }
   };
-
-  //
 
   const renderActionBtn = () => {
     if (userArray.includes(authUser?.role as string)) {
@@ -158,13 +156,6 @@ function ProduceCard({
     handleModalOpen('deleteProduce');
   };
 
-  const mailReceievedValue =
-    produceData?.certification_request[0]?.mail_received;
-
-  const certId = produceData?.certification_request[0]?.id;
-
-  const consentUpdate = useAdminUpdateConsentMutation();
-
   return (
     <div className="p-[20px] bg-primary-white">
       <div className="flex items-center gap-x-1 mb-[14px] justify-between">
@@ -208,71 +199,102 @@ function ProduceCard({
                     />
                   ))}
           </div>
+
           {/* Image */}
-          <div className="flex justify-between items-center mt-4">
-            <div className="w-full flex items-center justify-between pb-4 xlsm:flex-col-reverse xlsm:items-start xlsm:gap-[10px] xlsm:pb-[0px] ">
-              <h1 className="text-primary-main pb-[13px] text-[20px] font-[600] tracking-normal  ">
+          <div className="flex justify-between items-center mt-4 pb-3">
+            <div className="w-[80%] flex items-center justify-between xlsm:flex-col-reverse xlsm:items-start xlsm:gap-[10px]">
+              <h1 className="text-primary-main text-[20px] font-[600] tracking-normal">
                 {capitalize(produceData?.name)}
               </h1>
-              {!mailReceievedValue ? (
-                produceData?.certification === 'certified' &&
-                (authUser?.role === 'admin' ||
-                  authUser?.role === 'subadmin') ? (
+            </div>
+            {userArray.includes(authUser?.role as string) &&
+              produceData?.status === 'not_approved' && (
+                <div className="flex gap-[30px]">
+                  <p
+                    onClick={handleEditProduce}
+                    className="cursor-pointer text-tertiary-main"
+                  >
+                    Edit
+                  </p>
+                  <p
+                    onClick={handleDeleteProduce}
+                    className="cursor-pointer text-statusText-error"
+                  >
+                    Delete
+                  </p>
+                </div>
+              )}
+          </div>
+          <div className="border-y-[1px] border-primary-light-1 py-[15px]">
+            <div className="grid grid-cols-2 gap-x-[15px] sixm:grid-cols-1">
+              <div>
+                <DetailCard<IMyProduceData>
+                  detailProps={{
+                    detailKeys: detailColumnsHeadTitleA,
+                    produceData: produceData,
+                  }}
+                />
+              </div>
+              <div className="sixm:mt-[10px]">
+                <DetailCard<IMyProduceData>
+                  detailProps={{
+                    detailKeys:
+                      authUser?.role === 'exporter'
+                        ? detailColumnsHeadTitleC
+                        : detailColumnsHeadTitleB,
+                    produceData: produceData,
+                  }}
+                />
+              </div>
+            </div>
+            {userArray.includes(authUser?.role as string) &&
+              produceData?.status === 'not_approved' && (
+                <div className="flex justify-end mt-4 xlsm:justify-start xlsm:mt-5">
                   <CustomButton
-                    onClick={() =>
-                      consentUpdate.mutate({
-                        idData: {
-                          id: certId as string,
-                          adminId: authUser?.id as string,
-                        },
-                      })
-                    }
+                    onClick={() => {
+                      if (checkCertStatus()) {
+                        return;
+                      }
+                      if (currentUserStatus() === false) {
+                        return toast.error(
+                          'Account need to be activated, please contact admin',
+                          toastOptions,
+                        );
+                      }
+                      handleModalOpen('submitCertification');
+                    }}
                     className="bg-transparent border-[1px] border-secondary-light-1 text-secondary-light-1"
-                    loading={consentUpdate.isLoading}
+                    // loading={consentUpdate.isLoading}
                     loadingText="Loading..."
                   >
                     Confirm Certification
                   </CustomButton>
-                ) : null
-              ) : null}
-            </div>
-            {authUser?.role === 'admin' || authUser?.role === 'subadmin'
-              ? null
-              : produceData?.status === 'not_approved' && (
-                  <div className="flex gap-[20px]">
-                    <p onClick={handleEditProduce} className="cursor-pointer">
-                      Edit
-                    </p>
-                    <p onClick={handleDeleteProduce} className="cursor-pointer">
-                      Delete
-                    </p>
-                  </div>
-                )}
+                </div>
+              )}
           </div>
-          <div
-            className="grid grid-cols-2 gap-x-[15px] sixm:grid-cols-1
-         border-y-[1px] border-primary-light-1 py-[15px] "
-          >
-            <div>
-              <DetailCard<IMyProduceData>
-                detailProps={{
-                  detailKeys: detailColumnsHeadTitleA,
-                  produceData: produceData,
-                }}
-              />
+
+          {/* certification history */}
+          {adminUser.includes(authUser?.role as string) && (
+            <div className="border-y-[1px] border-primary-light-1 py-[15px]">
+              <h1 className="text-primary-main mb-[10px] text-[20px] font-[600] tracking-normal">
+                Certfication History
+              </h1>
+              {loading || refetching ? (
+                <TableLoading title="Loading certification History" />
+              ) : produceData?.certification_request.length > 0 ? (
+                <CertificationAccordionCard
+                  itemData={produceData?.certification_request}
+                />
+              ) : (
+                <EmptyBar
+                  emptyStateSize="sm"
+                  componentType="Certification History"
+                />
+              )}
             </div>
-            <div className="sixm:mt-[10px]">
-              <DetailCard<IMyProduceData>
-                detailProps={{
-                  detailKeys:
-                    authUser?.role === 'exporter'
-                      ? detailColumnsHeadTitleC
-                      : detailColumnsHeadTitleB,
-                  produceData: produceData,
-                }}
-              />
-            </div>
-          </div>
+          )}
+
+          {/* ownership history */}
           <div className="border-y-[1px] border-primary-light-1 py-[15px]">
             <h1 className="text-primary-main mb-[10px] text-[20px] font-[600] tracking-normal">
               Ownership History
@@ -292,6 +314,8 @@ function ProduceCard({
           componentType="Produce Detail not found"
         />
       )}
+
+      {/* Modals */}
       {modalState?.modalType === 'MoveTo' && (
         <MoveProduceTo produce={produceData} />
       )}

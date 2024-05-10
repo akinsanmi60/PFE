@@ -1,5 +1,6 @@
 import StatusBadge, { IStatusType } from '@shared/StatusBadge';
 import { capitalize, formatDate } from '@utils/constants';
+import { ICertification } from 'types/certification.type';
 import { IMyProduceData } from 'types/produce.type';
 
 function DetailColumnHead() {
@@ -57,20 +58,18 @@ function DetailColumnHead() {
         );
       },
     },
-    { label: 'Farm Location', accessor: 'farm_state' },
+    {
+      label: 'Farm Location',
+      accessor: 'farm_state',
+      render: ({ farm_state }) => {
+        return capitalize(farm_state);
+      },
+    },
     {
       label: 'Status',
       accessor: 'status',
       render: ({ status }) => {
         return <StatusBadge status={status as IStatusType} />;
-      },
-    },
-    {
-      label: 'Certification Agency',
-      accessor: 'certification_request',
-      render: ({ certification_request }) => {
-        const name = certification_request[0]?.agency?.agency_name;
-        return capitalize(name);
       },
     },
   ];
@@ -80,7 +79,13 @@ function DetailColumnHead() {
     accessor: keyof IMyProduceData | null;
     render?: (_object: IMyProduceData) => React.ReactNode;
   }[] = [
-    { label: 'Classification', accessor: 'produce_classification' },
+    {
+      label: 'Classification',
+      accessor: 'produce_classification',
+      render: ({ produce_classification }) => {
+        return capitalize(produce_classification);
+      },
+    },
 
     {
       label: 'Planting Date',
@@ -121,21 +126,6 @@ function DetailColumnHead() {
             : unit_transfered
         }`,
     },
-    {
-      label: 'Certification Status',
-      accessor: 'certification',
-      render: ({ certification }) => {
-        return renderCertificationStatus(certification);
-      },
-    },
-    {
-      label: 'Certification Confirmed',
-      accessor: 'certification_request',
-      render: ({ certification_request }) => {
-        const mail_received = certification_request[0]?.mail_received;
-        return mail_received ? 'Yes' : 'No';
-      },
-    },
   ];
 
   const detailColumnsHeadTitleC: {
@@ -162,10 +152,109 @@ function DetailColumnHead() {
     },
   ];
 
+  const detailColumnsHeadTitleD: {
+    label: string;
+    accessor: keyof ICertification | null;
+    render?: (_object: ICertification) => React.ReactNode;
+  }[] = [
+    {
+      label: 'Product ID',
+      accessor: null,
+      render: ({ produce: { pentrar_produce_id } }) => pentrar_produce_id,
+    },
+    {
+      label: 'Harvest Date',
+      accessor: null,
+      render: ({ produce: { harvest_date } }) => {
+        return formatDate({ date: harvest_date as string });
+      },
+    },
+    {
+      label: 'Submit Date',
+      accessor: null,
+      render: ({ send_date }) => {
+        return formatDate({ date: send_date as string });
+      },
+    },
+    {
+      label: 'Collected By',
+      accessor: null,
+      render: ({ collecting_agent }) => {
+        return collecting_agent === null
+          ? '--'
+          : capitalize(collecting_agent?.full_name as string);
+      },
+    },
+    {
+      label: 'Processed By',
+      accessor: null,
+      render: ({ testing_agent }) => {
+        return testing_agent === null
+          ? '--'
+          : capitalize(testing_agent?.full_name as string);
+      },
+    },
+    {
+      label: 'Certified By',
+      accessor: null,
+      render: ({ certifying_agent }) => {
+        return certifying_agent === null
+          ? '--'
+          : capitalize(certifying_agent?.full_name as string);
+      },
+    },
+    {
+      label: 'Certification Date',
+      accessor: null,
+      render: ({ updated_at, status }) => {
+        return status === 'certified'
+          ? formatDate({ date: updated_at as string })
+          : '--';
+      },
+    },
+    {
+      label: 'Pentrar Confirmation',
+      accessor: null,
+      render: ({ mail_received }) => {
+        return mail_received === null
+          ? '--'
+          : mail_received === false
+          ? 'No'
+          : 'Yes';
+      },
+    },
+    {
+      label: 'Is Produce Treated',
+      accessor: null,
+      render: ({ is_treated }) => {
+        return is_treated === null ? '--' : is_treated === false ? 'No' : 'Yes';
+      },
+    },
+    {
+      label: 'Treatment Name',
+      accessor: null,
+      render: ({ treatment_name }) => {
+        return treatment_name === null
+          ? '--'
+          : capitalize(treatment_name as string);
+      },
+    },
+    {
+      label: 'Treatment Duration',
+      accessor: null,
+      render: ({ treatment_duration }) => {
+        return treatment_duration === null
+          ? '--'
+          : capitalize(treatment_duration as string);
+      },
+    },
+  ];
+
   return {
     detailColumnsHeadTitleA,
     detailColumnsHeadTitleB,
     detailColumnsHeadTitleC,
+    detailColumnsHeadTitleD,
   };
 }
 

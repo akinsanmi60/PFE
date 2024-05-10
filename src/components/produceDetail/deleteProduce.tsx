@@ -17,7 +17,7 @@ function DeleteProduce({ id }: { id: string }) {
     <ModalBaseWrapper
       modalBaseProp={{
         showCloseBtn: false,
-        className: 'w-[350px]',
+        className: 'w-[450px]',
       }}
     >
       <ModalHeader

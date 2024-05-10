@@ -40,7 +40,7 @@ const ContributorsAccordionCard: React.FC<AccordionProps> = ({ itemData }) => {
   ];
 
   return (
-    <div className="flex flex-col gap-y-[10px] h-[350px] overflow-hidden overflow-y-auto">
+    <div className="flex flex-col gap-y-[10px] h-[300px] overflow-hidden overflow-y-auto">
       {itemData?.map((item, index) => (
         <div
           key={index}

@@ -11,7 +11,7 @@ const detailKeys = [
   'Quantity',
   'Unit',
   'Harvest Date',
-  'Sent on',
+  'Received on',
   'Farm Location',
 ];
 
@@ -21,14 +21,14 @@ function ReceivedTransferProduceDetail({
   transferDetail: ITransferedProduceData | null;
 }) {
   const returnString = () => {
-    const sentDate = transferDetail?.created_at
+    const receivedDate = transferDetail?.created_at
       ? formatDate({ date: transferDetail?.created_at as string })
       : 'N/A';
 
     const harvestDate = transferDetail?.harvest_date
       ? formatDate({ date: transferDetail?.harvest_date as string })
       : 'N/A';
-    return [sentDate, harvestDate];
+    return [harvestDate, receivedDate];
   };
 
   const detailValue = [

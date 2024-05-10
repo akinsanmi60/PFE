@@ -20,17 +20,19 @@ function SentTransferProduceDetail({
   transferDetail: ITransferedProduceData | null;
 }) {
   const returnString = () => {
-    return (
-      transferDetail?.created_at &&
-      formatDate({ date: transferDetail?.created_at as string })
-    );
-  };
+    const sentDate = transferDetail?.created_at
+      ? formatDate({ date: transferDetail?.created_at as string })
+      : 'N/A';
 
+    const harvestDate = transferDetail?.harvest_date
+      ? formatDate({ date: transferDetail?.harvest_date as string })
+      : 'N/A';
+    return [harvestDate, sentDate];
+  };
   const detailValue = [
     transferDetail?.qty_in_transefer,
     transferDetail?.unit,
-    transferDetail?.harvest_date ? transferDetail?.harvest_date : 'N/A',
-    returnString(),
+    ...returnString(),
     transferDetail?.from_location,
   ];
 

@@ -51,13 +51,24 @@ export const ApproveProduceValidationSchema = yup
   })
   .required();
 
-export const SubmitCertificationValidationSchema = yup
+export const SubmitCertificationValidationSchemaA = yup
   .object({
     send_date: yup.string().required('Please select estimated send date'),
     agencyID: yup.string().required('Please select agency'),
     is_treated: yup.string().required('Please select if treated'),
     treatment_name: yup.string().optional(),
     shipment_date: yup.string().required('Please select shipment date'),
+    treatment_duration: yup.string().optional(),
+  })
+  .required();
+
+export const SubmitCertificationValidationSchemaB = yup
+  .object({
+    send_date: yup.string().required('Please select estimated send date'),
+    agencyID: yup.string().required('Please select agency'),
+    is_treated: yup.string().required('Please select if treated'),
+    treatment_name: yup.string().optional(),
+    shipment_date: yup.string().optional(),
     treatment_duration: yup.string().optional(),
   })
   .required();

@@ -2,6 +2,7 @@ import { UseFormReturn } from 'react-hook-form';
 import { IBaseResponse, IDataCount } from './auth.type';
 import { IBaseQueryProps } from './pentrarHub.type';
 import { IIndividualAgencyData } from './agency.type';
+import { ICertification } from './certification.type';
 
 export type IUserQueryProps = IBaseQueryProps;
 export type ITransferProp = IBaseQueryProps & {
@@ -90,13 +91,7 @@ export type IMyProduceData = {
   nearest_landmark: string;
   produce_origin: string;
   produce_ownership: string;
-  certification_request: [
-    {
-      agency: { agency_name: string };
-      mail_received: boolean | null;
-      id: string;
-    },
-  ];
+  certification_request: ICertification[];
 };
 
 export type ITransferedProduceData = {
