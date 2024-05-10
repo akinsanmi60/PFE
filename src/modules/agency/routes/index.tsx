@@ -25,6 +25,10 @@ const AgencyCollectedCertification = React.lazy(
   () => import('@modules/agency/pages/certifications/collectedCertification'),
 );
 
+const AgencyInspectedCertification = React.lazy(
+  () => import('@modules/agency/pages/certifications/inspectCertification'),
+);
+
 const AgencyTeamMember = React.lazy(
   () => import('@modules/agency/pages/teamMember'),
 );
@@ -49,6 +53,7 @@ export const agencyPathsLinks = {
   processingCertifications: 'processing',
   completedCertifications: 'certified',
   collectedCertifications: 'collected',
+  inspectedCertifications: 'inspected',
   teamMember: 'team-member',
   teamMemberDetail: 'team-member/:id/detail',
   settings: 'profile-settings',
@@ -81,6 +86,10 @@ const agencyRoutes = {
       {
         element: AgencyCompletedCertification,
         path: agencyPathsLinks.completedCertifications,
+      },
+      {
+        element: AgencyInspectedCertification,
+        path: agencyPathsLinks.inspectedCertifications,
       },
     ],
   },

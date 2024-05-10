@@ -30,6 +30,10 @@ function CertificationPage() {
                 name: 'Certified',
                 href: `/${AgencyUserPath.certificationsTab('certified')}`,
               },
+              {
+                name: 'Inspected',
+                href: `/${AgencyUserPath.certificationsTab('inspected')}`,
+              },
             ]}
           />
         </PageContainer>
