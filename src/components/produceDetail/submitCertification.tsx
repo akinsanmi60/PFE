@@ -5,10 +5,7 @@ import { Resolver, useForm } from 'react-hook-form';
 import ControlledInput from '@shared/Input/ControlledInput';
 import { ISubmitCertificationFieldValues } from 'types/produce.type';
 import CustomButton from '@shared/Button';
-import {
-  SubmitCertificationValidationSchemaB,
-  SubmitCertificationValidationSchemaA,
-} from 'validation/addProduceValidation';
+import { SubmitCertificationValidationSchema } from 'validation/addProduceValidation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ControlledSelect from '@shared/Select/ControlledSelect';
 import ControlledTextArea from '@shared/Textarea/ControlledInput';
@@ -32,17 +29,6 @@ const treatmentDuration = [
 
 function SubmitCertification({ id }: { id: string }) {
   const { authUser } = useAuthContext();
-  const schema = () => {
-    switch (authUser?.role) {
-      case 'farmer':
-      case 'aggregator':
-        return SubmitCertificationValidationSchemaB;
-      case 'exporter':
-        return SubmitCertificationValidationSchemaA;
-      default:
-        return SubmitCertificationValidationSchemaA;
-    }
-  };
 
   const certSubmitForm = useForm({
     defaultValues: {
@@ -54,7 +40,7 @@ function SubmitCertification({ id }: { id: string }) {
       treatment_duration: '',
     } as ISubmitCertificationFieldValues,
     resolver: yupResolver(
-      schema(),
+      SubmitCertificationValidationSchema,
     ) as Resolver<ISubmitCertificationFieldValues>,
   });
 
@@ -133,16 +119,13 @@ function SubmitCertification({ id }: { id: string }) {
           />
         </div>
         <div className="flex  gap-x-4 xlsm:flex-col xlsm:gap-y-4">
-          {authUser?.role === 'exporter' && (
-            <ControlledInput
-              control={certSubmitForm.control}
-              name="shipment_date"
-              label="Estimated Shipment Date"
-              type="date"
-              useDataMaxLength={false}
-            />
-          )}
-
+          <ControlledInput
+            control={certSubmitForm.control}
+            name="shipment_date"
+            label="Estimated Shipment Date"
+            type="date"
+            useDataMaxLength={false}
+          />
           {viewTextArea && (
             <ControlledSelect
               control={certSubmitForm.control}

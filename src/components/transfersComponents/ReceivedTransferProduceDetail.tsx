@@ -11,7 +11,7 @@ const detailKeys = [
   'Quantity',
   'Unit',
   'Harvest Date',
-  'Received on',
+  'Received Date',
   'Farm Location',
 ];
 

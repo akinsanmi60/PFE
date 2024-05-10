@@ -1,6 +1,6 @@
 import { ReactComponent as LeftChevron } from '@assets/svg/leftChevron.svg';
 import CustomButton from '@shared/Button';
-import { capitalize } from '@utils/constants';
+import { Account, capitalize } from '@utils/constants';
 import DetailCard from 'components/produceDetail/detailCard';
 import { useNavigate } from 'react-router-dom';
 import { IMyProduceData } from 'types/produce.type';
@@ -125,26 +125,6 @@ function ProduceCard({
             : 'Approve Produce'}
         </CustomButton>
       );
-    } else if (authUser?.role === 'exporter') {
-      return (
-        <CustomButton
-          className='"w-full text-primary-white py-[2px] bg-secondary-light-1'
-          onClick={() => {
-            if (checkCertStatus()) {
-              return;
-            }
-            if (currentUserStatus() === false) {
-              return toast.error(
-                'Account need to be activated, please contact admin',
-                toastOptions,
-              );
-            }
-            handleModalOpen('submitCertification');
-          }}
-        >
-          {checkCertStatus() ? 'Produce Submitted' : 'Submit Certification'}
-        </CustomButton>
-      );
     }
   };
 
@@ -247,8 +227,8 @@ function ProduceCard({
                 />
               </div>
             </div>
-            {userArray.includes(authUser?.role as string) &&
-              produceData?.status === 'not_approved' && (
+            {authUser?.role === Account.Exporter &&
+              produceData?.certification === 'not_certified' && (
                 <div className="flex justify-end mt-4 xlsm:justify-start xlsm:mt-5">
                   <CustomButton
                     onClick={() => {
@@ -264,10 +244,9 @@ function ProduceCard({
                       handleModalOpen('submitCertification');
                     }}
                     className="bg-transparent border-[1px] border-secondary-light-1 text-secondary-light-1"
-                    // loading={consentUpdate.isLoading}
                     loadingText="Loading..."
                   >
-                    Confirm Certification
+                    Send Certification
                   </CustomButton>
                 </div>
               )}
