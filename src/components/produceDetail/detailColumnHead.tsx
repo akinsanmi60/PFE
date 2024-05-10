@@ -19,6 +19,9 @@ function DetailColumnHead() {
       case 'collected':
         status = 'Collected';
         break;
+      case 'inspected':
+        status = 'Inspected';
+        break;
       default:
         status = 'Certified';
     }
